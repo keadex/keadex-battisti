@@ -1,0 +1,11 @@
+@import './src/assets/styles/shared-imports.scss';
+
+.dos-button__root {
+  padding: 0 5px 0 5px;
+  background: $divider-color;
+  color: $primary-color;
+  box-shadow: 5px 5px $secondary-text-color;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+}

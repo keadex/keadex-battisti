@@ -1,8 +1,27 @@
 import React, { RefObject } from 'react';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import ScrollAnimation from 'react-animate-on-scroll';
+import { FormattedMessage as FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import BasePageComponent from '../../components/base-page-component/BasePageComponent';
 import './Home.scss';
+import keadexLogo from "../../assets/img/keadex-logo.png";
+import notWebsite from "../../assets/img/not-website.png";
+import knwoledge from "../../assets/img/knwoledge.png";
+import learn from "../../assets/img/learn.png";
+import moment, { Moment } from 'moment';
+import styled from 'styled-components';
+import ReactPlayer from 'react-player'
 import { MorphSVGTimeline, generateMorphSVGTimelines } from '../../helper/animation-helper';
-import { KeadexPreview } from '../../components/keadex-preview/KeadexPreview';
+import { MDBCard } from 'mdbreact';
+import { MDBView, MDBCardBody } from 'mdbreact';
+import { DosButton } from '../../components/dos-button/DosButton';
+import { KEA_LAB_URL, KEA_LAB_ID } from '../../core/routing/route.constants';
+import { Background } from '../../components/background/background';
+import code from "../../assets/img/code-bg.jpg";
+
+const FooterDiv:any = styled.div<any>`
+  position:absolute; width: 100%; top: ${(props)=>(props.vpHeight && props.logoContainerHeight)?(props.vpHeight-props.logoContainerHeight - 100) + "px":"0px"}
+`;
+
 
 //--------------- TYPES
 interface HomeState {
@@ -10,10 +29,20 @@ interface HomeState {
   height: number
 }
 
+enum ListItem{
+  experiment = "experiment",
+  modular = "modular",
+  openSource = "openSource"
+}
+
+
 //--------------- COMPONENT
-class Home extends React.Component<any, HomeState> {
+class Home extends BasePageComponent<any, HomeState> {
   
   //ATTRS
+  private logoContRef:RefObject<HTMLDivElement>;
+  private svgPathRef:RefObject<SVGPathElement>[];
+  private listRefs:Map<string, RefObject<HTMLLIElement>>;
   private experimentPath:string[] = [
     "M131,290.8c-17.2,0-34.4,0.1-51.6,0c-9-0.1-18-0.4-26.5-3.8c-7.4-3-11.1-8.5-12.1-16.3c-1.3-10.1,2.5-18.9,6.9-27.3c13.8-26.3,26.9-53,42.2-78.5c12.5-20.7,17-42.5,16.1-66c-0.3-7.3-0.9-14.7-1.4-22c-0.1-2-0.9-3.1-3-3.8c-8.2-2.7-12.8-10-11.6-17.8c1.3-8.1,7.8-13.8,16.5-13.9c16.5-0.1,33.1-0.1,49.6,0c8.2,0.1,14.8,5.8,16.1,13.3c1.3,8-2.8,15.2-10.7,18.1c-2.5,0.9-3.7,2.1-3.9,4.7c-1.9,21.3-3,42.7,3.5,63.4c2.3,7.4,6.5,14.2,10.1,21.1c14.3,26.8,28.7,53.5,43,80.3c2.1,3.9,3.4,8.1,5.2,12.1c2.5,5.6,2.6,11.5,1.9,17.4c-0.9,7.4-5,12.4-11.9,15.2c-7.4,3-15.3,3.6-23.1,3.7C167.9,290.9,149.5,290.8,131,290.8C131,290.8,131,290.8,131,290.8z",
     "M135.8,12.8c-0.8,0-1.5,0.1-2.3,0.3c0.6-1.1,0.9-2.3,0.9-3.6c0.1-4.3-3.6-8.2-8-8.3c-4.5-0.1-8.1,3.4-8.2,8c-0.1,4.7,3.2,8.1,7.9,8.2c0.4,0,0.7,0,1-0.1c-1.3,1.8-2.1,4-2,6.4c0,1.7,0.5,3.3,1.3,4.8c-0.7-0.3-1.4-0.4-2.2-0.4c-3.3,0.1-5.2,1.9-5.5,5.2c-0.3,3.1,2.2,5.7,5.4,5.8c3.1,0.1,5.8-2.4,5.8-5.5c0-0.5-0.1-1.1-0.2-1.6c1.8,1.3,4.1,2.1,6.5,2.1c5.9-0.1,10.7-5.1,10.6-10.9C146.6,17.4,141.7,12.7,135.8,12.8z",
@@ -30,14 +59,30 @@ class Home extends React.Component<any, HomeState> {
     "M11.6,130.3C11.5,71.1,55.3,20.7,113.8,12.7c53.5-7.3,105.3,20.8,126.3,70.5c19.5,46.2,11.7,89.3-20.3,127.7c-10.3,12.4-23.3,21.7-38.5,27.5c-0.6,0.2-1.1,0.4-1.6,0.6c-2,0.9-3.2,0.4-4-1.8c-2.6-7-5.4-14-8.1-21c-5.1-13-10.1-26.1-15.2-39.1c-1-2.4-0.8-3.6,1.7-4.9c13.1-6.7,20.1-17.8,22.1-32.1c2.9-20.2-3.6-36.7-20.9-47.7c-15.8-10.1-32.6-9.9-48.6-0.2c-16,9.7-23,24.5-21.5,43.2c0.9,10.9,4.2,20.8,11.6,29.1c3.3,3.8,7.3,6.8,11.8,8.9c1.9,0.9,2.1,1.9,1.4,3.8c-8.2,20-16.3,39.9-24.3,60c-0.9,2.2-2,2.4-4,1.6c-14.8-5.5-27.1-14.5-37.7-26.1c-19.3-21.1-30.1-46.1-32.2-74.6c0-0.5-0.1-1-0.1-1.5C11.6,134.5,11.6,132.4,11.6,130.3z"
   ]
   private timelines:Map<string, MorphSVGTimeline>|undefined;
+  private lastSubjectId:ListItem = ListItem.experiment;
+  private listInterval:number = -1;
+  private listIntervalTime:number = 5000;
 
   //FUNCS
 
   //------------ constructor
   constructor(props:any, state:HomeState){
     super(props, state);
+    this.anchorRefs.set("why-keadex", React.createRef<any>());
+    this.anchorRefs.set("whats-keadex", React.createRef<any>());
+    this.svgPathRef = [
+      React.createRef<SVGPathElement>(),
+      React.createRef<SVGPathElement>(),
+      React.createRef<SVGPathElement>(),
+      React.createRef<SVGPathElement>()
+    ];
     this.state = { width: 0, height: 0 };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+    this.logoContRef = React.createRef<HTMLDivElement>();
+    this.listRefs = new Map<string, RefObject<HTMLLIElement>>();
+    this.listRefs.set(ListItem.experiment, React.createRef<HTMLLIElement>());
+    this.listRefs.set(ListItem.modular, React.createRef<HTMLLIElement>());
+    this.listRefs.set(ListItem.openSource, React.createRef<HTMLLIElement>());
   }
 
 
@@ -70,16 +115,16 @@ class Home extends React.Component<any, HomeState> {
 
   //------------ startWhatsKeadexLoop
   private startWhatsKeadexLoop(){
-    // this.listInterval = setInterval(()=>{
-    //   var nextListItem:string = Object.keys(ListItem)[(Object.keys(ListItem).indexOf(this.lastSubjectId) + 1) % Object.keys(ListItem).length];
-    //   this.animateWhatsKeadex(ListItem[nextListItem as keyof typeof ListItem])
-    // }, this.listIntervalTime);
+    this.listInterval = setInterval(()=>{
+      var nextListItem:string = Object.keys(ListItem)[(Object.keys(ListItem).indexOf(this.lastSubjectId) + 1) % Object.keys(ListItem).length];
+      this.animateWhatsKeadex(ListItem[nextListItem as keyof typeof ListItem])
+    }, this.listIntervalTime);
   }
 
 
   //------------ stoptWhatsKeadexLoop
   private stoptWhatsKeadexLoop(){
-    // if (this.listInterval != -1) clearInterval(this.listInterval);    
+    if (this.listInterval != -1) clearInterval(this.listInterval);    
   }
 
 
@@ -111,20 +156,27 @@ class Home extends React.Component<any, HomeState> {
         toSvgPath: {id: "modular", path: this.modularPath}
       }
     ]
-    // this.timelines = generateMorphSVGTimelines(this.svgPathRef, subjects);
+    this.timelines = generateMorphSVGTimelines(this.svgPathRef, subjects);
   }
 
 
   //------------ animateWhatsKeadex
-  private animateWhatsKeadex(){
-    // if (this.timelines == undefined) this.initTimeline();
-    // if (toSubjectId !== this.lastSubjectId){
-    //   var subjects:string = this.lastSubjectId + "_" + toSubjectId;
-    //   this.listRefs.get(this.lastSubjectId)!.current!.className="";
-    //   this.listRefs.get(toSubjectId)!.current!.className="active";
-    //   this.lastSubjectId = toSubjectId;
-    //   this.timelines!.get(subjects)!.timeline.restart();
-    // }
+  private animateWhatsKeadex(toSubjectId:ListItem){
+    if (this.timelines == undefined) this.initTimeline();
+    if (toSubjectId !== this.lastSubjectId){
+      var subjects:string = this.lastSubjectId + "_" + toSubjectId;
+      this.listRefs.get(this.lastSubjectId)!.current!.className="";
+      this.listRefs.get(toSubjectId)!.current!.className="active";
+      this.lastSubjectId = toSubjectId;
+      this.timelines!.get(subjects)!.timeline.restart();
+    }
+  }
+
+
+  //------------ onWhatsKeadexHover
+  private onWhatsKeadexHover(toSubjectId:ListItem){
+    this.stoptWhatsKeadexLoop();
+    this.animateWhatsKeadex(toSubjectId)
   }
 
 
@@ -134,20 +186,191 @@ class Home extends React.Component<any, HomeState> {
   }
 
 
+  //------------ getDaysFromLaunch
+  private getDaysFromLaunch(){
+    let today: Moment = moment();
+    let launchDay: Moment = moment(process.env.REACT_APP_LAUNCH_DATE);
+    return today.diff(launchDay, "days");
+  }
+
 
   //------------ render
   public render() {
     return (
       <React.Fragment>
-        <KeadexPreview />
+        
+        <div className='page-body p-0'>
 
-        {/* WHAT IS KEADEX */}
-        {/* <div id="whats-keadex"  className="">
-          ciao           
-          <svg id="svg" height="100%" viewBox="0 0 260 300" >
-            <path filter="url(#shadow-6dp)" id="target1" d={this.experimentPath[0]}></path>
-          </svg>
-        </div>                    */}
+          {/* COVER */}
+          <div className="home__section home__cover" id="home-section">
+            <div className="full-center position-relative text-center" ref={this.logoContRef}>
+              {/* <img id="jack" className="full-center position-absolute home__jack" src={jack} /> */}
+              <ScrollAnimation scrollableParentSelector="#home" offset={0} animateIn='animate__fadeIn animate__slow' animateOut='animate__fadeOut'>
+                <img id="keadex-logo" src={keadexLogo} width={300}/>
+              </ScrollAnimation>
+              <ScrollAnimation scrollableParentSelector="#home" offset={0} delay={350} animateIn='animate__fadeIn animate__slow' animateOut='animate__fadeOut'>
+                <div className="home__title"><FormattedMessage id="HOME.TITLE" /></div>
+              </ScrollAnimation>
+            </div>
+            <div className="home__footer-text text-uppercase">
+              <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeIn animate__slow' animateOut='animate__fadeOut'>
+                <div className="home__footer-text-text">
+                  <FooterDiv vpHeight={this.state.height} logoContainerHeight={(this.logoContRef.current)?this.logoContRef.current.offsetHeight:"0"}>Version {process.env.REACT_APP_VERSION} alpha</FooterDiv>
+                </div>
+              </ScrollAnimation>
+            </div>
+          </div>
+
+          {/* WHY KEADEX */}
+          <div id="why-keadex" ref={this.anchorRefs.get("why-keadex")} className="home__section home__why-keadex">
+            <Background id="bg" img={code} overlayColor="#131313"/>
+            <div className="home__section-content">
+              <div className="row m-0">
+                <div className="col-12">
+                  <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp'>
+                    <h1 className="text-brand1-dark mt-5 mt-md-0"><FormattedMessage id="HOME.WHY_KEADEX" /></h1>
+                  </ScrollAnimation>
+                </div>
+              </div>
+              <div className="row m-0 mt-5 mt-md-6">
+                <div className="col-12 col-md-8">
+                  <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
+                    <FormattedHTMLMessage id="HOME.TEXT_WHAT_IS" />
+                  </ScrollAnimation>
+                </div>
+                <div className="col-12 col-md-4 mt-5 mt-md-0">
+                  <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
+                    <ReactPlayer url='https://youtu.be/7W7hEUGtv4U' width="100%" className="mb-5 mb-md-0"/>
+                  </ScrollAnimation>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* WHAT IS KEADEX */}
+          <div id="whats-keadex" ref={this.anchorRefs.get("whats-keadex")} className="home__section home__whats-keadex mt-6 mt-md-6">
+            {/* <Background id="bg" img={bgWhat}/> */}
+            {/* <Background id="bg" img={code} overlayColor="#131313"/> */}
+            <div className="row m-0">
+              <div className="col-12">
+                <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp'>
+                  <h1 className="text-brand1-dark"><FormattedMessage id="HOME.WHAT_IS_KEADEX" /></h1>
+                </ScrollAnimation>
+              </div>
+            </div>
+            <div className="row m-0 mt-5 mt-md-6">
+              <div className="col-12 col-md-3 text-center">
+                <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp'>
+                  <svg id="svg" height="100%" viewBox="0 0 260 300" >
+                    <defs>                      
+                      <filter id="shadow-6dp" x="-50%" y="-100%" width="200%" height="300%">
+                        <feOffset in="SourceAlpha" result="offA" dy="6" />
+                        <feOffset in="SourceAlpha" result="offB" dy="1" />
+                        <feOffset in="SourceAlpha" result="offC" dy="3" />
+                        <feMorphology in="offC" result="spreadC" operator="erode" radius="1" />
+                        <feGaussianBlur in="offA" result="blurA" stdDeviation="5" />
+                        <feGaussianBlur in="offB" result="blurB" stdDeviation="9" />
+                        <feGaussianBlur in="spreadC" result="blurC" stdDeviation="2.5" />
+                        <feFlood floodOpacity="0.14" result="opA" />
+                        <feFlood floodOpacity="0.12" result="opB" />
+                        <feFlood floodOpacity="0.40" result="opC" />
+                        <feComposite in="opA" in2="blurA" result="shA" operator="in" />
+                        <feComposite in="opB" in2="blurB" result="shB" operator="in" />
+                        <feComposite in="opC" in2="blurC" result="shC" operator="in" />
+                        <feMerge>
+                          <feMergeNode in="shA" />
+                          <feMergeNode in="shB" />
+                          <feMergeNode in="shC" />
+                          <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                      </filter>
+                    </defs>
+                    <path filter="url(#shadow-6dp)" ref={this.svgPathRef[0]} id="target1" d={this.experimentPath[0]}></path>
+                    <path filter="url(#shadow-6dp)" ref={this.svgPathRef[1]} id="target2" d={this.experimentPath[1]}></path>
+                    <path filter="url(#shadow-6dp)" ref={this.svgPathRef[2]} id="target3" d={this.experimentPath[2]}></path>
+                  </svg>
+                </ScrollAnimation>
+              </div>
+              <div className="col-12 col-md-9 mt-5 mt-md-0 pl-0 pl-md-5">
+                <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
+                  <FormattedHTMLMessage id="HOME.TEXT_WHY" />
+                </ScrollAnimation>
+                <ul>
+                  <li className="active" ref={this.listRefs.get(ListItem.experiment)} onClick={()=>{this.onWhatsKeadexHover(ListItem.experiment)}} onMouseOver={()=>{this.onWhatsKeadexHover(ListItem.experiment)}} onMouseLeave={()=>{this.startWhatsKeadexLoop()}}>
+                    <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
+                      <FormattedHTMLMessage id="HOME.EXPERIMENT" />
+                    </ScrollAnimation>
+                  </li>
+                  <li ref={this.listRefs.get(ListItem.modular)} onClick={()=>{this.onWhatsKeadexHover(ListItem.modular)}} onMouseOver={()=>{this.onWhatsKeadexHover(ListItem.modular)}} onMouseLeave={()=>{this.startWhatsKeadexLoop()}}>
+                    <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
+                      <FormattedHTMLMessage id="HOME.MODULAR" />
+                    </ScrollAnimation>
+                  </li>
+                  <li ref={this.listRefs.get(ListItem.openSource)} onClick={()=>{this.onWhatsKeadexHover(ListItem.openSource)}} onMouseOver={()=>{this.onWhatsKeadexHover(ListItem.openSource)}} onMouseLeave={()=>{this.startWhatsKeadexLoop()}}>
+                    <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
+                      <FormattedHTMLMessage id="HOME.OPEN_SOURCE" />
+                    </ScrollAnimation>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="row m-0 mt-5 mt-md-6">
+              <div className="col-12 text-center">
+                <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
+                  <h2 className="text-primary-light"><FormattedMessage id="HOME.SO_KEADEX" /></h2>
+                </ScrollAnimation>
+              </div>
+            </div>
+            <div className="row m-0 mt-3 mt-md-4 text-center">
+                <div className="col-12 col-lg-4">
+                  <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
+                    <MDBView className="h-100 w-100">
+                      <MDBCard className="h-100 w-100">
+                        <MDBCardBody>
+                          <h4 className="text-brand1"><FormattedHTMLMessage id="HOME.TITLE_NOT_WEBSITE" /></h4>
+                          <img className="mt-4 mb-4" src={notWebsite} />
+                          <div><FormattedHTMLMessage id="HOME.TEXT_NOT_WEBSITE" /></div>
+                        </MDBCardBody>
+                      </MDBCard>
+                    </MDBView>
+                  </ScrollAnimation>
+                </div>
+                <div className="col-12 col-lg-4 mt-3 mt-lg-0">
+                  <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut' delay={350}>
+                    <MDBView className="h-100 w-100">
+                      <MDBCard className="h-100 w-100">
+                        <MDBCardBody>
+                          <h4 className="text-brand1"><FormattedHTMLMessage id="HOME.TITLE_KNOW" /></h4>
+                          <img className="mt-4 mb-4" src={knwoledge} />
+                          <div><FormattedHTMLMessage id="HOME.TEXT_KNOW" /></div>
+                        </MDBCardBody>
+                      </MDBCard>
+                    </MDBView>
+                  </ScrollAnimation>
+                </div>
+                <div className="col-12 col-lg-4 mt-3 mt-lg-0">
+                  <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut' delay={700}>
+                    <MDBView className="h-100 w-100">
+                      <MDBCard className="h-100 w-100">
+                        <MDBCardBody>
+                          <h4 className="text-brand1"><FormattedHTMLMessage id="HOME.TITLE_WILL_KNOW" /></h4>
+                          <img className="mt-4 mb-4" src={learn} />
+                          <div><FormattedHTMLMessage id="HOME.TEXT_WILL_KNOW" /></div>
+                        </MDBCardBody>
+                      </MDBCard>
+                    </MDBView>
+                  </ScrollAnimation>
+                </div>
+              </div>
+            <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp'>
+              <div className="m-0 mt-6 mt-md-7 text-center home__kealab">
+                <div className="home__kealab-title"><FormattedHTMLMessage id="HOME.TITLE_KEALAB" /></div>
+                <div className="home__kealab-content"><FormattedHTMLMessage id="HOME.TEXT_KEALAB" /></div>
+                <DosButton onClick={()=>{window.CustomTemplate.openPage(KEA_LAB_ID, true)}} href={KEA_LAB_URL}><FormattedMessage id="HOME.SHOW_KEALAB" /></DosButton>
+              </div>
+            </ScrollAnimation>
+          </div>          
+        </div>
       </React.Fragment>
     );
   }

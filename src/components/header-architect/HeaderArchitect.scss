@@ -1,0 +1,121 @@
+@import './src/assets/styles/shared-imports.scss';
+
+.header-architect__root{
+  width: 100%;
+  background-size: contain;
+  height: 150px;
+  background: black;
+}
+
+.header-architect__game-container{
+  border: 35px solid transparent;
+  padding-top: 15px;
+  border-image-source: url("../../assets/img/header-experience/border-tetris.png");
+  border-image-repeat: round;
+  border-image-slice: 60;
+  bottom: 0;
+  position: absolute;
+  border-top: 0;
+  width: 40%;
+  height: 100%;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.header-architect__game-bg{
+  background-image: url("../../assets/img/header-experience/bg-tetris.png");
+  width: 100%;
+  height: 90%;
+  bottom: 0;
+}
+
+.header-architect__tetriminos-container {
+  height: 100%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%,0);
+  bottom: -7px;
+} 
+
+.header-architect__shape{
+  // width: 41px;
+  // left: calc(41px * 3);
+  // bottom: 4px;
+  bottom: 250px;
+  position: absolute;
+}
+
+.header-architect__game-over-root{
+  width: 100%;
+  text-align: center;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background: rgba(29,29,29,0.8);
+  z-index: 2;
+}
+
+.header-architect__game-over-text{
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: $h2-text-size;
+}
+
+.header-architect__dates{
+  left: 6%;
+  z-index: 1;
+  position: absolute;
+}
+
+.header-architect__tetris {
+  position: absolute;
+  height: 100%;
+  // width: 180px;
+  padding-top: 5px;
+
+  &-score {
+    @extend .header-architect__tetris;
+    left: 5%;
+  }
+  &-help {
+    @extend .header-architect__tetris;
+    left: 15%;
+  }
+  &-statistics {
+    @extend .header-architect__tetris;
+    right: 7%;
+  }
+}
+
+@include media-breakpoint-down(md) { 
+  .header-architect__game-container{
+    width: 100%;
+  }
+
+}
+
+@include media-breakpoint-down(sm) { 
+  .header-architect__game-container{
+    border-width: 15px;
+  }
+  .header-architect__tetriminos-container {
+    bottom: 0px;
+  } 
+  .header-architect__game-over-text{
+    font-size: $h5-text-size;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  // .header-architect__tetris-help {
+  //   left: 10%;
+  // }
+  .header-architect__tetris-score {
+    left: 1%;
+  }
+  .header-architect__tetris-statistics {
+    right: 0%;
+  }
+  
+}

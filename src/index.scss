@@ -21,6 +21,7 @@
   src: url('./assets/fonts/Perfect DOS VGA 437 Win.ttf'); 
 }
 
+
 body {
   background: $primary-color;
 	// font-family: 'Inconsolata', monospace;
@@ -111,6 +112,8 @@ h1 {
 .text-brand1-dark{
 	color: $brand-color-1-dark;
 }
+
+
 
 //NAV
 .nav-link{

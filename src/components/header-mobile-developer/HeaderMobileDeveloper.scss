@@ -1,0 +1,29 @@
+@import './src/assets/styles/shared-imports.scss';
+
+.header-mobile-root{
+  width: 100%;
+  background-image: url("../../assets/img/header-experience/bg-super-mario.png");
+  background-size: contain;
+  height: 150px;
+}
+
+.header-mobile-actors {
+  bottom: 19px;
+  position: absolute;
+}
+
+.header-mobile-apple {
+  margin-left: 10px;
+  left: 55%;
+  width: 35px;
+}
+
+@include media-breakpoint-down(md) { 
+  .header-mobile-root{
+    background-size: cover;
+  }
+}
+
+@include media-breakpoint-down(sm) { 
+
+}
