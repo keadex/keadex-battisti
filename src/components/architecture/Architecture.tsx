@@ -102,7 +102,7 @@ export const Architecture : React.FunctionComponent<ArchitectureProps> = (props)
                   <div>
                     <div className="mt-6 mb-4 w-100 text-center"><img className="architecture__module-logo" src={module.logo} /></div>
                     <MDBCard className="h-100 w-100 mt-5">
-                      <MDBCardBody className="h-100 experience__card-body-chart pt-5">
+                      <MDBCardBody className="h-100 experience__card-body-chart pt-5 pl-4 pl-md-5 pr-4 pr-md-5">
                         <div className="architecture__module-details-toolbar architecture__speed-dial">
                           <FloatingMenu
                             slideSpeed={500}
