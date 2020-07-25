@@ -78,5 +78,15 @@ export function watchForHover() {
 //----- scrollToSection
 export function scrollToSection(ref:RefObject<HTMLDivElement>, parentId:string):void{
   let pageElem : HTMLElement = document.getElementById(parentId)!;
+  console.log(ref.current!.getBoundingClientRect().top+pageElem.scrollTop + " -- " + ref.current!.getBoundingClientRect().top + " | " + pageElem.scrollTop)
   pageElem.scrollTo({top: ref.current!.getBoundingClientRect().top+pageElem.scrollTop, behavior: 'smooth'});
+}
+
+
+//----- scrollToSectionById
+export function scrollToSectionById(targetElementId:string, parentId:string):void{
+  let pageElem : HTMLElement = document.getElementById(parentId)!;
+  let targetElement : HTMLElement|null = document.getElementById(targetElementId);
+  if (targetElement)
+    pageElem.scrollTo({top: targetElement.getBoundingClientRect().top+pageElem.scrollTop, behavior: 'smooth'});
 }

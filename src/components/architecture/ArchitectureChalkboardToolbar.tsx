@@ -1,4 +1,4 @@
-import React, { useState, RefObject } from 'react';
+import React, { useState, RefObject, useEffect } from 'react';
 import "./Architecture.scss";
 import { MDBIcon } from 'mdbreact';
 import { MDBBtn } from 'mdbreact';
@@ -14,7 +14,8 @@ import { useHistory } from 'react-router-dom';
 
 //------------------ TYPES
 interface ArchitectureChalkboardToolbarProps {
-  onArchitectureTypeSelection: (architectureType: ArchitectureType)=>void;
+  onArchitectureTypeSelection: (architectureType: ArchitectureType) => void;
+  navigateToModule: (moduleId:string) => void;
   architectureType: ArchitectureType;
   zoomPanPinchProps: any;
   modules: ArchitectureModule[];
@@ -25,8 +26,21 @@ interface ArchitectureChalkboardToolbarProps {
 //------------------ COMPONENT
 export const ArchitectureChalkboardToolbar : React.FunctionComponent<ArchitectureChalkboardToolbarProps> = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isModuleSelected, setIsModuleSelected] = useState(false);
   const history = useHistory();
 
+  useEffect(() => {
+    /*
+      Check if a module has been selected and you need to scroll to the modules details.
+      You need to do it here, because the module details HTML is outside this component and to get its correct
+      position you need to wait this component to be rendered.
+    */
+    if (isModuleSelected){
+      scrollToSection(props.moduleDetailsRef, KEA_LAB_ID);
+      setIsModuleSelected(false);
+    }
+  });
+  
   //---------- getModuleButtons
   function getModuleButtons(){
     let buttons:JSX.Element[] = [];
@@ -47,16 +61,14 @@ export const ArchitectureChalkboardToolbar : React.FunctionComponent<Architectur
           icon={<span>{module.name}</span>}
           size={40}
           onClick={() => {
-            // location.href = "#/"+module.id;
-            history.push("#/"+module.id);
-            scrollToSection(props.moduleDetailsRef, KEA_LAB_ID);
+            props.navigateToModule(module.id);
+            setIsModuleSelected(true);
             setIsOpen(false);
           }} />);
     }))
-
     return buttons;
   }
-
+  
   //----- render
   return (
     <React.Fragment>

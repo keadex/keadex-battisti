@@ -22,7 +22,6 @@ export const ApplicationArchitecture : React.FunctionComponent<ApplicationArchit
       id: "keadex-battisti",
       name: intl.formatMessage({id: "KEADEX_MODULES.KEADEX_BATTISTI"}),
       logo: keadexBattisti,
-      githubUrl: "https://github.com/keadex",
       description: (
         <p style={{marginBottom:"300px"}}><b>Keadex Battisti</b> represents the shell of Keadex, the way to describe it.</p>
       ),
@@ -34,20 +33,6 @@ export const ApplicationArchitecture : React.FunctionComponent<ApplicationArchit
       )
     }
   ]
-
-
-  // //----- afterInjection <--- si può generalizzare mettendolo in Architecture.tsx, iterando sui module
-  // function afterInjection(error:Error|null, svg:SVGElement|undefined):void{
-  //   if (svg){
-  //   // props.svgPanProps.resetTransform();
-  //   let battistiModule = svg.querySelector("#battisti-module");
-  //     battistiModule!.classList.add("architecture__module");
-  //     battistiModule!.addEventListener("click", ()=>{
-  //       console.log("ciao")
-  //       // goToSection(moduleDetailsRef!.current!);
-  //     });
-  //   }
-  // }
 
 
   //----- render

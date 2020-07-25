@@ -16,7 +16,7 @@ import { MDBView, MDBCardBody } from 'mdbreact';
 import { DosButton } from '../../components/dos-button/DosButton';
 import { KEA_LAB_URL, KEA_LAB_ID } from '../../core/routing/route.constants';
 import { Background } from '../../components/background/background';
-import code from "../../assets/img/code-bg.jpg";
+import graph from "../../assets/img/graph-bg.jpg";
 
 const FooterDiv:any = styled.div<any>`
   position:absolute; width: 100%; top: ${(props)=>(props.vpHeight && props.logoContainerHeight)?(props.vpHeight-props.logoContainerHeight - 100) + "px":"0px"}
@@ -223,7 +223,7 @@ class Home extends BasePageComponent<any, HomeState> {
 
           {/* WHY KEADEX */}
           <div id="why-keadex" ref={this.anchorRefs.get("why-keadex")} className="home__section home__why-keadex">
-            <Background id="bg" img={code} overlayColor="#131313"/>
+            <Background id="bg" img={graph} overlayColor="#131313"/>
             <div className="home__section-content">
               <div className="row m-0">
                 <div className="col-12">

@@ -28,7 +28,6 @@ export interface ArchitectureModule {
   id: string;
   name: string;
   logo: string;
-  githubUrl: string;
   description: JSX.Element;
   technologies: JSX.Element;
   roadmap: JSX.Element;
@@ -42,15 +41,8 @@ export const Architecture : React.FunctionComponent<ArchitectureProps> = (props)
   const moduleDescriptionRef:RefObject<HTMLDivElement> = useRef(null);
   const moduleTechnologiesRef:RefObject<HTMLDivElement> = useRef(null);
   const moduleRoadmapRef:RefObject<HTMLDivElement> = useRef(null);
-
+  let router:any = null;
   
-  // //----- scrollToSection
-  // function scrollToSection(ref:RefObject<HTMLDivElement>):void{
-  //   setIsOpen(false);
-  //   let pageElem : HTMLElement = document.getElementById(KEA_LAB_ID)!;
-  //   pageElem.scrollTo({top: ref.current!.getBoundingClientRect().top+pageElem.scrollTop, behavior: 'smooth'});
-  // }
-
 
   //----- afterInjection
   function afterInjection(error:Error|null, svg:SVGElement|undefined):void{
@@ -61,7 +53,7 @@ export const Architecture : React.FunctionComponent<ArchitectureProps> = (props)
         if (svgElem){
           svgElem.classList.add("architecture__module");
           svgElem.addEventListener("click", ()=>{
-            location.href = "#/"+module.id;
+            navigateToModule(module.id);
             scrollToSection(moduleDetailsRef, KEA_LAB_ID);
           });
         }
@@ -76,7 +68,13 @@ export const Architecture : React.FunctionComponent<ArchitectureProps> = (props)
     setIsOpen(false);
   }
 
-  
+
+  //----- navigateToModule
+  function navigateToModule(moduleId:string):void{
+    router!.history.push(moduleId)
+  }
+
+
   //----- render
   return (
     <React.Fragment>
@@ -85,7 +83,7 @@ export const Architecture : React.FunctionComponent<ArchitectureProps> = (props)
           <TransformWrapper defaultScale={1}>
             {(zoomPanPinchProps:any) => (
               <React.Fragment>
-                <ArchitectureChalkboardToolbar modules={props.modules} moduleDetailsRef={moduleDetailsRef} onArchitectureTypeSelection={props.onArchitectureTypeSelection} architectureType={props.architectureType} zoomPanPinchProps={zoomPanPinchProps} />
+                <ArchitectureChalkboardToolbar modules={props.modules} moduleDetailsRef={moduleDetailsRef} onArchitectureTypeSelection={props.onArchitectureTypeSelection} navigateToModule={navigateToModule} architectureType={props.architectureType} zoomPanPinchProps={zoomPanPinchProps} />
                 <TransformComponent>
                   <ReactSVG src={AppArchSvg} renumerateIRIElements={false} afterInjection={afterInjection} className={"architecture__chalkboard"}/>
                 </TransformComponent>
@@ -94,8 +92,8 @@ export const Architecture : React.FunctionComponent<ArchitectureProps> = (props)
           </TransformWrapper>
         </div>
       </div>
-      <HashRouter>
-        {/* <Link to="/keadex-battisti">Section three</Link>           */}
+
+      <HashRouter ref={r => router = r}>  
         <div id="module-details" ref={moduleDetailsRef}>
           <Switch>
             {
@@ -131,7 +129,7 @@ export const Architecture : React.FunctionComponent<ArchitectureProps> = (props)
                             <ChildButton
                               icon={<MDBIcon fab icon="github"/>}
                               size={40}
-                              onClick={()=>{window.open(module.githubUrl, "_blank"); }} />
+                              onClick={()=>{setIsOpen(false); window.open("https://github.com/keadex/"+module.id, "_blank"); }} />
                           </FloatingMenu>
                         </div>
                         <div ref={moduleDescriptionRef} id="module-description">

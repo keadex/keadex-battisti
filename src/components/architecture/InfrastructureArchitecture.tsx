@@ -40,7 +40,7 @@ export const InfrastructureArchitecture : React.FunctionComponent<Infrastructure
         <TransformWrapper defaultScale={1}>
           {(zoomPanPinchProps:any) => (
             <React.Fragment>
-              <ArchitectureChalkboardToolbar modules={[]} onArchitectureTypeSelection={props.onArchitectureTypeSelection} moduleDetailsRef={React.createRef()} architectureType={props.architectureType} zoomPanPinchProps={zoomPanPinchProps} />
+              {/* <ArchitectureChalkboardToolbar modules={[]} onArchitectureTypeSelection={props.onArchitectureTypeSelection} moduleDetailsRef={React.createRef()} architectureType={props.architectureType} zoomPanPinchProps={zoomPanPinchProps} /> */}
               <TransformComponent>
                 <ReactSVG src={InfrArchSvg} renumerateIRIElements={false} afterInjection={afterInjection} className={"architecture__chalkboard"}/>
               </TransformComponent>
