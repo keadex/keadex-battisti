@@ -1,10 +1,6 @@
-import BaseRequest from '../../model/base-request.type';
 import BaseResponse from '../../model/base-response.type';
 import axios, { AxiosPromise } from 'axios';
-import { addBotMessage } from '../store/reducers/bot.reducer';
-import store from '../store/store';
 import { Quote, Experience, ForceGraph } from '../../model/models';
-import { activateSpinner, disableSpinner } from '../store/reducers/app.reducer';
 
 
 class NetworkService {
@@ -53,54 +49,6 @@ class NetworkService {
       return Promise.reject(error);
     });
   }
-
-
-  //--------- trashCall
-  // trashCall = (request : BaseRequest, listener : NetworkListener<BaseResponse>) : void => {
-  //   console.log("enter");
-  //   let response = {
-  //     message: "ok",
-  //     code: 0
-  //   }
-  //   axios.get('https://your-domain.atlassian.net/wiki/rest/api/content?type=blogpost&start=0&limit=10&expand=space,history,body.view,metadata.labels', {
-  //     // params: {
-  //     //   ID: 12345
-  //     // }
-  //   })
-  //   .then(function (response) {
-  //     // listener.onSuccess(response.data);
-  //   })
-  //   .catch(function (error) {
-  //     console.log("prima");
-  //     store.dispatch(addBotMessage("ciao"));
-  //     console.log("dopo");
-  //     // listener.onFailure(error.data);
-  //   })
-  //   .then(function () {
-  //     // always executed
-  //   });  
-  //   console.log("exit");
-  // }
-
-
-  //--------- getExperience
-  // getExperience = (listener : NetworkListener<BaseResponse>) : void => {
-  //   console.log("enter");
-  //   let response = {
-  //     message: "ok",
-  //     code: 0
-  //   }
-  //   axios.get(process.env.REACT_APP_BASE_URL! + process.env.REACT_APP_GET_EXPERIENCE_API!)
-  //   .then(function (response) {
-  //     listener.onSuccess(response.data);
-  //   })
-  //   .catch(function (error) {
-  //     listener.onFailure(error.data);
-  //   })
-  //   .then(function () {
-  //     // always executed
-  //   });  
-  // }
 
 
   //--------- getQuotes
