@@ -4,13 +4,10 @@ import { ReactSVG } from 'react-svg'
 import "./Architecture.scss";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { MDBIcon } from 'mdbreact';
-import { MDBBtn } from 'mdbreact';
-import { MDBBtnGroup } from 'mdbreact';
 import { FormattedMessage } from 'react-intl';
 import { MDBCard } from 'mdbreact';
 import { MDBCardBody } from 'mdbreact';
-import { Switch, Route, HashRouter, useHistory } from 'react-router-dom';
-import { HashLink as Link } from 'react-router-hash-link';
+import { Switch, Route, HashRouter } from 'react-router-dom';
 import { FloatingMenu, MainButton, ChildButton } from 'react-floating-button-menu';
 import { ArchitectureChalkboardToolbar } from './ArchitectureChalkboardToolbar';
 import { ArchitectureType } from '../../pages/kea-lab/KeaLab';
@@ -48,7 +45,6 @@ export const Architecture : React.FunctionComponent<ArchitectureProps> = (props)
   function afterInjection(error:Error|null, svg:SVGElement|undefined):void{
     if (svg && props.modules){
       props.modules.forEach((module)=>{
-        // props.svgPanProps.resetTransform();
         let svgElem = svg.querySelector("#"+module.id);
         if (svgElem){
           svgElem.classList.add("architecture__module");
@@ -135,17 +131,14 @@ export const Architecture : React.FunctionComponent<ArchitectureProps> = (props)
                         <div ref={moduleDescriptionRef} id="module-description">
                           <h1><FormattedMessage id="KEALAB.MODULE_DETAILS.MENU.DESCRIPTION" /></h1>
                           {module.description}
-                          {/* <p style={{marginBottom:"300px"}}><b>Keadex Battisti</b> represents the shell of Keadex, the way to describe it.</p> */}
                         </div>
                         <div className="mt-5" ref={moduleTechnologiesRef} id="module-technologies">
                           <h1><FormattedMessage id="KEALAB.MODULE_DETAILS.MENU.TECHNOLOGIES" /></h1>
                           {module.technologies}
-                          {/* <p style={{marginBottom:"600px"}}><b>Keadex Battisti</b> represents the shell of Keadex, the way to describe it.</p> */}
                         </div>
                         <div className="mt-5" ref={moduleRoadmapRef} id="module-roadmap">
                           <h1><FormattedMessage id="KEALAB.MODULE_DETAILS.MENU.ROADMAP" /></h1>
                           {module.roadmap}
-                          {/* <p style={{marginBottom:"600px"}}><b>Keadex Battisti</b> represents the shell of Keadex, the way to describe it.</p> */}
                         </div>
                       </MDBCardBody>
                     </MDBCard>
