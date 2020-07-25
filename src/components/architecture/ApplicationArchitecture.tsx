@@ -1,22 +1,21 @@
 import React from 'react';
 import keadexBattisti from '../../assets/img/keadex-battisti.png'; 
 import "./Architecture.scss";
-import { Architecture, ArchitectureModule } from './Architecture';
+import { Architecture, ArchitectureModule, ArchitectureImplProps } from './Architecture';
 import { ArchitectureType } from '../../pages/kea-lab/KeaLab';
 import { useIntl } from 'react-intl';
+import AppArchSvg from '../../assets/img/application-architecture.svg'; 
 
 
 //------------------ TYPES
-interface ApplicationArchitectureProps{
-  onArchitectureTypeSelection: (architectureType: ArchitectureType)=>void;
-}
 
 
 //------------------ COMPONENT
-export const ApplicationArchitecture : React.FunctionComponent<ApplicationArchitectureProps> = (props:ApplicationArchitectureProps) => {
+export const ApplicationArchitecture : React.FunctionComponent<ArchitectureImplProps> = (props:ArchitectureImplProps) => {
   
   const intl = useIntl();
   
+  //TODO Retrieve this data from the CMS
   let modules : ArchitectureModule[] = [
     {
       id: "keadex-battisti",
@@ -41,7 +40,8 @@ export const ApplicationArchitecture : React.FunctionComponent<ApplicationArchit
       <Architecture 
         architectureType={ArchitectureType.application} 
         onArchitectureTypeSelection={props.onArchitectureTypeSelection}
-        modules={modules} />
+        modules={modules}
+        chalkboard={AppArchSvg} />
     </React.Fragment>
   );
 }

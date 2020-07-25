@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef, RefObject } from 'react';
-import AppArchSvg from '../../assets/img/application-architecture.svg'; 
+import React, { useState, useRef, RefObject } from 'react';
 import { ReactSVG } from 'react-svg'
 import "./Architecture.scss";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
@@ -19,6 +18,11 @@ interface ArchitectureProps{
   architectureType: ArchitectureType;
   onArchitectureTypeSelection: (architectureType: ArchitectureType)=>void;
   modules: ArchitectureModule[];
+  chalkboard: string;
+}
+
+export interface ArchitectureImplProps{
+  onArchitectureTypeSelection: (architectureType: ArchitectureType)=>void;
 }
 
 export interface ArchitectureModule {
@@ -81,7 +85,7 @@ export const Architecture : React.FunctionComponent<ArchitectureProps> = (props)
               <React.Fragment>
                 <ArchitectureChalkboardToolbar modules={props.modules} moduleDetailsRef={moduleDetailsRef} onArchitectureTypeSelection={props.onArchitectureTypeSelection} navigateToModule={navigateToModule} architectureType={props.architectureType} zoomPanPinchProps={zoomPanPinchProps} />
                 <TransformComponent>
-                  <ReactSVG src={AppArchSvg} renumerateIRIElements={false} afterInjection={afterInjection} className={"architecture__chalkboard"}/>
+                  <ReactSVG src={props.chalkboard} renumerateIRIElements={false} afterInjection={afterInjection} className={"architecture__chalkboard"}/>
                 </TransformComponent>
               </React.Fragment>
             )}

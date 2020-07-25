@@ -44,7 +44,7 @@ class KeaLab extends BasePageComponent<any, KeaLabState> {
     if (this.state.architectureType == ArchitectureType.application){
       return <ApplicationArchitecture onArchitectureTypeSelection={this.setArchitectureType}/>
     }else{
-      return <InfrastructureArchitecture architectureType={this.state.architectureType} onArchitectureTypeSelection={this.setArchitectureType}/>
+      return <InfrastructureArchitecture onArchitectureTypeSelection={this.setArchitectureType}/>
     }
   }
 
