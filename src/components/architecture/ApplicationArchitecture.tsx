@@ -24,7 +24,7 @@ export const ApplicationArchitecture : React.FunctionComponent<ArchitectureImplP
       description: (
         <p style={{marginBottom:"300px"}}><b>Keadex Battisti</b> represents the shell of Keadex, the way to describe it.</p>
       ),
-      technologies: (
+      features: (
         <p style={{marginBottom:"300px"}}><b>Keadex Battisti</b> represents the shell of Keadex, the way to describe it.</p>
       ),
       roadmap: (

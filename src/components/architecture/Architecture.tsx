@@ -30,7 +30,7 @@ export interface ArchitectureModule {
   name: string;
   logo: string;
   description: JSX.Element;
-  technologies: JSX.Element;
+  features: JSX.Element;
   roadmap: JSX.Element;
 }
 
@@ -40,7 +40,7 @@ export const Architecture : React.FunctionComponent<ArchitectureProps> = (props)
 
   const moduleDetailsRef:RefObject<HTMLDivElement> = useRef(null)
   const moduleDescriptionRef:RefObject<HTMLDivElement> = useRef(null);
-  const moduleTechnologiesRef:RefObject<HTMLDivElement> = useRef(null);
+  const moduleFeaturesRef:RefObject<HTMLDivElement> = useRef(null);
   const moduleRoadmapRef:RefObject<HTMLDivElement> = useRef(null);
   let router:any = null;
   
@@ -119,9 +119,9 @@ export const Architecture : React.FunctionComponent<ArchitectureProps> = (props)
                               size={40}
                               onClick={()=>{ scrollToSection(moduleDescriptionRef, KEA_LAB_ID);}} />
                             <ChildButton
-                              icon={<FormattedMessage id="KEALAB.MODULE_DETAILS.MENU.TECHNOLOGIES" />}
+                              icon={<FormattedMessage id="KEALAB.MODULE_DETAILS.MENU.FEATURES" />}
                               size={40} 
-                              onClick={()=>{ scrollToSection(moduleTechnologiesRef, KEA_LAB_ID); }} />
+                              onClick={()=>{ scrollToSection(moduleFeaturesRef, KEA_LAB_ID); }} />
                             <ChildButton
                               icon={<FormattedMessage id="KEALAB.MODULE_DETAILS.MENU.ROADMAP" />}
                               size={40}
@@ -136,9 +136,9 @@ export const Architecture : React.FunctionComponent<ArchitectureProps> = (props)
                           <h1><FormattedMessage id="KEALAB.MODULE_DETAILS.MENU.DESCRIPTION" /></h1>
                           {module.description}
                         </div>
-                        <div className="mt-5" ref={moduleTechnologiesRef} id="module-technologies">
-                          <h1><FormattedMessage id="KEALAB.MODULE_DETAILS.MENU.TECHNOLOGIES" /></h1>
-                          {module.technologies}
+                        <div className="mt-5" ref={moduleFeaturesRef} id="module-features">
+                          <h1><FormattedMessage id="KEALAB.MODULE_DETAILS.MENU.FEATURES" /></h1>
+                          {module.features}
                         </div>
                         <div className="mt-5" ref={moduleRoadmapRef} id="module-roadmap">
                           <h1><FormattedMessage id="KEALAB.MODULE_DETAILS.MENU.ROADMAP" /></h1>

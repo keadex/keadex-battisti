@@ -133,7 +133,7 @@
         "MODULE_DETAILS": {
             "MENU": {
                 "DESCRIPTION": "Description",
-                "TECHNOLOGIES": "Technologies",
+                "FEATURES": "Features",
                 "ROADMAP": "Roadmap"
             }
         }
