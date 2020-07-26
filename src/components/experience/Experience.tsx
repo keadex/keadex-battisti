@@ -1,5 +1,5 @@
 import React, { RefObject } from 'react';
-import { FormattedMessage as FormattedHTMLMessage, FormattedMessage, WrappedComponentProps, injectIntl } from 'react-intl';
+import { FormattedMessage, WrappedComponentProps, injectIntl } from 'react-intl';
 import { Tween } from 'react-gsap';
 import {Experience as ExperienceModel} from '../../model/models' 
 import './Experience.scss';
@@ -212,7 +212,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                                 <div className="experience__section-title mb-md-3">{"<"}<FormattedMessage id={"ABOUT_ME.EXPERIENCE.MAIN_ACTIVITIES"} />{"/>"}</div>
                                 {
                                   this.props.experience.tasks.map((value, index) =>{
-                                    return <div key={index} className={(index%2==0)?"experience__list-item--even":"experience__list-item--odd"}>{">"} <FormattedHTMLMessage id={"TASKS."+value.id} /> </div>
+                                    return <div key={index} className={(index%2==0)?"experience__list-item--even":"experience__list-item--odd"}>{">"} <FormattedMessage id={"TASKS."+value.id} /> </div>
                                   })
                                 }
                               </Tween>
@@ -224,7 +224,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                                 <div className="experience__section-title mb-md-3">{"<"}<FormattedMessage id={"ABOUT_ME.EXPERIENCE.SECTORS"} />{"/>"}</div>
                                 {
                                   this.props.experience.sectors.map((value, index) =>{
-                                    return <div key={index} className={(index%2==0)?"experience__list-item--even":"experience__list-item--odd"}>{">"} <FormattedHTMLMessage id={"SECTORS."+value.id} /> </div>
+                                    return <div key={index} className={(index%2==0)?"experience__list-item--even":"experience__list-item--odd"}>{">"} <FormattedMessage id={"SECTORS."+value.id} /> </div>
                                   })
                                 }
                               </Tween>

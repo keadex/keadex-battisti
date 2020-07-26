@@ -56,20 +56,19 @@
         "TITLE": "an ever-evolving experimental platform. fully free and open source.",
         "WHAT_IS_KEADEX": "What is Keadex?",
         "WHY_KEADEX": "Why Keadex?",
-        "TEXT_WHAT_IS": "In 2014, I came across a National Geographic documentary.<br><br>I was impressed from the <span class='text-brand1'>personality</span>, <span class='text-brand1'>smartness</span> and <span class='text-brand1'>problem solving</span> of that bird: the <span class='text-brand1'>Kea Parrot</span>.<br>A mix of interpretations and actions applied by the Kea to solve a problem: et voilà, the modern definition of <span class='text-brand1'>algorithm</span>.<br><br>Ok, but \"dex\"? \"dex\" is a rebus. Try to solve it...",
-        "TEXT_WHY": "As solution architect, it'is important to be <span class='text-brand1'>constantly updated</span> about new technologies and test them in order to understand how to improve the IT solutions.<br><br>Keadex is born:",
+        "TEXT_WHAT_IS": "In 2014, I came across a National Geographic documentary.<br></br><br></br>I was impressed from the <span>personality</span>, <span>smartness</span> and <span>problem solving</span> of that bird: the <span>Kea Parrot</span>.<br></br>A mix of interpretations and actions applied by the Kea to solve a problem: et voilà, the modern definition of <span>algorithm</span>.<br></br><br></br>Ok, but \"dex\"? \"dex\" is a rebus. Try to solve it...",
+        "TEXT_WHY": "As solution architect, it'is important to be <span>constantly updated</span> about new technologies and test them in order to understand how to improve the IT solutions.<br></br><br></br>Keadex is born:",
         "EXPERIMENT": "to experiment new technologies",
         "MODULAR": "to integrate them in an ever-evolving, modular and configurable platform",
         "OPEN_SOURCE": "to be reusable and improved by everyone, because the only way to make progress is to learn from each other",
         "SO_KEADEX": "So Keadex...",
         "TITLE_NOT_WEBSITE": "is not a website",
-        "TEXT_NOT_WEBSITE": "It is more than a website.<br>It is a platform.",
+        "TEXT_NOT_WEBSITE": "It is more than a website.<br></br>It is a platform.",
         "TITLE_KNOW": "is part of what I know",
-        "TEXT_KNOW": "Everything in Keadex is implemented by applying my skills.<br>From the graphic design to each snippet of code.",
+        "TEXT_KNOW": "Everything in Keadex is implemented by applying my skills.<br></br>From the graphic design to each snippet of code.",
         "TITLE_WILL_KNOW": "will be part of what I'll learn",
-        "TEXT_WILL_KNOW": "It will never exist a final release of Keadex.<br>If I learn something then a new version is released.",
-        "TITLE_KEALAB": "$$\\\\&nbsp;&nbsp;&nbsp;$$\\\\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$\\\\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$\\\\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>$$&nbsp;|&nbsp;$$&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>$$&nbsp;|$$&nbsp;&nbsp;/&nbsp;$$$$$$\\\\&nbsp;&nbsp;&nbsp;$$$$$$\\\\&nbsp;&nbsp;$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$$$$$\\\\&nbsp;&nbsp;$$$$$$$\\\\&nbsp;&nbsp;<br>$$$$$&nbsp;&nbsp;/&nbsp;$$&nbsp;&nbsp;__$$\\\\&nbsp;&nbsp;\\\\____$$\\\\&nbsp;$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\\\\____$$\\\\&nbsp;$$&nbsp;&nbsp;__$$\\\\&nbsp;<br>$$&nbsp;&nbsp;$$<&nbsp;&nbsp;$$$$$$$$&nbsp;|&nbsp;$$$$$$$&nbsp;|$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$$$$$$&nbsp;|$$&nbsp;|&nbsp;&nbsp;$$&nbsp;|<br>$$&nbsp;|\\\\$$\\\\&nbsp;$$&nbsp;&nbsp;&nbsp;____|$$&nbsp;&nbsp;__$$&nbsp;|$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$&nbsp;&nbsp;__$$&nbsp;|$$&nbsp;|&nbsp;&nbsp;$$&nbsp;|<br>$$&nbsp;|&nbsp;\\\\$$\\\\\\\\$$$$$$$\\\\&nbsp;\\\\$$$$$$$&nbsp;|$$$$$$$$\\\\\\\\$$$$$$$&nbsp;|$$$$$$$&nbsp;&nbsp;|<br>\\\\__|&nbsp;&nbsp;\\\\__|\\\\_______|&nbsp;\\\\_______|\\\\________|\\\\_______|\\\\_______/&nbsp;",
-        "TEXT_KEALAB": "Keadex will grow with new capabilities as I will have the time to integrate them.<br>I'm not fully dedicated to this project.<br><br>Since Keadex is a <span class='text-brand1'>modular</span> platform, it is made up of different and independent modules.<br><br>Each module is part of a general roadmap.<br>Check the <span class='text-brand1'>KeaLab</span> to see the progress and the technical details.",
+        "TEXT_WILL_KNOW": "It will never exist a final release of Keadex.<br></br>If I learn something then a new version is released.",
+        "TEXT_KEALAB": "Keadex will grow with new capabilities as I will have the time to integrate them.<br></br>I'm not fully dedicated to this project.<br></br><br></br>Since Keadex is a <span>modular</span> platform, it is made up of different and independent modules.<br></br><br></br>Each module is part of a general roadmap.<br></br>Check the <span>KeaLab</span> to see the progress and the technical details.",
         "SHOW_KEALAB": "Show me KeaLab",
         "SLOGAN": "an ever-evolving experimental platform. fully free and open source.",    
         "ALPHA_LAUNCH": "Alpha on autumn '20"
@@ -80,7 +79,7 @@
         "EDUCATION": {
             "TITLE": "Education",
             "HAPPY_HOUR": "My first H-Language 'hello world!' dates back to 1991 in Bari (Italy), where the Happy Hour is made up of octopus, sea urchins, \"focaccia\" and Peroni beer.",
-            "HIGH_SCHOOL": "I've started to study Computer Science at \"I.T.I.S. Guglielmo Marconi Bari\"... the best fu***ing high school of the planet! But my passion is (of course) born many years earlier...",
+            "HIGH_SCHOOL": "I've started to study Computer Science at \"I.T.I.S. Guglielmo Marconi Bari\"... the best fu***ing high school of the planet! But my passion was (of course) born many years earlier...",
             "UNIVERSITY": "I graduated in 2013 in Computer Science at \"University of Bari\". In 2013 I attended the \"University of Liverpool\" thanks to the Erasmus program. Here I wrote my dissertation \"SoChild - A social network to control and to support the language acquisition by children\".",
             "JACK": "\"Hello, Friend\"",
             "BRAIN_GRAPH_BANNER": ">interact with me on desktop devices_"
@@ -90,7 +89,7 @@
             "TITLE_SPORT": "SPORT",
             "DESCRIPTION_SPORT": "All sports. Except golf... golf is not a sport.",
             "TITLE_MARTIAL_ARTS": "MARTIAL ARTS",
-            "DESCRIPTION_MARTIAL_ARTS": "Born in a family of Martial Arts masters (<a href='http://www.kyohansimmi.it' target='_blank'>Kyohan Simmi</a>) with some good results... 😎",
+            "DESCRIPTION_MARTIAL_ARTS": "Born in a family of Martial Arts masters (<a>Kyohan Simmi</a>) with some good results... 😎",
             "TITLE_MUSIC": "MUSIC",
             "DESCRIPTION_MUSIC": "Every developer lives with his headphones. My Spotify playlists are composed by more or less... all the genres.",
             "TITLE_SPEARFISHING": "SPEARFISHING",
@@ -108,7 +107,7 @@
         },
         "RESUME": {
             "TITLE": "Just another boring resume",
-            "SERIOUSLY": "Seriously? You still want a boring PDF?<br/>Do you have any idea how f**ing hard it was to develop this page?!",
+            "SERIOUSLY": "Seriously? You still want a boring PDF?<br></br>Do you have any idea how f**ing hard it was to develop this page?!",
             "AGREEMENT_LABEL": "by checking this box I confirm to be a boring person"
         }
     },

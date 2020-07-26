@@ -3,11 +3,12 @@ import React, { RefObject } from 'react';
 import pdfIcon from "../../assets/img/pdf-icon-glitch.gif";
 import './Resume.scss';
 import { TimelineMax, Linear } from 'gsap';
-import { FormattedMessage, FormattedMessage as FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { MDBBtn } from 'mdbreact';
 import KMDCheckbox from '../kmdcheckbox/KMDCheckbox';
 import { MDBIcon } from 'mdbreact';
 import NetworkService from '../../core/network/network.service';
+import { FORMATTED_MESSAGE_STANDARD_HTML_VALUES } from '../../core/app.constants';
 
 
 //--------------- TYPES
@@ -91,7 +92,7 @@ class Resume extends React.Component<any, ResumeState> {
         <div id="resume-agree-container" className="full-center resume__agree-container text-center" ref={this.resumeAgreeContRef}>
           <div id="resume-agree-bg" className="resume__agree-bg"></div>
           <div id="resume-agree-content" className="resume__agree-content position-relative">
-            <div className="resume__seriously-label"><FormattedHTMLMessage id="ABOUT_ME.RESUME.SERIOUSLY" /></div>
+            <div className="resume__seriously-label"><FormattedMessage id="ABOUT_ME.RESUME.SERIOUSLY" values={FORMATTED_MESSAGE_STANDARD_HTML_VALUES}/></div>
             <MDBBtn color="primary" className="mt-5 mt-md-7" disabled={!this.state.isAgreementChecked} onClick={()=>{this.startDownload()}}>Download</MDBBtn>
             <div>
               <KMDCheckbox id="downloadResume" className="md-checkbox-inline" handleCheck={(isChecked)=>{this.setState({isAgreementChecked:isChecked});}}>
@@ -103,9 +104,7 @@ class Resume extends React.Component<any, ResumeState> {
 
         {/* RESUME DOWNLOAD */}
         <div id="resume-binary-container" className="full-center resume__binary-container text-center" ref={this.resumeBinaryContRef}>
-          <div id="resume-binary-content" className="resume__binary-content">
-            {/* <img src={binaryMatrix} className="resume__matrix-code" /> */}
-          </div>
+          <div id="resume-binary-content" className="resume__binary-content" />
         </div>
 
         {/* PDF ICON */}

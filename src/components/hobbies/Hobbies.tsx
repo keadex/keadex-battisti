@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage as FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Tween } from 'react-gsap';
 import box from "../../assets/img/hobbies/box.png";
 import sport from "../../assets/img/hobbies/sport.png";
@@ -83,7 +83,7 @@ class Education extends React.Component<IEducationProps> {
               playState="stop">
                 <div>
                   <h1><FormattedMessage id="ABOUT_ME.HOBBIES.TITLE_SPORT" /></h1>
-                  <FormattedHTMLMessage id="ABOUT_ME.HOBBIES.DESCRIPTION_SPORT" />
+                  <FormattedMessage id="ABOUT_ME.HOBBIES.DESCRIPTION_SPORT" />
                 </div>
             </Tween>
           </div>
@@ -104,7 +104,14 @@ class Education extends React.Component<IEducationProps> {
               playState="stop">
                 <div>
                   <h1><FormattedMessage id="ABOUT_ME.HOBBIES.TITLE_MARTIAL_ARTS" /></h1>
-                  <div><FormattedHTMLMessage id="ABOUT_ME.HOBBIES.DESCRIPTION_MARTIAL_ARTS" /></div>
+                  <div>
+                    <FormattedMessage
+                      id="ABOUT_ME.HOBBIES.DESCRIPTION_MARTIAL_ARTS"
+                      values={{
+                        a: (chunks:any) => (<a href='http://www.kyohansimmi.it' target='_blank'>{chunks}</a>)
+                      }
+                    }/>
+                  </div>
                 </div>
             </Tween>
           </div>
@@ -125,7 +132,7 @@ class Education extends React.Component<IEducationProps> {
               playState="stop">
                 <div>
                   <h1><FormattedMessage id="ABOUT_ME.HOBBIES.TITLE_MUSIC" /></h1>
-                  <FormattedHTMLMessage id="ABOUT_ME.HOBBIES.DESCRIPTION_MUSIC" />
+                  <FormattedMessage id="ABOUT_ME.HOBBIES.DESCRIPTION_MUSIC" />
                 </div>
             </Tween>
           </div>
@@ -146,7 +153,7 @@ class Education extends React.Component<IEducationProps> {
               playState="stop">
                 <div>
                   <h1><FormattedMessage id="ABOUT_ME.HOBBIES.TITLE_SPEARFISHING" /></h1>
-                  <FormattedHTMLMessage id="ABOUT_ME.HOBBIES.DESCRIPTION_SPEARFISHING" />
+                  <FormattedMessage id="ABOUT_ME.HOBBIES.DESCRIPTION_SPEARFISHING" />
                 </div>
             </Tween>
           </div>
@@ -167,7 +174,7 @@ class Education extends React.Component<IEducationProps> {
               playState="stop">
                 <div>
                   <h1><FormattedMessage id="ABOUT_ME.HOBBIES.TITLE_CINEMA" /></h1>
-                  <FormattedHTMLMessage id="ABOUT_ME.HOBBIES.DESCRIPTION_CINEMA" />
+                  <FormattedMessage id="ABOUT_ME.HOBBIES.DESCRIPTION_CINEMA" />
                 </div>
             </Tween>
           </div>

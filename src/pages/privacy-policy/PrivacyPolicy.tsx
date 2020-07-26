@@ -1,7 +1,4 @@
 import React from 'react';
-import { FormattedMessage, FormattedMessage as FormattedHTMLMessage } from 'react-intl';
-
-
 
 //------------------ COMPONENT
 export const PrivacyPolicy: React.FunctionComponent<any> = props => {

@@ -1,5 +1,5 @@
 import React, { RefObject } from 'react';
-import { FormattedMessage as FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Tween } from 'react-gsap';
 import frontalLobe from "../../assets/img/education/frontal-lobe.png";
 import occipitalLobe from "../../assets/img/education/occipital-lobe.png";
@@ -200,7 +200,7 @@ class Education extends React.Component<IEducationProps, EducationState> {
               progress={this.adjustProgress(3, progress)}
               playState="stop">
                 <div>
-                  <div className="mt-md-6 mt-5"><FormattedHTMLMessage id="ABOUT_ME.EDUCATION.HAPPY_HOUR" /></div>
+                  <div className="mt-md-6 mt-5"><FormattedMessage id="ABOUT_ME.EDUCATION.HAPPY_HOUR" /></div>
                 </div>
             </Tween>
           </div>
@@ -220,7 +220,7 @@ class Education extends React.Component<IEducationProps, EducationState> {
               progress={this.adjustProgress(5, progress)}
               playState="stop">
                 <div>
-                  <div className="mt-md-6 mt-5"><FormattedHTMLMessage id="ABOUT_ME.EDUCATION.HIGH_SCHOOL" /></div>
+                  <div className="mt-md-6 mt-5"><FormattedMessage id="ABOUT_ME.EDUCATION.HIGH_SCHOOL" /></div>
                 </div>
             </Tween>
           </div>
@@ -240,7 +240,7 @@ class Education extends React.Component<IEducationProps, EducationState> {
               progress={this.adjustProgress(7, progress)}
               playState="stop">
                 <div>
-                  <div className="mt-md-6 mt-5"><FormattedHTMLMessage id="ABOUT_ME.EDUCATION.UNIVERSITY" /></div>
+                  <div className="mt-md-6 mt-5"><FormattedMessage id="ABOUT_ME.EDUCATION.UNIVERSITY" /></div>
                 </div>
             </Tween>
           </div>
@@ -261,7 +261,7 @@ class Education extends React.Component<IEducationProps, EducationState> {
               progress={this.adjustProgress(9, progress)}
               playState="stop">
                 <div>
-                  <div className="mt-md-6 mt-5"><FormattedHTMLMessage id="ABOUT_ME.EDUCATION.JACK" /></div>
+                  <div className="mt-md-6 mt-5"><FormattedMessage id="ABOUT_ME.EDUCATION.JACK" /></div>
                 </div>
             </Tween>
           </div>

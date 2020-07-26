@@ -1,6 +1,6 @@
 import React, { RefObject } from 'react';
 import ScrollAnimation from 'react-animate-on-scroll';
-import { FormattedMessage as FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import BasePageComponent from '../../components/base-page-component/BasePageComponent';
 import './Home.scss';
 import keadexLogo from "../../assets/img/keadex-logo.png";
@@ -17,6 +17,7 @@ import { DosButton } from '../../components/dos-button/DosButton';
 import { KEA_LAB_URL, KEA_LAB_ID } from '../../core/routing/route.constants';
 import { Background } from '../../components/background/background';
 import graph from "../../assets/img/graph-bg.jpg";
+import { FORMATTED_MESSAGE_STANDARD_HTML_VALUES } from '../../core/app.constants';
 
 const FooterDiv:any = styled.div<any>`
   position:absolute; width: 100%; top: ${(props)=>(props.vpHeight && props.logoContainerHeight)?(props.vpHeight-props.logoContainerHeight - 100) + "px":"0px"}
@@ -38,7 +39,7 @@ enum ListItem{
 
 //--------------- COMPONENT
 class Home extends BasePageComponent<any, HomeState> {
-  
+
   //ATTRS
   private logoContRef:RefObject<HTMLDivElement>;
   private svgPathRef:RefObject<SVGPathElement>[];
@@ -62,6 +63,10 @@ class Home extends BasePageComponent<any, HomeState> {
   private lastSubjectId:ListItem = ListItem.experiment;
   private listInterval:number = -1;
   private listIntervalTime:number = 5000;
+  private formatMessageValues:Record<string, any> = {
+    span: (chunks:any) => (<span className='text-brand1'>{chunks}</span>),
+    br: (chunk:any)=>(<br />)
+  }
 
   //FUNCS
 
@@ -83,18 +88,6 @@ class Home extends BasePageComponent<any, HomeState> {
     this.listRefs.set(ListItem.experiment, React.createRef<HTMLLIElement>());
     this.listRefs.set(ListItem.modular, React.createRef<HTMLLIElement>());
     this.listRefs.set(ListItem.openSource, React.createRef<HTMLLIElement>());
-  }
-
-
-  call(){
-    // NetworkService.getInstance().getExperience({
-    //   onSuccess(response : BaseResponse){
-    //     console.log(response);
-    //   },
-    //   onFailure(response : BaseResponse){
-    //     console.log(response);
-    //   }
-    // });
   }
 
 
@@ -235,7 +228,7 @@ class Home extends BasePageComponent<any, HomeState> {
               <div className="row m-0 mt-5 mt-md-6">
                 <div className="col-12 col-md-8">
                   <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
-                    <FormattedHTMLMessage id="HOME.TEXT_WHAT_IS" />
+                    <FormattedMessage id="HOME.TEXT_WHAT_IS" values={this.formatMessageValues}/>
                   </ScrollAnimation>
                 </div>
                 <div className="col-12 col-md-4 mt-5 mt-md-0">
@@ -293,22 +286,22 @@ class Home extends BasePageComponent<any, HomeState> {
               </div>
               <div className="col-12 col-md-9 mt-5 mt-md-0 pl-0 pl-md-5">
                 <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
-                  <FormattedHTMLMessage id="HOME.TEXT_WHY" />
+                  <FormattedMessage id="HOME.TEXT_WHY" values={this.formatMessageValues}/>
                 </ScrollAnimation>
                 <ul>
                   <li className="active" ref={this.listRefs.get(ListItem.experiment)} onClick={()=>{this.onWhatsKeadexHover(ListItem.experiment)}} onMouseOver={()=>{this.onWhatsKeadexHover(ListItem.experiment)}} onMouseLeave={()=>{this.startWhatsKeadexLoop()}}>
                     <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
-                      <FormattedHTMLMessage id="HOME.EXPERIMENT" />
+                      <FormattedMessage id="HOME.EXPERIMENT" />
                     </ScrollAnimation>
                   </li>
                   <li ref={this.listRefs.get(ListItem.modular)} onClick={()=>{this.onWhatsKeadexHover(ListItem.modular)}} onMouseOver={()=>{this.onWhatsKeadexHover(ListItem.modular)}} onMouseLeave={()=>{this.startWhatsKeadexLoop()}}>
                     <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
-                      <FormattedHTMLMessage id="HOME.MODULAR" />
+                      <FormattedMessage id="HOME.MODULAR" />
                     </ScrollAnimation>
                   </li>
                   <li ref={this.listRefs.get(ListItem.openSource)} onClick={()=>{this.onWhatsKeadexHover(ListItem.openSource)}} onMouseOver={()=>{this.onWhatsKeadexHover(ListItem.openSource)}} onMouseLeave={()=>{this.startWhatsKeadexLoop()}}>
                     <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
-                      <FormattedHTMLMessage id="HOME.OPEN_SOURCE" />
+                      <FormattedMessage id="HOME.OPEN_SOURCE" />
                     </ScrollAnimation>
                   </li>
                 </ul>
@@ -323,39 +316,39 @@ class Home extends BasePageComponent<any, HomeState> {
             </div>
             <div className="row m-0 mt-3 mt-md-4 text-center">
                 <div className="col-12 col-lg-4">
-                  <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
+                  <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp h-100' animateOut='animate__fadeOut h-100'>
                     <MDBView className="h-100 w-100">
                       <MDBCard className="h-100 w-100">
                         <MDBCardBody>
-                          <h4 className="text-brand1"><FormattedHTMLMessage id="HOME.TITLE_NOT_WEBSITE" /></h4>
+                          <h4 className="text-brand1"><FormattedMessage id="HOME.TITLE_NOT_WEBSITE" /></h4>
                           <img className="mt-4 mb-4" src={notWebsite} />
-                          <div><FormattedHTMLMessage id="HOME.TEXT_NOT_WEBSITE" /></div>
+                          <div><FormattedMessage id="HOME.TEXT_NOT_WEBSITE" values={FORMATTED_MESSAGE_STANDARD_HTML_VALUES}/></div>
                         </MDBCardBody>
                       </MDBCard>
                     </MDBView>
                   </ScrollAnimation>
                 </div>
                 <div className="col-12 col-lg-4 mt-3 mt-lg-0">
-                  <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut' delay={350}>
+                  <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp h-100' animateOut='animate__fadeOut h-100' delay={350}>
                     <MDBView className="h-100 w-100">
                       <MDBCard className="h-100 w-100">
                         <MDBCardBody>
-                          <h4 className="text-brand1"><FormattedHTMLMessage id="HOME.TITLE_KNOW" /></h4>
+                          <h4 className="text-brand1"><FormattedMessage id="HOME.TITLE_KNOW" /></h4>
                           <img className="mt-4 mb-4" src={knwoledge} />
-                          <div><FormattedHTMLMessage id="HOME.TEXT_KNOW" /></div>
+                          <div><FormattedMessage id="HOME.TEXT_KNOW" values={FORMATTED_MESSAGE_STANDARD_HTML_VALUES}/></div>
                         </MDBCardBody>
                       </MDBCard>
                     </MDBView>
                   </ScrollAnimation>
                 </div>
                 <div className="col-12 col-lg-4 mt-3 mt-lg-0">
-                  <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut' delay={700}>
+                  <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp h-100' animateOut='animate__fadeOut h-100' delay={700}>
                     <MDBView className="h-100 w-100">
                       <MDBCard className="h-100 w-100">
                         <MDBCardBody>
-                          <h4 className="text-brand1"><FormattedHTMLMessage id="HOME.TITLE_WILL_KNOW" /></h4>
+                          <h4 className="text-brand1"><FormattedMessage id="HOME.TITLE_WILL_KNOW" /></h4>
                           <img className="mt-4 mb-4" src={learn} />
-                          <div><FormattedHTMLMessage id="HOME.TEXT_WILL_KNOW" /></div>
+                          <div><FormattedMessage id="HOME.TEXT_WILL_KNOW" values={FORMATTED_MESSAGE_STANDARD_HTML_VALUES}/></div>
                         </MDBCardBody>
                       </MDBCard>
                     </MDBView>
@@ -364,8 +357,9 @@ class Home extends BasePageComponent<any, HomeState> {
               </div>
             <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp'>
               <div className="m-0 mt-6 mt-md-7 text-center home__kealab">
-                <div className="home__kealab-title"><FormattedHTMLMessage id="HOME.TITLE_KEALAB" /></div>
-                <div className="home__kealab-content"><FormattedHTMLMessage id="HOME.TEXT_KEALAB" /></div>
+                <div className="home__kealab-title">
+                  $$\&nbsp;&nbsp;&nbsp;$$\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>$$&nbsp;|&nbsp;$$&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>$$&nbsp;|$$&nbsp;&nbsp;/&nbsp;$$$$$$\&nbsp;&nbsp;&nbsp;$$$$$$\&nbsp;&nbsp;$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$$$$$\&nbsp;&nbsp;$$$$$$$\&nbsp;&nbsp;<br/>$$$$$&nbsp;&nbsp;/&nbsp;$$&nbsp;&nbsp;__$$\&nbsp;&nbsp;\____$$\&nbsp;$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\____$$\&nbsp;$$&nbsp;&nbsp;__$$\&nbsp;<br/>$$&nbsp;&nbsp;$$&lt;&nbsp;&nbsp;$$$$$$$$&nbsp;|&nbsp;$$$$$$$&nbsp;|$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$$$$$$&nbsp;|$$&nbsp;|&nbsp;&nbsp;$$&nbsp;|<br/>$$&nbsp;|\$$\&nbsp;$$&nbsp;&nbsp;&nbsp;____|$$&nbsp;&nbsp;__$$&nbsp;|$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$&nbsp;&nbsp;__$$&nbsp;|$$&nbsp;|&nbsp;&nbsp;$$&nbsp;|<br/>$$&nbsp;|&nbsp;\$$\\$$$$$$$\&nbsp;\$$$$$$$&nbsp;|$$$$$$$$\\$$$$$$$&nbsp;|$$$$$$$&nbsp;&nbsp;|<br/>\__|&nbsp;&nbsp;\__|\_______|&nbsp;\_______|\________|\_______|\_______/&nbsp;                </div>
+                <div className="home__kealab-content"><FormattedMessage id="HOME.TEXT_KEALAB" values={this.formatMessageValues}/></div>
                 <DosButton onClick={()=>{window.CustomTemplate.openPage(KEA_LAB_ID, true)}} href={KEA_LAB_URL}><FormattedMessage id="HOME.SHOW_KEALAB" /></DosButton>
               </div>
             </ScrollAnimation>

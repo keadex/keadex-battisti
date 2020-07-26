@@ -1,6 +1,6 @@
-import React, { Component, RefObject } from 'react';
+import React from 'react';
 import './ProgressBar.scss';
-import { FormattedMessage, FormattedMessage as FormattedHTMLMessage, WrappedComponentProps, injectIntl } from 'react-intl';
+import { WrappedComponentProps, injectIntl } from 'react-intl';
 import { IStoreState } from '../../core/store/store.type';
 import { connect } from 'react-redux';
 import { SceneId } from '../../core/app.constants';
