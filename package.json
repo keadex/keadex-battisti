@@ -1,7 +1,8 @@
 {
   "name": "keadex-battisti",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
+  "license": "MIT",
   "dependencies": {
     "@formatjs/intl-pluralrules": "^3.2.3",
     "@fullpage/react-fullpage": "^0.1.17",
@@ -12,9 +13,9 @@
     "@types/modernizr": "^3.5.3",
     "@types/moment": "^2.13.0",
     "@types/node": "10.12.18",
-    "@types/react": "^16.8.6",
+    "@types/react": "^16.9.43",
     "@types/react-animate-on-scroll": "^2.1.2",
-    "@types/react-dom": "16.0.11",
+    "@types/react-dom": "16.9.8",
     "@types/react-helmet": "^5.0.8",
     "@types/react-router-dom": "^5.1.5",
     "@types/react-router-hash-link": "^1.2.1",
@@ -33,12 +34,13 @@
     "mdbreact": "^4.26.0",
     "modernizr": "^3.7.1",
     "moment": "^2.26.0",
+    "next": "latest",
     "node-sass": "^4.13.1",
-    "react": "^16.8.6",
+    "react": "^16.12.0",
     "react-animate-on-scroll": "file:public/patch/react-animate-on-scroll",
     "react-app-polyfill": "^1.0.6",
     "react-cookie-consent": "^5.0.1",
-    "react-dom": "^16.8.6",
+    "react-dom": "^16.12.0",
     "react-floating-button-menu": "^2.0.8",
     "react-force-graph": "^1.32.1",
     "react-gsap": "^1.2.0",
@@ -58,14 +60,13 @@
     "scrollmagic": "^2.0.7",
     "smoothscroll-polyfill": "^0.4.4",
     "styled-components": "^4.3.2",
-    "svg-classlist-polyfill": "^1.0.2",
-    "typescript": "^3.9.7"
+    "svg-classlist-polyfill": "^1.0.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "type-check": "tsc"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -78,6 +79,10 @@
   ],
   "devDependencies": {
     "@types/react-redux": "^6.0.14",
-    "redux-devtools-extension": "^2.13.8"
+    "@types/node": "^12.12.21",
+    "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
+    "redux-devtools-extension": "^2.13.8",
+    "typescript": "3.9.7"
   }
 }
