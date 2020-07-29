@@ -40,7 +40,7 @@ export const KeadexPreview : React.FunctionComponent = React.memo((props) => {
 
   let techLabels = [
     "Micro Frontends", "Microservices", "Artificial\nIntelligence",
-    "IoT", "Security", "Anayltics", "DevOps", "SEO\nOptimization",
+    "IoT", "Security", "Analytics", "DevOps", "SEO\nOptimization",
     "Performance\nOptimization", "Video Game\nDevelopment", "UX/UI", "And bugs."
   ]
 
