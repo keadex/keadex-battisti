@@ -1,0 +1,11 @@
+@import './variables.scss';
+@import './scss/core/bootstrap/functions';
+@import './scss/core/bootstrap/variables';
+@import './scss/core/mixins';
+
+// Internet Explorer 10+ only
+@mixin ie-only() {
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    @content;
+  }
+}

@@ -1,0 +1,143 @@
+{
+    "GENERIC": {
+        "TODAY": "Today",
+        "DOWNLOAD": "Download",
+        "DAY": "Day",
+        "APPLICATION": "Application",
+        "INFRASTRUCTURE": "Infrastructure"
+    },
+    "POSITIONS": {
+        "MOBILE_DEVELOPER": "Mobile Developer",
+        "SOFTWARE_ENGINEER": "Software Engineer",
+        "IT_SOLUTION_ARCHITECT": "IT Solution Architect" 
+    },
+    "TASKS": {
+        "DESIGN": "Design",
+        "APP_DEVELOPMENT": "App Development",
+        "PROJECT_MANAGEMENT": "Project Management",
+        "REQUIREMENTS_ANALYSIS": "Requirements Analysis",
+        "SOLUTION_ARCHITECTURE": "Solution Architecture",
+        "SOFTWARE_DEVELOPMENT": "Software Development",
+        "SOFTWARE_ENGINEERING": "Software Engineering",
+        "TECHNICAL_LEAD": "Technical Lead",
+        "TEAM_LEADING": "Team Leading",
+        "VENDOR_MANAGEMENT": "Vendor Management"
+    },
+    "CITIES": {
+        "LIVERPOOL": "Liverpool",
+        "ROME": "Rome",
+        "MILAN": "Milan"
+    },
+    "COUNTRIES": {
+        "ITALY": "Italy",
+        "UK": "United Kingdom"
+    },
+    "SECTORS": {
+        "BANKING": "Banking",
+        "ECOMMERCE": "eCommerce",
+        "EDUCATION": "Education",
+        "DIGITAL_SOLUTIONS": "Digital Solutions",
+        "UTILITIES": "Energy & Utilities",
+        "RETAIL": "Retail",
+        "RISK_ANALYTICS": "Risk Analytics",
+        "TELECOMMUNICATION": "Telecommunication"
+    },
+    "NAVIGATION": {
+        "HOME": "~root",
+        "ABOUT_ME": "a80ut_m3",
+        "WHY_KEADEX": "why_K34d3x",
+        "WHATS_KEADEX": "wh4t5_K34d3x",
+        "KEA_LAB": "k34_l4b"
+    },
+    "KEADEX_PREVIEW":{
+        "LOAD": "Click here to load."
+    },
+    "HOME": {
+        "TITLE": "an ever-evolving experimental platform. fully free and open source.",
+        "WHAT_IS_KEADEX": "What is Keadex?",
+        "WHY_KEADEX": "Why Keadex?",
+        "TEXT_WHAT_IS": "In 2014, I came across a National Geographic documentary.<br></br><br></br>I was impressed from the <span>personality</span>, <span>smartness</span> and <span>problem solving</span> of that bird: the <span>Kea Parrot</span>.<br></br>A mix of interpretations and actions applied by the Kea to solve a problem: et voilà, the modern definition of <span>algorithm</span>.<br></br><br></br>Ok, but \"dex\"? \"dex\" is a rebus. Try to solve it...",
+        "TEXT_WHY": "As solution architect, it'is important to be <span>constantly updated</span> about new technologies and test them in order to understand how to improve the IT solutions.<br></br><br></br>Keadex is born:",
+        "EXPERIMENT": "to experiment new technologies",
+        "MODULAR": "to integrate them in an ever-evolving, modular and configurable platform",
+        "OPEN_SOURCE": "to be reusable and improved by everyone, because the only way to make progress is to learn from each other",
+        "SO_KEADEX": "So Keadex...",
+        "TITLE_NOT_WEBSITE": "is not a website",
+        "TEXT_NOT_WEBSITE": "It is more than a website.<br></br>It is a platform.",
+        "TITLE_KNOW": "is part of what I know",
+        "TEXT_KNOW": "Everything in Keadex is implemented by applying my skills.<br></br>From the graphic design to each snippet of code.",
+        "TITLE_WILL_KNOW": "will be part of what I'll learn",
+        "TEXT_WILL_KNOW": "It will never exist a final release of Keadex.<br></br>If I learn something then a new version is released.",
+        "TEXT_KEALAB": "Keadex will grow with new capabilities as I will have the time to integrate them.<br></br>I'm not fully dedicated to this project.<br></br><br></br>Since Keadex is a <span>modular</span> platform, it is made up of different and independent modules.<br></br><br></br>Each module is part of a general roadmap.<br></br>Check the <span>KeaLab</span> to see the progress and the technical details.",
+        "SHOW_KEALAB": "Show me KeaLab",
+        "SLOGAN": "an ever-evolving experimental platform. fully free and open source.",    
+        "ALPHA_LAUNCH": "Alpha on autumn '20"
+    },
+    "ABOUT_ME" : {
+        "TITLE": "I'm a nerd.<span><br></br></span> Trust on me.",
+        "SUBTITLE": "From Bari (Italy). Since 1991. Of July.",
+        "EDUCATION": {
+            "TITLE": "Education",
+            "HAPPY_HOUR": "My first H-Language 'hello world!' dates back to 1991 in Bari (Italy), where the Happy Hour is made up of octopus, sea urchins, \"focaccia\" and Peroni beer.",
+            "HIGH_SCHOOL": "I've started to study Computer Science at \"I.T.I.S. Guglielmo Marconi Bari\"... the best fu***ing high school of the planet! But my passion was (of course) born many years earlier...",
+            "UNIVERSITY": "I graduated in 2013 in Computer Science at \"University of Bari\". In 2013 I attended the \"University of Liverpool\" thanks to the Erasmus program. Here I wrote my dissertation \"SoChild - A social network to control and to support the language acquisition by children\".",
+            "JACK": "\"Hello, Friend\"",
+            "BRAIN_GRAPH_BANNER": ">interact with me on desktop devices_"
+        },
+        "HOBBIES":{
+            "TITLE": "Hobbies",
+            "TITLE_SPORT": "SPORT",
+            "DESCRIPTION_SPORT": "All sports. Except golf... golf is not a sport.",
+            "TITLE_MARTIAL_ARTS": "MARTIAL ARTS",
+            "DESCRIPTION_MARTIAL_ARTS": "Born in a family of Martial Arts masters (<a>Kyohan Simmi</a>) with some good results... 😎",
+            "TITLE_MUSIC": "MUSIC",
+            "DESCRIPTION_MUSIC": "Every developer lives with his headphones. My Spotify playlists are composed by more or less... all the genres.",
+            "TITLE_SPEARFISHING": "SPEARFISHING",
+            "DESCRIPTION_SPEARFISHING": "My dream is to travel beyond Earth orbit. In the meanwhile I settle for the opposite direction.",
+            "TITLE_CINEMA": "CINEMA",
+            "DESCRIPTION_CINEMA": "From Kubrick to Özpetek... From Fellini to Tarantino..."
+        },
+        "EXPERIENCE": {
+            "COMPANIES": "companies",
+            "CUSTOMERS": "customers",
+            "MAIN_ACTIVITIES": "main activities",
+            "SECTORS": "sectors",
+            "SUMMARY": "Summary",
+            "SKILLS": "Skills"
+        },
+        "RESUME": {
+            "TITLE": "Just another boring resume",
+            "SERIOUSLY": "Seriously? You still want a boring PDF?<br></br>Do you have any idea how f**ing hard it was to develop this page?!",
+            "AGREEMENT_LABEL": "by checking this box I confirm to be a boring person"
+        }
+    },
+    "QUOTES": {
+        "NO_QUOTES_AUTHOR": "jh4ck",
+        "NO_QUOTES": "The quote is not available. The authors are busy...",
+        "TIP_QUOTE_AUTHOR": "jh4ck",
+        "TIP_QUOTE": "I don't have enough quotes!! Please, don't overdo it!! 😒"
+    },
+    "COOKIE_DECLARATION": {
+        "TITLE": "Cookie Declaration"
+    },
+    "PRIVACY_POLICY": {
+        "TITLE": "Privacy Policy"
+    },
+    "TERMS_CONDITIONS": {
+        "TITLE": "Terms & Conditions"
+    },
+    "KEALAB":{
+        "TITLE": "This is KeaLab",
+        "SUBTITLE": "Where the magic happens.",
+        "MODULE_DETAILS": {
+            "MENU": {
+                "DESCRIPTION": "Description",
+                "FEATURES": "Features",
+                "ROADMAP": "Roadmap"
+            }
+        }
+    },
+    "KEADEX_MODULES":{
+        "KEADEX_BATTISTI": "Keadex Battisti"
+    }
+}
