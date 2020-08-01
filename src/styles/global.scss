@@ -1,24 +1,20 @@
-@import '~@fortawesome/fontawesome-free/css/all.min.css';
-// @import "./assets/styles/scss/core/bootstrap/functions";
-// @import "./assets/styles/scss/core/bootstrap/variables";
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+@import "./custom-template.scss";
+// @import "./custom-template-demo.scss";
 @import '~bootstrap/scss/bootstrap.scss';
 @import '../components/shared/scss/mdb.scss';
 
 @import '~animate.css/animate.min.css';
 @import '../components/shared/shared-imports.module.scss';
 
-// @font-face {
-//   font-family: 'Inconsolata';
-//   font-style: monospace;
-//   font-weight: 400;
-//   src: url('https://fonts.googleapis.com/css?family=Inconsolata'); 
-// }
+
 
 @font-face {
   font-family: 'Perfect DOS VGA 437';
   font-style: sans-serif;
   font-weight: 400;
-  src: url('/public/fonts/Perfect DOS VGA 437 Win.ttf'); 
+  src: url('/fonts/Perfect DOS VGA 437 Win.ttf'); 
 }
 
 
@@ -290,9 +286,6 @@ html.js, .js body{
 @media screen and (max-width: 40em) {
 	.js .pages-nav {
 		padding: 20px 30px 0 30px;
-	}
-	.js .pages-nav__item {
-		padding: 4px 0;
 	}
 	.link--social {
 		margin: 0 0.75em;

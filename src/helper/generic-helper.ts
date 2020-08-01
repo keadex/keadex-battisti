@@ -51,8 +51,7 @@ export function rgbToHex(r:number, g:number, b:number) {
 
 //---------- watchForHover
 export function watchForHover() {
-  console.log("watch for hover")
-;
+  console.log("watch for hover");
   // lastTouchTime is used for ignoring emulated mousemove events
   let lastTouchTime = 0
 
@@ -90,4 +89,10 @@ export function scrollToSectionById(targetElementId:string, parentId:string):voi
   let targetElement : HTMLElement|null = document.getElementById(targetElementId);
   if (targetElement)
     pageElem.scrollTo({top: targetElement.getBoundingClientRect().top+pageElem.scrollTop, behavior: 'smooth'});
+}
+
+
+//----- isClient
+export function isClient():boolean{
+  return typeof window !== 'undefined';
 }

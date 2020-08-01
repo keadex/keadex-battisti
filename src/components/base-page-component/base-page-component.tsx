@@ -1,5 +1,6 @@
 import React, { RefObject } from 'react';
 import store from '../../core/store/store';
+import { PAGE_ROOT_ID } from '../../core/route.constants';
 
 
 //--------------- COMPONENT
@@ -21,10 +22,12 @@ class BasePageComponent<K,V> extends React.Component<K,V> {
   scrollToHash(){
     let hash = window.location.hash?window.location.hash.replace("#", ""):undefined;
     let page = window.location.pathname.replace("/", "");
-    
+    console.log(hash + " -- " + page);
     if (hash && hash.length > 0 && this.anchorRefs.has(hash) && !store.getState().app.menuOpen){
       // console.log(this.anchorRefs.get(hash)!);
-      document.getElementById(page)!.scrollTo({top: this.anchorRefs.get(hash)!.current.offsetTop, behavior: 'smooth'});
+      debugger;
+      console.log(PAGE_ROOT_ID);
+      document.getElementById(PAGE_ROOT_ID)!.scrollTo({top: this.anchorRefs.get(hash)!.current.offsetTop, behavior: 'smooth'});
     }
   }
   
@@ -37,6 +40,7 @@ class BasePageComponent<K,V> extends React.Component<K,V> {
 
   //------------ componentDidUpdate
   componentDidUpdate(){
+    console.log("ciao")
     this.scrollToHash();
   }
 

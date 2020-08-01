@@ -8,7 +8,7 @@
   position: relative;
   overflow: hidden;
 
-  #bg{
+  :global(#bg){
     margin: -$page-body-padding-desktop;
   }
 }
@@ -57,13 +57,13 @@
   padding-bottom: 0px;
   svg {
     width: 50%;
-    #target1{
+    :global(#target1){
       fill: $brand-color-2;
     }
-    #target2{
+    :global(#target2){
       fill: $brand-color-3;
     }
-    #target3{
+    :global(#target3){
       fill: $brand-color-1;
     }
   }
@@ -83,10 +83,10 @@
     }
   }
 
-  .card {
+  :global(.card){
     background: #171717;
   }
-  .card-body img{
+  :global(.card-body img){
     width: 150px;
     display: initial;
   }
@@ -141,7 +141,7 @@
     min-height: 100vh;
     padding: $page-body-padding-mobile;
 
-    #bg{
+    :global(#bg){
       margin: -$page-body-padding-mobile;
     }
   }

@@ -1,4 +1,4 @@
-import { IProgress } from "../../components/progressbar/ProgressBar";
+import { IProgress } from "../../components/progressbar/progress-bar"
 import { Experience } from "../../model/models";
 import { SceneId } from "../app.constants";
 

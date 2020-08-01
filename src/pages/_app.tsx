@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import type { AppProps } from 'next/app'
+import {Router} from 'next/router'
 import Head from 'next/head'
 import '../styles/global.scss'
 import { BreakpointProvider, Query } from '../core/react-breakpoint'
@@ -8,12 +9,16 @@ import { Provider } from 'react-redux'
 import store from '../core/store/store'
 import { IntlProvider } from 'react-intl'
 import flatten from 'flat'
+import { toggleMenu, activateSpinner, disableSpinner } from '../core/store/reducers/app.reducer';
 
 // import 'react-app-polyfill/ie9';
 // import 'react-app-polyfill/stable';
 // import 'svg-classlist-polyfill'
 // import smoothscroll from 'smoothscroll-polyfill';
 import { watchForHover } from '../helper/generic-helper'
+import Spinner from '../components/spinner/spinner';
+import Header from '../components/header/header';
+import Body from '../components/body/body';
 
 // smoothscroll.polyfill();
 
@@ -26,6 +31,7 @@ declare global {
   interface Window { CustomTemplate: CustomTemplate; }
 }
 
+
 //---------- react-intl configuration
 if (!Intl.PluralRules) {
     require('@formatjs/intl-pluralrules/polyfill');
@@ -37,6 +43,7 @@ const messages = {
     'en': messages_en
 };
 const language = 'en'; //navigator.language.split(/[-_]/)[0];  // language without region code
+
 
 //---------- React Breakpoint configuration
 const queries : Query = {
@@ -52,7 +59,13 @@ const queries : Query = {
   upXl: '(min-width: 1200px)'
 }
 
+//---------- Bind router events to show loader
+Router.events.on('routeChangeStart', () => store.dispatch(activateSpinner()));
+Router.events.on('routeChangeComplete', () => store.dispatch(disableSpinner()));
+Router.events.on('routeChangeError', () => store.dispatch(disableSpinner()));
 
+
+//---------- COMPONENT
 function App({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
@@ -62,15 +75,41 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>ciao</title>
+        {/* <link rel="stylesheet" type="text/css" href="../../custom_template/css/demo.css" /> */}
+        {/* <link rel="stylesheet" type="text/css" href="../../custom_template/css/component.css" /> */}
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" /><script src="../../custom_template/js/modernizr-custom.min.js" />
+        <link rel="manifest" href="/manifest.json" />
+        <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;display=swap" rel="stylesheet" />
+        <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="d12031df-a146-4c32-8276-e1d5c086b932" data-blockingmode="auto" type="text/javascript"></script>
+        <title>Keadex</title>
       </Head>
       <BreakpointProvider queries={queries}>
         <Provider store={store}>
           <IntlProvider locale={language} messages={messages[language]}>
-            <Component {...pageProps} />
+            <div>
+              <Spinner />
+              <div>
+                <Header />
+
+                {/* pages stack */}
+                {/* I need to leave page-stack div outside the body because the javascript of
+                the template cannot wait the rendering of body component since it calculates
+                the number of the pages of the stack*/}
+                <div className="pages-stack">
+                  <Body>
+                    <div>
+                      <Component {...pageProps} />
+                    </div>
+                  </Body>
+                </div>
+                
+                <button className="menu-button" onClick={()=>store.dispatch(toggleMenu())}><span>Menu</span></button>
+              </div>
+            </div>
           </IntlProvider>
         </Provider>
-      </BreakpointProvider>  
+      </BreakpointProvider>
     </>
   )
 }

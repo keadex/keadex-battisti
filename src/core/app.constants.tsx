@@ -14,6 +14,6 @@ export enum SceneId {
 
 export const FORMATTED_MESSAGE_STANDARD_HTML_VALUES : Record<string, any> = {
   span: (chunks:any) => (<span>{chunks}</span>),
-  br: (chunk:any)=>(<br />),
+  br: ()=>(<br />),
   "&nbsp;": ()=>(<>&nbsp;</>)
 }

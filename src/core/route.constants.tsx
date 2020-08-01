@@ -21,6 +21,7 @@ export interface IRoute {
 }
 
 //PAGE IDS
+export const PAGE_ROOT_ID = "page-root";
 export const HOME_ID = "home";
 export const ABOUT_ME_ID = "about-me";
 export const WHY_KEADEX_ID = "why-keadex";
@@ -32,11 +33,11 @@ export const TERMS_AND_CONDITIONS_ID = "terms-conditions";
 
 
 //ROUTES
-const BASE_URL = "/:language";
-export const HOME_URL = "/home";
+// const BASE_URL = "/:language";
+export const HOME_URL = "/";
 export const ABOUT_ME_URL = "/about-me";
-export const WHY_KEADEX_URL = "/home#why-keadex";
-export const WHATS_KEADEX = "/home#whats-keadex";
+export const WHY_KEADEX_URL = "/#why-keadex";
+export const WHATS_KEADEX_URL = "/#whats-keadex";
 export const KEA_LAB_URL = "/kealab";
 export const COOKIE_DECLARATION_URL = "/cookie-declaration";
 export const PRIVACY_POLICY_URL = "/privacy-policy";

@@ -30,7 +30,7 @@ export const aboutMeReducer = handleActions<IAboutMeState, IAboutMeAction>(
       let experience = update(state.experience, {$set: action.payload.experience});
       return { ...state, experience: experience!};
     },
-    [resetState.toString()]: (state, action) => {
+    [resetState.toString()]: (state) => {
       let defaultState = getDefaultAboutMeState();
       return { ...state, currentScene: defaultState.currentScene, progress: defaultState.progress, experience: defaultState.experience};
     },

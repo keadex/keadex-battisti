@@ -1,5 +1,5 @@
 import React from 'react';
-import './dos-button.module.scss';
+import styles from './dos-button.module.scss';
 import { useHistory } from 'react-router-dom';
 
 
@@ -24,7 +24,7 @@ export const DosButton : React.FunctionComponent<DosButtonProps> = props => {
   }
 
   return (
-    <div className="dos-button__root" onClick={handleClick}>
+    <div className={`${styles["dos-button__root"]}`} onClick={handleClick}>
       {props.children}
     </div>
   );

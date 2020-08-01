@@ -20,10 +20,10 @@ export const appReducer = handleActions<IAppState, IAppAction>(
         newValue = action.payload.menuOpen;
       return { ...state, menuOpen: newValue};
     },
-    [activateSpinner.toString()]: (state, action) => {
+    [activateSpinner.toString()]: (state) => {
       return { ...state, spinnerCounter: state.spinnerCounter+1};
     },
-    [disableSpinner.toString()]: (state, action) => {
+    [disableSpinner.toString()]: (state) => {
       return { ...state, spinnerCounter: state.spinnerCounter-1};
     }
   },

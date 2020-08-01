@@ -2,22 +2,22 @@ import React, { RefObject } from 'react';
 import ScrollAnimation from 'react-animate-on-scroll';
 import { FormattedMessage } from 'react-intl';
 import BasePageComponent from '../components/base-page-component/base-page-component';
-import './index.module.scss'; 
+import styles from './index.module.scss'; 
 import keadexLogo from "../../public/img/keadex-logo.png"
 import notWebsite from "../../public/img/not-website.png";
 import knwoledge from "../../public/img/knwoledge.png";
 import learn from "../../public/img/learn.png";
-import moment, { Moment } from 'moment';
 import styled from 'styled-components';
 import ReactPlayer from 'react-player'
 import { MorphSVGTimeline, generateMorphSVGTimelines } from '../helper/animation-helper';
 import { MDBCard } from 'mdbreact';
 import { MDBView, MDBCardBody } from 'mdbreact';
 import { DosButton } from '../components/dos-button/dos-button';
-import { KEA_LAB_URL, KEA_LAB_ID } from '../core/route.constants';
+import { KEA_LAB_URL, PAGE_ROOT_ID } from '../core/route.constants';
 import { Background } from '../components/background/background';
 import graph from "../../public/img/graph-bg.jpg";
 import { FORMATTED_MESSAGE_STANDARD_HTML_VALUES } from '../core/app.constants';
+import PageLayout from '../components/page-layout/page-layout';
 
 const FooterDiv:any = styled.div<any>`
   position:absolute; width: 100%; top: ${(props)=>(props.vpHeight && props.logoContainerHeight)?(props.vpHeight-props.logoContainerHeight - 100) + "px":"0px"}
@@ -65,7 +65,7 @@ class Home extends BasePageComponent<any, HomeState> {
   private listIntervalTime:number = 5000;
   private formatMessageValues:Record<string, any> = {
     span: (chunks:any) => (<span className='text-brand1'>{chunks}</span>),
-    br: (chunk:any)=>(<br />)
+    br: ()=>(<br />)
   }
 
   //FUNCS
@@ -159,7 +159,7 @@ class Home extends BasePageComponent<any, HomeState> {
     if (toSubjectId !== this.lastSubjectId){
       var subjects:string = this.lastSubjectId + "_" + toSubjectId;
       this.listRefs.get(this.lastSubjectId)!.current!.className="";
-      this.listRefs.get(toSubjectId)!.current!.className="active";
+      this.listRefs.get(toSubjectId)!.current!.className=styles["active"];
       this.lastSubjectId = toSubjectId;
       this.timelines!.get(subjects)!.timeline.restart();
     }
@@ -180,59 +180,59 @@ class Home extends BasePageComponent<any, HomeState> {
 
 
   //------------ getDaysFromLaunch
-  private getDaysFromLaunch(){
-    let today: Moment = moment();
-    let launchDay: Moment = moment(process.env.REACT_APP_LAUNCH_DATE);
-    return today.diff(launchDay, "days");
-  }
+  // private getDaysFromLaunch(){
+  //   let today: Moment = moment();
+  //   let launchDay: Moment = moment(process.env.REACT_APP_LAUNCH_DATE);
+  //   return today.diff(launchDay, "days");
+  // }
 
 
   //------------ render
   public render() {
     return (
-      <React.Fragment>
+      <PageLayout>
         
         <div className='page-body p-0'>
 
           {/* COVER */}
-          <div className="home__section home__cover" id="home-section">
+          <div className={`${styles["home__section"]} ${styles["home__cover"]}`} id="home-section">
             <div className="full-center position-relative text-center" ref={this.logoContRef}>
               {/* <img id="jack" className="full-center position-absolute home__jack" src={jack} /> */}
-              <ScrollAnimation scrollableParentSelector="#home" offset={0} animateIn='animate__fadeIn animate__slow' animateOut='animate__fadeOut'>
+              <ScrollAnimation scrollableParentSelector="#page-root" offset={0} animateIn='animate__fadeIn animate__slow' animateOut='animate__fadeOut'>
                 <img id="keadex-logo" src={keadexLogo} width={300}/>
               </ScrollAnimation>
-              <ScrollAnimation scrollableParentSelector="#home" offset={0} delay={350} animateIn='animate__fadeIn animate__slow' animateOut='animate__fadeOut'>
-                <div className="home__title"><FormattedMessage id="HOME.TITLE" /></div>
+              <ScrollAnimation scrollableParentSelector="#page-root" offset={0} delay={350} animateIn='animate__fadeIn animate__slow' animateOut='animate__fadeOut'>
+                <div className={`${styles["home__title"]}`}><FormattedMessage id="HOME.TITLE" /></div>
               </ScrollAnimation>
             </div>
-            <div className="home__footer-text text-uppercase">
-              <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeIn animate__slow' animateOut='animate__fadeOut'>
-                <div className="home__footer-text-text">
-                  <FooterDiv vpHeight={this.state.height} logoContainerHeight={(this.logoContRef.current)?this.logoContRef.current.offsetHeight:"0"}>Version {process.env.REACT_APP_VERSION} alpha</FooterDiv>
+            <div className={`${styles["home__footer-text"]} text-uppercase`}>
+              <ScrollAnimation scrollableParentSelector="#page-root" animateIn='animate__fadeIn animate__slow' animateOut='animate__fadeOut'>
+                <div className={`${styles["home__footer-text-text"]}`}>
+                  <FooterDiv vpHeight={this.state.height} logoContainerHeight={(this.logoContRef.current)?this.logoContRef.current.offsetHeight:"0"}>Version {process.env.NEXT_PUBLIC_APP_VERSION} alpha</FooterDiv>
                 </div>
               </ScrollAnimation>
             </div>
           </div>
 
           {/* WHY KEADEX */}
-          <div id="why-keadex" ref={this.anchorRefs.get("why-keadex")} className="home__section home__why-keadex">
-            <Background id="bg" img={graph} overlayColor="#131313"/>
-            <div className="home__section-content">
+          <div id="why-keadex" ref={this.anchorRefs.get("why-keadex")} className={`${styles["home__section"]} ${styles["home__why-keadex"]}`}>
+            <Background id={`bg`} img={graph} overlayColor="#131313"/>
+            <div className={`${styles["home__section-content"]}`}>
               <div className="row m-0">
                 <div className="col-12">
-                  <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp'>
+                  <ScrollAnimation scrollableParentSelector="#page-root" animateIn='animate__fadeInUp'>
                     <h1 className="text-brand1-dark mt-5 mt-md-0"><FormattedMessage id="HOME.WHY_KEADEX" /></h1>
                   </ScrollAnimation>
                 </div>
               </div>
               <div className="row m-0 mt-5 mt-md-6">
                 <div className="col-12 col-md-8">
-                  <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
+                  <ScrollAnimation scrollableParentSelector="#page-root" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
                     <FormattedMessage id="HOME.TEXT_WHAT_IS" values={this.formatMessageValues}/>
                   </ScrollAnimation>
                 </div>
                 <div className="col-12 col-md-4 mt-5 mt-md-0">
-                  <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
+                  <ScrollAnimation scrollableParentSelector="#page-root" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
                     <ReactPlayer url='https://youtu.be/7W7hEUGtv4U' width="100%" className="mb-5 mb-md-0"/>
                   </ScrollAnimation>
                 </div>
@@ -241,19 +241,19 @@ class Home extends BasePageComponent<any, HomeState> {
           </div>
 
           {/* WHAT IS KEADEX */}
-          <div id="whats-keadex" ref={this.anchorRefs.get("whats-keadex")} className="home__section home__whats-keadex mt-6 mt-md-6">
+          <div id="whats-keadex" ref={this.anchorRefs.get("whats-keadex")} className={`${styles["home__section"]} ${styles["home__whats-keadex"]} mt-6 mt-md-6`}>
             {/* <Background id="bg" img={bgWhat}/> */}
             {/* <Background id="bg" img={code} overlayColor="#131313"/> */}
             <div className="row m-0">
               <div className="col-12">
-                <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp'>
+                <ScrollAnimation scrollableParentSelector="#page-root" animateIn='animate__fadeInUp'>
                   <h1 className="text-brand1-dark"><FormattedMessage id="HOME.WHAT_IS_KEADEX" /></h1>
                 </ScrollAnimation>
               </div>
             </div>
             <div className="row m-0 mt-5 mt-md-6">
               <div className="col-12 col-md-3 text-center">
-                <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp'>
+                <ScrollAnimation scrollableParentSelector="#page-root" animateIn='animate__fadeInUp'>
                   <svg id="svg" height="100%" viewBox="0 0 260 300" >
                     <defs>                      
                       <filter id="shadow-6dp" x="-50%" y="-100%" width="200%" height="300%">
@@ -285,22 +285,22 @@ class Home extends BasePageComponent<any, HomeState> {
                 </ScrollAnimation>
               </div>
               <div className="col-12 col-md-9 mt-5 mt-md-0 pl-0 pl-md-5">
-                <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
+                <ScrollAnimation scrollableParentSelector="#page-root" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
                   <FormattedMessage id="HOME.TEXT_WHY" values={this.formatMessageValues}/>
                 </ScrollAnimation>
                 <ul>
-                  <li className="active" ref={this.listRefs.get(ListItem.experiment)} onClick={()=>{this.onWhatsKeadexHover(ListItem.experiment)}} onMouseOver={()=>{this.onWhatsKeadexHover(ListItem.experiment)}} onMouseLeave={()=>{this.startWhatsKeadexLoop()}}>
-                    <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
+                  <li className={`${styles["active"]}`} ref={this.listRefs.get(ListItem.experiment)} onClick={()=>{this.onWhatsKeadexHover(ListItem.experiment)}} onMouseOver={()=>{this.onWhatsKeadexHover(ListItem.experiment)}} onMouseLeave={()=>{this.startWhatsKeadexLoop()}}>
+                    <ScrollAnimation scrollableParentSelector="#page-root" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
                       <FormattedMessage id="HOME.EXPERIMENT" />
                     </ScrollAnimation>
                   </li>
                   <li ref={this.listRefs.get(ListItem.modular)} onClick={()=>{this.onWhatsKeadexHover(ListItem.modular)}} onMouseOver={()=>{this.onWhatsKeadexHover(ListItem.modular)}} onMouseLeave={()=>{this.startWhatsKeadexLoop()}}>
-                    <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
+                    <ScrollAnimation scrollableParentSelector="#page-root" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
                       <FormattedMessage id="HOME.MODULAR" />
                     </ScrollAnimation>
                   </li>
                   <li ref={this.listRefs.get(ListItem.openSource)} onClick={()=>{this.onWhatsKeadexHover(ListItem.openSource)}} onMouseOver={()=>{this.onWhatsKeadexHover(ListItem.openSource)}} onMouseLeave={()=>{this.startWhatsKeadexLoop()}}>
-                    <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
+                    <ScrollAnimation scrollableParentSelector="#page-root" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
                       <FormattedMessage id="HOME.OPEN_SOURCE" />
                     </ScrollAnimation>
                   </li>
@@ -309,14 +309,14 @@ class Home extends BasePageComponent<any, HomeState> {
             </div>
             <div className="row m-0 mt-5 mt-md-6">
               <div className="col-12 text-center">
-                <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
+                <ScrollAnimation scrollableParentSelector="#page-root" animateIn='animate__fadeInUp' animateOut='animate__fadeOut'>
                   <h2 className="text-primary-light"><FormattedMessage id="HOME.SO_KEADEX" /></h2>
                 </ScrollAnimation>
               </div>
             </div>
             <div className="row m-0 mt-3 mt-md-4 text-center">
                 <div className="col-12 col-lg-4">
-                  <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp h-100' animateOut='animate__fadeOut h-100'>
+                  <ScrollAnimation scrollableParentSelector="#page-root" animateIn='animate__fadeInUp h-100' animateOut='animate__fadeOut h-100'>
                     <MDBView className="h-100 w-100">
                       <MDBCard className="h-100 w-100">
                         <MDBCardBody>
@@ -329,7 +329,7 @@ class Home extends BasePageComponent<any, HomeState> {
                   </ScrollAnimation>
                 </div>
                 <div className="col-12 col-lg-4 mt-3 mt-lg-0">
-                  <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp h-100' animateOut='animate__fadeOut h-100' delay={350}>
+                  <ScrollAnimation scrollableParentSelector="#page-root" animateIn='animate__fadeInUp h-100' animateOut='animate__fadeOut h-100' delay={350}>
                     <MDBView className="h-100 w-100">
                       <MDBCard className="h-100 w-100">
                         <MDBCardBody>
@@ -342,7 +342,7 @@ class Home extends BasePageComponent<any, HomeState> {
                   </ScrollAnimation>
                 </div>
                 <div className="col-12 col-lg-4 mt-3 mt-lg-0">
-                  <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp h-100' animateOut='animate__fadeOut h-100' delay={700}>
+                  <ScrollAnimation scrollableParentSelector="#page-root" animateIn='animate__fadeInUp h-100' animateOut='animate__fadeOut h-100' delay={700}>
                     <MDBView className="h-100 w-100">
                       <MDBCard className="h-100 w-100">
                         <MDBCardBody>
@@ -355,22 +355,30 @@ class Home extends BasePageComponent<any, HomeState> {
                   </ScrollAnimation>
                 </div>
               </div>
-            <ScrollAnimation scrollableParentSelector="#home" animateIn='animate__fadeInUp'>
-              <div className="m-0 mt-6 mt-md-7 text-center home__kealab">
-                <div className="home__kealab-title">
+            <ScrollAnimation scrollableParentSelector="#page-root" animateIn='animate__fadeInUp'>
+              <div className={`m-0 mt-6 mt-md-7 text-center ${styles["home__kealab"]}`}>
+                <div className={`${styles["home__kealab-title"]}`}>
                   $$\&nbsp;&nbsp;&nbsp;$$\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>$$&nbsp;|&nbsp;$$&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>$$&nbsp;|$$&nbsp;&nbsp;/&nbsp;$$$$$$\&nbsp;&nbsp;&nbsp;$$$$$$\&nbsp;&nbsp;$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$$$$$\&nbsp;&nbsp;$$$$$$$\&nbsp;&nbsp;<br/>$$$$$&nbsp;&nbsp;/&nbsp;$$&nbsp;&nbsp;__$$\&nbsp;&nbsp;\____$$\&nbsp;$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\____$$\&nbsp;$$&nbsp;&nbsp;__$$\&nbsp;<br/>$$&nbsp;&nbsp;$$&lt;&nbsp;&nbsp;$$$$$$$$&nbsp;|&nbsp;$$$$$$$&nbsp;|$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$$$$$$&nbsp;|$$&nbsp;|&nbsp;&nbsp;$$&nbsp;|<br/>$$&nbsp;|\$$\&nbsp;$$&nbsp;&nbsp;&nbsp;____|$$&nbsp;&nbsp;__$$&nbsp;|$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$&nbsp;&nbsp;__$$&nbsp;|$$&nbsp;|&nbsp;&nbsp;$$&nbsp;|<br/>$$&nbsp;|&nbsp;\$$\\$$$$$$$\&nbsp;\$$$$$$$&nbsp;|$$$$$$$$\\$$$$$$$&nbsp;|$$$$$$$&nbsp;&nbsp;|<br/>\__|&nbsp;&nbsp;\__|\_______|&nbsp;\_______|\________|\_______|\_______/&nbsp;                </div>
-                <div className="home__kealab-content"><FormattedMessage id="HOME.TEXT_KEALAB" values={this.formatMessageValues}/></div>
-                <DosButton onClick={()=>{window.CustomTemplate.openPage(KEA_LAB_ID, true)}} href={KEA_LAB_URL}><FormattedMessage id="HOME.SHOW_KEALAB" /></DosButton>
+                <div className={`${styles["home__kealab-content"]}`}><FormattedMessage id="HOME.TEXT_KEALAB" values={this.formatMessageValues}/></div>
+                <DosButton onClick={()=>{window.CustomTemplate.openPage(PAGE_ROOT_ID, true)}} href={KEA_LAB_URL}><FormattedMessage id="HOME.SHOW_KEALAB" /></DosButton>
               </div>
             </ScrollAnimation>
           </div>          
         </div>
-      </React.Fragment>
+      </PageLayout>
     );
   }
 }
-
-export default Home;
+const mapStateToProps = (state:IStoreState) => {
+  return {
+    menuOpen: state.app.menuOpen
+  }
+}
+export default connect(
+  mapStateToProps,
+  null
+)(Home)
+// export default Home;
 
 
 
@@ -393,6 +401,8 @@ export default Home;
 // import Link from 'next/link'
 // import Layout from '../components/Layout'
 // import './index.scss'
+import { connect } from 'react-redux';
+import { IStoreState } from '../core/store/store.type';
 
 // const IndexPage = () => (
 //   <Layout title="Home | Next.js + TypeScript Example">
