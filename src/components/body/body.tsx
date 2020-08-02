@@ -1,23 +1,25 @@
-import React, { RefObject } from 'react';
+import React, { RefObject, cloneElement } from 'react';
 import { connect } from 'react-redux';
 import { IStoreState } from '../../core/store/store.type';
 import SplashScreen from '../splashscreen/splash-screen';
 import { toggleMenu } from '../../core/store/reducers/app.reducer';
+import { NextComponentType, NextPageContext } from 'next';
+import { PAGE_ROOT_ID } from '../../core/route.constants';
 // import store from '../../core/store/store';
 
 
 //--------------- TYPES
 interface IBodyProps {
   menuOpen: boolean,
+  navigationOccurred: boolean,
   toggleMenu:(menuOpen?: boolean)=>void,
-  children: React.ReactNode
+  PageComponent: NextComponentType<NextPageContext, any, {}>;
+  pageProps: any
 }
 
 
 //--------------- COMPONENT
 class Body extends React.Component<IBodyProps> {
-  
-  private pageRef : RefObject<HTMLDivElement> = React.createRef();
 
   //------------ constructor
   constructor(props:IBodyProps){
@@ -31,9 +33,16 @@ class Body extends React.Component<IBodyProps> {
   //     this.props.toggleMenu(false)
   // }
 
+  //------------ componentDidMount
+  componentDidMount(){
+    document.body.scrollTop=0
+  }
+
+
   //------------ componentDidUpdate
   componentDidUpdate(){
-    this.pageRef!.current!.scrollTop = 0;
+    if (this.props.menuOpen || !this.props.navigationOccurred) document.getElementById(PAGE_ROOT_ID)!.scrollTop = 0;
+    document.body.scrollTop=0    
   }
 
   //------------ render
@@ -46,7 +55,7 @@ class Body extends React.Component<IBodyProps> {
             Object.keys(ROUTES).map(function (key) {
               // let ComponentName = ROUTES[key].component;
               return ( */}
-                <div className="page" id="page-root" data-menuopen={this.props.menuOpen} ref={this.pageRef}>
+                <div className="page" id="page-root" data-menuopen={this.props.menuOpen}>
                   {/* <Switch> */}
                     {/* <Route exact path={ROUTES[key].url} render={() => (
                       <Suspense fallback={<div></div>}> */}
@@ -54,7 +63,9 @@ class Body extends React.Component<IBodyProps> {
                           <SplashScreen/>
                         </div>
                         <div style={{opacity:this.props.menuOpen?0:1}} className={this.props.menuOpen?"":"animate__animated animate__fast animate__fadeIn"}>
-                          {this.props.children}
+                          {/* {cloneElement(this.props.children)} */}
+                          {/* {this.props.children} */}
+                          <this.props.PageComponent {...this.props.pageProps} />
                         </div>
                       {/* </Suspense> */}
                     {/* )}/> */}
@@ -83,7 +94,8 @@ class Body extends React.Component<IBodyProps> {
 
 const mapStateToProps = (state:IStoreState) => {
   return {
-    menuOpen: state.app.menuOpen
+    menuOpen: state.app.menuOpen,
+    navigationOccurred: state.app.navigationOccurred
   }
 }
 

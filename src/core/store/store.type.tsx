@@ -13,6 +13,8 @@ export interface IStoreState {
 export interface IAppState {
     menuOpen: boolean;
     spinnerCounter: number;
+    previousUrl: string|null;
+    navigationOccurred:boolean;
 }
 
 export interface IBotState {
@@ -42,7 +44,9 @@ export const getDefaultStoreState = () : IStoreState => {
 export const getDefaultAppState =  () : IAppState => {
     return {
         menuOpen: false,
-        spinnerCounter: 0
+        spinnerCounter: 0,
+        previousUrl: null,
+        navigationOccurred: true
     }
 };
 

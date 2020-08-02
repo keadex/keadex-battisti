@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 import store from '../core/store/store'
 import { IntlProvider } from 'react-intl'
 import flatten from 'flat'
-import { toggleMenu, activateSpinner, disableSpinner } from '../core/store/reducers/app.reducer';
+import { toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred } from '../core/store/reducers/app.reducer';
 
 // import 'react-app-polyfill/ie9';
 // import 'react-app-polyfill/stable';
@@ -60,9 +60,15 @@ const queries : Query = {
 }
 
 //---------- Bind router events to show loader
-Router.events.on('routeChangeStart', () => store.dispatch(activateSpinner()));
+Router.events.on('routeChangeStart', () => {store.dispatch(activateSpinner()); store.dispatch(setPreviousUrl(location.href)); store.dispatch(setNavigationOccurred(true));});
 Router.events.on('routeChangeComplete', () => store.dispatch(disableSpinner()));
 Router.events.on('routeChangeError', () => store.dispatch(disableSpinner()));
+Router.events.on('hashChangeStart', () => {store.dispatch(setPreviousUrl(location.href)); store.dispatch(setNavigationOccurred(true));});
+
+//I need to handle the following event because by default Next.js, whene there is an hash change, scrolls the body
+//to the target element (https://github.com/vercel/next.js/blob/1b033423dcc43b51752013cb8807051e66917d58/packages/next/client/index.js)
+//This causes an issue on my side because instead of the body, I've a custome root scrollable element (the page)
+Router.events.on('hashChangeComplete', () => {document.body.scrollTop=0;});
 
 
 //---------- COMPONENT
@@ -72,7 +78,7 @@ function App({ Component, pageProps }: AppProps) {
     watchForHover();
   });
   
-  return (
+  return (    
     <>
       <Head>
         {/* <link rel="stylesheet" type="text/css" href="../../custom_template/css/demo.css" /> */}
@@ -97,11 +103,9 @@ function App({ Component, pageProps }: AppProps) {
                 the template cannot wait the rendering of body component since it calculates
                 the number of the pages of the stack*/}
                 <div className="pages-stack">
-                  <Body>
-                    <div>
-                      <Component {...pageProps} />
-                    </div>
-                  </Body>
+                  <Body PageComponent={Component} pageProps={pageProps} />
+                    {/* <Component {...pageProps} />
+                  </Body> */}
                 </div>
                 
                 <button className="menu-button" onClick={()=>store.dispatch(toggleMenu())}><span>Menu</span></button>

@@ -93,9 +93,14 @@ class Home extends BasePageComponent<any, HomeState> {
 
   //------------ componentDidMount
   componentDidMount(){
+    super.componentDidMount();
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
     this.startWhatsKeadexLoop();
+  }
+
+  componentDidUpdate(){
+    super.componentDidUpdate();
   }
 
 
@@ -189,6 +194,7 @@ class Home extends BasePageComponent<any, HomeState> {
 
   //------------ render
   public render() {
+    
     return (
       <PageLayout>
         
@@ -374,11 +380,11 @@ const mapStateToProps = (state:IStoreState) => {
     menuOpen: state.app.menuOpen
   }
 }
-export default connect(
-  mapStateToProps,
-  null
-)(Home)
-// export default Home;
+// export default connect(
+//   null,
+//   null
+// )(Home)
+export default Home;
 
 
 

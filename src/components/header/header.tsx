@@ -29,11 +29,11 @@ class Header extends React.Component<IHeaderProps> {
         {/* navigation */}
         <nav className="pages-nav">
         <img src={logo} className="nav-logo" alt="logo" />
-          <div className="pages-nav__item"><Link href={HOME_URL} scroll={false} ><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((fullpath.endsWith(HOME_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.HOME" /></a></Link></div>
-          <div className="pages-nav__item"><Link href={WHY_KEADEX_URL} scroll={false} ><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((fullpath.endsWith(WHY_KEADEX_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.WHY_KEADEX" /></a></Link></div>
-          <div className="pages-nav__item"><Link href={WHATS_KEADEX_URL} scroll={false} ><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((fullpath.endsWith(WHATS_KEADEX_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.WHATS_KEADEX" /></a></Link></div>
-          <div className="pages-nav__item"><Link href={ABOUT_ME_URL}><a onClick={()=>this.props.toggleMenu(false)} className="link link--page"><FormattedMessage id="NAVIGATION.ABOUT_ME" /></a></Link></div>
-          <div className="pages-nav__item"><Link href={KEA_LAB_URL}><a onClick={()=>this.props.toggleMenu(false)} className="link link--page"><FormattedMessage id="NAVIGATION.KEA_LAB" /></a></Link></div>
+          <div className="pages-nav__item"><Link replace href={HOME_URL} scroll={false} ><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((fullpath.endsWith(HOME_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.HOME" /></a></Link></div>
+          <div className="pages-nav__item"><Link replace href={WHY_KEADEX_URL} scroll={false} ><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((fullpath.endsWith(WHY_KEADEX_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.WHY_KEADEX" /></a></Link></div>
+          <div className="pages-nav__item"><Link replace href={WHATS_KEADEX_URL} scroll={false} ><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((fullpath.endsWith(WHATS_KEADEX_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.WHATS_KEADEX" /></a></Link></div>
+          <div className="pages-nav__item"><Link replace href={ABOUT_ME_URL}><a onClick={()=>this.props.toggleMenu(false)} className="link link--page"><FormattedMessage id="NAVIGATION.ABOUT_ME" /></a></Link></div>
+          <div className="pages-nav__item"><Link replace href={KEA_LAB_URL}><a onClick={()=>this.props.toggleMenu(false)} className="link link--page"><FormattedMessage id="NAVIGATION.KEA_LAB" /></a></Link></div>
           {/* <div className="pages-nav__item"><a className="link link--page" href="#page-software">Software</a></div>
           <div className="pages-nav__item"><a className="link link--page" href="#page-custom">Customization &amp; Settings</a></div>
           <div className="pages-nav__item"><a className="link link--page" href="#page-training">Training</a></div>
