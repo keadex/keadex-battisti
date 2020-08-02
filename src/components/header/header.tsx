@@ -12,28 +12,54 @@ import { IStoreState } from '../../core/store/store.type';
 
 
 //--------------- TYPES
-interface IHeaderProps extends WithRouterProps {
+interface HeaderProps extends WithRouterProps {
   toggleMenu:(menuOpen?: boolean)=>void
 }
 
 
 //--------------- COMPONENT
-class Header extends React.Component<IHeaderProps> {
+class Header extends React.Component<HeaderProps> {
+
+  /*
+    Needed to fix active class for next/Link, INCLUDING ANCHOR TAGS.
+    When using SSR, anchor tags are not available on server side, but only in client side.
+    If you use directly this.props.router.asPath as condition to set the active class, you will
+    receive a className mismatch between client and server rendering.
+    By using a combination of getSnapshotBeforeUpdate() (executed only on client side) and a local
+    variable you can bypass this problem.
+  */
+  private currentUrl:string="";
+
+
+  //------------ componentDidMount
+  componentDidMount(){
+    this.currentUrl=location.href;
+  }
+
+
+  //------------ getSnapshotBeforeUpdate
+  getSnapshotBeforeUpdate(propsPrecedenti:HeaderProps, statePrecedente:any){
+    this.currentUrl=location.href;
+    return this.currentUrl;
+  }
+
+  //------------ componentDidUpdate
+  componentDidUpdate(propsPrecedenti:HeaderProps, statePrecedente:any, snapshot:any) {
+  }
+
   
   //------------ render
   public render() {
-    console.log(this.props.router.asPath);
-    let fullpath = this.props.router.asPath;//TODO this.props.location.pathname + this.props.location.hash;
     return (
       <div>
         {/* navigation */}
         <nav className="pages-nav">
         <img src={logo} className="nav-logo" alt="logo" />
-          <div className="pages-nav__item"><Link replace href={HOME_URL} scroll={false} ><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((fullpath.endsWith(HOME_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.HOME" /></a></Link></div>
-          <div className="pages-nav__item"><Link replace href={WHY_KEADEX_URL} scroll={false} ><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((fullpath.endsWith(WHY_KEADEX_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.WHY_KEADEX" /></a></Link></div>
-          <div className="pages-nav__item"><Link replace href={WHATS_KEADEX_URL} scroll={false} ><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((fullpath.endsWith(WHATS_KEADEX_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.WHATS_KEADEX" /></a></Link></div>
-          <div className="pages-nav__item"><Link replace href={ABOUT_ME_URL}><a onClick={()=>this.props.toggleMenu(false)} className="link link--page"><FormattedMessage id="NAVIGATION.ABOUT_ME" /></a></Link></div>
-          <div className="pages-nav__item"><Link replace href={KEA_LAB_URL}><a onClick={()=>this.props.toggleMenu(false)} className="link link--page"><FormattedMessage id="NAVIGATION.KEA_LAB" /></a></Link></div>
+          <div className="pages-nav__item"><Link replace href={HOME_URL} scroll={false} ><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((this.currentUrl.endsWith(HOME_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.HOME" /></a></Link></div>
+          <div className="pages-nav__item"><Link replace href={WHY_KEADEX_URL} scroll={false} ><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((this.currentUrl.endsWith(WHY_KEADEX_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.WHY_KEADEX" /></a></Link></div>
+          <div className="pages-nav__item"><Link replace href={WHATS_KEADEX_URL} scroll={false} ><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((this.currentUrl.endsWith(WHATS_KEADEX_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.WHATS_KEADEX" /></a></Link></div>
+          <div className="pages-nav__item"><Link replace href={ABOUT_ME_URL}><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((this.currentUrl.endsWith(ABOUT_ME_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.ABOUT_ME" /></a></Link></div>
+          <div className="pages-nav__item"><Link replace href={KEA_LAB_URL}><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((this.currentUrl.endsWith(KEA_LAB_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.KEA_LAB" /></a></Link></div>
           {/* <div className="pages-nav__item"><a className="link link--page" href="#page-software">Software</a></div>
           <div className="pages-nav__item"><a className="link link--page" href="#page-custom">Customization &amp; Settings</a></div>
           <div className="pages-nav__item"><a className="link link--page" href="#page-training">Training</a></div>
@@ -55,12 +81,12 @@ class Header extends React.Component<IHeaderProps> {
 
 }
 
-// const mapStateToProps = (state:IStoreState) => {
-//   return {
-//     menuOpen: state.app.menuOpen
-//   }
-// }
+const mapStateToProps = (state:IStoreState) => {
+  return {
+    menuOpen: state.app.menuOpen
+  }
+}
 export default connect(
-  null,
+  mapStateToProps,
   { toggleMenu }
 )(withRouter(Header))

@@ -49,12 +49,12 @@ html.js,
 }
 
 .pages-nav__item {
-	width: 33%;
-	padding: 1em;
+  width: auto;
+	padding: 1em 4em 1em 4em;
 }
 
 .js .pages-nav__item {
-	padding: 0 10%;
+	padding: 0 5%;
 }
 
 .pages-nav .pages-nav__item--social {
@@ -77,7 +77,7 @@ html.js,
 }
 
 .link {
-	font-size: 0.85em;
+	font-size: $body1-text-size;
 	font-weight: bold;
 	position: relative;
 	letter-spacing: 1px;
@@ -86,27 +86,32 @@ html.js,
 
 .link:hover,
 .link:focus {
-	color: #fff;
+	color: $accent-color;
 }
 
 .link--page {
 	display: block;
-	color: #cecece;
+	color: $primary-color-text;
+}
+
+.link--page.is-active{
+	color: $accent-color;	
 }
 
 .link--page:not(.link--faded)::before {
 	content: '';
 	position: absolute;
-	top: 100%;
+	top: 70%;
 	left: 0%;
-	width: 30px;
+	width: 15px;
 	height: 2px;
-	/* margin: 5px 0 0 -15px; */
-	background: #fff;
+	margin: 5px 0 0 0;
+	background: $accent-color;
 	-webkit-transition: -webkit-transform 0.3s;
 	transition: transform 0.3s;
 	-webkit-transform: scale3d(0, 1, 1);
-	transform: scale3d(0, 1, 1);
+  transform: scale3d(0, 1, 1);
+  transform-origin: left;
 }
 
 .link--page:hover:before {
@@ -115,7 +120,7 @@ html.js,
 }
 
 .link--faded {
-	color: #4f4f64;
+	color: $secondary-text-color;
 }
 
 .link--faded:hover,
@@ -128,8 +133,9 @@ html.js,
 }
 
 .link--social {
-	font-size: 1.5em;
 	margin: 0 0.75em;
+	font-size: $h5-text-size;
+	color: $secondary-text-color;
 }
 
 .text-hidden {
@@ -155,12 +161,16 @@ html.js,
 .js .page {
 	position: relative;
 	z-index: 5;
-	overflow: hidden;
 	width: 100%;
 	height: 100vh;
 	pointer-events: auto;
-	background: #2a2b30;
 	box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1);
+	background: $primary-color-dark;
+	overflow: auto;
+}
+
+.pages-stack--open .page{
+	overflow: hidden;
 }
 
 .js .pages-stack--open .page {
@@ -284,13 +294,13 @@ html.js,
 		margin: 0 0 0 50%;
 	}
 	.pages-nav__item {
-		width: 50%;
+		// width: 50%;
 		min-height: 20px;
 	}
 	.link--page {
 		overflow: hidden;
 		white-space: nowrap;
-		text-overflow: ellipsis;
+		// text-overflow: ellipsis;
 	}
 	.link--social {
 		margin: 0 0.1em;
@@ -300,7 +310,7 @@ html.js,
 @media screen and (max-width: 40em) {
 	.js .pages-nav {
 		/* display: block; */
-		padding: 10px 20px 0 20px;
+		padding: 20px 30px 0 30px;
 		text-align: left;
 	}
 	.js .pages-nav__item--small {
@@ -310,6 +320,7 @@ html.js,
 	}
 	.pages-nav__item--social {
 		font-size: 0.9em;
+		margin-top: 10px;
 	}
 	.menu-button {
 		top: 15px;
@@ -321,6 +332,16 @@ html.js,
 	}
 	.poster {
 		margin: 1em;
+	}
+	.link--social {
+		margin: 0 0.75em;
+		font-size: $h6-text-size;
+	}
+	.link--page.is-active::before {
+		top: 70%;
+	}
+	.link--page:not(.link--faded)::before{
+		top: 70%;
 	}
 }
 
@@ -338,7 +359,22 @@ html.js,
   height: 90px;
 }
 .link--page.is-active::before {
-  top: 70%;
+	content: '';
+	position: absolute;
+	top: 70%;
+	left: 0%;
+	width: 15px;
+	height: 2px;
+	background: $accent-color;
+	-webkit-transition: -webkit-transform 0.3s;
+	transition: transform 0.3s;
+	-webkit-transform: scale3d(0, 1, 1);
+	transform: scale3d(0, 1, 1);
+}
+
+.link--page.is-active:before {
+	-webkit-transform: scale3d(1, 1, 1);
+	transform: scale3d(1, 1, 1);
 }
 
 @include media-breakpoint-down(lg) { 
@@ -378,7 +414,10 @@ html.js,
   }
   .link--page.is-active::before {
     top: 80%;
-  }
+	}
+	.link--page:not(.link--faded)::before{
+    top: 80%;
+	}
 }
 
 
