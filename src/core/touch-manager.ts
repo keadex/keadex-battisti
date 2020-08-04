@@ -1,4 +1,4 @@
-import * as Three from 'three';
+// import * as Three from 'three';
 
 class TouchManager {
   private isMoving: boolean = false;
@@ -89,42 +89,42 @@ class TouchManager {
   }
 
   private handleClick = (event: MouseEvent | TouchEvent) => {
-    let xPosition: number = 0;
-    let yPosition: number = 0;
+    // let xPosition: number = 0;
+    // let yPosition: number = 0;
 
-    if (event instanceof MouseEvent) {
-      xPosition = event.x;
-      yPosition = event.y;
-    } else if (event instanceof TouchEvent) {
-      xPosition = event.changedTouches[0].clientX;
-      yPosition = event.changedTouches[0].clientY;
-    }
+    // if (event instanceof MouseEvent) {
+    //   xPosition = event.x;
+    //   yPosition = event.y;
+    // } else if (event instanceof TouchEvent) {
+    //   xPosition = event.changedTouches[0].clientX;
+    //   yPosition = event.changedTouches[0].clientY;
+    // }
 
-    var mouse = new Three.Vector2();
-    var raycaster = new Three.Raycaster();
+    // var mouse = new Three.Vector2();
+    // var raycaster = new Three.Raycaster();
 
-    // calculate mouse position in normalized device coordinates
-    // (-1 to +1) for both components
-    mouse.x = (xPosition / window.innerWidth) * 2 - 1;
-    mouse.y = -(yPosition / window.innerHeight) * 2 + 1;
+    // // calculate mouse position in normalized device coordinates
+    // // (-1 to +1) for both components
+    // mouse.x = (xPosition / window.innerWidth) * 2 - 1;
+    // mouse.y = -(yPosition / window.innerHeight) * 2 + 1;
 
-    if (this.forceGraphInstance.camera && this.forceGraphInstance.scene) {
-      raycaster.setFromCamera(
-        new Three.Vector2(mouse.x, mouse.y),
-        this.forceGraphInstance.camera()
-      );
+    // if (this.forceGraphInstance.camera && this.forceGraphInstance.scene) {
+    //   raycaster.setFromCamera(
+    //     new Three.Vector2(mouse.x, mouse.y),
+    //     this.forceGraphInstance.camera()
+    //   );
 
-      const intersects = raycaster
-        .intersectObjects(this.forceGraphInstance.scene().children, true)
-        .filter(o => ["node"].indexOf((o.object as any).__graphObjType) !== -1); // Check only node objects
+    //   const intersects = raycaster
+    //     .intersectObjects(this.forceGraphInstance.scene().children, true)
+    //     .filter(o => ["node"].indexOf((o.object as any).__graphObjType) !== -1); // Check only node objects
 
-      const topObject: any = intersects.length ? intersects[0].object : null;
-      const topNode: any = topObject && topObject.__data && topObject.__data;
+    //   const topObject: any = intersects.length ? intersects[0].object : null;
+    //   const topNode: any = topObject && topObject.__data && topObject.__data;
 
-      if (topNode) {
-        this.clickHandler(topNode);
-      }
-    }
+    //   if (topNode) {
+    //     this.clickHandler(topNode);
+    //   }
+    // }
   };
 }
 

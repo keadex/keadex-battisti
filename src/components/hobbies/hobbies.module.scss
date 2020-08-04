@@ -1,0 +1,93 @@
+@import '../shared/shared-imports.module.scss';
+
+
+.hobbies__box{
+  width: 7%;
+  margin-left: -25%;
+  transform-origin: bottom right;
+}
+
+.hobbies__hobby {
+  position: absolute;
+  width: 10%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.hobbies__hobby-martial-arts{
+  width: 6%;
+}
+
+.hobbies__hobby-spearfishing{
+  width: 8%;
+}
+.hobbies__hobby-cinema{
+  width: 8%;
+}
+.hobbies__hobby-spearfishing-end{
+  top: 72vh;
+}
+.hobbies__hobby-cinema-end{
+  top: 71vh;
+}
+
+.hobbies__hobby-description {
+  position: absolute;
+  top: 50%;
+  transform: translate(0,-50%);
+  width: 100%;
+}
+
+@include media-breakpoint-down(lg) { 
+  .hobbies__box{
+    width: 12%;
+    margin-left: -40%;
+  }
+  .hobbies__hobby {
+    position: absolute;
+    width: 20%;
+  }
+  .hobbies__hobby-martial-arts{
+    width: 12%;
+  }
+  .hobbies__hobby-spearfishing{
+    width: 18%;
+  }
+  .hobbies__hobby-cinema{
+    width: 18%;
+  }
+  .hobbies__hobby-spearfishing-end{
+    top: 70vh;
+  }
+  .hobbies__hobby-cinema-end{
+    top: 69vh;
+  }
+}
+
+@include media-breakpoint-down(sm) { 
+  .hobbies__box{
+    width: 25%;
+    margin-left: -75%;
+  }
+  .hobbies__hobby {
+    position: absolute;
+    width: 30%;
+  }
+  .hobbies__hobby-martial-arts{
+    width: 20%;
+  }
+  .hobbies__hobby-spearfishing{
+    width: 34%;
+  }
+  .hobbies__hobby-cinema{
+    width: 30%;
+  }
+  .hobbies__hobby-spearfishing-end{
+    top: 69vh;
+  }
+  .hobbies__hobby-cinema-end{
+    top: 69vh;
+  }
+}

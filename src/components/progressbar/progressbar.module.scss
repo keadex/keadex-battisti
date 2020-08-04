@@ -1,4 +1,4 @@
-@import './src/assets/styles/shared-imports.scss';
+@import '../shared/shared-imports.module.scss';
 
 $border-size: 1px;
 // $height-progressbar: 50px;  moved in variable.scss
@@ -9,7 +9,7 @@ $padding-progressbar: 10px;
   border: dashed $border-size $primary-color-light;
   // border-top: $border-size dashed white;
   // border-bottom: $border-size dashed white;
-  border-image-source: url("../../assets/img/border-dash.png");
+  border-image-source: url("../../../public/img/border-dash.png");
   border-image-slice: 2;
   border-image-repeat: round;  
   width: 100%;

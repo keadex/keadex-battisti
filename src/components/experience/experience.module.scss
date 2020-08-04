@@ -1,0 +1,172 @@
+@import '../shared/shared-imports.module.scss';
+
+
+.experience__body {
+  // pointer-events: all;
+  position: absolute;
+  bottom: 50px;
+  top: 240px;
+  width: 100%;
+}
+
+.experience__list-item--even {
+  font-size: $h6-text-size;
+  // text-align: center;
+}
+
+.experience__list-item--odd{
+  font-size: $h6-text-size;
+  color: $brand-color-1;
+  // text-align: center;
+}
+
+.experience__section-title{
+  color: $console-text-color;
+  font-size: $h6-text-size;
+  // text-align: center;
+}
+
+.experience__skills-chart-container{
+  width: 50%;
+  height: 100%;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+  margin-top: 50px;
+}
+
+.experience__skills-radar{
+  fill: $brand-color-1;
+}
+
+.experience__logo-brands{
+  max-width: 150px;
+  max-height: 25px;
+  display: unset !important;  
+}
+
+.experience__body .md-tabs{
+  width: 30%;
+  left: 50%;
+  transform: translate(-50%,0);
+}
+
+.experience__body .carousel-indicators{
+  display: none;
+}
+.experience__body .carousel-control-next{
+  display: none;
+}
+.experience__body .carousel-control-prev{
+  display: none;
+}
+
+.experience__card-body{
+  padding-top: 60px;
+}
+.experience__avatar{
+  width: 90px;
+  height: 90px;
+}
+.experience__avatar img{
+  width: 90px;
+  height: 90px;
+}
+.experience__card-content-container{
+  width: 100%;
+  height: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  bottom: 0;
+  position: absolute;
+  left: 0;
+}
+.experience__card-body-chart{
+  display: flex;
+  flex-direction: column;
+}
+.experience__legend{
+  font-size: $body2-text-size;
+  pointer-events: none;
+}
+
+.experience__legend-container{
+  height: 100%;
+  overflow: auto;
+}
+
+@include media-breakpoint-down(md) { 
+  .experience__body .md-tabs{
+    width: 80%;
+  }
+
+  .experience__logo-brands{
+    max-width: 60px;
+    max-height: 15px;
+  }
+
+  .experience__skills-chart-container{
+    height: 250px;
+  }
+}
+
+@include media-breakpoint-down(lg) { 
+  .experience__list-item--even {
+    font-size: $caption-text-size;
+  }
+  
+  .experience__list-item--odd{
+    font-size: $caption-text-size;
+  }
+
+  .experience__section-title{
+    font-size: $caption-text-size;
+  }
+}
+
+@include media-breakpoint-down(sm) { 
+  .experience__title-position{
+    display: inline-block;
+    margin-left: 10px;
+    font-size: $body2-text-size;
+    vertical-align: top;
+  }
+  .experience__avatar{
+    width: 40px;
+    height: 40px;
+  }
+  .experience__avatar img{
+    width: 40px;
+    height: 40px;
+  }
+  .experience__body{
+    bottom: 20px;
+  }
+  .experience__body .nav-link{
+    padding: 3px;
+  }
+  .experience__card-body{
+    padding-top: 35px;
+  }
+  .experience__card-content-container{
+    height: 75%;
+    padding: 10px 5px 0px 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .experience__legend{
+    font-size: $caption-text-size;
+  }  
+  .experience__skills-chart-container{
+    margin-top: 0px;
+    height: 160px;
+  }
+  .experience__list-item--even {
+    display: inline;
+  }
+  
+  .experience__list-item--odd{
+    display: inline;
+  }
+}
+

@@ -1,5 +1,5 @@
 import React from 'react';
-import './progress-bar.module.scss';
+import styles from './progressbar.module.scss';
 import { WrappedComponentProps, injectIntl } from 'react-intl';
 import { IStoreState } from '../../core/store/store.type';
 import { connect } from 'react-redux';
@@ -48,12 +48,12 @@ class ProgressBar extends React.Component<IProgressBarProps, any> {
       return (<div></div>)
     this.percentage = Math.round(this.props.progress[this.props.currentScene].progress * 100);
     return (
-      <div className="progressbar">
+      <div className={`${styles["progressbar"]}`}>
         <span className="d-inline-block float-left">Progress:</span>
         
-        <div className="progressbar__container d-inline-block">
-          <div className="progress-bar__section-title text-truncate">{this.getTitle()}</div>
-          <div className="progressbar__bar" style={{ width: this.percentage+'%' }}></div>
+        <div className={`${styles["progressbar__container"]} d-inline-block`}>
+          <div className={`${styles["progress-bar__section-title"]} text-truncate`}>{this.getTitle()}</div>
+          <div className={`${styles["progressbar__bar"]}`} style={{ width: this.percentage+'%' }}></div>
         </div>
         <span className="d-inline-block float-right">{this.percentage}%</span>
         {/* <span>Scene: {this.props.currentScene} Progress: {Math.round(this.props.progress[this.props.currentScene].progress * 10) / 10} Duration {this.props.progress[this.props.currentScene].duration}</span> */}
@@ -62,7 +62,6 @@ class ProgressBar extends React.Component<IProgressBarProps, any> {
   }
 
 }
-
 
 
 const mapStateToProps = (state:IStoreState) => {
