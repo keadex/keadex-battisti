@@ -31,7 +31,7 @@ class Education extends React.Component<IEducationProps, EducationState> {
 
   //ATTRS
   private _isMounted:boolean;
-  private forceGraphRef:RefObject<any>;
+  // private forceGraphRef:RefObject<any>;
   private brain:Map<string, HTMLImageElement> = new Map();
 
   //FUNCS
@@ -43,12 +43,26 @@ class Education extends React.Component<IEducationProps, EducationState> {
       experienceGraph: {nodes: [], links: []}
     }
     this._isMounted = false;
-    this.forceGraphRef = React.createRef<any>();
-    this.initBrain();    
+    // this.forceGraphRef = React.createRef<any>();
   }
 
 
-  //------------ constructor
+  //---------- componentDidMount
+  componentDidMount() {
+    this.initBrain();    
+    this._isMounted = true;
+    let _self = this;
+    NetworkService.getInstance().getExperienceGraph().then(function(response){
+      if (_self._isMounted && response.data.result){
+        _self.setState({experienceGraph: response.data.result});
+      }
+    });
+    TouchManager.init();
+    // TouchManager.forceGraphInstance = this.forceGraphRef;
+  }
+
+
+  //------------ initBrain
   private initBrain(){
     let frontalLobeImg = new Image();
     frontalLobeImg.src = frontalLobe;
@@ -68,31 +82,19 @@ class Education extends React.Component<IEducationProps, EducationState> {
   }
 
 
-  //---------- componentDidMount
-  componentDidMount() {
-    this._isMounted = true;
-    let _self = this;
-    NetworkService.getInstance().getExperienceGraph().then(function(response){
-      if (_self._isMounted && response.data.result){
-        _self.setState({experienceGraph: response.data.result});
-      }
-    });
-    TouchManager.init();
-    TouchManager.forceGraphInstance = this.forceGraphRef;
-  }
   //---------- componentDidUpdate
   componentDidUpdate(){
     //Enlarge graph only if it is not in mobile mode
-    if (!this.props.breakpoints!.xs && !this.props.breakpoints!.sm){
-      this.forceGraphRef.current.d3Force('charge')
-        .strength(-200)
-        .distanceMax(1000);
-      this.forceGraphRef.current.d3Force('link').distance(80)
-    }else{
-      this.forceGraphRef.current.d3Force('charge')
-        .strength(-20);
-      this.forceGraphRef.current.d3Force('link').distance(50)
-    }
+    // if (!this.props.breakpoints!.xs && !this.props.breakpoints!.sm){
+    //   this.forceGraphRef.current.d3Force('charge')
+    //     .strength(-200)
+    //     .distanceMax(1000);
+    //   this.forceGraphRef.current.d3Force('link').distance(80)
+    // }else{
+    //   this.forceGraphRef.current.d3Force('charge')
+    //     .strength(-20);
+    //   this.forceGraphRef.current.d3Force('link').distance(50)
+    // }
   }
 
   //---------- componentWillUnmount

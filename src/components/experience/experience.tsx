@@ -172,7 +172,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
               
               {/* TAB */}
               <MDBNav tabs className="nav-justified pointer-events-all" color='indigo'>
-                <MDBNavItem>
+                {/* <MDBNavItem>
                   <MDBNavLink to="#" link active={this.state.activeItem == 1} onClick={(event:Event)=>this.onTabBtnClick(event, 1)} role="tab" >
                     <MDBIcon icon="address-card" /> <FormattedMessage id={"ABOUT_ME.EXPERIENCE.SUMMARY"} />
                   </MDBNavLink>
@@ -181,7 +181,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                   <MDBNavLink to="#" link active={this.state.activeItem == 2} onClick={(event:Event)=>this.onTabBtnClick(event, 2)} role="tab" >
                     <MDBIcon icon="list-ul" /> <FormattedMessage id={"ABOUT_ME.EXPERIENCE.SKILLS"} />
                   </MDBNavLink>
-                </MDBNavItem>
+                </MDBNavItem> */}
               </MDBNav>
               
               {/* CONTENT */}

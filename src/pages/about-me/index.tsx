@@ -13,7 +13,7 @@ import {Experience as IExperience} from '../../model/models';
 import NetworkService from '../../core/network/network.service';
 import Resume from '../../components/resume/resume';
 import BasePageComponent from '../../components/base-page-component/base-page-component';
-import { ABOUT_ME_ID } from '../../core/route.constants';
+import { ABOUT_ME_ID, PAGE_ROOT_ID } from '../../core/route.constants';
 
 
 //--------------- TYPES
@@ -105,7 +105,7 @@ class AboutMe extends BasePageComponent<IAboutMeProps, any> {
         <div className='page-body'>
 
          
-            <Controller container={"#"+ABOUT_ME_ID} globalSceneOptions={{ triggerHook: 0 }}>
+            <Controller container={"#"+PAGE_ROOT_ID} globalSceneOptions={{ triggerHook: 0 }}>
               
               {/* PROGRESS BAR */}
               <Scene duration={0} pin enabled={true}>

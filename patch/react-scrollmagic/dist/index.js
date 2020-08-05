@@ -3011,17 +3011,22 @@ var Controller = function (_React$Component) {
  */
 function debugAddIndicators (ScrollMagic) {
 	var NAMESPACE = "debug.addIndicators";
-
+  
+  //START JACK PATCH
+  //You can't the same global variable name, otherwise you will lose the access to the global variable
+  var _window = {};
 	if (typeof window === 'undefined') {
-		var window = {};
-		window.addEventListener = function () {};
-	}
+		_window.addEventListener = function () {};
+	}else{
+    _window = window;
+  }
 
-	var console = window.console || {},
+	var console = _window.console || {},
 	    err = Function.prototype.bind.call(console.error || console.log || function () {}, console);
 	if (!ScrollMagic) {
 		err("(" + NAMESPACE + ") -> ERROR: The ScrollMagic main module could not be found. Please make sure it's loaded before this plugin or use an asynchronous loader like requirejs.");
 	}
+  //START JACK PATCH
 
 	// plugin settings
 	var FONT_SIZE = "0.85em",
@@ -3892,4 +3897,3 @@ var Scene = function (_React$PureComponent2) {
 Scene.displayName = 'Scene';
 
 export { Controller, Scene };
-//# sourceMappingURL=index.es.js.map

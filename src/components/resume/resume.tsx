@@ -20,7 +20,7 @@ interface ResumeState{
 class Resume extends React.Component<any, ResumeState> {
 
   //ATTRS
-  private tlDownloadResume : TimelineMax;
+  private tlDownloadResume : TimelineMax|undefined;
   private resumeAgreeContRef : RefObject<HTMLDivElement>;
   private resumeBinaryContRef : RefObject<HTMLDivElement>;
   private isAnimationInitialized : boolean;
@@ -35,13 +35,18 @@ class Resume extends React.Component<any, ResumeState> {
       isAgreementChecked: false
     }
     this.startDownload = this.startDownload.bind(this);
-    this.tlDownloadResume = new TimelineMax();
     this.resumeAgreeContRef = React.createRef<HTMLDivElement>();
     this.resumeBinaryContRef = React.createRef<HTMLDivElement>();
     this.isAnimationInitialized = false;
   }
 
+
+  //----- componentDidMount
+  componentDidMount(){
+    this.tlDownloadResume = new TimelineMax();
+  }
   
+
   //----- initTimeline
   private initTimeline(){
     this.isAnimationInitialized = true;
@@ -52,33 +57,33 @@ class Resume extends React.Component<any, ResumeState> {
     let agreeContainerStyle = window.getComputedStyle(this.resumeAgreeContRef.current!);
     let agreeContainerHeight = parseFloat(agreeContainerStyle!.height!.replace("px", ""));
     
-    this.tlDownloadResume.to("#resume-agree-bg", 1, {opacity: `1`});
-    this.tlDownloadResume.to("#resume-agree-container", 1, {top: `${top + (-1*((agreeContainerHeight*scaleFactor/2)+(agreeContainerHeight*scaleFactor/4)))}px`, transform: `translate(-50%, 0) scale(${scaleFactor})`}, "-=1");
-    this.tlDownloadResume.to("#resume-binary-container", 1, {top: `${top + (agreeContainerHeight*scaleFactor)}px`,  transform: "translate(-50%, 0)"}, "-=1");
-    this.tlDownloadResume.to("#resume-agree-content", 2, {transform: `translate(0, 100%)`});
-    this.tlDownloadResume.to("#resume-agree-bg", 2, {transform: `translate(0, 100%)`}, "-=2");
-    this.tlDownloadResume.to("#resume-binary-content", 3, {transform: `translate(0, 100%)`, opacity: 1, ease:Linear.easeNone}, "-=2");
-    this.tlDownloadResume.to("#resume-pdf", 2, {opacity: `1`}, "-=2.5");
+    this.tlDownloadResume!.to("#resume-agree-bg", 1, {opacity: `1`});
+    this.tlDownloadResume!.to("#resume-agree-container", 1, {top: `${top + (-1*((agreeContainerHeight*scaleFactor/2)+(agreeContainerHeight*scaleFactor/4)))}px`, transform: `translate(-50%, 0) scale(${scaleFactor})`}, "-=1");
+    this.tlDownloadResume!.to("#resume-binary-container", 1, {top: `${top + (agreeContainerHeight*scaleFactor)}px`,  transform: "translate(-50%, 0)"}, "-=1");
+    this.tlDownloadResume!.to("#resume-agree-content", 2, {transform: `translate(0, 100%)`});
+    this.tlDownloadResume!.to("#resume-agree-bg", 2, {transform: `translate(0, 100%)`}, "-=2");
+    this.tlDownloadResume!.to("#resume-binary-content", 3, {transform: `translate(0, 100%)`, opacity: 1, ease:Linear.easeNone}, "-=2");
+    this.tlDownloadResume!.to("#resume-pdf", 2, {opacity: `1`}, "-=2.5");
     
-    this.tlDownloadResume.addCallback(()=>{
+    this.tlDownloadResume!.addCallback(()=>{
       NetworkService.getInstance().downloadFile(process.env.REACT_APP_BASE_URL! + process.env.REACT_APP_GET_RESUME_PDF_API!, "r3sum3-g14c0m0s1mm1.pdf");
     }, "-=2.5");
     
-    this.tlDownloadResume.pause();
+    this.tlDownloadResume!.pause();
   }
 
 
   //----- startDownload
   private startDownload(){
     if (!this.isAnimationInitialized) this.initTimeline();
-    this.tlDownloadResume.restart();    
+    this.tlDownloadResume!.restart();    
   }
 
 
   //----- restartAnimation
   private restartAnimation(){ 
-    this.tlDownloadResume.seek(0, true);
-    this.tlDownloadResume.pause(0, true);
+    this.tlDownloadResume!.seek(0, true);
+    this.tlDownloadResume!.pause(0, true);
   }
 
 
