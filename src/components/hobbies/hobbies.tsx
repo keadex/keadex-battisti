@@ -94,7 +94,7 @@ class Education extends React.Component<IEducationProps> {
             to={{ rotation:-80, left:"-20%", top: "65vh", opacity: 1 }}
             progress={this.adjustProgress(2, progress)}
             playState="stop">
-              <img className={`${styles["hobbies__hobby"]} ${["hobbies__hobby-martial-arts"]}`} src={martialArts} alt="Martial Arts hobby" />
+              <img className={`${styles["hobbies__hobby"]} ${styles["hobbies__hobby-martial-arts"]}`} src={martialArts} alt="Martial Arts hobby" />
           </Tween>
           <div className={`${styles["hobbies__hobby-description"]} ${(this.adjustProgress(2.1, progress)==0?"out":"")}`}>
             <Tween            
@@ -122,7 +122,7 @@ class Education extends React.Component<IEducationProps> {
             to={{ rotation:80, left:"20%", top: "68vh", opacity: 1 }}
             progress={this.adjustProgress(3, progress)}
             playState="stop">
-              <img className={`${styles["hobbies__hobby"]} ${["hobbies__hobby-martial-arts"]}`} src={music} alt="Music hobby" />
+              <img className={`${styles["hobbies__hobby"]} ${styles["hobbies__hobby-martial-arts"]}`} src={music} alt="Music hobby" />
           </Tween>
           <div className={`${styles["hobbies__hobby-description"]} ${(this.adjustProgress(3.1, progress)==0?"out":"")}`}>
             <Tween            

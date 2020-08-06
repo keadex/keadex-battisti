@@ -13,7 +13,7 @@ import {Experience as IExperience} from '../../model/models';
 import NetworkService from '../../core/network/network.service';
 import Resume from '../../components/resume/resume';
 import BasePageComponent from '../../components/base-page-component/base-page-component';
-import { ABOUT_ME_ID, PAGE_ROOT_ID } from '../../core/route.constants';
+import { PAGE_ROOT_ID } from '../../core/route.constants';
 
 
 //--------------- TYPES

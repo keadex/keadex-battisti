@@ -14,9 +14,15 @@ import jack from "../../../public/img/jack/jack.gif";
 import styles from './education.module.scss';
 import { ForceGraph } from '../../model/models';
 import NetworkService from '../../core/network/network.service';
-// import { ForceGraph2D } from 'react-force-graph';
 import { withHooksBreakpoint, HooksBreakpointProps } from '../../core/react-breakpoint';
 import TouchManager from '../../core/touch-manager';
+import { isClient } from '../../helper/generic-helper';
+import NoSSR from 'react-no-ssr';
+
+let ForceGraph2D:any = undefined;
+if (isClient()){
+  ForceGraph2D = require('react-force-graph').ForceGraph2D;
+}
 
 //------------------ TYPES
 export interface IEducationProps extends HooksBreakpointProps{
@@ -31,7 +37,7 @@ class Education extends React.Component<IEducationProps, EducationState> {
 
   //ATTRS
   private _isMounted:boolean;
-  // private forceGraphRef:RefObject<any>;
+  private forceGraphRef:RefObject<any>;
   private brain:Map<string, HTMLImageElement> = new Map();
 
   //FUNCS
@@ -43,7 +49,7 @@ class Education extends React.Component<IEducationProps, EducationState> {
       experienceGraph: {nodes: [], links: []}
     }
     this._isMounted = false;
-    // this.forceGraphRef = React.createRef<any>();
+    this.forceGraphRef = React.createRef<any>();
   }
 
 
@@ -58,7 +64,7 @@ class Education extends React.Component<IEducationProps, EducationState> {
       }
     });
     TouchManager.init();
-    // TouchManager.forceGraphInstance = this.forceGraphRef;
+    TouchManager.forceGraphInstance = this.forceGraphRef;
   }
 
 
@@ -85,16 +91,17 @@ class Education extends React.Component<IEducationProps, EducationState> {
   //---------- componentDidUpdate
   componentDidUpdate(){
     //Enlarge graph only if it is not in mobile mode
-    // if (!this.props.breakpoints!.xs && !this.props.breakpoints!.sm){
-    //   this.forceGraphRef.current.d3Force('charge')
-    //     .strength(-200)
-    //     .distanceMax(1000);
-    //   this.forceGraphRef.current.d3Force('link').distance(80)
-    // }else{
-    //   this.forceGraphRef.current.d3Force('charge')
-    //     .strength(-20);
-    //   this.forceGraphRef.current.d3Force('link').distance(50)
-    // }
+    if (!this.props.breakpoints!.xs && !this.props.breakpoints!.sm){
+      debugger;
+      this.forceGraphRef.current.d3Force('charge')
+        .strength(-200)
+        .distanceMax(1000);
+      this.forceGraphRef.current.d3Force('link').distance(80)
+    }else{
+      this.forceGraphRef.current.d3Force('charge')
+        .strength(-20);
+      this.forceGraphRef.current.d3Force('link').distance(50)
+    }
   }
 
   //---------- componentWillUnmount
@@ -159,30 +166,32 @@ class Education extends React.Component<IEducationProps, EducationState> {
                   
                   {/* SHOW INTERACTIVE BRAIN GRAPH ONLY ON DESKTOP */}
                   <div className={`d-none d-lg-block ${styles["education__brain-container--desktop"]} ${(this.adjustProgress(1, progress)!=0?"out":"")} ${(progress==0?"pointer-events-none":"")}`}>
-                    {/* <ForceGraph2D ref={this.forceGraphRef} graphData={this.state.experienceGraph} linkColor={() => '#fff'} nodeAutoColorBy="group" enableNodeDrag={true} enableZoomPanInteraction={false}
-                      nodeCanvasObjectMode={()=>"replace"} nodeCanvasObject={(node:any, ctx, globalScale) => {
-                        if (node != undefined && node.id != undefined && node.x != undefined && node.y != undefined){
-                          if (node.id == "occipital-lobe" || node.id == "temporal-lobe" || node.id == "parietal-lobe" || node.id == "cerebellum" || node.id == "frontal-lobe"){
-                            let percentage = 85;
-                            if (!this.props.breakpoints!.xs && !this.props.breakpoints!.sm) percentage = 75;
-                            const image = this.brain.get(node.id);
-                            const width = image!.width - Math.ceil((image!.width * percentage)/100);
-                            const height = image!.height * (width/image!.width);
-                            ctx.drawImage(image!, node.x-width/2, node.y-height/2, width, height);
-                          }else{
-                            const fontSize = 12/globalScale;
-                            ctx.font = `${fontSize}px \"Perfect DOS VGA 437\"`;
-                            ctx.textAlign = 'center';
-                            ctx.textBaseline = 'middle';
-                            ctx.fillStyle = node.color;
-                            var lines = node.name.split('\n');
-                            var lineheight = 8;
-                            for (var i = 0; i<lines.length; i++)
-                              ctx.fillText(lines[i], node.x, node.y + (i*lineheight));
-                          }
+                    <NoSSR>
+                    {ForceGraph2D && <ForceGraph2D ref={this.forceGraphRef} graphData={this.state.experienceGraph} linkColor={() => '#fff'} nodeAutoColorBy="group" enableNodeDrag={true} enableZoomPanInteraction={false}
+                      nodeCanvasObjectMode={()=>"replace"} nodeCanvasObject={(node:any, ctx:any, globalScale:any) => {
+                      if (node != undefined && node.id != undefined && node.x != undefined && node.y != undefined){
+                        if (node.id == "occipital-lobe" || node.id == "temporal-lobe" || node.id == "parietal-lobe" || node.id == "cerebellum" || node.id == "frontal-lobe"){
+                          let percentage = 85;
+                          if (!this.props.breakpoints!.xs && !this.props.breakpoints!.sm) percentage = 75;
+                          const image = this.brain.get(node.id);
+                          const width = image!.width - Math.ceil((image!.width * percentage)/100);
+                          const height = image!.height * (width/image!.width);
+                          ctx.drawImage(image!, node.x-width/2, node.y-height/2, width, height);
+                        }else{
+                          const fontSize = 12/globalScale;
+                          ctx.font = `${fontSize}px \"Perfect DOS VGA 437\"`;
+                          ctx.textAlign = 'center';
+                          ctx.textBaseline = 'middle';
+                          ctx.fillStyle = node.color;
+                          var lines = node.name.split('\n');
+                          var lineheight = 8;
+                          for (var i = 0; i<lines.length; i++)
+                            ctx.fillText(lines[i], node.x, node.y + (i*lineheight));
                         }
-                      }} /> */}
-                    </div>
+                      }
+                    }} />}
+                    </NoSSR>
+                  </div>
                 </div>                
             </Tween>
           </div>

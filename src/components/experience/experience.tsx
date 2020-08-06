@@ -10,6 +10,14 @@ import HeaderMobileDeveloper from '../header-mobile-developer/header-mobile-deve
 import { HooksBreakpointProps } from '../../core/react-breakpoint';
 import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBCard, MDBCardBody, MDBCardTitle, MDBNav, MDBNavItem, MDBNavLink, MDBIcon  } from "mdbreact";
 import { generateColors } from '../../helper/generic-helper';
+import jackMobile from "../../../public/img/jack/jack-mobile.png";
+import jackFullStack from "../../../public/img/jack/jack-fullstack.png";
+import jackArchitect from "../../../public/img/jack/jack-architect.png";
+import atosLogo from "../../../public/img/logo/atos-logo.png";
+import ibmLogo from "../../../public/img/logo/ibm-logo.png";
+import openReplyLogo from "../../../public/img/logo/open-reply-logo.png";
+import univLiverpoolLogo from "../../../public/img/logo/univ-liverpool-logo.png";
+import vodafoneLogo from "../../../public/img/logo/vodafone-logo.png";
 
 
 //------------------ TYPES
@@ -32,6 +40,18 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
   private carouselInterval:number = -1;
   private carouselIntervalTime:number = 10600000;
   private colors : string[] = [];
+  private jackImages : any = {
+    "jack-mobile.png": jackMobile,
+    "jack-fullstack.png": jackFullStack,
+    "jack-architect.png": jackArchitect
+  }
+  private logo : any = {
+    "atos-logo.png": atosLogo,
+    "ibm-logo.png": ibmLogo,
+    "open-reply-logo.png": openReplyLogo,
+    "univ-liverpool-logo.png": univLiverpoolLogo,
+    "vodafone-logo.png": vodafoneLogo
+  }
 
 
   //FUNCS
@@ -197,7 +217,8 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                           {/* POSITION */}                          
                           <MDBCardTitle className="text-center">
                             <div className={`avatar d-inline-block ${styles["experience__avatar"]}`}>
-                              {/* <img src={require(`../../../public/img/jack/${this.props.experience.avatar_filename}`)} alt="avatar position"/> */}
+                              <img src={this.jackImages[this.props.experience.avatar_filename]} alt="avatar position"/>
+                              {/* <img src={`../../../public/img/jack/${this.props.experience.avatar_filename}`} alt="avatar position"/> */}
                             </div>
                             <div className={`${styles["experience__title-position"]} text-left text-md-center`}>
                               <FormattedMessage id={"POSITIONS." + this.props.experience.id} /><br />
@@ -236,7 +257,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                                 <div className={`${styles["experience__section-title"]} mb-md-3 mb-2`}>{"<"}<FormattedMessage id={"ABOUT_ME.EXPERIENCE.COMPANIES"} />{"/>"}</div>
                                 {
                                   this.props.experience.companies.map((value, index) =>{
-                                    return <div className="d-inline d-md-block mx-1 mx-md-0" key={index}></div>
+                                    return <div className="d-inline d-md-block mx-1 mx-md-0" key={index}><img src={this.logo[value.logo_filename]} className={`mb-3 mb-md-4 ${styles["experience__logo-brands"]} d-inline`} alt={`${value.name}`}/></div>
                                   })
                                 }
                               </Tween>

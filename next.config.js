@@ -21,9 +21,9 @@ module.exports = compose([
 
         if (
           entries['main.js'] &&
-          !entries['main.js'].includes('./src/client/polyfills.ts')
+          !entries['main.js'].includes('./src/core/polyfills.ts')
         ) {
-          entries['main.js'].unshift('./src/client/polyfills.ts')
+          entries['main.js'].unshift('./src/core/polyfills.ts')
         }
 
         return entries

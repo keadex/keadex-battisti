@@ -42,11 +42,11 @@
   color: $primary-color;
   opacity: 0.7;
   
-  #quote{
+  :global(#quote){
     font-size: $h5-text-size;
   }
 
-  #author{
+  :global(#author){
     font-size: $h6-text-size;
     float: right;
   }
@@ -73,7 +73,7 @@
   margin: 10px;
   background: $primary-color;
 
-  #text {
+  :global(#text) {
     font-size: $caption-text-size;
     color: $console-text-color;
     border: 1px solid $console-text-color;
@@ -100,11 +100,11 @@
     padding-left: 20px;
     padding-right: 20px;
 
-    #quote{
+    :global(#quote){
       font-size: $h6-text-size;
     }
   
-    #author{
+    :global(#author){
       font-size: $body2-text-size;
     }
   }

@@ -49,7 +49,7 @@ class HeaderSoftwareEngineer extends React.Component<ExperienceProps> {
           {/* <h2 className="text-md-right text-center text-light mr-md-5">{this.props.experience.from} - {this.props.experience.to}</h2> */}
           <img id="sw-stack" className={`${styles["header-sw-eng__sw-stack"]}`} src={swStack} alt="Software Stack"  ref={this.swStackRef}/>
           <div className={`${styles["header-sw-eng-root--ground"]} position-absolute fixed-top`} />
-          <EngineerImg id="engineer" className={`animate__animated animate__fadeIn ${["header-sw-eng__engineer"]}`} src={engineer} alt="Software Engineer" height="80px" swStackWidth={(this.swStackRef.current)?this.swStackRef.current.offsetWidth:"0"} />
+          <EngineerImg id="engineer" className={`animate__animated animate__fadeIn ${styles["header-sw-eng__engineer"]}`} src={engineer} alt="Software Engineer" height="80px" swStackWidth={(this.swStackRef.current)?this.swStackRef.current.offsetWidth:"0"} />
         </div>
     );
   }
