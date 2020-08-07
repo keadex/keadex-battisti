@@ -133,7 +133,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
 
 
   //------------ onTabBtnClick
-  private onTabBtnClick(event:Event|null, itemId:number){
+  private onTabBtnClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>|null, itemId:number){
     (event != null)?event.preventDefault():itemId=(this.refCarousel.current.state.activeItem==1?2:1);
     this.refCarousel.current.setState({activeItem: itemId});
     this.setState({activeItem: itemId});
@@ -192,16 +192,16 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
               
               {/* TAB */}
               <MDBNav tabs className="nav-justified pointer-events-all" color='indigo'>
-                {/* <MDBNavItem>
-                  <MDBNavLink to="#" link active={this.state.activeItem == 1} onClick={(event:Event)=>this.onTabBtnClick(event, 1)} role="tab" >
+                <MDBNavItem>
+                  <a className={`nav-link ${this.state.activeItem == 1?"active":""}`} role="tab" onClick={(event)=>this.onTabBtnClick(event, 1)}>
                     <MDBIcon icon="address-card" /> <FormattedMessage id={"ABOUT_ME.EXPERIENCE.SUMMARY"} />
-                  </MDBNavLink>
+                  </a>
                 </MDBNavItem>
                 <MDBNavItem>
-                  <MDBNavLink to="#" link active={this.state.activeItem == 2} onClick={(event:Event)=>this.onTabBtnClick(event, 2)} role="tab" >
+                  <a className={`nav-link ${this.state.activeItem == 2?"active":""}`} role="tab" onClick={(event)=>this.onTabBtnClick(event, 2)}>
                     <MDBIcon icon="list-ul" /> <FormattedMessage id={"ABOUT_ME.EXPERIENCE.SKILLS"} />
-                  </MDBNavLink>
-                </MDBNavItem> */}
+                  </a>
+                </MDBNavItem>
               </MDBNav>
               
               {/* CONTENT */}

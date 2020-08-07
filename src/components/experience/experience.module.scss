@@ -28,7 +28,8 @@
 
 .experience__skills-chart-container{
   width: 50%;
-  height: 100%;
+  // height: 50%;
+  flex: 5;
   position: relative;
   left: 50%;
   transform: translate(-50%, 0);
@@ -45,19 +46,19 @@
   display: unset !important;  
 }
 
-.experience__body .md-tabs{
+.experience__body :global(.md-tabs){
   width: 30%;
   left: 50%;
   transform: translate(-50%,0);
 }
 
-.experience__body .carousel-indicators{
+.experience__body :global(.carousel-indicators){
   display: none;
 }
-.experience__body .carousel-control-next{
+.experience__body :global(.carousel-control-next){
   display: none;
 }
-.experience__body .carousel-control-prev{
+.experience__body :global(.carousel-control-prev){
   display: none;
 }
 
@@ -91,12 +92,13 @@
 }
 
 .experience__legend-container{
-  height: 100%;
+  // height: 50%;
+  flex: 5;
   overflow: auto;
 }
 
 @include media-breakpoint-down(md) { 
-  .experience__body .md-tabs{
+  .experience__body :global(.md-tabs){
     width: 80%;
   }
 
@@ -107,6 +109,7 @@
 
   .experience__skills-chart-container{
     height: 250px;
+    flex: none;
   }
 }
 
@@ -142,7 +145,7 @@
   .experience__body{
     bottom: 20px;
   }
-  .experience__body .nav-link{
+  .experience__body :global(.nav-link){
     padding: 3px;
   }
   .experience__card-body{
@@ -160,6 +163,7 @@
   .experience__skills-chart-container{
     margin-top: 0px;
     height: 160px;
+    flex: none;
   }
   .experience__list-item--even {
     display: inline;

@@ -92,7 +92,6 @@ class Education extends React.Component<IEducationProps, EducationState> {
   componentDidUpdate(){
     //Enlarge graph only if it is not in mobile mode
     if (!this.props.breakpoints!.xs && !this.props.breakpoints!.sm){
-      debugger;
       this.forceGraphRef.current.d3Force('charge')
         .strength(-200)
         .distanceMax(1000);

@@ -44,7 +44,7 @@ class HeaderMobileDeveloper extends React.Component<ExperienceProps> {
   public render() {
     this.tlBotAndroid.progress(this.props.progress)
     return (
-        <div className="header-mobile-root position-relative">
+        <div className={`${styles["header-mobile-root"]} position-relative`}>
           {/* <h2 className="text-center text-light">{this.props.experience.from} - {this.props.experience.to}</h2> */}
           <img id="android-bot" className={`${styles["header-mobile-actors"]}`} src={androidBot} alt="Android bot" height="50px" />
           <img id="apple-logo" className={`${styles["header-mobile-actors"]} ${styles["header-mobile-apple"]}`} src={appleLogo} alt="Apple logo" height="45px" />

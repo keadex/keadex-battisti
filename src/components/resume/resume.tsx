@@ -61,12 +61,12 @@ class Resume extends React.Component<any, ResumeState> {
     this.tlDownloadResume!.to("#resume-agree-container", 1, {top: `${top + (-1*((agreeContainerHeight*scaleFactor/2)+(agreeContainerHeight*scaleFactor/4)))}px`, transform: `translate(-50%, 0) scale(${scaleFactor})`}, "-=1");
     this.tlDownloadResume!.to("#resume-binary-container", 1, {top: `${top + (agreeContainerHeight*scaleFactor)}px`,  transform: "translate(-50%, 0)"}, "-=1");
     this.tlDownloadResume!.to("#resume-agree-content", 2, {transform: `translate(0, 100%)`});
-    this.tlDownloadResume!.to("#resume-agree-bg", 2, {transform: `translate(0, 100%)`}, "-=2");
+    this.tlDownloadResume!.to("#resume-agree-bg", 2, {transform: `translate(0, 101%)`}, "-=2");
     this.tlDownloadResume!.to("#resume-binary-content", 3, {transform: `translate(0, 100%)`, opacity: 1, ease:Linear.easeNone}, "-=2");
     this.tlDownloadResume!.to("#resume-pdf", 2, {opacity: `1`}, "-=2.5");
     
     this.tlDownloadResume!.addCallback(()=>{
-      NetworkService.getInstance().downloadFile(process.env.REACT_APP_BASE_URL! + process.env.REACT_APP_GET_RESUME_PDF_API!, "r3sum3-g14c0m0s1mm1.pdf");
+      NetworkService.getInstance().downloadFile(process.env.NEXT_PUBLIC_BASE_URL! + process.env.NEXT_PUBLIC_GET_RESUME_PDF_API!, "resume-giacomosimmi.pdf");
     }, "-=2.5");
     
     this.tlDownloadResume!.pause();

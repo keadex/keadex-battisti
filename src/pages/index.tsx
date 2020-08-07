@@ -99,8 +99,10 @@ class Home extends BasePageComponent<any, HomeState> {
     this.startWhatsKeadexLoop();
   }
 
-  componentDidUpdate(){
-    super.componentDidUpdate();
+  
+  //------------ componentDidUpdate
+  componentDidUpdate(prevProps:any, prevState:HomeState, snapshot:any){
+    super.componentDidUpdate(prevProps, prevState, snapshot);
   }
 
 
@@ -187,7 +189,7 @@ class Home extends BasePageComponent<any, HomeState> {
   //------------ getDaysFromLaunch
   // private getDaysFromLaunch(){
   //   let today: Moment = moment();
-  //   let launchDay: Moment = moment(process.env.REACT_APP_LAUNCH_DATE);
+  //   let launchDay: Moment = moment(process.env.NEXT_PUBLIC_LAUNCH_DATE);
   //   return today.diff(launchDay, "days");
   // }
 

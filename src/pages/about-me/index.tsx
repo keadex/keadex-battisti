@@ -22,7 +22,8 @@ interface IAboutMeProps{
   setProgress:(currentScene:number, progress: number)=>void,
   setExperience: (experience: IExperience[])=>void,
   resetState:()=>void,
-  experience: IExperience[]
+  experience: IExperience[],
+  menuOpen: boolean
 }
 
 
@@ -47,6 +48,7 @@ class AboutMe extends BasePageComponent<IAboutMeProps, any> {
 
   //---------- componentDidMount
   componentDidMount() {
+    this.resetProgress();
     let _self = this;
     NetworkService.getInstance().getExperience()
       .then(function (response) {
@@ -55,6 +57,20 @@ class AboutMe extends BasePageComponent<IAboutMeProps, any> {
         }
       }
     );
+  }
+
+  //------------ componentDidUpdate
+  componentDidUpdate(prevProps:IAboutMeProps, prevState:any, snapshot:any) {
+    super.componentDidUpdate(prevProps, prevState, snapshot);
+    if (prevProps.menuOpen && prevProps.menuOpen != this.props.menuOpen){
+      this.resetProgress();
+    }
+  }
+
+  //---------- resetProgress
+  private resetProgress(){
+    this.props.setCurrentScene(0);
+    this.props.setProgress(0, 0);
   }
 
 
@@ -199,7 +215,8 @@ class AboutMe extends BasePageComponent<IAboutMeProps, any> {
 
 const mapStateToProps = (state:IStoreState) => {
   return {
-    experience: state.aboutMe.experience
+    experience: state.aboutMe.experience,
+    menuOpen: state.app.menuOpen
   }
 }
 

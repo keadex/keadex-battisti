@@ -40,7 +40,7 @@ class BasePageComponent<K,V> extends React.Component<K,V> {
 
 
   //------------ componentDidUpdate
-  componentDidUpdate(){
+  componentDidUpdate(prevProps:K, prevState:V, snapshot:any) {
     this.scrollToHash();
   }
 

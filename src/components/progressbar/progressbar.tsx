@@ -30,6 +30,7 @@ class ProgressBar extends React.Component<IProgressBarProps, any> {
   
 
   //FUNCS
+  
   //----------- getTitle
   private getTitle(){
     let title = undefined;
