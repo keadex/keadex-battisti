@@ -20,6 +20,7 @@
   width: 100%;
   overflow: hidden !important;
   padding-top: $height-progressbar;
+  margin-bottom: -$page-body-padding-desktop;
 }
 
 .about-me__content-panel {
@@ -47,4 +48,10 @@
   padding-left: 0;
   padding-right: 0;
   position: fixed;
+}
+
+@include media-breakpoint-down(sm) {
+  .about-me__panel {
+    margin-bottom: -$page-body-padding-mobile;
+  }
 }

@@ -60,15 +60,41 @@ const queries : Query = {
 }
 
 //---------- Bind router events to show loader
-Router.events.on('routeChangeStart', () => {store.dispatch(activateSpinner()); store.dispatch(setPreviousUrl(location.href)); store.dispatch(setNavigationOccurred(true));});
-Router.events.on('routeChangeComplete', () => store.dispatch(disableSpinner()));
-Router.events.on('routeChangeError', () => store.dispatch(disableSpinner()));
-Router.events.on('hashChangeStart', () => {store.dispatch(setPreviousUrl(location.href)); store.dispatch(setNavigationOccurred(true));});
+Router.events.on('routeChangeStart', () => {
+  store.dispatch(activateSpinner());
+  store.dispatch(setPreviousUrl(location.href));
+  // store.dispatch(setNavigationOccurred(true));
+});
+Router.events.on('routeChangeComplete', () => {
+  console.log("routeChangeStart " + location.href + " -- " + store.getState().app.previousUrl);
+  store.dispatch(disableSpinner());
+  if (location.href != store.getState().app.previousUrl){
+    store.dispatch(setNavigationOccurred(true));
+  }else{
+    store.dispatch(setNavigationOccurred(false));
+  }
+});
+Router.events.on('routeChangeError', () => {
+  store.dispatch(disableSpinner());
+  store.dispatch(setNavigationOccurred(false));
+});
+Router.events.on('hashChangeStart', () => {
+  store.dispatch(setPreviousUrl(location.href));
+  // store.dispatch(setNavigationOccurred(true));
+});
 
 //I need to handle the following event because by default Next.js, whene there is an hash change, scrolls the body
 //to the target element (https://github.com/vercel/next.js/blob/1b033423dcc43b51752013cb8807051e66917d58/packages/next/client/index.js)
 //This causes an issue on my side because instead of the body, I've a custome root scrollable element (the page)
-Router.events.on('hashChangeComplete', () => {document.body.scrollTop=0;});
+Router.events.on('hashChangeComplete', () => {
+  console.log("routeChangeStart " + location.href + " -- " + store.getState().app.previousUrl);
+   document.body.scrollTop=0;
+   if (location.href != store.getState().app.previousUrl){
+    store.dispatch(setNavigationOccurred(true));
+  }else{
+    store.dispatch(setNavigationOccurred(false));
+  }
+});
 
 
 //---------- COMPONENT
