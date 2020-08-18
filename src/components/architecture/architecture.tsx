@@ -52,10 +52,13 @@ const Architecture : React.FunctionComponent<ArchitectureProps> = (props) => {
   // let router:any = null;
   
 
+  //----- useEffect
   useEffect(() => {
+    // console.log("useeffect " + location.href + " " + router.asPath);
     setCurrentUrl(location.href);
     // console.log("sssss " + props.navigationOccurred)
   });
+
 
   //----- afterInjection
   function afterInjection(error:Error|null, svg:SVGElement|undefined):void{
@@ -65,7 +68,11 @@ const Architecture : React.FunctionComponent<ArchitectureProps> = (props) => {
         if (svgElem){
           svgElem.classList.add(styles["architecture__module"]);
           svgElem.addEventListener("click", ()=>{
+            // console.log("nav");
             navigateToModule(module.id);
+            // console.log("setcurrenturl " + location.origin+router.asPath+"#"+module.id)
+            setCurrentUrl(router.asPath+"#"+module.id);
+            // console.log("scroll");
             scrollToSection(moduleDetailsRef, KEA_LAB_ID);
           });
         }
@@ -76,7 +83,9 @@ const Architecture : React.FunctionComponent<ArchitectureProps> = (props) => {
 
   //----- scrollToSection
   function scrollToSection(ref:RefObject<HTMLDivElement>, parentId:string):void{
+    // console.log("scrolltosect");
     scrollToSectionHelper(ref, parentId);
+    // console.log("setisopen");
     setIsOpen(false);
   }
 
@@ -88,6 +97,7 @@ const Architecture : React.FunctionComponent<ArchitectureProps> = (props) => {
 
 
   //----- render
+  // console.log("render " + currentUrl);
   return (
     <div>
       {/* <div>ciao:{props.navigationOccurred.toString()}</div> */}
@@ -115,7 +125,7 @@ const Architecture : React.FunctionComponent<ArchitectureProps> = (props) => {
                 // if (currentUrl.indexOf("#"+module.id) != -1)
                 // return (<div ke></div>);
                 return (
-                  <div key={module.id} data-modulename={module.id} className={(currentUrl.indexOf("#"+module.id) == -1)?"d-none":""}>
+                  (currentUrl.indexOf("#"+module.id) != -1)&&<div key={module.id} data-modulename={module.id} className={(currentUrl.indexOf("#"+module.id) == -1)?"d-none":""}>
                     <div className="mt-6 mb-4 w-100 text-center"><img className={`${styles["architecture__module-logo"]}`} src={module.logo} /></div>
                     <MDBCard className="h-100 w-100 mt-5">
                       <MDBCardBody className={`h-100 ${styles["experience__card-body-chart"]} pt-5 pl-4 pl-md-5 pr-4 pr-md-5`}>

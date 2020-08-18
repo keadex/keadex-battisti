@@ -55,7 +55,7 @@
 
 .architecture__module{
   cursor: pointer;
-  body.hasHover &:hover{
+  :global(body.hasHover) &:hover{
     // stroke: green;
     // fill: green;
     opacity: 0.2;

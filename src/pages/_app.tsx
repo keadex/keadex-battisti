@@ -66,7 +66,7 @@ Router.events.on('routeChangeStart', () => {
   // store.dispatch(setNavigationOccurred(true));
 });
 Router.events.on('routeChangeComplete', () => {
-  console.log("routeChangeStart " + location.href + " -- " + store.getState().app.previousUrl);
+  //console.log("routeChangeComplete " + location.href + " -- " + store.getState().app.previousUrl);
   store.dispatch(disableSpinner());
   if (location.href != store.getState().app.previousUrl){
     store.dispatch(setNavigationOccurred(true));
@@ -87,11 +87,13 @@ Router.events.on('hashChangeStart', () => {
 //to the target element (https://github.com/vercel/next.js/blob/1b033423dcc43b51752013cb8807051e66917d58/packages/next/client/index.js)
 //This causes an issue on my side because instead of the body, I've a custome root scrollable element (the page)
 Router.events.on('hashChangeComplete', () => {
-  console.log("routeChangeStart " + location.href + " -- " + store.getState().app.previousUrl);
-   document.body.scrollTop=0;
-   if (location.href != store.getState().app.previousUrl){
+  //console.log("hashChangeComplete " + location.href + " -- " + store.getState().app.previousUrl);
+  document.body.scrollTop=0;
+  if (location.href != store.getState().app.previousUrl){
+    //console.log("occurred");
     store.dispatch(setNavigationOccurred(true));
   }else{
+    //console.log("not occurred");
     store.dispatch(setNavigationOccurred(false));
   }
 });
