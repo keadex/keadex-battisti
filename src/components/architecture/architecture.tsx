@@ -22,7 +22,7 @@ interface ArchitectureProps {
   onArchitectureTypeSelection: (architectureType: ArchitectureType)=>void;
   modules: ArchitectureModule[];
   chalkboard: string;
-  previousUrl: string;
+  previousUrl?: string;
 }
 
 export interface ArchitectureImplProps{

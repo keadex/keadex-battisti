@@ -53,6 +53,10 @@
   }
 }
 
+.architecture__chalkboard-toolbar-reset{
+  z-index: 2;
+}
+
 .architecture__module{
   cursor: pointer;
   :global(body.hasHover) &:hover{
@@ -83,7 +87,7 @@
     &:hover{
       opacity: inherit;
     }
-    body.hasHover &:hover{
+    :global(body.hasHover) &:hover{
       opacity: 0.5;
     }
   }
@@ -95,7 +99,7 @@
       border-radius: 15px;
       width: inherit;
       padding: 0 15px 0 15px;
-      body.hasHover &:hover{
+      :global(body.hasHover) &:hover{
         opacity: 0.5;
       }
     }

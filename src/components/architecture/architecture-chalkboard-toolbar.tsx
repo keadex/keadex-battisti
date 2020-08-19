@@ -77,7 +77,7 @@ export const ArchitectureChalkboardToolbar : React.FunctionComponent<Architectur
           <div className={`${styles["architecture__chalkboard-toolbar-container"]}`}>
             <MDBBtn className="btn-floating btn-sm ml-0" color="primary" onClick={props.zoomPanPinchProps.zoomIn}><MDBIcon icon="search-plus"  /></MDBBtn>
             <MDBBtn className="btn-floating btn-sm" color="primary" onClick={props.zoomPanPinchProps.zoomOut}><MDBIcon icon="search-minus"  /></MDBBtn>
-            <MDBBtn className="btn-floating btn-sm" color="primary" onClick={props.zoomPanPinchProps.resetTransform}><MDBIcon icon="undo"  /></MDBBtn>
+            <MDBBtn className={`btn-floating btn-sm ${styles["architecture__chalkboard-toolbar-reset"]}`} color="primary" onClick={props.zoomPanPinchProps.resetTransform}><MDBIcon icon="undo"  /></MDBBtn>
             <div className={`${styles["architecture__speed-dial"]}`}>
               <FloatingMenu
                   slideSpeed={500}
