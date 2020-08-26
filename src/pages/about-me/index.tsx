@@ -17,7 +17,7 @@ import { PAGE_ROOT_ID } from '../../core/route.constants';
 
 
 //--------------- TYPES
-interface IAboutMeProps{
+interface AboutMeProps {
   setCurrentScene:(value:number, payload?: string)=>void
   setProgress:(currentScene:number, progress: number)=>void,
   setExperience: (experience: IExperience[])=>void,
@@ -26,9 +26,21 @@ interface IAboutMeProps{
   menuOpen: boolean
 }
 
+// export const getServerSideProps = wrapper.getServerSideProps(
+//   ({store, req, res, ...etc}) => {
+//     console.log("getServerSideProps aboutme before " + store.getState().app.previousUrl);
+//     store.dispatch(setPreviousUrl("blaaa"));
+//     console.log("getServerSideProps aboutme after " + store.getState().app.previousUrl);
+//     return {
+//       props: {
+//         prova: store.getState().app.previousUrl
+//       },
+//     }
+//   }
+// );
 
 //--------------- COMPONENT
-class AboutMe extends BasePageComponent<IAboutMeProps, any> {
+class AboutMe extends BasePageComponent<AboutMeProps, any> {
   
   //------ ATTRS
   private defaultState:IAboutMeState;
@@ -39,7 +51,7 @@ class AboutMe extends BasePageComponent<IAboutMeProps, any> {
   //------ FUNCTIONS
 
   //---------- constructor
-  constructor(props: IAboutMeProps, state: any) {
+  constructor(props: AboutMeProps, state: any) {
     super(props, state);
     this.defaultState = getDefaultAboutMeState();
     this.onSceneEvent = this.onSceneEvent.bind(this);
@@ -60,7 +72,7 @@ class AboutMe extends BasePageComponent<IAboutMeProps, any> {
   }
 
   //------------ componentDidUpdate
-  componentDidUpdate(prevProps:IAboutMeProps, prevState:any, snapshot:any) {
+  componentDidUpdate(prevProps:AboutMeProps, prevState:any, snapshot:any) {
     super.componentDidUpdate(prevProps, prevState, snapshot);
     if (prevProps.menuOpen && prevProps.menuOpen != this.props.menuOpen){
       this.resetProgress();
@@ -119,7 +131,6 @@ class AboutMe extends BasePageComponent<IAboutMeProps, any> {
           <p className="bp-header__desc"><FormattedMessage id="ABOUT_ME.SUBTITLE" /></p>
         </header>
         <div className='page-body'>
-
          
             <Controller container={"#"+PAGE_ROOT_ID} globalSceneOptions={{ triggerHook: 0 }}>
               

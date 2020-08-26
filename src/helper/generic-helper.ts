@@ -51,7 +51,7 @@ export function rgbToHex(r:number, g:number, b:number) {
 
 //---------- watchForHover
 export function watchForHover() {
-  console.log("watch for hover");
+  console.debug("watch for hover");
   // lastTouchTime is used for ignoring emulated mousemove events
   let lastTouchTime = 0
 

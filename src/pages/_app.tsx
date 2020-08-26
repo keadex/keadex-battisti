@@ -6,10 +6,10 @@ import Head from 'next/head'
 import '../styles/global.scss'
 import { BreakpointProvider, Query } from '../core/react-breakpoint'
 import { Provider } from 'react-redux'
-import store from '../core/store/store'
+import { wrapper } from '../core/store/store'
 import { IntlProvider } from 'react-intl'
 import flatten from 'flat'
-import { toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred } from '../core/store/reducers/app.reducer';
+import { toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred, setIsAppInitialized } from '../core/store/reducers/app.reducer';
 
 // import 'react-app-polyfill/ie9';
 // import 'react-app-polyfill/stable';
@@ -19,6 +19,7 @@ import { watchForHover } from '../helper/generic-helper'
 import Spinner from '../components/spinner/spinner';
 import Header from '../components/header/header';
 import Body from '../components/body/body';
+import {useStore} from 'react-redux';
 
 // smoothscroll.polyfill();
 
@@ -59,53 +60,61 @@ const queries : Query = {
   upXl: '(min-width: 1200px)'
 }
 
-//---------- Bind router events to show loader
-Router.events.on('routeChangeStart', () => {
-  store.dispatch(activateSpinner());
-  store.dispatch(setPreviousUrl(location.href));
-  // store.dispatch(setNavigationOccurred(true));
-});
-Router.events.on('routeChangeComplete', () => {
-  //console.log("routeChangeComplete " + location.href + " -- " + store.getState().app.previousUrl);
-  store.dispatch(disableSpinner());
-  if (location.href != store.getState().app.previousUrl){
-    store.dispatch(setNavigationOccurred(true));
-  }else{
-    store.dispatch(setNavigationOccurred(false));
-  }
-});
-Router.events.on('routeChangeError', () => {
-  store.dispatch(disableSpinner());
-  store.dispatch(setNavigationOccurred(false));
-});
-Router.events.on('hashChangeStart', () => {
-  store.dispatch(setPreviousUrl(location.href));
-  // store.dispatch(setNavigationOccurred(true));
-});
-
-//I need to handle the following event because by default Next.js, whene there is an hash change, scrolls the body
-//to the target element (https://github.com/vercel/next.js/blob/1b033423dcc43b51752013cb8807051e66917d58/packages/next/client/index.js)
-//This causes an issue on my side because instead of the body, I've a custome root scrollable element (the page)
-Router.events.on('hashChangeComplete', () => {
-  //console.log("hashChangeComplete " + location.href + " -- " + store.getState().app.previousUrl);
-  document.body.scrollTop=0;
-  if (location.href != store.getState().app.previousUrl){
-    //console.log("occurred");
-    store.dispatch(setNavigationOccurred(true));
-  }else{
-    //console.log("not occurred");
-    store.dispatch(setNavigationOccurred(false));
-  }
-});
-
 
 //---------- COMPONENT
-function App({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
+  
+  const store = useStore();
+
+  //---------- Bind router events to show loader
+  if (!store.getState().app.isAppInitialized){
+    console.debug("Initialize route events");
+    Router.events.on('routeChangeStart', () => {
+      store.dispatch(activateSpinner());
+      store.dispatch(setPreviousUrl(location.href));
+      // store.dispatch(setNavigationOccurred(true));
+    });
+    Router.events.on('routeChangeComplete', () => {
+      //console.log("routeChangeComplete " + location.href + " -- " + store.getState().app.previousUrl);
+      store.dispatch(disableSpinner());
+      if (location.href != store.getState().app.previousUrl){
+        store.dispatch(setNavigationOccurred(true));
+      }else{
+        store.dispatch(setNavigationOccurred(false));
+      }
+    });
+    Router.events.on('routeChangeError', () => {
+      store.dispatch(disableSpinner());
+      store.dispatch(setNavigationOccurred(false));
+    });
+    Router.events.on('hashChangeStart', () => {
+      store.dispatch(setPreviousUrl(location.href));
+      // store.dispatch(setNavigationOccurred(true));
+    });
+
+    //I need to handle the following event because by default Next.js, whene there is an hash change, scrolls the body
+    //to the target element (https://github.com/vercel/next.js/blob/1b033423dcc43b51752013cb8807051e66917d58/packages/next/client/index.js)
+    //This causes an issue on my side because instead of the body, I've a custome root scrollable element (the page)
+    Router.events.on('hashChangeComplete', () => {
+      //console.log("hashChangeComplete " + location.href + " -- " + store.getState().app.previousUrl);
+      document.body.scrollTop=0;
+      if (location.href != store.getState().app.previousUrl){
+        //console.log("occurred");
+        store.dispatch(setNavigationOccurred(true));
+      }else{
+        //console.log("not occurred");
+        store.dispatch(setNavigationOccurred(false));
+      }
+    });
+  }
 
   useEffect(() => {
-    watchForHover();
+    if (!store.getState().app.isAppInitialized){
+      watchForHover();
+      store.dispatch(setIsAppInitialized(true));
+    }
   });
-  
+
   return (    
     <>
       <Head>
@@ -119,7 +128,7 @@ function App({ Component, pageProps }: AppProps) {
         <title>Keadex</title>
       </Head>
       <BreakpointProvider queries={queries}>
-        <Provider store={store}>
+        {/* <Provider store={store}> */}
           <IntlProvider locale={language} messages={messages[language]}>
             <div>
               <Spinner />
@@ -140,7 +149,7 @@ function App({ Component, pageProps }: AppProps) {
               </div>
             </div>
           </IntlProvider>
-        </Provider>
+        {/* </Provider> */}
       </BreakpointProvider>
     </>
   )
@@ -159,4 +168,4 @@ function App({ Component, pageProps }: AppProps) {
 //   return { ...appProps }
 // }
 
-export default App
+export default wrapper.withRedux(MyApp);

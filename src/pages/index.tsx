@@ -201,7 +201,6 @@ class Home extends BasePageComponent<any, HomeState> {
       <PageLayout>
         
         <div className='page-body p-0'>
-
           {/* COVER */}
           <div className={`${styles["home__section"]} ${styles["home__cover"]}`} id="home-section">
             <div className="full-center position-relative text-center" ref={this.logoContRef}>
@@ -379,40 +378,3 @@ class Home extends BasePageComponent<any, HomeState> {
 }
 
 export default Home;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import Link from 'next/link'
-// import Layout from '../components/Layout'
-// import './index.scss'
-import { connect } from 'react-redux';
-import { IStoreState } from '../core/store/store.type';
-
-// const IndexPage = () => (
-//   <Layout title="Home | Next.js + TypeScript Example">
-//     <h1>Hello Next.js 👋</h1>
-//     <p>
-//       <Link href="/about">
-//         <a>About</a>
-//       </Link>
-//     </p>
-//   </Layout>
-// )
-
-// export default IndexPage

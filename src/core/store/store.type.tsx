@@ -11,6 +11,7 @@ export interface IStoreState {
 
 
 export interface IAppState {
+    isAppInitialized: boolean;
     menuOpen: boolean;
     spinnerCounter: number;
     previousUrl: string|null;
@@ -23,7 +24,7 @@ export interface IBotState {
 
 export interface IAboutMeState {
     currentScene: number;
-    scenePayload?: string;
+    scenePayload: string|null;
     progress: IProgress[];
     experience: Experience[];
 }
@@ -43,6 +44,7 @@ export const getDefaultStoreState = () : IStoreState => {
 
 export const getDefaultAppState =  () : IAppState => {
     return {
+        isAppInitialized: false,
         menuOpen: false,
         spinnerCounter: 0,
         previousUrl: null,
@@ -59,13 +61,13 @@ export const getDefaultBotState =  () : IBotState => {
 export const getDefaultAboutMeState =  () : IAboutMeState => {
     return {
         currentScene: 0,
-        scenePayload: undefined,
+        scenePayload: null,
         progress: [
             {id: SceneId.Education, scene:0, progress: 0, duration: 3000, title: "ABOUT_ME.EDUCATION.TITLE"},
             {id: SceneId.Hobbies, scene:1, progress: 0, duration: 5000, title: "ABOUT_ME.HOBBIES.TITLE"},
-            {id: SceneId.Mobile, scene:2, progress: 0, duration: 2000, title: undefined},
-            {id: SceneId.FullStack, scene:3, progress: 0, duration: 2000, title: undefined},
-            {id: SceneId.ITSolutionArchitect, scene:4, progress: 0, duration: 2000, title: undefined},
+            {id: SceneId.Mobile, scene:2, progress: 0, duration: 2000, title: null},
+            {id: SceneId.FullStack, scene:3, progress: 0, duration: 2000, title: null},
+            {id: SceneId.ITSolutionArchitect, scene:4, progress: 0, duration: 2000, title: null},
             {id: SceneId.CV, scene:5, progress: 0, duration: 200, title: "ABOUT_ME.RESUME.TITLE"}
         ],
         experience: []

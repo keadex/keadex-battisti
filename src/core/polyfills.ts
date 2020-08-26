@@ -5,4 +5,4 @@ import smoothscroll from 'smoothscroll-polyfill';
 
 smoothscroll.polyfill();
 
-console.log("custom polyfills");
+console.debug("custom polyfills");

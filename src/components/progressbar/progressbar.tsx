@@ -11,7 +11,7 @@ export interface IProgress{
   scene: number,
   progress: number,
   duration: number,
-  title: string|undefined
+  title: string|null
 }
 
 interface IProgressBarProps extends WrappedComponentProps {

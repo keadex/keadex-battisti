@@ -4,13 +4,13 @@ import NetworkService from '../../core/network/network.service';
 import {Quote} from '../../model/models';
 import styles from './splash-screen.module.scss';
 import { COOKIE_DECLARATION_URL, PRIVACY_POLICY_URL, TERMS_AND_CONDITIONS_URL, PAGE_ROOT_ID } from '../../core/route.constants';
-import store from '../../core/store/store';
 import { toggleMenu } from '../../core/store/reducers/app.reducer';
 import Link from 'next/link';
+import { connect } from 'react-redux';
 
 //------------------ COMPONENT
 interface ISplashScreenProps extends WrappedComponentProps {
-
+  toggleMenu:(menuOpen?: boolean)=>void
 }
 
 //------------------ COMPONENT
@@ -70,13 +70,13 @@ class SplashScreen extends React.Component<ISplashScreenProps> {
 
   //------------ close
   private close(){
-    store.dispatch(toggleMenu());
+    this.props.toggleMenu();
     window.CustomTemplate.closeMenu();
   }
 
   //------------ close
   private openLink(pageId: string){
-    store.dispatch(toggleMenu());
+    this.props.toggleMenu();
     window.CustomTemplate.openPage(pageId, false);
   }
 
@@ -116,4 +116,7 @@ class SplashScreen extends React.Component<ISplashScreenProps> {
 
 }
 
-export default injectIntl(SplashScreen)
+export default connect(
+  null,
+  { toggleMenu }
+)(injectIntl(SplashScreen))

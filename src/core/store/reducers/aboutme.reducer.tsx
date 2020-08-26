@@ -2,13 +2,15 @@ import { createActions, handleActions } from 'redux-actions';
 import { getDefaultAboutMeState, IAboutMeState } from '../store.type';
 import update from 'immutability-helper';
 import { Experience } from '../../../model/models';
+import {HYDRATE} from 'next-redux-wrapper';
+import {AnyAction} from 'redux';
 
-interface IAboutMeAction {
-  currentScene: number;
-  payload: string;
-  progress: number;
-  experience?: Experience[]
-}
+// interface IAboutMeAction {
+//   currentScene: number;
+//   payload: string;
+//   progress: number;
+//   experience?: Experience[]
+// }
 
 export const { setCurrentScene, setProgress, setExperience, resetState } = createActions({
   SET_CURRENT_SCENE: (currentScene = 0, payload = undefined) => ({ currentScene: currentScene , payload : payload}),
@@ -17,8 +19,12 @@ export const { setCurrentScene, setProgress, setExperience, resetState } = creat
   RESET_STATE: () => ({})
 });
 
-export const aboutMeReducer = handleActions<IAboutMeState, IAboutMeAction>(
+export const aboutMeReducer = handleActions<IAboutMeState, AnyAction>(
   {
+    [HYDRATE]: (state) => {
+      console.debug("hydrate aboutme");
+      return {...state};
+    },
     [setCurrentScene.toString()]: (state, action) => {
       return { ...state, currentScene: action.payload.currentScene, scenePayload: action.payload.payload};
     },
