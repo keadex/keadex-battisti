@@ -24,7 +24,7 @@ export const ApplicationArchitecture : React.FunctionComponent<ArchitectureImplP
         <p style={{marginBottom:"300px"}}>BATTISTI <b>Keadex Battisti</b> represents the shell of Keadex, the way to describe it.</p>
       ),
       features: (
-        <p style={{marginBottom:"300px"}}>
+        <div style={{marginBottom:"300px"}}>
           <ul>
             <li>Typescript</li>
             <li>Bootstrap + MDB React (Material Design for Bootstrap)</li>
@@ -43,7 +43,7 @@ export const ApplicationArchitecture : React.FunctionComponent<ArchitectureImplP
             <li>SVG Interaction (react-svg)</li>
             <li>Video Player (react-player)</li>
           </ul>
-        </p>
+        </div>
       ),
       roadmap: (
         <p style={{marginBottom:"300px"}}><b>Keadex Battisti</b> represents the shell of Keadex, the way to describe it.</p>
