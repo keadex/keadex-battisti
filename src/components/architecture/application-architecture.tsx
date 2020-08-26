@@ -24,7 +24,26 @@ export const ApplicationArchitecture : React.FunctionComponent<ArchitectureImplP
         <p style={{marginBottom:"300px"}}>BATTISTI <b>Keadex Battisti</b> represents the shell of Keadex, the way to describe it.</p>
       ),
       features: (
-        <p style={{marginBottom:"300px"}}><b>Keadex Battisti</b> represents the shell of Keadex, the way to describe it.</p>
+        <p style={{marginBottom:"300px"}}>
+          <ul>
+            <li>Typescript</li>
+            <li>Bootstrap + MDB React (Material Design for Bootstrap)</li>
+            <li>Styled Components</li>
+            <li>Next.js</li>
+            <li>Redux (react-redux, redux-actions)</li>
+            <li>Redux Thunk</li>
+            <li>Redux Wrapper for Next.js</li>
+            <li>Internationalization (react-intl)</li>
+            <li>Recharts</li>
+            <li>Force directed graph (react-force-graph</li>
+            <li>CSS Animation (animate.css)</li>
+            <li>GreenSock Animation Platform (react-gsap)</li>
+            <li>Animation on scroll (react-scrollmagic, react-animate-on-scroll)</li>
+            <li>SVG Shape Animation (flubber)</li>
+            <li>SVG Interaction (react-svg)</li>
+            <li>Video Player (react-player)</li>
+          </ul>
+        </p>
       ),
       roadmap: (
         <p style={{marginBottom:"300px"}}><b>Keadex Battisti</b> represents the shell of Keadex, the way to describe it.</p>
