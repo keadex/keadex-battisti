@@ -29,6 +29,7 @@ class KeaLab extends BasePageComponent<any, KeaLabState> {
 
   //----- componentDidMount
   componentDidMount(){
+    super.componentDidMount();
     window.scrollTo(0,0)
   }
 

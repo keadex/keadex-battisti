@@ -6,7 +6,7 @@ import Head from 'next/head'
 import '../styles/global.scss'
 import { BreakpointProvider, Query } from '../core/react-breakpoint'
 import { Provider } from 'react-redux'
-import { wrapper } from '../core/store/store'
+import { wrapper, StoreService } from '../core/store/store';
 import { IntlProvider } from 'react-intl'
 import flatten from 'flat'
 import { toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred, setIsAppInitialized } from '../core/store/reducers/app.reducer';
@@ -65,6 +65,7 @@ const queries : Query = {
 function MyApp({ Component, pageProps }: AppProps) {
   
   const store = useStore();
+  StoreService.getInstance().saveStore(store);
 
   //---------- Bind router events to show loader
   if (!store.getState().app.isAppInitialized){
@@ -92,11 +93,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       // store.dispatch(setNavigationOccurred(true));
     });
 
-    //I need to handle the following event because by default Next.js, whene there is an hash change, scrolls the body
-    //to the target element (https://github.com/vercel/next.js/blob/1b033423dcc43b51752013cb8807051e66917d58/packages/next/client/index.js)
-    //This causes an issue on my side because instead of the body, I've a custome root scrollable element (the page)
+    //We need to handle the following event because by default Next.js, whene there is an hash change, scrolls the body
+    //to the target element (next.js/packages/next/client/index.js)
+    //This causes an issue on our side because instead of the body, We've a custome root scrollable element (the page)
     Router.events.on('hashChangeComplete', () => {
-      //console.log("hashChangeComplete " + location.href + " -- " + store.getState().app.previousUrl);
+      // console.log("hashChangeComplete " + location.href + " -- " + store.getState().app.previousUrl);
       document.body.scrollTop=0;
       if (location.href != store.getState().app.previousUrl){
         //console.log("occurred");
@@ -109,6 +110,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   useEffect(() => {
+    //See above comment about "hashChangeComplete". setTimeout() is needed to be sure that scrollIntoView()
+    //used by Next.js doesn't override the scroll (also Next.js uses setTimeout())
+    setTimeout(()=>document.body.scrollTop=0, 0);    
     if (!store.getState().app.isAppInitialized){
       watchForHover();
       store.dispatch(setIsAppInitialized(true));

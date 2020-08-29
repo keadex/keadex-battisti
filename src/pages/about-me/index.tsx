@@ -60,6 +60,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
 
   //---------- componentDidMount
   componentDidMount() {
+    super.componentDidMount();
     this.resetProgress();
     let _self = this;
     NetworkService.getInstance().getExperience()
