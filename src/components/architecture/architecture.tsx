@@ -11,7 +11,7 @@ import { FloatingMenu, MainButton, ChildButton } from 'react-floating-button-men
 import { ArchitectureChalkboardToolbar } from './architecture-chalkboard-toolbar';
 import { ArchitectureType } from '../../pages/kealab';
 import { KEA_LAB_ID, PAGE_ROOT_ID } from '../../core/route.constants';
-import { scrollToSection as scrollToSectionHelper, isClient } from '../../helper/generic-helper';
+import { scrollToSection as scrollToSectionHelper, isClient, disableScrollIntoView } from '../../helper/generic-helper';
 import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import { IStoreState } from '../../core/store/store.type';
@@ -63,6 +63,7 @@ const Architecture : React.FunctionComponent<ArchitectureProps> = (props) => {
   //----- afterInjection
   function afterInjection(error:Error|null, svg:SVGElement|undefined):void{
     if (svg && props.modules){
+      disableScrollIntoView(props.modules.map((module)=>{return module.id}), null);
       props.modules.forEach((module)=>{
         let svgElem = svg.querySelector("#"+module.id);
         if (svgElem){
@@ -72,8 +73,8 @@ const Architecture : React.FunctionComponent<ArchitectureProps> = (props) => {
             navigateToModule(module.id);
             // console.log("setcurrenturl " + location.origin+router.asPath+"#"+module.id)
             setCurrentUrl(router.asPath+"#"+module.id);
-            // console.log("scroll");
-            scrollToSection(moduleDetailsRef, KEA_LAB_ID);
+            // console.log("SCROLL architecture svg");
+            scrollToSection(moduleDetailsRef, PAGE_ROOT_ID);
           });
         }
       })

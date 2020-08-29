@@ -36,7 +36,8 @@ export const ArchitectureChalkboardToolbar : React.FunctionComponent<Architectur
       position you need to wait this component to be rendered.
     */
    if (isModuleSelected){
-      scrollToSection(props.moduleDetailsRef, PAGE_ROOT_ID);
+      console.log("SCROLL chalkboard toolbar menu");
+      setTimeout(()=>scrollToSection(props.moduleDetailsRef, PAGE_ROOT_ID), 0);
       setIsModuleSelected(false);
     }
   });

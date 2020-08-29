@@ -79,6 +79,9 @@ export function watchForHover() {
 //----- scrollToSection
 export function scrollToSection(ref:RefObject<HTMLDivElement>, parentId:string):void{
   let pageElem : HTMLElement = document.getElementById(parentId)!;
+  // console.log(ref);
+  // console.log(parentId);
+  // console.log(ref.current!.getBoundingClientRect().top+pageElem.scrollTop);
   pageElem.scrollTo({top: ref.current!.getBoundingClientRect().top+pageElem.scrollTop, behavior: 'smooth'});
 }
 
@@ -95,4 +98,20 @@ export function scrollToSectionById(targetElementId:string, parentId:string):voi
 //----- isClient
 export function isClient():boolean{
   return typeof window !== 'undefined';
+}
+
+
+export function disableScrollIntoView(elementIds:string[]|null, elementNames:string[]|null):void{
+  if (elementIds){
+    elementIds.forEach((elementId)=>{
+      // console.debug("Disabling scrollIntoView() of element " + elementId);
+      let element = document.getElementById(elementId);
+      if (element != null){
+        // console.debug("scrollIntoView() of element " + elementId + " DISABLED!");
+        element.scrollIntoView = (arg?: boolean | ScrollIntoViewOptions | undefined)=>{};
+      }else{
+        // console.debug("Element " + elementId + " not found!");
+      }
+    })
+  }
 }

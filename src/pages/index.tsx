@@ -13,11 +13,12 @@ import { MorphSVGTimeline, generateMorphSVGTimelines } from '../helper/animation
 import { MDBCard } from 'mdbreact';
 import { MDBView, MDBCardBody } from 'mdbreact';
 import { DosButton } from '../components/dos-button/dos-button';
-import { KEA_LAB_URL, PAGE_ROOT_ID } from '../core/route.constants';
+import { KEA_LAB_URL, PAGE_ROOT_ID, WHY_KEADEX_ID, WHATS_KEADEX_ID } from '../core/route.constants';
 import { Background } from '../components/background/background';
 import graph from "../../public/img/graph-bg.jpg";
 import { FORMATTED_MESSAGE_STANDARD_HTML_VALUES } from '../core/app.constants';
 import PageLayout from '../components/page-layout/page-layout';
+import { disableScrollIntoView } from '../helper/generic-helper';
 
 const FooterDiv:any = styled.div<any>`
   position:absolute; width: 100%; top: ${(props)=>(props.vpHeight && props.logoContainerHeight)?(props.vpHeight-props.logoContainerHeight - 100) + "px":"0px"}
@@ -73,8 +74,8 @@ class Home extends BasePageComponent<any, HomeState> {
   //------------ constructor
   constructor(props:any, state:HomeState){
     super(props, state);
-    this.anchorRefs.set("why-keadex", React.createRef<any>());
-    this.anchorRefs.set("whats-keadex", React.createRef<any>());
+    this.anchorRefs.set(WHY_KEADEX_ID, React.createRef<any>());
+    this.anchorRefs.set(WHATS_KEADEX_ID, React.createRef<any>());
     this.svgPathRef = [
       React.createRef<SVGPathElement>(),
       React.createRef<SVGPathElement>(),
@@ -91,12 +92,25 @@ class Home extends BasePageComponent<any, HomeState> {
   }
 
 
+
   //------------ componentDidMount
   componentDidMount(){
     super.componentDidMount();
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
     this.startWhatsKeadexLoop();
+    
+    /**
+     * The following line is needed because when there is an hash change, Next.js scrolls the body to target
+     * element identified by the hash by using "scrollIntoView()".
+     * See:
+     *    - next.js/packages/next/client/index.tsx
+     *    - next.js/packages/next/next-server/lib/router/router.js
+     * 
+     * This causes an issue on our side because instead of the body, we've a custome root scrollable element (the page)
+    */
+    // console.log("SCROLL disable scroll")
+    disableScrollIntoView([WHY_KEADEX_ID, WHATS_KEADEX_ID], null);
   }
 
   
@@ -110,6 +124,14 @@ class Home extends BasePageComponent<any, HomeState> {
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateWindowDimensions);
     this.stoptWhatsKeadexLoop();
+  }
+
+
+  //------------ disableScrollIntoView
+  //The following function is needed to prevent Next.js to scrollToHash since it uses "scrollIntoView()".
+  //scrollIntoView() scrolls the body, but in our case we need to scroll the content div (page-root) of the body.
+  private disableNextScrollIntoView(){
+    disableScrollIntoView([WHY_KEADEX_ID, WHATS_KEADEX_ID], null);
   }
 
 

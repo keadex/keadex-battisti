@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import type { AppProps } from 'next/app'
-import {Router} from 'next/router'
+import {Router, useRouter} from 'next/router'
 import Head from 'next/head'
 import '../styles/global.scss'
 import { BreakpointProvider, Query } from '../core/react-breakpoint'
@@ -15,7 +15,7 @@ import { toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigat
 // import 'react-app-polyfill/stable';
 // import 'svg-classlist-polyfill'
 // import smoothscroll from 'smoothscroll-polyfill';
-import { watchForHover } from '../helper/generic-helper'
+import { watchForHover, isClient } from '../helper/generic-helper';
 import Spinner from '../components/spinner/spinner';
 import Header from '../components/header/header';
 import Body from '../components/body/body';
@@ -66,59 +66,80 @@ function MyApp({ Component, pageProps }: AppProps) {
   
   const store = useStore();
   StoreService.getInstance().saveStore(store);
+  
+  const router = useRouter();
 
-  //---------- Bind router events to show loader
-  if (!store.getState().app.isAppInitialized){
-    console.debug("Initialize route events");
-    Router.events.on('routeChangeStart', () => {
-      store.dispatch(activateSpinner());
-      store.dispatch(setPreviousUrl(location.href));
-      // store.dispatch(setNavigationOccurred(true));
-    });
-    Router.events.on('routeChangeComplete', () => {
-      //console.log("routeChangeComplete " + location.href + " -- " + store.getState().app.previousUrl);
-      store.dispatch(disableSpinner());
-      if (location.href != store.getState().app.previousUrl){
-        store.dispatch(setNavigationOccurred(true));
-      }else{
-        store.dispatch(setNavigationOccurred(false));
-      }
-    });
-    Router.events.on('routeChangeError', () => {
-      store.dispatch(disableSpinner());
-      store.dispatch(setNavigationOccurred(false));
-    });
-    Router.events.on('hashChangeStart', () => {
-      store.dispatch(setPreviousUrl(location.href));
-      // store.dispatch(setNavigationOccurred(true));
-    });
-
-    //We need to handle the following event because by default Next.js, whene there is an hash change, scrolls the body
-    //to the target element (next.js/packages/next/client/index.js)
-    //This causes an issue on our side because instead of the body, We've a custome root scrollable element (the page)
-    Router.events.on('hashChangeComplete', () => {
-      // console.log("hashChangeComplete " + location.href + " -- " + store.getState().app.previousUrl);
-      document.body.scrollTop=0;
-      if (location.href != store.getState().app.previousUrl){
-        //console.log("occurred");
-        store.dispatch(setNavigationOccurred(true));
-      }else{
-        //console.log("not occurred");
-        store.dispatch(setNavigationOccurred(false));
-      }
-    });
+  const onRouteChangeStart = ()=>{
+    store.dispatch(activateSpinner());
+    store.dispatch(setPreviousUrl(location.href));
+    // store.dispatch(setNavigationOccurred(true));
   }
 
+  const onRouteChangeComplete = ()=>{
+    //console.log("routeChangeComplete " + location.href + " -- " + store.getState().app.previousUrl);
+    store.dispatch(disableSpinner());
+    if (location.href != store.getState().app.previousUrl){
+      store.dispatch(setNavigationOccurred(true));
+    }else{
+      store.dispatch(setNavigationOccurred(false));
+    }
+  }
+
+  const onRouteChangeError = ()=>{
+    store.dispatch(disableSpinner());
+    store.dispatch(setNavigationOccurred(false));
+  }
+
+  const onHashChangeStart = ()=>{
+    store.dispatch(setPreviousUrl(location.href));
+    // store.dispatch(setNavigationOccurred(true));
+  }
+
+  const onHashChangeComplete = ()=>{
+    // console.log("hashChangeComplete " + location.href + " -- " + store.getState().app.previousUrl);
+    // document.body.scrollTop=0;
+    if (location.href != store.getState().app.previousUrl){
+      //console.log("occurred");
+      store.dispatch(setNavigationOccurred(true));
+    }else{
+      //console.log("not occurred");
+      store.dispatch(setNavigationOccurred(false));
+    }
+  }
+
+  //---------- useEffect
   useEffect(() => {
     //See above comment about "hashChangeComplete". setTimeout() is needed to be sure that scrollIntoView()
     //used by Next.js doesn't override the scroll (also Next.js uses setTimeout())
-    setTimeout(()=>document.body.scrollTop=0, 0);    
+    // console.log("SCROLL _app scrolltop");
+    // setTimeout(()=>document.body.scrollTop=0, 0);    
+    
     if (!store.getState().app.isAppInitialized){
       watchForHover();
       store.dispatch(setIsAppInitialized(true));
     }
+
+    //---------- Bind router events to show loader
+    console.debug("Register route events");
+    router.events.on('routeChangeStart', onRouteChangeStart);
+    router.events.on('routeChangeComplete', onRouteChangeComplete);
+    router.events.on('routeChangeError', onRouteChangeError);
+    router.events.on('hashChangeStart', onHashChangeStart);
+    router.events.on('hashChangeComplete', onHashChangeComplete);
+
+    //component unmount
+    return () => {
+      console.debug("Unregister route events");
+      router.events.off('routeChangeStart', onRouteChangeStart);
+      router.events.off('routeChangeComplete', onRouteChangeComplete);
+      router.events.off('routeChangeError', onRouteChangeError);
+      router.events.off('hashChangeStart', onHashChangeStart);
+      router.events.off('hashChangeComplete', onHashChangeComplete);
+    }
   });
 
+
+  //---------- rendering
   return (    
     <>
       <Head>

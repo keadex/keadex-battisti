@@ -35,7 +35,8 @@ class Body extends React.Component<IBodyProps> {
 
   //------------ componentDidMount
   componentDidMount(){
-    document.body.scrollTop=0;
+    // console.log("SCROLL body didmount scrolltop");
+    // document.body.scrollTop=0;
   }
 
 
@@ -44,8 +45,10 @@ class Body extends React.Component<IBodyProps> {
     //the following line is needed to be sure to scoll to the top the page root when you open the menu
     //(splashscreen case) and when you close the menu without changing the page (content case). The last
     //case id needed because we scroll to the top the page root every time you change the page (see _app.tsx - useEffect())
+    // console.log("SCROLL body didupdate scrolltop=0 section");
     if (this.props.menuOpen || !this.props.navigationOccurred) document.getElementById(PAGE_ROOT_ID)!.scrollTop = 0;
-    document.body.scrollTop=0;
+    // console.log("SCROLL body didupdate scrolltop");
+    // document.body.scrollTop=0;
   }
 
   //------------ render

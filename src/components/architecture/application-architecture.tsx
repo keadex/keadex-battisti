@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import keadexBattisti from '../../../public/img/keadex-battisti.png';
 import Architecture, {ArchitectureModule, ArchitectureImplProps } from './architecture';
 import { ArchitectureType } from '../../pages/kealab';
 import { useIntl } from 'react-intl';
 import AppArchSvg from '../../../public/img/application-architecture.svg'; 
+import { disableScrollIntoView } from '../../helper/generic-helper';
 
 
 //------------------ TYPES
