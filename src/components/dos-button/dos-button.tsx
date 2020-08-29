@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './dos-button.module.scss';
-import { useHistory } from 'react-router-dom';
+import { useRouter } from 'next/router';
 
 
 //------------------ TYPES
@@ -11,7 +11,7 @@ interface DosButtonProps {
 
 //------------------ COMPONENT
 export const DosButton : React.FunctionComponent<DosButtonProps> = props => {
-  const history = useHistory();
+  const router = useRouter();
 
   //------ handleClick
   function handleClick(){
@@ -19,7 +19,7 @@ export const DosButton : React.FunctionComponent<DosButtonProps> = props => {
       props.onClick();
     }
     if (props.href){
-      history.push(props.href);
+      router.push(props.href);
     }
   }
 
