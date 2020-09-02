@@ -21,9 +21,9 @@ export const { setCurrentScene, setProgress, setExperience, resetState } = creat
 
 export const aboutMeReducer = handleActions<IAboutMeState, AnyAction>(
   {
-    [HYDRATE]: (state) => {
+    [HYDRATE]: (state, action) => {
       console.debug("hydrate aboutme");
-      return {...state};
+      return {...state, experience: action.payload.aboutMe.experience};
     },
     [setCurrentScene.toString()]: (state, action) => {
       return { ...state, currentScene: action.payload.currentScene, scenePayload: action.payload.payload};

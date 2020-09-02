@@ -14,7 +14,7 @@ import { injectIntl } from 'react-intl';
 class HeaderMobileDeveloper extends React.Component<ExperienceProps> {
 
   //ATTRS
-  private tlBotAndroid:TimelineMax;
+  private tlBotAndroid:TimelineMax|undefined;
 
 
   //FUNCS
@@ -22,27 +22,27 @@ class HeaderMobileDeveloper extends React.Component<ExperienceProps> {
   //----- constructor
   constructor(props:ExperienceProps){
     super(props);
-    this.tlBotAndroid = new TimelineMax();
   }
 
   //----- componentDidMount
   componentDidMount(){
+    this.tlBotAndroid = new TimelineMax();
     this.initTimeline();
   }
 
   //----- initTimeline
   private initTimeline(){    
-    this.tlBotAndroid.to("#android-bot", 1, {left:"26%"});
-    this.tlBotAndroid.to("#apple-logo", 1, {left:"26%"}, "-=1");
-    this.tlBotAndroid.to("#android-bot", 0.5, {bottom:"90px"}, "-=0.5");
-    this.tlBotAndroid.to("#android-bot", 0.5, {bottom:"19px"});
-    this.tlBotAndroid.to("#apple-logo", 0.5, {height:"5px"}, "-=0.4");
-    this.tlBotAndroid.pause()
+    this.tlBotAndroid!.to("#android-bot", 1, {left:"26%"});
+    this.tlBotAndroid!.to("#apple-logo", 1, {left:"26%"}, "-=1");
+    this.tlBotAndroid!.to("#android-bot", 0.5, {bottom:"90px"}, "-=0.5");
+    this.tlBotAndroid!.to("#android-bot", 0.5, {bottom:"19px"});
+    this.tlBotAndroid!.to("#apple-logo", 0.5, {height:"5px"}, "-=0.4");
+    this.tlBotAndroid!.pause()
   }
 
   //------------ render
   public render() {
-    this.tlBotAndroid.progress(this.props.progress)
+    this.tlBotAndroid?.progress(this.props.progress)
     return (
         <div className={`${styles["header-mobile-root"]} position-relative`}>
           {/* <h2 className="text-center text-light">{this.props.experience.from} - {this.props.experience.to}</h2> */}

@@ -14,6 +14,8 @@ import NetworkService from '../../core/network/network.service';
 import Resume from '../../components/resume/resume';
 import BasePageComponent from '../../components/base-page-component/base-page-component';
 import { PAGE_ROOT_ID } from '../../core/route.constants';
+import { GetStaticProps } from 'next';
+import { wrapper } from '../../core/store/store';
 
 
 //--------------- TYPES
@@ -38,6 +40,19 @@ interface AboutMeProps {
 //     }
 //   }
 // );
+export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
+  async ({store}) => {
+    let response = await NetworkService.getInstance().getExperience();
+    if (response.data.results != undefined) {
+      // console.log(response.data);
+      // console.log(response.data.results);
+      store.dispatch(setExperience(response.data.results));
+    }
+    return {
+      revalidate: 60
+    }
+    });
+
 
 //--------------- COMPONENT
 class AboutMe extends BasePageComponent<AboutMeProps, any> {
@@ -62,14 +77,14 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
   componentDidMount() {
     super.componentDidMount();
     this.resetProgress();
-    let _self = this;
-    NetworkService.getInstance().getExperience()
-      .then(function (response) {
-        if (response.data.results != undefined) {
-          _self.props.setExperience(response.data.results);
-        }
-      }
-    );
+    // let _self = this;
+    // NetworkService.getInstance().getExperience()
+    //   .then(function (response) {
+    //     if (response.data.results != undefined) {
+    //       _self.props.setExperience(response.data.results);
+    //     }
+    //   }
+    // );
   }
 
   //------------ componentDidUpdate

@@ -22,7 +22,7 @@ interface HeaderArchitectProps extends WrappedComponentProps, ExperienceProps{}
 class HeaderArchitect extends React.Component<HeaderArchitectProps> {
 
   //ATTRS
-  private tlBotAndroid:TimelineMax;
+  private tlBotAndroid:TimelineMax|undefined;
   private widthBoxShape:number = 38;
 
 
@@ -31,25 +31,25 @@ class HeaderArchitect extends React.Component<HeaderArchitectProps> {
   //----- constructor
   constructor(props:HeaderArchitectProps){
     super(props);
-    this.tlBotAndroid = new TimelineMax();
   }
 
   //----- componentDidMount
   componentDidMount(){
+    this.tlBotAndroid = new TimelineMax();
     this.initTimeline();
   }
 
   //----- initTimeline
   private initTimeline(){    
-    this.tlBotAndroid.to("#order-manager-shape", 1, {bottom: "0px"});
-    this.tlBotAndroid.to("#microservices-shape", 1, {bottom: "0px"});
-    this.tlBotAndroid.to("#cloud-ai-shape", 1, {bottom: "0px"});
-    this.tlBotAndroid.to("#devops-shape", 1, {bottom: this.widthBoxShape+"px"});
-    this.tlBotAndroid.to("#micro-frontends-shape", 1, {bottom: this.widthBoxShape+"px"});
-    this.tlBotAndroid.to("#crm-shape", 1, {bottom: this.widthBoxShape+"px"});
-    this.tlBotAndroid.to("#game-over", 1, {className: `${styles["header-architect__game-over-root"]} animate__animated animate__fadeIn`});
+    this.tlBotAndroid!.to("#order-manager-shape", 1, {bottom: "0px"});
+    this.tlBotAndroid!.to("#microservices-shape", 1, {bottom: "0px"});
+    this.tlBotAndroid!.to("#cloud-ai-shape", 1, {bottom: "0px"});
+    this.tlBotAndroid!.to("#devops-shape", 1, {bottom: this.widthBoxShape+"px"});
+    this.tlBotAndroid!.to("#micro-frontends-shape", 1, {bottom: this.widthBoxShape+"px"});
+    this.tlBotAndroid!.to("#crm-shape", 1, {bottom: this.widthBoxShape+"px"});
+    this.tlBotAndroid!.to("#game-over", 1, {className: `${styles["header-architect__game-over-root"]} animate__animated animate__fadeIn`});
 
-    this.tlBotAndroid.pause()
+    this.tlBotAndroid!.pause()
   }
 
 
@@ -69,7 +69,7 @@ class HeaderArchitect extends React.Component<HeaderArchitectProps> {
 
   //------------ render
   public render() {
-    this.tlBotAndroid.progress(this.props.progress);
+    this.tlBotAndroid?.progress(this.props.progress);
     return (
         <div className={`${styles["header-architect__root"]} position-relative overflow-hidden`}>
           {/* <div className="text-light d-lg-none header-architect__dates"><span>Score: </span><span style={{color: "yellow"}}>{this.props.experience.from}+</span></div> */}
