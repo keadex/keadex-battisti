@@ -2,6 +2,11 @@ import BaseResponse from '../../model/base-response.type';
 import axios, { AxiosPromise } from 'axios';
 import { Quote, Experience, ForceGraph } from '../../model/models';
 
+//API ENDPOINTS
+export const GET_QUOTES_API : string = process.env.NEXT_PUBLIC_BASE_URL! + process.env.NEXT_PUBLIC_GET_QUOTES_API!;
+export const GET_EXPERIENCE_API : string = process.env.NEXT_PUBLIC_BASE_URL! + process.env.NEXT_PUBLIC_GET_EXPERIENCE_API!;
+export const GET_EXPERIENCE_GRAPH_API : string = process.env.NEXT_PUBLIC_BASE_URL! + process.env.NEXT_PUBLIC_GET_EXPERIENCE_GRAPH_API!;
+
 
 class NetworkService {
 
@@ -53,18 +58,18 @@ class NetworkService {
 
   //--------- getQuotes
   getQuotes = () : AxiosPromise<BaseResponse<Quote>> => {
-    return axios.get<BaseResponse<Quote>>(process.env.NEXT_PUBLIC_BASE_URL! + process.env.NEXT_PUBLIC_GET_QUOTES_API!);
+    return axios.get<BaseResponse<Quote>>(GET_QUOTES_API);
   }
 
 
   //--------- getExperience
   getExperience = () : AxiosPromise<BaseResponse<Experience>> => {
-    return axios.get<BaseResponse<Experience>>(process.env.NEXT_PUBLIC_BASE_URL! + process.env.NEXT_PUBLIC_GET_EXPERIENCE_API!);
+    return axios.get<BaseResponse<Experience>>(GET_EXPERIENCE_API);
   }
 
   //--------- getExperienceGraph
   getExperienceGraph = () : AxiosPromise<BaseResponse<ForceGraph.Graph>> => {
-    return axios.get<BaseResponse<ForceGraph.Graph>>(process.env.NEXT_PUBLIC_BASE_URL! + process.env.NEXT_PUBLIC_GET_EXPERIENCE_GRAPH_API!);
+    return axios.get<BaseResponse<ForceGraph.Graph>>(GET_EXPERIENCE_GRAPH_API);
   }
 
   //--------- downloadFile

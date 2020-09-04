@@ -13,8 +13,7 @@ import brainGraph from "../../../public/img/education/brain-graph.png";
 import jack from "../../../public/img/jack/jack.gif";
 import styles from './education.module.scss';
 import { ForceGraph } from '../../model/models';
-import NetworkService from '../../core/network/network.service';
-import { withHooksBreakpoint, HooksBreakpointProps, useBreakpoint } from '../../core/react-breakpoint';
+import { useBreakpoint } from '../../core/react-breakpoint';
 import { isClient } from '../../helper/generic-helper';
 import NoSSR from 'react-no-ssr';
 
@@ -25,10 +24,8 @@ if (isClient()){
 
 //------------------ TYPES
 export interface EducationProps {
-  progress: number
-}
-interface EducationState{
-  experienceGraph: ForceGraph.Graph
+  progress: number,
+  experienceGraph?: ForceGraph.Graph
 }
 
     
@@ -52,33 +49,22 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
     }
   }, []);
   
-  let _isMounted:MutableRefObject<boolean> = useRef(false);
   let brain:MutableRefObject<Map<string, HTMLImageElement>> = useRef(new Map());
   let breakpoints = useBreakpoint();
   
-  const [experienceGraph, setExperienceGraph] = useState<ForceGraph.Graph>({nodes: [], links: []});
+  // let experienceGraph : ForceGraph.Graph|undefined = {nodes: [], links: []};
 
-  
+  // const { data, error } = useSWR(GET_EXPERIENCE_GRAPH_API, (url)=>NetworkService.getInstance().getExperienceGraph());
+  // if (!error && data && data.data && data.data.result){
+  //   experienceGraph = data.data.result;
+  // }
+
+
   //FUNCS
 
   //---------- componentDidMount
   useEffect(() => {
     initBrain();
-    _isMounted.current = true;
-    NetworkService.getInstance().getExperienceGraph().then(function(response){
-      if (_isMounted.current && response.data.result){
-        //Since this is a callback, _isMounted is needed to avoid that state updates
-        //occur when the component is unmounted
-        setExperienceGraph(response.data.result);
-      }
-    });
-    // TouchManager.init();
-    // TouchManager.forceGraphInstance = this.forceGraphRef;    
-
-    return () => {
-      // Clean up the subscription
-      _isMounted.current = false;
-    };
   }, []);
 
 
@@ -158,7 +144,7 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
                 {/* SHOW INTERACTIVE BRAIN GRAPH ONLY ON DESKTOP */}
                 <div className={`d-none d-lg-block ${styles["education__brain-container--desktop"]} ${(adjustProgress(1, progress)!=0?"out":"")} ${(progress==0?"pointer-events-none":"")}`}>
                   <NoSSR>
-                    {ForceGraph2D && <ForceGraph2D ref={forceGraphRef} graphData={experienceGraph} linkColor={() => '#fff'} nodeAutoColorBy="group" enableNodeDrag={true} enableZoomPanInteraction={false}
+                    {ForceGraph2D && <ForceGraph2D ref={forceGraphRef} graphData={props.experienceGraph} linkColor={() => '#fff'} nodeAutoColorBy="group" enableNodeDrag={true} enableZoomPanInteraction={false}
                       nodeCanvasObjectMode={()=>"replace"} nodeCanvasObject={(node:any, ctx:any, globalScale:any) => {
                         
                       if (node != undefined && node.id != undefined && node.x != undefined && node.y != undefined){

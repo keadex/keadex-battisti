@@ -9,7 +9,7 @@ import { getDefaultAboutMeState, IAboutMeState, IStoreState } from '../../core/s
 import Education from '../../components/education/education';
 import Hobbies from '../../components/hobbies/hobbies';
 import Experience from '../../components/experience/experience';
-import {Experience as IExperience} from '../../model/models';
+import {Experience as IExperience, ForceGraph} from '../../model/models';
 import NetworkService from '../../core/network/network.service';
 import Resume from '../../components/resume/resume';
 import BasePageComponent from '../../components/base-page-component/base-page-component';
@@ -25,7 +25,8 @@ interface AboutMeProps {
   setExperience: (experience: IExperience[])=>void,
   resetState:()=>void,
   experience: IExperience[],
-  menuOpen: boolean
+  menuOpen: boolean,
+  experienceGraph?: ForceGraph.Graph
 }
 
 // export const getServerSideProps = wrapper.getServerSideProps(
@@ -42,16 +43,19 @@ interface AboutMeProps {
 // );
 export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
   async ({store}) => {
-    let response = await NetworkService.getInstance().getExperience();
-    if (response.data.results != undefined) {
-      // console.log(response.data);
-      // console.log(response.data.results);
-      store.dispatch(setExperience(response.data.results));
+    let expResp = await NetworkService.getInstance().getExperience();
+    if (expResp.data && expResp.data.results != undefined) {
+      store.dispatch(setExperience(expResp.data.results));
     }
+    let expGraphResp = await NetworkService.getInstance().getExperienceGraph();
     return {
+      props:{
+        experienceGraph: (expGraphResp.data)?expGraphResp.data.result:undefined
+      },
       revalidate: 60
     }
-    });
+  }
+);
 
 
 //--------------- COMPONENT
@@ -167,7 +171,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
                   // console.log(event);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>
-                      <Education progress={progress}/>
+                      <Education progress={progress} experienceGraph={this.props.experienceGraph}/>
                     </div>
                   )
                 }}
