@@ -1,5 +1,5 @@
 import { IProgress } from "../../components/progressbar/progressbar"
-import { Experience } from "../../model/models";
+import { Experience, Quote } from "../../model/models";
 import { SceneId } from "../app.constants";
 
 export interface IStoreState {
@@ -15,7 +15,8 @@ export interface IAppState {
     menuOpen: boolean;
     spinnerCounter: number;
     previousUrl: string|null;
-    navigationOccurred:boolean;
+    navigationOccurred: boolean;
+    quotes: Quote[];
 }
 
 export interface IBotState {
@@ -48,7 +49,8 @@ export const getDefaultAppState =  () : IAppState => {
         menuOpen: false,
         spinnerCounter: 0,
         previousUrl: null,
-        navigationOccurred: true
+        navigationOccurred: true,
+        quotes: []
     }
 };
 

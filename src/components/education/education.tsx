@@ -62,7 +62,7 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
 
   //FUNCS
 
-  //---------- componentDidMount
+  //---------- useEffect
   useEffect(() => {
     initBrain();
   }, []);

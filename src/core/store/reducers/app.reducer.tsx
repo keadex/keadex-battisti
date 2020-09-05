@@ -2,6 +2,7 @@ import { createActions, handleActions } from 'redux-actions';
 import { getDefaultAppState, IAppState } from '../store.type';
 import {HYDRATE} from 'next-redux-wrapper';
 import {AnyAction} from 'redux';
+import update from 'immutability-helper';
 
 // interface IAppAction {
 //   menuOpen: boolean;
@@ -9,13 +10,14 @@ import {AnyAction} from 'redux';
 //   navigationOccurred: boolean;
 // }
 
-export const { setIsAppInitialized, toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred } = createActions({
+export const { setIsAppInitialized, toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred, setQuotes } = createActions({
   SET_IS_APP_INITIALIZED: (isAppInitialized) => ({isAppInitialized: isAppInitialized}),
   TOGGLE_MENU: (menuOpen) => ({menuOpen: menuOpen}),
   ACTIVATE_SPINNER: () => ({}),
   DISABLE_SPINNER: () => ({}),
   SET_PREVIOUS_URL: (previousUrl) => ({previousUrl: previousUrl}),
-  SET_NAVIGATION_OCCURRED: (navigationOccurred) => ({navigationOccurred: navigationOccurred})
+  SET_NAVIGATION_OCCURRED: (navigationOccurred) => ({navigationOccurred: navigationOccurred}),
+  SET_QUOTES: (quotes) => ({quotes: quotes})
 });
 
 export const appReducer = handleActions<IAppState, AnyAction>(
@@ -52,6 +54,10 @@ export const appReducer = handleActions<IAppState, AnyAction>(
     },
     [setNavigationOccurred.toString()]: (state, action) => {
       return { ...state, navigationOccurred: action.payload.navigationOccurred};
+    },
+    [setQuotes.toString()]: (state, action) => {
+      let quotes = update(state.quotes, {$set: action.payload.quotes});
+      return { ...state, quotes: quotes!};
     }
   },
   getDefaultAppState()

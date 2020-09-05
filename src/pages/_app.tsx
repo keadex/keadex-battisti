@@ -9,7 +9,7 @@ import { Provider } from 'react-redux'
 import { wrapper, StoreService } from '../core/store/store';
 import { IntlProvider } from 'react-intl'
 import flatten from 'flat'
-import { toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred, setIsAppInitialized } from '../core/store/reducers/app.reducer';
+import { toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred, setIsAppInitialized, setQuotes } from '../core/store/reducers/app.reducer';
 
 // import 'react-app-polyfill/ie9';
 // import 'react-app-polyfill/stable';
@@ -20,6 +20,8 @@ import Spinner from '../components/spinner/spinner';
 import Header from '../components/header/header';
 import Body from '../components/body/body';
 import {useStore} from 'react-redux';
+import useSWR from 'swr';
+import NetworkService, { GET_QUOTES_API } from '../core/network/network.service';
 
 // smoothscroll.polyfill();
 
@@ -106,17 +108,23 @@ function MyApp({ Component, pageProps }: AppProps) {
       store.dispatch(setNavigationOccurred(false));
     }
   }
+  
+  //useSWR caches already done requests and doesn't resubmit the same request.
+  //So it's not a problem if the following line is called multiple time: only a request is submitted
+  const { data, error } = useSWR(GET_QUOTES_API, (url)=>NetworkService.getInstance().getQuotes());
+  
 
   //---------- useEffect
   useEffect(() => {
-    //See above comment about "hashChangeComplete". setTimeout() is needed to be sure that scrollIntoView()
-    //used by Next.js doesn't override the scroll (also Next.js uses setTimeout())
-    // console.log("SCROLL _app scrolltop");
-    // setTimeout(()=>document.body.scrollTop=0, 0);    
-    
+
     if (!store.getState().app.isAppInitialized){
       watchForHover();
       store.dispatch(setIsAppInitialized(true));
+    }
+
+    if (!error && data && data.data && data.data.results && store.getState().app.quotes.length == 0){
+      //save quotes only if not already saved
+      store.dispatch(setQuotes(data.data.results));
     }
 
     //---------- Bind router events to show loader

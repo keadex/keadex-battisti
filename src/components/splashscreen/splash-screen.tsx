@@ -1,122 +1,120 @@
-import React from 'react';
-import { injectIntl, WrappedComponentProps, FormattedMessage } from 'react-intl';
-import NetworkService from '../../core/network/network.service';
+import React, { useRef, MutableRefObject, useEffect } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import {Quote} from '../../model/models';
 import styles from './splash-screen.module.scss';
 import { COOKIE_DECLARATION_URL, PRIVACY_POLICY_URL, TERMS_AND_CONDITIONS_URL, PAGE_ROOT_ID } from '../../core/route.constants';
 import { toggleMenu } from '../../core/store/reducers/app.reducer';
 import Link from 'next/link';
 import { connect } from 'react-redux';
+import { IStoreState } from '../../core/store/store.type';
 
-//------------------ COMPONENT
-interface ISplashScreenProps extends WrappedComponentProps {
-  toggleMenu:(menuOpen?: boolean)=>void
+//------------------ TYPES
+interface SplashScreenProps {
+  toggleMenu:(menuOpen?: boolean)=>void;
+  menuOpen: boolean;
+  quotes: Quote[];
 }
 
+
 //------------------ COMPONENT
-class SplashScreen extends React.Component<ISplashScreenProps> {
-  
+export const SplashScreen : React.FunctionComponent<SplashScreenProps> = props => {
+
   //ATTRS
-  private quotes: Quote[] = [];
-  private lastTimeQuote: number;
-  private countQuote: number;
+  const intl = useIntl();
+  let lastTimeQuote: MutableRefObject<number> = useRef(-1);
+  let countQuote: MutableRefObject<number> = useRef(0);
+
+  let quote: MutableRefObject<Quote> = useRef(generateQuote());
 
 
   //FUNCS
 
-  //------------ constructor
-  constructor(props: any) {
-    super(props);
-    this.lastTimeQuote = -1;
-    this.countQuote = 0;
-    let _self = this;
-    NetworkService.getInstance().getQuotes()
-      .then(function (response) {
-        if (response.data.results != undefined) {
-          _self.quotes = response.data.results;
-        }
-      }
-    );
-  }
+  //---------- useEffect
+  useEffect(() => {
+    quote.current = generateQuote();
+  });
 
 
   //------------ generateQuote
-  private generateQuote(): Quote {
+  function generateQuote(): Quote {
     let indexQuote = 0;
     let quote: Quote = {
-      author: this.props.intl.formatMessage({ id: "QUOTES.NO_QUOTES_AUTHOR" }),
-      quote: this.props.intl.formatMessage({ id: "QUOTES.NO_QUOTES" }),
+      author: intl.formatMessage({ id: "QUOTES.NO_QUOTES_AUTHOR" }),
+      quote: intl.formatMessage({ id: "QUOTES.NO_QUOTES" }),
     };
-    if ((new Date().getTime() - this.lastTimeQuote < 3000) && (this.countQuote == 2)) {
-      this.countQuote = 0;
+    if ((new Date().getTime() - lastTimeQuote.current < 3000) && (countQuote.current == 2)) {
+      countQuote.current = 0;
       return {
-        author: this.props.intl.formatMessage({ id: "QUOTES.TIP_QUOTE_AUTHOR" }),
-        quote: this.props.intl.formatMessage({ id: "QUOTES.TIP_QUOTE" }),
+        author: intl.formatMessage({ id: "QUOTES.TIP_QUOTE_AUTHOR" }),
+        quote: intl.formatMessage({ id: "QUOTES.TIP_QUOTE" }),
       }
-    } else if (this.countQuote > 2) {
-      this.countQuote = 0;
+    } else if (countQuote.current > 2) {
+      countQuote.current= 0;
     }
-    if (this.quotes != undefined && this.quotes.length > 0) {
-      indexQuote = Math.floor(Math.random() * this.quotes.length);
-      quote = this.quotes[indexQuote];
+    if (props.quotes != undefined && props.quotes.length > 0) {
+      indexQuote = Math.floor(Math.random() * props.quotes.length);
+      quote = props.quotes[indexQuote];
       quote.author = quote.author.replace(/ /g, "-");
       quote.quote = quote.quote.replace(/(\n).*/g, "");
-      this.countQuote++;
-      this.lastTimeQuote = new Date().getTime();
+      countQuote.current++;
+      lastTimeQuote.current = new Date().getTime();
     }
     return quote;
   }
 
 
   //------------ close
-  private close(){
-    this.props.toggleMenu();
+  function close(){
+    props.toggleMenu();
     window.CustomTemplate.closeMenu();
   }
 
   //------------ close
-  private openLink(pageId: string){
-    this.props.toggleMenu();
+  function openLink(pageId: string){
+    props.toggleMenu();
     window.CustomTemplate.openPage(pageId, false);
   }
 
-  //------------ render
-  public render() {
-    let quote: Quote = this.generateQuote();
-    return (
-      <div className={`${styles["splash-screen"]}`}>
-        <div className={`${styles["splash-screen__topbar-tools"]}`}>
-          {/* <img src={windowToolImg} className="splash-screen__window-tool" alt="window-tool" /> */}
-          <h5>- [] <span id="close" onClick={()=>{this.close()}}>X</span></h5>
-        </div>
-        <div className={`${styles["splash-screen__quote"]} animate__animated animate__fast animate__fadeIn`}>
-          {/* <span className="splash-screen__title">
-            &nbsp;_&nbsp;<br />
-            |&nbsp;|_&nbsp;___&nbsp;_&nbsp;_<br />
-            |&nbsp;&nbsp;&nbsp;|&nbsp;-_|&nbsp;|&nbsp;|_&nbsp;_&nbsp;_&nbsp;<br />
-            |_|_|___|_&nbsp;&nbsp;|_|_|_|<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|___|<br /><br />
-          </span> */}
-          <div className={`${styles["splash-screen__content"]}`}>
-            <div className="w-100 text-center">
-              <span>Keadex ©2020. Code licensed under an MIT-style License.</span><br/>
-              <Link href={COOKIE_DECLARATION_URL}><a onClick={()=>{this.openLink(PAGE_ROOT_ID)}} ><FormattedMessage id="COOKIE_DECLARATION.TITLE" /></a></Link>&nbsp;|&nbsp;
-              <Link href={PRIVACY_POLICY_URL}><a onClick={()=>{this.openLink(PAGE_ROOT_ID)}}><FormattedMessage id="PRIVACY_POLICY.TITLE" /></a></Link>&nbsp;|&nbsp;
-              <Link href={TERMS_AND_CONDITIONS_URL}><a onClick={()=>{this.openLink(PAGE_ROOT_ID)}}><FormattedMessage id="TERMS_CONDITIONS.TITLE" /></a></Link>
-            </div>
-            <div className="d-none d-md-block mt-5">
-              {quote.author}@keadex&gt;print-quote.sh<br />
-              {quote.author}@keadex&gt;{quote.quote}
-            </div>
+
+  return (
+    <div className={`${styles["splash-screen"]}`}>
+      <div className={`${styles["splash-screen__topbar-tools"]}`}>
+        {/* <img src={windowToolImg} className="splash-screen__window-tool" alt="window-tool" /> */}
+        <h5>- [] <span id="close" onClick={()=>{close()}}>X</span></h5>
+      </div>
+      <div className={`${styles["splash-screen__quote"]} animate__animated animate__fast animate__fadeIn`}>
+        {/* <span className="splash-screen__title">
+          &nbsp;_&nbsp;<br />
+          |&nbsp;|_&nbsp;___&nbsp;_&nbsp;_<br />
+          |&nbsp;&nbsp;&nbsp;|&nbsp;-_|&nbsp;|&nbsp;|_&nbsp;_&nbsp;_&nbsp;<br />
+          |_|_|___|_&nbsp;&nbsp;|_|_|_|<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|___|<br /><br />
+        </span> */}
+        <div className={`${styles["splash-screen__content"]}`}>
+          <div className="w-100 text-center">
+            <span>Keadex ©2020. <span className="d-block d-md-none" />Code licensed under an MIT-style License.</span><br/>
+            <Link href={COOKIE_DECLARATION_URL}><a onClick={()=>{openLink(PAGE_ROOT_ID)}} ><FormattedMessage id="COOKIE_DECLARATION.TITLE" /></a></Link>&nbsp;|&nbsp;
+            <Link href={PRIVACY_POLICY_URL}><a onClick={()=>{openLink(PAGE_ROOT_ID)}}><FormattedMessage id="PRIVACY_POLICY.TITLE" /></a></Link>&nbsp;|&nbsp;
+            <Link href={TERMS_AND_CONDITIONS_URL}><a onClick={()=>{openLink(PAGE_ROOT_ID)}}><FormattedMessage id="TERMS_CONDITIONS.TITLE" /></a></Link>
+          </div>
+          <div className="d-none d-md-block mt-5">
+            {quote.current.author}@keadex&gt;print-quote.sh<br />
+            {quote.current.quote}
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
+const mapStateToProps = (state:IStoreState) => {
+  return {
+    menuOpen: state.app.menuOpen,
+    quotes: state.app.quotes
+  }
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   { toggleMenu }
-)(injectIntl(SplashScreen))
+)(SplashScreen)
