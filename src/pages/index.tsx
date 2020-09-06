@@ -237,7 +237,7 @@ class Home extends BasePageComponent<any, HomeState> {
             <div className={`${styles["home__footer-text"]} text-uppercase`}>
               <ScrollAnimation scrollableParentSelector={"#"+PAGE_ROOT_ID} animateIn='animate__fadeIn animate__slow' animateOut='animate__fadeOut'>
                 <div className={`${styles["home__footer-text-text"]}`}>
-                  <FooterDiv vpHeight={this.state.height} logoContainerHeight={(this.logoContRef.current)?this.logoContRef.current.offsetHeight:"0"}>Version {process.env.NEXT_PUBLIC_APP_VERSION} alpha</FooterDiv>
+                  <FooterDiv vpHeight={this.state.height} logoContainerHeight={(this.logoContRef.current)?this.logoContRef.current.offsetHeight:"0"}>Version {process.env.NEXT_PUBLIC_APP_VERSION}</FooterDiv>
                 </div>
               </ScrollAnimation>
             </div>
