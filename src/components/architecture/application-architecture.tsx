@@ -49,22 +49,6 @@ export const ApplicationArchitecture : React.FunctionComponent<ArchitectureImplP
       roadmap: (
         <p style={{marginBottom:"300px"}}><b>Keadex Battisti</b> represents the shell of Keadex, the way to describe it.</p>
       )
-    },
-    {
-      id: "keadex-prova",
-      name: intl.formatMessage({id: "KEADEX_MODULES.KEADEX_BATTISTI"}),
-      logo: keadexBattisti,
-      description: (
-        <p style={{marginBottom:"300px"}}>PROVA <b>Keadex Battisti</b> represents the shell of Keadex, the way to describe it.</p>
-      ),
-      features: (
-        <div style={{marginBottom:"300px"}}>
-          ciao
-        </div>
-      ),
-      roadmap: (
-        <p style={{marginBottom:"300px"}}><b>Keadex Battisti</b> represents the shell of Keadex, the way to describe it.</p>
-      )
     }
   ]
 
