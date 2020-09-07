@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": false,
   "license": "MIT",
+  "author": "Keadex",
   "dependencies": {
     "@formatjs/intl-pluralrules": "^3.2.3",
     "@fortawesome/fontawesome-free": "^5.14.0",
