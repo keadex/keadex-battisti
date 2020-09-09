@@ -44,13 +44,13 @@ interface AboutMeProps {
 export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
   async ({store}) => {
     let expResp = await NetworkService.getInstance().getExperience();
-    if (expResp.data && expResp.data.results != undefined) {
-      store.dispatch(setExperience(expResp.data.results));
+    if (expResp.data) {
+      store.dispatch(setExperience(expResp.data));
     }
     let expGraphResp = await NetworkService.getInstance().getExperienceGraph();
     return {
       props:{
-        experienceGraph: (expGraphResp.data)?expGraphResp.data.result:undefined
+        experienceGraph: (expGraphResp.data)?expGraphResp.data:undefined
       },
       revalidate: 60
     }

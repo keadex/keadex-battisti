@@ -57,19 +57,28 @@ class NetworkService {
 
 
   //--------- getQuotes
-  getQuotes = () : AxiosPromise<BaseResponse<Quote>> => {
-    return axios.get<BaseResponse<Quote>>(GET_QUOTES_API);
+  getQuotes = () : AxiosPromise<Quote[]> => {
+    return axios.get<Quote[]>(GET_QUOTES_API);
   }
 
 
-  //--------- getExperience
-  getExperience = () : AxiosPromise<BaseResponse<Experience>> => {
-    return axios.get<BaseResponse<Experience>>(GET_EXPERIENCE_API);
+  /**
+   * @deprecated Temporary getExperience function based on a REST API.
+   * This will be replaced by getExperience which will be based on 
+   * GraphQL and it will be available when Keadex Einaudi (the backend)
+   * will be delivered.
+   */
+  __tmp_getExperience = () : AxiosPromise<Experience[]> => {
+    return axios.get<Experience[]>(GET_EXPERIENCE_API);
+  }
+
+  getExperience = () : AxiosPromise<Experience[]> => {
+    return axios.get<Experience[]>(GET_EXPERIENCE_API);
   }
 
   //--------- getExperienceGraph
-  getExperienceGraph = () : AxiosPromise<BaseResponse<ForceGraph.Graph>> => {
-    return axios.get<BaseResponse<ForceGraph.Graph>>(GET_EXPERIENCE_GRAPH_API);
+  getExperienceGraph = () : AxiosPromise<ForceGraph.Graph> => {
+    return axios.get<ForceGraph.Graph>(GET_EXPERIENCE_GRAPH_API);
   }
 
   //--------- downloadFile

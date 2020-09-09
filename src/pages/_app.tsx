@@ -122,9 +122,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       store.dispatch(setIsAppInitialized(true));
     }
 
-    if (!error && data && data.data && data.data.results && store.getState().app.quotes.length == 0){
+    if (!error && data && data.data && store.getState().app.quotes.length == 0){
       //save quotes only if not already saved
-      store.dispatch(setQuotes(data.data.results));
+      store.dispatch(setQuotes(data.data));
     }
 
     //---------- Bind router events to show loader
