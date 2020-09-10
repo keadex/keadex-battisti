@@ -19,7 +19,7 @@ export interface Company {
   to?: string,
   city: string,
   country: string,
-  logo_filename: string
+  logoFilename: string
 }
 
 
@@ -27,7 +27,7 @@ export interface Company {
 export interface Customer {
   id: string,
   name: string,
-  logo_filename: string
+  logoFilename: string
 }
 
 
@@ -40,7 +40,7 @@ export interface Sector {
 // --------  SKILL
 export interface Skill {
   name: string,
-  usage_percentage: number
+  usagePercentage: number
 }
 
 
@@ -49,7 +49,7 @@ export interface Experience {
   id: string,
   from: string,
   to?: string,
-  avatar_filename: string,
+  avatarFilename: string,
   tasks: Task[],
   companies: Company[],
   customers: Customer[],

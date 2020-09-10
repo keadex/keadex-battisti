@@ -217,8 +217,8 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                           {/* POSITION */}                          
                           <MDBCardTitle className="text-center">
                             <div className={`avatar d-inline-block ${styles["experience__avatar"]}`}>
-                              <img src={this.jackImages[this.props.experience.avatar_filename]} alt="avatar position"/>
-                              {/* <img src={`../../../public/img/jack/${this.props.experience.avatar_filename}`} alt="avatar position"/> */}
+                              <img src={this.jackImages[this.props.experience.avatarFilename]} alt="avatar position"/>
+                              {/* <img src={`../../../public/img/jack/${this.props.experience.avatarFilename}`} alt="avatar position"/> */}
                             </div>
                             <div className={`${styles["experience__title-position"]} text-left text-md-center`}>
                               <FormattedMessage id={"POSITIONS." + this.props.experience.id} /><br />
@@ -257,7 +257,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                                 <div className={`${styles["experience__section-title"]} mb-md-3 mb-2`}>{"<"}<FormattedMessage id={"ABOUT_ME.EXPERIENCE.COMPANIES"} />{"/>"}</div>
                                 {
                                   this.props.experience.companies.map((value, index) =>{
-                                    return <div className="d-inline d-md-block mx-1 mx-md-0" key={index}><img src={this.logo[value.logo_filename]} className={`mb-3 mb-md-4 ${styles["experience__logo-brands"]} d-inline`} alt={`${value.name}`}/></div>
+                                    return <div className="d-inline d-md-block mx-1 mx-md-0" key={index}><img src={this.logo[value.logoFilename]} className={`mb-3 mb-md-4 ${styles["experience__logo-brands"]} d-inline`} alt={`${value.name}`}/></div>
                                   })
                                 }
                               </Tween>
@@ -270,7 +270,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                                   <div className="experience__section-title mb-md-3 mb-2">{"<"}<FormattedMessage id={"ABOUT_ME.EXPERIENCE.CUSTOMERS"} />{"/>"}</div>
                                   {
                                     this.props.experience.customers.map((value, index) =>{
-                                      return <div className="w-100" key={index}><img src={require(`../../../public/img/logo/${value.logo_filename}`)} className="mb-3 mb-md-4 experience__logo-brands" alt={`${value.name}`}/></div>
+                                      return <div className="w-100" key={index}><img src={require(`../../../public/img/logo/${value.logoFilename}`)} className="mb-3 mb-md-4 experience__logo-brands" alt={`${value.name}`}/></div>
                                     })
                                   }
                                 </Tween>
@@ -290,7 +290,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                           <div className={`${styles["experience__skills-chart-container"]} pointer-events-all`}>
                             <ResponsiveContainer>
                               <PieChart>
-                                <Pie dataKey="usage_percentage" data={this.props.experience.skills.sort((a,b)=>{return a.name.localeCompare(b.name)})} cx={'50%'} cy={'50%'} innerRadius={"20%"} outerRadius={"100%"} paddingAngle={0} stroke="#2C2C2C" strokeWidth="0.2px">
+                                <Pie dataKey="usagePercentage" data={this.props.experience.skills.sort((a,b)=>{return a.name.localeCompare(b.name)})} cx={'50%'} cy={'50%'} innerRadius={"20%"} outerRadius={"100%"} paddingAngle={0} stroke="#2C2C2C" strokeWidth="0.2px">
                                   {
                                     this.props.experience.skills.map((entry, index) => <Cell fill={this.colors[index]} key={index}/>)
                                   }
@@ -305,7 +305,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                                   this.props.experience.skills.map((entry, index) => {
                                     return (
                                     <div className={`col-auto ${styles["experience__legend"]}`} key={index}>
-                                      <MDBIcon icon="square-full" style={{color: this.colors[index]}}/> {entry.name} ({entry.usage_percentage}%)
+                                      <MDBIcon icon="square-full" style={{color: this.colors[index]}}/> {entry.name} ({entry.usagePercentage}%)
                                     </div>
                                     )
                                   })                                  
