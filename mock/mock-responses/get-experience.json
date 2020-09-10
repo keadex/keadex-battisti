@@ -1,0 +1,479 @@
+[
+  {
+    "id": "MOBILE_DEVELOPER",
+    "from": "2013",
+    "to": "2015",
+    "avatarFilename": "jack-mobile.png",
+    "tasks": [
+      {
+        "id": "REQUIREMENTS_ANALYSIS"
+      },
+      {
+        "id": "DESIGN"
+      },
+      {
+        "id": "APP_DEVELOPMENT"
+      },
+      {
+        "id": "TEAM_LEADING"
+      }
+    ],
+    "companies": [
+      {
+        "name": "University of Liverpool",
+        "from": "09/2013",
+        "to": "12/2013",
+        "city": "LIVERPOOL",
+        "country": "UK",
+        "logoFilename": "univ-liverpool-logo.png"
+      },
+      {
+        "name": "Open Reply",
+        "from": "01/2014",
+        "to": "05/2015",
+        "city": "ROME",
+        "country": "ITALY",
+        "logoFilename": "open-reply-logo.png"
+      }
+    ],
+    "customers": [
+      {
+        "id": 1,
+        "name": "University of Liverpool",
+        "logoFilename": "univ-liverpool-logo.png"
+      },
+      {
+        "id": 2,
+        "name": "Eni",
+        "logoFilename": "eni-logo.png"
+      },
+      {
+        "id": 3,
+        "name": "CNH Industrial",
+        "logoFilename": "cnh-logo.png"
+      },
+      {
+        "id": 4,
+        "name": "Veneto Banca",
+        "logoFilename": "veneto-banca-logo.png"
+      }
+    ],
+    "sectors": [
+      {
+        "id": "EDUCATION"
+      },
+      {
+        "id": "UTILITIES"
+      },
+      {
+        "id": "RETAIL"
+      },
+      {
+        "id": "BANKING"
+      }
+    ],
+    "skills": [
+      {
+        "name": "Native App",
+        "usagePercentage": 100
+      },
+      {
+        "name": "Hybrid Apps",
+        "usagePercentage": 70
+      },
+      {
+        "name": "Android",
+        "usagePercentage": 100
+      },
+      {
+        "name": "Apache Cordova",
+        "usagePercentage": 70
+      },
+      {
+        "name": "Sencha Touch",
+        "usagePercentage": 50
+      },
+      {
+        "name": "AngularJS",
+        "usagePercentage": 40
+      },
+      {
+        "name": "IBM Worklight",
+        "usagePercentage": 90
+      },
+      {
+        "name": "SVN",
+        "usagePercentage": 100
+      },
+      {
+        "name": "IBM RTC",
+        "usagePercentage": 80
+      },
+      {
+        "name": "UML",
+        "usagePercentage": 100
+      },
+      {
+        "name": "MySQL",
+        "usagePercentage": 20
+      },
+      {
+        "name": "SQLite",
+        "usagePercentage": 80
+      },
+      {
+        "name": "Cryptography",
+        "usagePercentage": 80
+      },
+      {
+        "name": "Caching Strategies",
+        "usagePercentage": 60
+      }
+    ]
+  },
+  {
+    "id": "SOFTWARE_ENGINEER",
+    "from": "2015",
+    "to": "2018",
+    "avatarFilename": "jack-fullstack.png",
+    "tasks": [
+      {
+        "id": "REQUIREMENTS_ANALYSIS"
+      },
+      {
+        "id": "SOFTWARE_DEVELOPMENT"
+      },
+      {
+        "id": "SOFTWARE_ENGINEERING"
+      },
+      {
+        "id": "TEAM_LEADING"
+      },
+      {
+        "id": "PROJECT_MANAGEMENT"
+      }
+    ],
+    "companies": [
+      {
+        "name": "IBM",
+        "from": "05/2015",
+        "to": "06/2017",
+        "city": "MILAN",
+        "country": "ITALY",
+        "logoFilename": "ibm-logo.png"
+      },
+      {
+        "name": "Atos",
+        "from": "06/2017",
+        "to": "05/2018",
+        "city": "MILAN",
+        "country": "ITALY",
+        "logoFilename": "atos-logo.png"
+      }
+    ],
+    "customers": [
+      {
+        "id": 5,
+        "name": "Intesa Sanpaolo",
+        "logoFilename": "intesa-sanpaolo-logo.png"
+      },
+      {
+        "id": 6,
+        "name": "Autogrill",
+        "logoFilename": "autogrill-logo.png"
+      },
+      {
+        "id": 7,
+        "name": "Amsa",
+        "logoFilename": "amsa-logo.png"
+      },
+      {
+        "id": 8,
+        "name": "A2A Energia",
+        "logoFilename": "a2a-energia-logo.png"
+      }
+    ],
+    "sectors": [
+      {
+        "id": "UTILITIES"
+      },
+      {
+        "id": "RETAIL"
+      },
+      {
+        "id": "BANKING"
+      },
+      {
+        "id": "RISK_ANALYTICS"
+      }
+    ],
+    "skills": [
+      {
+        "name": "AngularJS",
+        "usagePercentage": 100
+      },
+      {
+        "name": "Angular 4+",
+        "usagePercentage": 100
+      },
+      {
+        "name": "Git",
+        "usagePercentage": 100
+      },
+      {
+        "name": "Gulp.js",
+        "usagePercentage": 80
+      },
+      {
+        "name": "CoffeeScript",
+        "usagePercentage": 100
+      },
+      {
+        "name": "Jade",
+        "usagePercentage": 100
+      },
+      {
+        "name": "IBM RTCE",
+        "usagePercentage": 80
+      },
+      {
+        "name": "Bootstrap 3+",
+        "usagePercentage": 100
+      },
+      {
+        "name": "Struts2",
+        "usagePercentage": 40
+      },
+      {
+        "name": "Node.js",
+        "usagePercentage": 70
+      },
+      {
+        "name": "Spring",
+        "usagePercentage": 80
+      },
+      {
+        "name": "Hibernate",
+        "usagePercentage": 80
+      },
+      {
+        "name": "Oracle DB",
+        "usagePercentage": 90
+      },
+      {
+        "name": "JBoss",
+        "usagePercentage": 60
+      },
+      {
+        "name": "IBM MQ",
+        "usagePercentage": 90
+      },
+      {
+        "name": "WebSocket",
+        "usagePercentage": 100
+      },
+      {
+        "name": "IBM Watson",
+        "usagePercentage": 40
+      },
+      {
+        "name": "InVision",
+        "usagePercentage": 70
+      },
+      {
+        "name": "CVS",
+        "usagePercentage": 50
+      },
+      {
+        "name": "Apache Tomcat 7+",
+        "usagePercentage": 80
+      },
+      {
+        "name": "Multithreading",
+        "usagePercentage": 100
+      },
+      {
+        "name": "Shell Scripting",
+        "usagePercentage": 70
+      },
+      {
+        "name": "SQL Stored Procedures",
+        "usagePercentage": 60
+      },
+      {
+        "name": "Oracle Trigger",
+        "usagePercentage": 60
+      }
+    ]
+  },
+  {
+    "id": "IT_SOLUTION_ARCHITECT",
+    "from": "2018",
+    "avatarFilename": "jack-architect.png",
+    "to": null,
+    "tasks": [
+      {
+        "id": "REQUIREMENTS_ANALYSIS"
+      },
+      {
+        "id": "TECHNICAL_LEAD"
+      },
+      {
+        "id": "SOFTWARE_ENGINEERING"
+      },
+      {
+        "id": "SOLUTION_ARCHITECTURE"
+      },
+      {
+        "id": "PROJECT_MANAGEMENT"
+      }
+    ],
+    "companies": [
+      {
+        "name": "Vodafone",
+        "from": "05/2018",
+        "to": null,
+        "city": "MILAN",
+        "country": "ITALY",
+        "logoFilename": "vodafone-logo.png"
+      }
+    ],
+    "sectors": [
+      {
+        "id": "TELECOMMUNICATION"
+      },
+      {
+        "id": "ECOMMERCE"
+      },
+      {
+        "id": "DIGITAL_SOLUTIONS"
+      }
+    ],
+    "skills": [
+      {
+        "name": "Angular 4+",
+        "usagePercentage": 40
+      },
+      {
+        "name": "Git",
+        "usagePercentage": 90
+      },
+      {
+        "name": "React",
+        "usagePercentage": 90
+      },
+      {
+        "name": "Adobe Experience Manager",
+        "usagePercentage": 90
+      },
+      {
+        "name": "Adobe Analytics",
+        "usagePercentage": 60
+      },
+      {
+        "name": "Order Manager",
+        "usagePercentage": 80
+      },
+      {
+        "name": "Bootstrap 4",
+        "usagePercentage": 90
+      },
+      {
+        "name": "Oracle Siebel",
+        "usagePercentage": 40
+      },
+      {
+        "name": "Node.js",
+        "usagePercentage": 50
+      },
+      {
+        "name": "Spring",
+        "usagePercentage": 80
+      },
+      {
+        "name": "Hibernate",
+        "usagePercentage": 80
+      },
+      {
+        "name": "Oracle DB",
+        "usagePercentage": 80
+      },
+      {
+        "name": "AWS",
+        "usagePercentage": 60
+      },
+      {
+        "name": "Microsoft Azure",
+        "usagePercentage": 80
+      },
+      {
+        "name": "Cloud Computing",
+        "usagePercentage": 90
+      },
+      {
+        "name": "WebSocket",
+        "usagePercentage": 60
+      },
+      {
+        "name": "Microsoft Bot Framework",
+        "usagePercentage": 60
+      },
+      {
+        "name": "UniMRCP",
+        "usagePercentage": 80
+      },
+      {
+        "name": "Apache Tomcat 7+",
+        "usagePercentage": 90
+      },
+      {
+        "name": "Shell Scripting",
+        "usagePercentage": 60
+      },
+      {
+        "name": "Jira",
+        "usagePercentage": 90
+      },
+      {
+        "name": "DevOps",
+        "usagePercentage": 80
+      },
+      {
+        "name": "Performance Optimization",
+        "usagePercentage": 100
+      },
+      {
+        "name": "Artificial Intelligence",
+        "usagePercentage": 60
+      },
+      {
+        "name": "Data Warehouse",
+        "usagePercentage": 60
+      },
+      {
+        "name": "Release Management",
+        "usagePercentage": 70
+      },
+      {
+        "name": "Risk Assessment",
+        "usagePercentage": 90
+      },
+      {
+        "name": "Jenkins",
+        "usagePercentage": 70
+      },
+      {
+        "name": "Bit.dev",
+        "usagePercentage": 90
+      },
+      {
+        "name": " SEO Optimization",
+        "usagePercentage": 80
+      },
+      {
+        "name": "Order Fulfillment",
+        "usagePercentage": 80
+      }
+    ]
+  }
+]

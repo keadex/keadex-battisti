@@ -1,0 +1,43 @@
+type Task {
+  id: String
+}
+
+type Company {
+  name: String
+  from: String
+  to: String
+  city: String
+  country: String
+  logoFilename: String
+}
+
+type Customer {
+  id: String
+  name: String
+  logoFilename: String
+}
+
+type Sector {
+  id: String
+}
+
+type Skill {
+  name: String
+  usagePercentage: Int
+}
+
+type Experience {
+  id: String!
+  from: String
+  to: String
+  avatarFilename: String
+  tasks: [Task]
+  companies: [Company]
+  customers: [Customer]
+  sectors: [Sector]
+  skills: [Skill]
+}
+
+type Query {
+  experiences: [Experience]!
+}
