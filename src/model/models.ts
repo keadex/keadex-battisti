@@ -1,3 +1,15 @@
+// -------- BASE RESPONSE
+export interface BaseResponse<T> {
+  data?: Query<T>;
+}
+
+// -------- QUERY
+export interface Query<T> {
+  experiences?: T;
+  quotes?: T;
+  experienceGraph?: T;
+}
+
 // -------- QUOTE
 export interface Quote {
   quote: string;
@@ -64,7 +76,8 @@ export namespace ForceGraph {
   export interface Node {
     id: string,
     name: string,
-    val: number
+    val: number,
+    group: number
   }
 
   export interface Link {

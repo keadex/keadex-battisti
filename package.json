@@ -31,6 +31,8 @@
     "bootstrap": "^4.3.1",
     "flat": "^4.1.0",
     "flubber": "^0.4.2",
+    "graphql": "^15.3.0",
+    "graphql-tag": "^2.11.0",
     "immutability-helper": "^3.0.1",
     "material-colors": "^1.2.6",
     "mdbreact": "^4.26.0",

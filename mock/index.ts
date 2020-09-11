@@ -14,38 +14,14 @@ const app = express();
 
 const schema = loadSchemaSync(join(__dirname, 'schema.graphql'), { loaders: [new GraphQLFileLoader()] });
 
-// const typeDefs = gql`
-// type Cat {
-//   id: ID!
-//   name: String!
-//   age: Int!
-//   nice: Boolean
-// }
-// type Horse {
-//   id: ID!
-//   name: String!
-//   netWorth: Float!
-//   description: String
-// }
-// type Query {
-//   allCats: [Cat!]!
-//   allHorses: [Horse!]!
-// }
-// `;
-
-
-// const CatResolver = {
-//   Cat: {
-//     id: () => '123'
-//   },
-// };
-
 const mocks = {
   // Horse: () => ({
   //   description: () => faker.random.arrayElement(["ciao1", "coap2", "ciao3"])
   // }),
   Query: () => ({
-    experiences: ()=> require('./mock-responses/get-experience.json')
+    experiences: ()=> require('./mock-responses/experiences.json'),
+    quotes: ()=> require('./mock-responses/quotes.json'),
+    experienceGraph: ()=> require('./mock-responses/experience-graph.json')
   })
 };
 
@@ -53,5 +29,5 @@ const server = new ApolloServer({ schema,  mocks });
 server.applyMiddleware({ app });
 
 app.listen({ port: PORT }, () => {
-  console.log(`Server ready at http://localhost:4000${server.graphqlPath}`)
+  console.log(`Server ready at http://local.keadex.io:4000${server.graphqlPath}`)
 })

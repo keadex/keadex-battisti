@@ -111,8 +111,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   
   //useSWR caches already done requests and doesn't resubmit the same request.
   //So it's not a problem if the following line is called multiple time: only a request is submitted
-  const { data, error } = useSWR(GET_QUOTES_API, (url)=>NetworkService.getInstance().getQuotes());
-  
+  const quotesResp = useSWR(GET_QUOTES_API, (url)=>NetworkService.getInstance().__tmp_getQuotes());
 
   //---------- useEffect
   useEffect(() => {
@@ -122,9 +121,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       store.dispatch(setIsAppInitialized(true));
     }
 
-    if (!error && data && data.data && store.getState().app.quotes.length == 0){
+    if (!quotesResp.error && quotesResp && quotesResp.data && quotesResp.data.data
+      && quotesResp.data.data.data && quotesResp.data.data.data.quotes && store.getState().app.quotes.length == 0){
       //save quotes only if not already saved
-      store.dispatch(setQuotes(data.data));
+      store.dispatch(setQuotes(quotesResp.data.data.data.quotes));
     }
 
     //---------- Bind router events to show loader
@@ -161,7 +161,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>Keadex</title>
       </Head>
       <BreakpointProvider queries={queries}>
-        {/* <Provider store={store}> */}
           <IntlProvider locale={language} messages={messages[language]}>
             <div>
               <Spinner />
@@ -182,7 +181,6 @@ function MyApp({ Component, pageProps }: AppProps) {
               </div>
             </div>
           </IntlProvider>
-        {/* </Provider> */}
       </BreakpointProvider>
     </>
   )

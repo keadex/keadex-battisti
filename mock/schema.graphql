@@ -38,6 +38,35 @@ type Experience {
   skills: [Skill]
 }
 
+type Quote {
+  quote: String!
+  author: String!
+  likes: Int
+  tags: [String]
+  pk: Int
+  image: String
+  language: String
+}
+
+type Node {
+  id: String!
+  name: String!
+  val: Int!
+  group: Int!
+}
+
+type Link {
+  source: String!
+  target: String!
+}
+
+type Graph {
+  nodes: [Node!]!
+  links: [Link!]!
+}
+
 type Query {
-  experiences: [Experience]!
+  experiences: [Experience!]!
+  quotes: [Quote!]!
+  experienceGraph: Graph!
 }
