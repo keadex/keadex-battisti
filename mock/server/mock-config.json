@@ -1,0 +1,21 @@
+{
+  "profiles": [
+    {
+      "name": "default",
+      "mocksMap": [
+        {
+          "graphqlService": "experiences",
+          "mockFileName": "experiences.json"
+        },
+        {
+          "graphqlService": "quotes",
+          "mockFileName": "quotes.json"
+        },
+        {
+          "graphqlService": "experienceGraph",
+          "mockFileName": "experience-graph.json"
+        }
+      ]
+    }
+  ]
+}

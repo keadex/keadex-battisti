@@ -4,7 +4,7 @@
   "description": "GraphQL mock server",
   "main": "index.ts",
   "scripts": {
-    "start": "ts-node index.ts",
+    "start": "ts-node ./cli/cli.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Keadex",
@@ -13,10 +13,12 @@
     "@types/faker": "^5.1.0",
     "apollo-server-express": "^2.17.0",
     "body-parser": "^1.19.0",
+    "exec": "^0.2.1",
     "express": "^4.17.1",
     "faker": "^5.1.0",
     "graphql": "^15.3.0",
     "graphql-tools": "^6.2.1",
+    "terminal-kit": "^1.43.0",
     "ts-node": "^9.0.0"
   }
 }
