@@ -19,9 +19,9 @@ const mocks = {
   //   description: () => faker.random.arrayElement(["ciao1", "coap2", "ciao3"])
   // }),
   Query: () => ({
-    experiences: ()=> require('./mock-responses/experiences.json'),
-    quotes: ()=> require('./mock-responses/quotes.json'),
-    experienceGraph: ()=> require('./mock-responses/experience-graph.json')
+    experiences: ()=> require('./mocks/experiences.json'),
+    quotes: ()=> require('./mocks/quotes.json'),
+    experienceGraph: ()=> require('./mocks/experience-graph.json')
   })
 };
 
