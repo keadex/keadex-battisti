@@ -289,6 +289,113 @@ $md-checkbox-label-padding: .75em;
 }
 
 
+//------------ Cookie Dialog
+#CybotCookiebotDialog{
+  top: inherit !important;
+  bottom: 0 !important;
+  background: $primary-color !important;
+  color: $primary-color-text !important;
+}
+a#CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll{
+  width: inherit !important;
+  background: $brand-color-1 !important;
+  border: 1px solid $brand-color-1 !important;
+}
+a#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection{
+  width: inherit !important;
+  background: $brand-color-1 !important;
+  border: 1px solid $brand-color-1 !important;
+}
+a#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll{
+  width: inherit !important;
+  background: $brand-color-1 !important;
+  border: 1px solid $brand-color-1 !important;
+}
+#CybotCookiebotDialogBodyContentTitle{
+  color: $brand-color-1 !important;
+}
+#CybotCookiebotDialogPoweredbyLink{
+  display: none !important;
+}
+#CybotCookiebotDialogBodyContent{
+  padding-left: 0px !important;
+}
+#CybotCookiebotDialogBodyLevelDetailsWrapper{
+  background: $primary-color-dark !important;
+  border-color: $secondary-text-color !important;
+}
+#CybotCookiebotDialogBodyLevelDetailsWrapper #CybotCookiebotDialogBodyButtonDetails:focus, #CybotCookiebotDialogBodyLevelDetailsWrapper #CybotCookiebotDialogBodyLevelDetailsButton:focus {
+  text-decoration: none;
+}
+
+#CybotCookiebotDialogBodyLevelButtonsSelectPane{
+  border-color: $secondary-text-color !important;
+}
+
+#CybotCookiebotDialogBodyLevelButtons{
+  margin-left: 0px !important;
+}
+
+#CybotCookiebotDialogDetail{
+  background: $primary-color !important;
+}
+
+#CybotCookiebotDialog a, #CybotCookiebotDialog a:hover{
+  color: $primary-color-text !important;
+}
+.CybotCookiebotDialogDetailBodyContentTabsItemSelected, #CybotCookiebotDialogDetailBodyContentTabsOverview:focus, #CybotCookiebotDialogDetailBodyContentTabsAbout:focus{
+  background: $primary-color !important;
+}
+.CybotCookiebotDialogDetailBodyContentTabsItem, #CybotCookiebotDialogDetailBodyContentTabsAbout:hover,
+#CybotCookiebotDialogDetailBodyContentTabsOverview:hover{
+  background-color: $primary-color-dark !important;
+}
+
+.CybotCookiebotDialogDetailBodyContentTab:first-child{
+  border-color: $secondary-text-color !important;
+}
+.CybotCookiebotDialogDetailBodyContentTabsItem, .CybotCookiebotDialogDetailBodyContentTabsItemSelected{
+  border-color: $secondary-text-color !important;
+}
+
+#CybotCookiebotDialogDetailBodyContent{
+  background: $primary-color !important;
+  color: $primary-color-text !important;
+  border-color: $secondary-text-color !important;
+}
+
+.CybotCookiebotDialogDetailBodyContentCookieTypeTableContainer .CybotCookiebotDialogDetailBodyContentCookieTypeTable thead td, .CybotCookiebotDialogDetailBodyContentCookieTypeTableContainer .CybotCookiebotDialogDetailBodyContentCookieTypeTable thead th{
+  background-color: $primary-color-dark !important;
+  color: $primary-color-text !important;
+  border-color: $secondary-text-color !important;
+}
+
+.CybotCookiebotDialogDetailBodyContentCookieTypeTableContainer .CybotCookiebotDialogDetailBodyContentCookieTypeTable tbody td{
+  color: $primary-color-text !important;
+  border-color: $secondary-text-color !important;
+}
+
+.CybotCookiebotDialogDetailBodyContentCookieContainerTypesSelected, .CybotCookiebotDialogDetailBodyContentCookieContainerTypesSelected:hover{
+  background-color: $primary-color !important;
+  border-color: $secondary-text-color !important;
+  border-right-color: $primary-color !important;
+  opacity: 1;
+}
+
+.CybotCookiebotDialogDetailBodyContentCookieContainerTypes, #CybotCookiebotDialogDetailBodyContentCookieContainerTypes a.CybotCookiebotDialogDetailBodyContentCookieContainerTypes:hover{
+  background-color: $primary-color-dark !important;
+  border-color: $secondary-text-color !important;
+}
+
+#CybotCookiebotDialogDetailFooter{
+  background-color: $primary-color !important;
+  color: $primary-color-text !important;
+  a{
+    text-decoration: none;
+  }
+}
+
+
 
 @include media-breakpoint-down(sm) {
 	h1 {

@@ -11,6 +11,7 @@ class MyDocument extends Document {
       <Html className="js">
         <Head />
         <body>
+          <div style={{height: "200px", background: "red", position: "fixed", width: "100%", zIndex: 1, top: 937, display: "block"}}>ciao</div>
           <Main />
           <NextScript />
           <script src="../../custom_template/js/classie.min.js" async/>

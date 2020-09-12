@@ -25,6 +25,12 @@ import { initGA, logPageView } from '../core/google-analytics';
 
 // smoothscroll.polyfill();
 
+//---------- Disable debug and log levels in production
+if (process.env.NODE_ENV === "production"){
+  console.log = ()=>{}
+  console.debug = ()=>{}
+}
+
 //---------- Window object extension
 export interface CustomTemplate{
   closeMenu: ()=>void;
@@ -160,6 +166,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="manifest" href="/manifest.json" />
         <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;display=swap" rel="stylesheet" />
         <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="d12031df-a146-4c32-8276-e1d5c086b932" data-blockingmode="auto" type="text/javascript"></script>
+        {/* <script id="CookieDeclaration" src="https://consent.cookiebot.com/d12031df-a146-4c32-8276-e1d5c086b932/cd.js" type="text/javascript" async></script> */}
         <title>Keadex</title>
       </Head>
       <BreakpointProvider queries={queries}>
