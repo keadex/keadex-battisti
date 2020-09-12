@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 
 import type { AppProps } from 'next/app'
-import {Router, useRouter} from 'next/router'
+import {useRouter} from 'next/router'
 import Head from 'next/head'
 import '../styles/global.scss'
 import { BreakpointProvider, Query } from '../core/react-breakpoint'
-import { Provider } from 'react-redux'
 import { wrapper, StoreService } from '../core/store/store';
 import { IntlProvider } from 'react-intl'
 import flatten from 'flat'
@@ -22,6 +21,7 @@ import Body from '../components/body/body';
 import {useStore} from 'react-redux';
 import useSWR from 'swr';
 import NetworkService, { GET_QUOTES_API } from '../core/network/network.service';
+import { initGA, logPageView } from '../core/google-analytics';
 
 // smoothscroll.polyfill();
 
@@ -118,9 +118,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     if (!store.getState().app.isAppInitialized){
       watchForHover();
+      initGA()
       store.dispatch(setIsAppInitialized(true));
     }
-
+    logPageView();
+    
     if (!quotesResp.error && quotesResp && quotesResp.data && quotesResp.data.data
       && quotesResp.data.data.data && quotesResp.data.data.data.quotes && store.getState().app.quotes.length == 0){
       //save quotes only if not already saved

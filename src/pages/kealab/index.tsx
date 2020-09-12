@@ -3,6 +3,7 @@ import BasePageComponent from '../../components/base-page-component/base-page-co
 import { FormattedMessage } from 'react-intl';
 import { ApplicationArchitecture } from '../../components/architecture/application-architecture';
 import { InfrastructureArchitecture } from '../../components/architecture/infrastructure-architecture';
+import PageLayout from '../../components/page-layout/page-layout';
 
 //------------------ TYPES
 export enum ArchitectureType{
@@ -53,7 +54,7 @@ class KeaLab extends BasePageComponent<any, KeaLabState> {
   //------------ render
   public render() {
     return (
-      <React.Fragment>
+      <PageLayout title="Keadex - KeaLab">
         <header className="bp-header cf">
           <h1 className="bp-header__title text-brand1-dark"><FormattedMessage id="KEALAB.TITLE" /></h1>
           <p className="bp-header__desc"><FormattedMessage id="KEALAB.SUBTITLE" /></p>
@@ -63,7 +64,7 @@ class KeaLab extends BasePageComponent<any, KeaLabState> {
             {this.getArchitecture(this.state.architectureType)}
           {/* </div> */}
         </div>
-      </React.Fragment>
+      </PageLayout>
     );
   }
 

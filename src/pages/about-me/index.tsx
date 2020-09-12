@@ -16,6 +16,8 @@ import BasePageComponent from '../../components/base-page-component/base-page-co
 import { PAGE_ROOT_ID } from '../../core/route.constants';
 import { GetStaticProps } from 'next';
 import { wrapper } from '../../core/store/store';
+import Head from 'next/head';
+import PageLayout from '../../components/page-layout/page-layout';
 
 
 //--------------- TYPES
@@ -140,7 +142,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
   //------------ render
   public render() {
     return (
-      <React.Fragment>
+      <PageLayout title="Keadex - About me">
         <header className="bp-header cf">
           <h1 className="bp-header__title text-brand1-dark">
             <FormattedMessage id="ABOUT_ME.TITLE" values={{
@@ -238,7 +240,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
               </Scene>
             </Controller>
         </div>
-      </React.Fragment>
+      </PageLayout>
     );
   }
 
