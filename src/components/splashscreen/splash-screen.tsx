@@ -93,7 +93,7 @@ export const SplashScreen : React.FunctionComponent<SplashScreenProps> = props =
         <div className={`${styles["splash-screen__content"]}`}>
           <div className="w-100 text-center">
             <span>Keadex ©2020. <span className="d-block d-md-none" />Code licensed under an MIT-style License.</span><br/>
-            <Link href={COOKIE_DECLARATION_URL}><a onClick={()=>{openLink(PAGE_ROOT_ID)}} ><FormattedMessage id="COOKIE_DECLARATION.TITLE" /></a></Link>&nbsp;|&nbsp;
+            {/* <Link href={COOKIE_DECLARATION_URL}><a onClick={()=>{openLink(PAGE_ROOT_ID)}} ><FormattedMessage id="COOKIE_DECLARATION.TITLE" /></a></Link>&nbsp;|&nbsp; */}
             <Link href={PRIVACY_POLICY_URL}><a onClick={()=>{openLink(PAGE_ROOT_ID)}}><FormattedMessage id="PRIVACY_POLICY.TITLE" /></a></Link>&nbsp;|&nbsp;
             <Link href={TERMS_AND_CONDITIONS_URL}><a onClick={()=>{openLink(PAGE_ROOT_ID)}}><FormattedMessage id="TERMS_CONDITIONS.TITLE" /></a></Link>
           </div>
