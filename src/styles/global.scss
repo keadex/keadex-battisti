@@ -9,13 +9,13 @@
 @import '../components/shared/shared-imports.module.scss';
 
 
-
 @font-face {
   font-family: 'Perfect DOS VGA 437';
   font-style: sans-serif;
   font-weight: 400;
   src: url('/fonts/Perfect DOS VGA 437 Win.ttf'); 
 }
+
 
 body {
   background: $primary-color;

@@ -19,6 +19,7 @@ import graph from "../../public/img/graph-bg.jpg";
 import { FORMATTED_MESSAGE_STANDARD_HTML_VALUES } from '../core/app.constants';
 import PageLayout from '../components/page-layout/page-layout';
 import { disableScrollIntoView } from '../helper/generic-helper';
+import { KeadexPreview } from '../components/keadex-preview/keadex-preview';
 
 const FooterDiv:any = styled.div<any>`
   position:absolute; width: 100%; top: ${(props)=>(props.vpHeight && props.logoContainerHeight)?(props.vpHeight-props.logoContainerHeight - 100) + "px":"0px"}
@@ -224,9 +225,11 @@ class Home extends BasePageComponent<any, HomeState> {
         
         <div className='page-body p-0'>
           {/* COVER */}
-          <div className={`${styles["home__section"]} ${styles["home__cover"]}`} id="home-section">
+          <div className={`${styles["home__section"]} ${styles["home__cover"]} animate__animated animate__fadeIn animate__slow`} id="home-section">
+            <KeadexPreview />
+          </div>
+          {/* <div className={`${styles["home__section"]} ${styles["home__cover"]}`} id="home-section">
             <div className="full-center position-relative text-center" ref={this.logoContRef}>
-              {/* <img id="jack" className="full-center position-absolute home__jack" src={jack} /> */}
               <ScrollAnimation scrollableParentSelector={"#"+PAGE_ROOT_ID} offset={0} animateIn='animate__fadeIn animate__slow' animateOut='animate__fadeOut'>
                 <img id="keadex-logo" src={keadexLogo} width={300}/>
               </ScrollAnimation>
@@ -241,7 +244,7 @@ class Home extends BasePageComponent<any, HomeState> {
                 </div>
               </ScrollAnimation>
             </div>
-          </div>
+          </div> */}
 
           {/* WHY KEADEX */}
           <div id="why-keadex" ref={this.anchorRefs.get("why-keadex")} className={`${styles["home__section"]} ${styles["home__why-keadex"]}`}>

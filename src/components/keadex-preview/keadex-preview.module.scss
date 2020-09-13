@@ -1,0 +1,113 @@
+@import '../shared/shared-imports.module.scss';
+
+.keadex-preview__section {
+  width: 100%;
+  // padding: $page-body-padding-desktop;
+  height: 100vh;
+  line-height: 2rem;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}
+
+.keadex-preview__cover > div{
+  width: 90%;
+}
+
+
+.keadex-preview__title {
+  margin-top: 50px;
+  font-size: $subtitle1-text-size;
+}
+
+.keadex-preview__tech-label{
+  line-height: 1;
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+}
+
+.keadex-preview__logo{
+  fill: $primary-color-text;
+  width: 300px;
+  cursor: pointer;
+  :global(body.hasHover) &:hover{
+    opacity: 0.5;
+  }
+}
+
+.keadex-preview__slogan{
+  margin-top: 25px;
+  font-size: 1rem;
+  line-height: 1.5;
+  opacity: 0;
+  width: 100%;
+  text-align: center;
+}
+
+
+.keadex-preview__footer{
+  left: 50%;
+  transform: translate(-50%) scale(0.5);
+  position: absolute;
+  text-align: center;
+  bottom: 20px;
+  opacity: 0;
+  width: 300px;
+  color: $secondary-text-color;
+  a{
+    color: $secondary-text-color !important;
+    font-size: 1.2rem;
+    // opacity: 0;
+    i{
+      font-size: 1.7rem;
+    }
+  }
+}
+
+
+
+@include media-breakpoint-down(sm) { 
+  
+  .keadex-preview__section{
+    height: auto;
+    min-height: 100vh;
+    // padding: $page-body-padding-mobile;
+    
+    img {
+      width: 200px;
+    }
+  }
+
+  .keadex-preview__title {
+    margin-top: 50px;
+    font-size: $subtitle2-text-size;
+  }
+
+  .keadex-preview__slogan{
+    font-size: 0.8rem;
+  }
+
+  .keadex-preview__footer{
+    font-size: 1rem;
+
+    i{
+      font-size: 1.4rem;
+    }
+  }
+
+  .keadex-preview__logo{
+    width: 220px;
+  }
+}
+
+.cls-1{
+  font-size:44.7px;
+}
+.cls-2{
+  font-size:28.55px;
+}
+.cls-1,.cls-2{
+  font-family:"Roboto" !important;
+}
