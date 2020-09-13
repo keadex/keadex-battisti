@@ -2,8 +2,9 @@ import ReactGA from 'react-ga'
 
 //-------- initGA
 export const initGA = () => {
-  console.debug('GA init')
-  ReactGA.initialize('UA-177879582-1')
+  console.debug('GA init');
+  ReactGA.initialize('UA-177879582-1');
+  ReactGA.set({ anonymizeIp: true });
 }
 
 
