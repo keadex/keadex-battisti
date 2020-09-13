@@ -10,10 +10,11 @@ import update from 'immutability-helper';
 //   navigationOccurred: boolean;
 // }
 
-export const { setIsAppInitialized, toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred, setQuotes } = createActions({
+export const { setIsAppInitialized, setIsGaInitialized, toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred, setQuotes } = createActions({
   SET_IS_APP_INITIALIZED: (isAppInitialized) => ({isAppInitialized: isAppInitialized}),
+  SET_IS_GA_INITIALIZED: (isGAInitialized) => ({isGAInitialized: isGAInitialized}),
   TOGGLE_MENU: (menuOpen) => ({menuOpen: menuOpen}),
-  ACTIVATE_SPINNER: () => ({}),
+  ACTIVATE_SPINNER: () => ({}), 
   DISABLE_SPINNER: () => ({}),
   SET_PREVIOUS_URL: (previousUrl) => ({previousUrl: previousUrl}),
   SET_NAVIGATION_OCCURRED: (navigationOccurred) => ({navigationOccurred: navigationOccurred}),
@@ -31,6 +32,9 @@ export const appReducer = handleActions<IAppState, AnyAction>(
     },
     [setIsAppInitialized.toString()]: (state, action) => {
       return { ...state, isAppInitialized: action.payload.isAppInitialized};
+    },
+    [setIsGaInitialized.toString()]: (state, action) => {
+      return { ...state, isGAInitialized: action.payload.isGAInitialized};
     },
     [toggleMenu.toString()]: (state, action) => {
       // console.log(!state.menuOpen + " --- " + action.payload.menuOpen);

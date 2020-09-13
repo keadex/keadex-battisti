@@ -8,7 +8,7 @@ import { BreakpointProvider, Query } from '../core/react-breakpoint'
 import { wrapper, StoreService } from '../core/store/store';
 import { IntlProvider } from 'react-intl'
 import flatten from 'flat'
-import { toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred, setIsAppInitialized, setQuotes } from '../core/store/reducers/app.reducer';
+import { toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred, setIsAppInitialized, setIsGaInitialized, setQuotes } from '../core/store/reducers/app.reducer';
 
 // import 'react-app-polyfill/ie9';
 // import 'react-app-polyfill/stable';
@@ -22,6 +22,8 @@ import {useStore} from 'react-redux';
 import useSWR from 'swr';
 import NetworkService, { GET_QUOTES_API } from '../core/network/network.service';
 import { initGA, logPageView } from '../core/google-analytics';
+import Cookies from 'js-cookie';
+import { CookieConsent } from '../model/models';
 
 // smoothscroll.polyfill();
 
@@ -121,14 +123,28 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   //---------- useEffect
   useEffect(() => {
+    // console.debug("_app");
 
     if (!store.getState().app.isAppInitialized){
       watchForHover();
-      initGA()
       store.dispatch(setIsAppInitialized(true));
     }
-    logPageView();
+
+    //---- start to use Google Analytics only if the user has given the consensus
+    let cookieConsent = Cookies.get('CookieConsent');    
+
+    //fix Cookiebot "CookieConsent" cookie json string (missing quotes)
+    cookieConsent = cookieConsent?.replaceAll('{', '{"').replaceAll(':', '":').replaceAll(',', ',"').replaceAll("'", '"');
     
+    if (!store.getState().app.isGAInitialized && cookieConsent && (JSON.parse(cookieConsent) as CookieConsent).statistics){
+      initGA()
+      store.dispatch(setIsGaInitialized(true));
+    }
+    if (store.getState().app.isGAInitialized){
+      logPageView();
+    }
+    //---- 
+
     if (!quotesResp.error && quotesResp && quotesResp.data && quotesResp.data.data
       && quotesResp.data.data.data && quotesResp.data.data.data.quotes && store.getState().app.quotes.length == 0){
       //save quotes only if not already saved

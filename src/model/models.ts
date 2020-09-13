@@ -90,3 +90,15 @@ export namespace ForceGraph {
     links: Link[]
   }
 }
+
+// --------  COOKIEBOT CookieConsent
+export interface CookieConsent {
+  stamp: string,
+  necessary: boolean,
+  preferences: boolean,
+  statistics: boolean,
+  marketing: boolean,
+  ver: number,
+  utc: number,
+  region: string
+}

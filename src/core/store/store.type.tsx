@@ -12,6 +12,7 @@ export interface IStoreState {
 
 export interface IAppState {
     isAppInitialized: boolean;
+    isGAInitialized: boolean;
     menuOpen: boolean;
     spinnerCounter: number;
     previousUrl: string|null;
@@ -46,6 +47,7 @@ export const getDefaultStoreState = () : IStoreState => {
 export const getDefaultAppState =  () : IAppState => {
     return {
         isAppInitialized: false,
+        isGAInitialized: false,
         menuOpen: false,
         spinnerCounter: 0,
         previousUrl: null,
