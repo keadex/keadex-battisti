@@ -22,6 +22,7 @@
     "strapi-plugin-content-manager": "3.1.4",
     "strapi-plugin-content-type-builder": "3.1.4",
     "strapi-plugin-email": "3.1.4",
+    "strapi-plugin-graphql": "3.1.4",
     "strapi-plugin-upload": "3.1.4",
     "strapi-plugin-users-permissions": "3.1.4",
     "strapi-provider-upload-cloudinary": "3.1.4",

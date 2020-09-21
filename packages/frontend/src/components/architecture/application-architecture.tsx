@@ -42,6 +42,15 @@ export const ApplicationArchitecture : React.FunctionComponent<ArchitectureImplP
             <li>SVG Shape Animation (flubber)</li>
             <li>SVG Interaction (react-svg)</li>
             <li>Video Player (react-player)</li>
+            <li>----</li>
+            <li>Lerna</li>
+            <li>GraphQL</li>
+            <li>GraphQL Tools (mock)</li>
+            <li>Apollo Server Express</li>
+            <li>useSWR</li>
+            <li>Strapi (headless CMS)</li>
+            <li>GraphQL Codegen</li>
+          
           </ul>
         </div>
       ),

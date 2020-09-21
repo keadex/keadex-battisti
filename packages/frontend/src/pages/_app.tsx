@@ -79,6 +79,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   
   const router = useRouter();
 
+  // Prevent Next bug when it tries to render the /strapi/[[...slug]] route
+  if (router.asPath === "/strapi/[[...slug]]") {
+    return null;
+  }
+
   const onRouteChangeStart = ()=>{
     store.dispatch(activateSpinner());
     store.dispatch(setPreviousUrl(location.href));
@@ -170,6 +175,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   });
 
+  // Extract the data we need
+  // const { global } = pageProps;
+  // if (global == null) {
+  //   return <ErrorPage statusCode={404} />;
+  // }
+  // const { metadata } = global;
 
   //---------- rendering
   return (    
@@ -186,6 +197,27 @@ function MyApp({ Component, pageProps }: AppProps) {
         {/* <script id="CookieDeclaration" src="https://consent.cookiebot.com/d12031df-a146-4c32-8276-e1d5c086b932/cd.js" type="text/javascript" async></script> */}
         <title>Keadex</title>
       </Head>
+
+      {/* Global site metadata */}
+      {/* <DefaultSeo
+        titleTemplate={`%s | ${global.metaTitleSuffix}`}
+        title={"Page"}
+        description={metadata.metaDescription}
+        openGraph={{
+          images: Object.values(metadata.shareImage.formats).map((image) => {
+            return {
+              url: getStrapiMedia(image.url),
+              width: image.width,
+              height: image.height,
+            };
+          }),
+        }}
+        twitter={{
+          cardType: metadata.twitterCardType,
+          handle: metadata.twitterUsername,
+        }}
+      /> */}
+
       <BreakpointProvider queries={queries}>
           <IntlProvider locale={language} messages={messages[language]}>
             <div>
