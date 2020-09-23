@@ -7,9 +7,8 @@ import { FormattedMessage } from 'react-intl';
 import { FloatingMenu, MainButton, ChildButton } from 'react-floating-button-menu';
 import { ArchitectureType } from '../../pages/kealab';
 import { ArchitectureModule } from './architecture';
-import { KEA_LAB_ID, PAGE_ROOT_ID } from '../../core/route.constants';
+import { PAGE_ROOT_ID } from '../../core/route.constants';
 import { scrollToSection } from '../../helper/generic-helper';
-import { useHistory } from 'react-router-dom';
 
 
 //------------------ TYPES
@@ -27,7 +26,6 @@ interface ArchitectureChalkboardToolbarProps {
 export const ArchitectureChalkboardToolbar : React.FunctionComponent<ArchitectureChalkboardToolbarProps> = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isModuleSelected, setIsModuleSelected] = useState(false);
-  const history = useHistory();
 
   useEffect(() => {
     /*

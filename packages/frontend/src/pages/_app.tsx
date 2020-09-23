@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import App, { AppContext } from "next/app";
 import type { AppProps } from 'next/app'
 import {useRouter} from 'next/router'
 import Head from 'next/head'
@@ -243,6 +244,27 @@ function MyApp({ Component, pageProps }: AppProps) {
     </>
   )
 }
+
+// getInitialProps disables automatic static optimization for pages that don't
+// have getStaticProps. So [[...slug]] pages still get SSG.
+// Hopefully we can replace this with getStaticProps once this issue is fixed:
+// https://github.com/vercel/next.js/discussions/10949
+MyApp.getInitialProps = async (appCtx:AppContext) => {
+  // Calls page's `getInitialProps` and fills `appProps.pageProps`
+  const appProps = await App.getInitialProps(appCtx);
+  
+  if(appCtx.ctx.pathname.indexOf("/strapi") != -1){
+    // Fetch global site settings from Strapi, only for pages retrieved by Strapi 
+    const global = await NetworkService.getInstance().getStrapiGlobalData();
+    const globalData = global.data.data?.global;
+    console.debug("Global data");
+    console.debug(globalData);
+    // Pass the data to our page via props
+    return { ...appProps, pageProps: { globalData, path: appCtx.ctx.pathname } };
+  }else{
+    return { ...appProps };
+  }
+};
 
 
 // Only uncomment this method if you have blocking data requirements for

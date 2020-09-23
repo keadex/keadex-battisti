@@ -16,7 +16,6 @@ import BasePageComponent from '../../components/base-page-component/base-page-co
 import { PAGE_ROOT_ID } from '../../core/route.constants';
 import { GetStaticProps } from 'next';
 import { wrapper } from '../../core/store/store';
-import Head from 'next/head';
 import PageLayout from '../../components/page-layout/page-layout';
 
 

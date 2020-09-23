@@ -20,6 +20,8 @@ import { FORMATTED_MESSAGE_STANDARD_HTML_VALUES } from '../core/app.constants';
 import PageLayout from '../components/page-layout/page-layout';
 import { disableScrollIntoView } from '../helper/generic-helper';
 import { KeadexPreview } from '../components/keadex-preview/keadex-preview';
+import { GetStaticProps } from 'next';
+import { wrapper } from '../core/store/store';
 
 const FooterDiv:any = styled.div<any>`
   position:absolute; width: 100%; top: ${(props)=>(props.vpHeight && props.logoContainerHeight)?(props.vpHeight-props.logoContainerHeight - 100) + "px":"0px"}
@@ -37,6 +39,16 @@ enum ListItem{
   modular = "modular",
   openSource = "openSource"
 }
+
+
+//---------- getStaticProps
+export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
+  async ({store}) => {
+    return {
+      props:{}
+    }
+  }
+);
 
 
 //--------------- COMPONENT
@@ -125,14 +137,6 @@ class Home extends BasePageComponent<any, HomeState> {
   componentWillUnmount() {
     window.removeEventListener('resize', this.updateWindowDimensions);
     this.stoptWhatsKeadexLoop();
-  }
-
-
-  //------------ disableScrollIntoView
-  //The following function is needed to prevent Next.js to scrollToHash since it uses "scrollIntoView()".
-  //scrollIntoView() scrolls the body, but in our case we need to scroll the content div (page-root) of the body.
-  private disableNextScrollIntoView(){
-    disableScrollIntoView([WHY_KEADEX_ID, WHATS_KEADEX_ID], null);
   }
 
 

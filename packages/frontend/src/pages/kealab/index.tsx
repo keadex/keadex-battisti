@@ -4,6 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { ApplicationArchitecture } from '../../components/architecture/application-architecture';
 import { InfrastructureArchitecture } from '../../components/architecture/infrastructure-architecture';
 import PageLayout from '../../components/page-layout/page-layout';
+import { GetStaticProps } from 'next';
+import { wrapper } from '../../core/store/store';
 
 //------------------ TYPES
 export enum ArchitectureType{
@@ -14,6 +16,16 @@ export enum ArchitectureType{
 interface KeaLabState {
   architectureType: ArchitectureType
 }
+
+
+//---------- getStaticProps
+export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
+  async ({store}) => {
+    return {
+      props:{}
+    }
+  }
+);
 
 
 //------------------ COMPONENT
@@ -28,10 +40,11 @@ class KeaLab extends BasePageComponent<any, KeaLabState> {
     this.setArchitectureType = this.setArchitectureType.bind(this);
   }
 
+
   //----- componentDidMount
   componentDidMount(){
     super.componentDidMount();
-    window.scrollTo(0,0)
+    window.scrollTo(0,0);
   }
 
 

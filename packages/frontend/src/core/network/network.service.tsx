@@ -144,9 +144,16 @@ class NetworkService {
     });
   }
 
+  //--------- getStrapiPages
+  getStrapiPages = () : AxiosPromise<StrapiResponse> => {
+    return axios.post<StrapiResponse>(STRAPI_GRAPHQL_ENDPOINT, {
+      query: print(PAGES(null, true))
+    })
+  }
+  
 
   //--------- getStrapiPageData
-  getStrapiPageData = async (slug:string, preview:boolean = false) : Promise<any> => {
+  getStrapiPageData = async (slug:string, preview:boolean = false) : Promise<Maybe<Page>> => {
     const pagesData : AxiosResponse<StrapiResponse>
       = await axios.post<StrapiResponse>(STRAPI_GRAPHQL_ENDPOINT, {
         query: print(PAGES(slug, preview))
@@ -162,9 +169,9 @@ class NetworkService {
   }
 
 
-  //--------- getGlobalData
+  //--------- getStrapiGlobalData
   // Get site data from Strapi (metadata, navbar, footer...)
-  getGlobalData = () : AxiosPromise<StrapiResponse> => {
+  getStrapiGlobalData = () : AxiosPromise<StrapiResponse> => {
     return axios.post<StrapiResponse>(STRAPI_GRAPHQL_ENDPOINT, {
       query: print(GLOBAL)
     })

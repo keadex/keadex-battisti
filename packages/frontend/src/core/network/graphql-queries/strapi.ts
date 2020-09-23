@@ -170,13 +170,17 @@ export const GLOBAL = gql`
   }
 `
 
-export const PAGES = (slug:string, preview:boolean)=> {
+export const PAGES = (slug:string|null, preview:boolean)=> {
   let status:Enum_Page_Status[] = [Enum_Page_Status.Published];
   if (preview) status.push(Enum_Page_Status.Draft);
 
+  let slugStr = "";
+  if (slug && slug.length > 0)
+    slugStr = `slug: ${slug}, `;
+
   return gql`
     query Pages {
-      pages(where: {slug: ${slug}, status: ${status}}) {
+      pages(where: {${slugStr} status: ${status}}) {
         id
         created_at
         updated_at
