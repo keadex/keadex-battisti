@@ -257,8 +257,8 @@ MyApp.getInitialProps = async (appCtx:AppContext) => {
     // Fetch global site settings from Strapi, only for pages retrieved by Strapi 
     const global = await NetworkService.getInstance().getStrapiGlobalData();
     const globalData = global.data.data?.global;
-    console.debug("Global data");
-    console.debug(globalData);
+    // console.debug("Global data");
+    // console.debug(globalData);
     // Pass the data to our page via props
     return { ...appProps, pageProps: { globalData, path: appCtx.ctx.pathname } };
   }else{

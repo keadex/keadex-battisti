@@ -171,16 +171,16 @@ export const GLOBAL = gql`
 `
 
 export const PAGES = (slug:string|null, preview:boolean)=> {
-  let status:Enum_Page_Status[] = [Enum_Page_Status.Published];
-  if (preview) status.push(Enum_Page_Status.Draft);
+  let status:string[] = [`"${Enum_Page_Status.Published}"`];
+  if (preview) status.push(`"${Enum_Page_Status.Draft.toString()}"`);
 
   let slugStr = "";
   if (slug && slug.length > 0)
-    slugStr = `slug: ${slug}, `;
-
+    slugStr = `slug: "${slug}", `;
+    
   return gql`
     query Pages {
-      pages(where: {${slugStr} status: ${status}}) {
+      pages(where: {${slugStr} status: [${status}]}) {
         id
         created_at
         updated_at
@@ -222,6 +222,316 @@ export const PAGES = (slug:string|null, preview:boolean)=> {
         }
         contentSections {
           __typename
+          ... on ComponentSectionsHero {
+            id
+            title
+            label
+            description
+            picture {
+              id
+              created_at
+              updated_at
+              name
+              alternativeText
+              caption
+              width
+              height
+              formats
+              hash
+              ext
+              mime
+              size
+              url
+              previewUrl
+              provider
+              provider_metadata
+              created_by {
+                id
+                username
+              }
+              updated_by {
+                id
+                username
+              }
+            }
+            smallTextWithLink
+            buttons {
+              id
+              url
+              newTab
+              text
+              type
+            }
+          }
+          ... on ComponentSectionsBottomActions {
+            id
+            title
+            buttons {
+              id
+              url
+              newTab
+              text
+              type
+            }
+          }
+          ... on ComponentSectionsFeatureColumnsGroup {
+            id
+            features {
+              id
+              title
+              description
+              icon {
+                id
+                created_at
+                updated_at
+                name
+                alternativeText
+                caption
+                width
+                height
+                formats
+                hash
+                ext
+                mime
+                size
+                url
+                previewUrl
+                provider
+                provider_metadata
+                created_by {
+                  id
+                  username
+                }
+                updated_by {
+                  id
+                  username
+                }
+              }
+            }
+          }
+          ... on ComponentSectionsFeatureRowsGroup {
+            id
+            features {
+              id
+              title
+              description
+              media {
+                id
+                created_at
+                updated_at
+                name
+                alternativeText
+                caption
+                width
+                height
+                formats
+                hash
+                ext
+                mime
+                size
+                url
+                previewUrl
+                provider
+                provider_metadata
+                created_by {
+                  id
+                  username
+                }
+                updated_by {
+                  id
+                  username
+                }
+              }
+              link {
+                id
+                url
+                newTab
+                text
+              }
+            }
+          }
+          ... on ComponentSectionsTestimonialsGroup {
+            id
+            title
+            description
+            link {
+              id
+              url
+              newTab
+              text
+            }
+            logos {
+              id
+              title
+              logo {
+                id
+                created_at
+                updated_at
+                name
+                alternativeText
+                caption
+                width
+                height
+                formats
+                hash
+                ext
+                mime
+                size
+                url
+                previewUrl
+                provider
+                provider_metadata
+                created_by {
+                  id
+                  username
+                }
+                updated_by {
+                  id
+                  username
+                }
+              }
+            }
+            testimonials {
+              id
+              logo {
+                id
+                created_at
+                updated_at
+                name
+                alternativeText
+                caption
+                width
+                height
+                formats
+                hash
+                ext
+                mime
+                size
+                url
+                previewUrl
+                provider
+                provider_metadata
+                created_by {
+                  id
+                  username
+                }
+                updated_by {
+                  id
+                  username
+                }
+              } 
+              picture {
+                id
+                created_at
+                updated_at
+                name
+                alternativeText
+                caption
+                width
+                height
+                formats
+                hash
+                ext
+                mime
+                size
+                url
+                previewUrl
+                provider
+                provider_metadata
+                created_by {
+                  id
+                  username
+                }
+                updated_by {
+                  id
+                  username
+                }
+              }
+              text
+              authorName
+              authorTitle
+              link
+            }
+          }
+          ... on ComponentSectionsLargeVideo {
+            id
+            title
+            description
+            video {
+              id
+              created_at
+              updated_at
+              name
+              alternativeText
+              caption
+              width
+              height
+              formats
+              hash
+              ext
+              mime
+              size
+              url
+              previewUrl
+              provider
+              provider_metadata
+              created_by {
+                id
+                username
+              }
+              updated_by {
+                id
+                username
+              }
+            }
+            poster {
+              id
+              created_at
+              updated_at
+              name
+              alternativeText
+              caption
+              width
+              height
+              formats
+              hash
+              ext
+              mime
+              size
+              url
+              previewUrl
+              provider
+              provider_metadata
+              created_by {
+                id
+                username
+              }
+              updated_by {
+                id
+                username
+              }
+            }
+          }
+          ... on ComponentSectionsRichText {
+            id
+            content
+          }
+          ... on ComponentSectionsPricing {
+            id
+            title
+            plans {
+              id
+              name
+              description
+              features {
+                id
+                name
+              }
+              isRecommended
+              price
+              pricePeriod
+            }
+          }
         }
         status
         created_by {
