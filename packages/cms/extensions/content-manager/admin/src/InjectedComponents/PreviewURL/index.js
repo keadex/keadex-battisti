@@ -58,12 +58,13 @@ function PreviewURL() {
   }
   // Build the right preview URL based on the page status
   let previewURL
+  
   if (modifiedData.status === 'draft') {
     // Secret Next.js preview URL
     previewURL = `${FRONTEND_URL}/api/preview?secret=${FRONTEND_PREVIEW_SECRET}&slug=${modifiedData.slug}`;
   } else {
     // Live public URL
-    previewURL = `${FRONTEND_URL}/${modifiedData.slug.replace('__', '/')}`;
+    previewURL = `${FRONTEND_URL}/strapi/${modifiedData.slug.replace('__', '/')}`;
   }
 
   return (
