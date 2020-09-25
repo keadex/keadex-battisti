@@ -49,7 +49,7 @@ export const ApplicationArchitecture : React.FunctionComponent<ArchitectureImplP
             <li>Apollo Server Express</li>
             <li>useSWR</li>
             <li>Strapi (headless CMS)</li>
-            <li>Dynamic page generation from Strapi (https://github.com/strapi/strapi-starter-next-corporate)</li>
+            <li>Dynamic page generation from Strapi (https://github.com/strapi/strapi-starter-next-corporate). Check the example: http://keadex.io/strapi/pricing</li>
             <li>GraphQL Codegen</li>
           
           </ul>

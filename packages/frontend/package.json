@@ -10,6 +10,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fullpage/react-fullpage": "^0.1.17",
     "@types/body-scroll-lock": "^2.6.1",
+    "@types/classnames": "^2.2.10",
     "@types/flat": "0.0.28",
     "@types/gsap": "^1.20.2",
     "@types/jest": "23.3.12",
@@ -30,6 +31,7 @@
     "animate.css": "^4.1.0",
     "axios": "^0.18.1",
     "bootstrap": "^4.3.1",
+    "classnames": "^2.2.6",
     "flat": "^4.1.0",
     "flubber": "^0.4.2",
     "graphql": "^15.3.0",
@@ -90,6 +92,9 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@graphql-codegen/cli": "1.17.8",
+    "@graphql-codegen/typescript": "1.17.8",
+    "@graphql-codegen/typescript-operations": "1.17.8",
     "@types/node": "^12.12.21",
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
@@ -105,9 +110,6 @@
     "redux-devtools-extension": "^2.13.8",
     "sass-loader": "^9.0.2",
     "typescript": "3.9.7",
-    "url-loader": "^4.1.0",
-    "@graphql-codegen/cli": "1.17.8",
-    "@graphql-codegen/typescript": "1.17.8",
-    "@graphql-codegen/typescript-operations": "1.17.8"
+    "url-loader": "^4.1.0"
   }
 }
