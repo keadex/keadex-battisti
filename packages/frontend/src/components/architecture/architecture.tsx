@@ -109,7 +109,7 @@ const Architecture : React.FunctionComponent<ArchitectureProps> = (props) => {
           props.modules.map(module => {
             return (
               (currentUrl.indexOf("#"+module.moduleId) != -1)&&<div key={module.moduleId} data-modulename={module.moduleId} className={(currentUrl.indexOf("#"+module.moduleId) == -1)?"d-none":""}>
-                <div className="mt-6 mb-4 w-100 text-center"><img className={`${styles["architecture__module-logo"]}`} src={getStrapiMedia(module.logo?.url)} /></div>
+                <div className="mt-6 mb-4 w-100 text-center"><img className={`${styles["architecture__module-logo"]}`} src={getStrapiMedia(module.logo?.url)!} /></div>
                 <MDBCard className="h-100 w-100 mt-5">
                   <MDBCardBody className={`h-100 ${styles["experience__card-body-chart"]} pt-5 pl-4 pl-md-5 pr-4 pr-md-5`}>
                     <div className={`${styles["architecture__module-details-toolbar"]} ${styles["architecture__speed-dial"]}`}>
