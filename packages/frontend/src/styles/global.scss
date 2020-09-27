@@ -395,6 +395,10 @@ a#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll{
   }
 }
 
+.notfound__logo {
+  height: 90vh;
+  width: 90%;
+}
 
 
 @include media-breakpoint-down(sm) {
@@ -414,5 +418,8 @@ a#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll{
   #CybotCookiebotDialogBodyContent{
     padding-left: 8px !important;
     padding-right: 8px !important;
+  }
+  .notfound__logo {
+    width: 95%;
   }
 }
