@@ -2,6 +2,7 @@ import React from 'react';
 
 //GENERIC
 export const MAX_BOT_MESSAGES = 5;
+export const DEFAULT_REVALIDATE_SECONDS = 60;
 
 export enum SceneId {
   Education = "EDUCATION",

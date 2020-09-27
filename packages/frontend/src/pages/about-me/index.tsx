@@ -17,6 +17,7 @@ import { PAGE_ROOT_ID } from '../../core/route.constants';
 import { GetStaticProps } from 'next';
 import { wrapper } from '../../core/store/store';
 import PageLayout from '../../components/page-layout/page-layout';
+import { DEFAULT_REVALIDATE_SECONDS } from '../../core/app.constants';
 
 
 //--------------- TYPES
@@ -53,7 +54,7 @@ export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
       props:{
         experienceGraph: (expGraphResp.data && expGraphResp.data.data && expGraphResp.data.data.experienceGraph)?expGraphResp.data.data.experienceGraph:undefined
       },
-      revalidate: 60
+      revalidate: DEFAULT_REVALIDATE_SECONDS
     }
   }
 );

@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "architecture_modules",
+  "info": {
+    "name": "ArchitectureModule"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "moduleId": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "logo": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "features": {
+      "type": "richtext",
+      "required": true
+    },
+    "roadmap": {
+      "type": "richtext",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "ApplicationArchitecture",
+        "InfrastructureArchitecture"
+      ],
+      "required": true,
+      "enumName": "ArchitectureModuleType"
+    }
+  }
+}

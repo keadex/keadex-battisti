@@ -25,6 +25,9 @@ export interface Scalars {
 
 export interface Query {
   __typename?: 'Query';
+  architectureModule?: Maybe<ArchitectureModule>;
+  architectureModules?: Maybe<Array<Maybe<ArchitectureModule>>>;
+  architectureModulesConnection?: Maybe<ArchitectureModuleConnection>;
   global?: Maybe<Global>;
   page?: Maybe<Page>;
   pages?: Maybe<Array<Maybe<Page>>>;
@@ -39,6 +42,27 @@ export interface Query {
   users?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
   usersConnection?: Maybe<UsersPermissionsUserConnection>;
   me?: Maybe<UsersPermissionsMe>;
+}
+
+
+export interface QueryArchitectureModuleArgs {
+  id: Scalars['ID'];
+}
+
+
+export interface QueryArchitectureModulesArgs {
+  sort?: Maybe<Scalars['String']>;
+  limit?: Maybe<Scalars['Int']>;
+  start?: Maybe<Scalars['Int']>;
+  where?: Maybe<Scalars['JSON']>;
+}
+
+
+export interface QueryArchitectureModulesConnectionArgs {
+  sort?: Maybe<Scalars['String']>;
+  limit?: Maybe<Scalars['Int']>;
+  start?: Maybe<Scalars['Int']>;
+  where?: Maybe<Scalars['JSON']>;
 }
 
 
@@ -120,31 +144,22 @@ export interface QueryUsersConnectionArgs {
   where?: Maybe<Scalars['JSON']>;
 }
 
-export interface Global {
-  __typename?: 'Global';
+export interface ArchitectureModule {
+  __typename?: 'ArchitectureModule';
   id: Scalars['ID'];
   created_at: Scalars['DateTime'];
   updated_at: Scalars['DateTime'];
-  metadata?: Maybe<ComponentMetaMetadata>;
-  metaTitleSuffix: Scalars['String'];
-  favicon?: Maybe<UploadFile>;
-  notificationBanner?: Maybe<ComponentElementsNotificationBanner>;
-  navbar?: Maybe<ComponentLayoutNavbar>;
-  footer?: Maybe<ComponentLayoutFooter>;
+  moduleId: Scalars['String'];
+  logo?: Maybe<UploadFile>;
+  name: Scalars['String'];
+  description: Scalars['String'];
+  features: Scalars['String'];
+  roadmap: Scalars['String'];
+  type: ArchitectureModuleType;
   created_by?: Maybe<AdminUser>;
   updated_by?: Maybe<AdminUser>;
 }
 
-
-export interface ComponentMetaMetadata {
-  __typename?: 'ComponentMetaMetadata';
-  id: Scalars['ID'];
-  metaTitle: Scalars['String'];
-  metaDescription: Scalars['String'];
-  shareImage?: Maybe<UploadFile>;
-  twitterCardType?: Maybe<Enum_Componentmetametadata_Twittercardtype>;
-  twitterUsername?: Maybe<Scalars['String']>;
-}
 
 export interface UploadFile {
   __typename?: 'UploadFile';
@@ -185,7 +200,7 @@ export interface AdminUser {
   username?: Maybe<Scalars['String']>;
 }
 
-export type Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Global | UpdateGlobalPayload | DeleteGlobalPayload | Page | PageConnection | PageAggregator | PageGroupBy | PageConnectionId | PageConnectionCreated_At | PageConnectionUpdated_At | PageConnectionSlug | PageConnectionShortName | PageConnectionMetadata | PageConnectionStatus | PageConnectionCreated_By | PageConnectionUpdated_By | CreatePagePayload | UpdatePagePayload | DeletePagePayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_At | UploadFileConnectionUpdated_At | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | UploadFileConnectionCreated_By | UploadFileConnectionUpdated_By | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsRoleConnectionCreated_By | UsersPermissionsRoleConnectionUpdated_By | CreateRolePayload | UpdateRolePayload | DeleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionCreated_By | UsersPermissionsUserConnectionUpdated_By | CreateUserPayload | UpdateUserPayload | DeleteUserPayload | ComponentElementsFeatureColumn | ComponentElementsFeatureRow | ComponentElementsFeature | ComponentElementsFooterSection | ComponentElementsLogos | ComponentElementsNotificationBanner | ComponentElementsPlan | ComponentElementsTestimonial | ComponentLayoutFooter | ComponentLayoutNavbar | ComponentLinksButton | ComponentLinksLink | ComponentMetaMetadata | ComponentSectionsBottomActions | ComponentSectionsFeatureColumnsGroup | ComponentSectionsFeatureRowsGroup | ComponentSectionsHero | ComponentSectionsLargeVideo | ComponentSectionsPricing | ComponentSectionsRichText | ComponentSectionsTestimonialsGroup;
+export type Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | ArchitectureModule | ArchitectureModuleConnection | ArchitectureModuleAggregator | ArchitectureModuleGroupBy | ArchitectureModuleConnectionId | ArchitectureModuleConnectionCreated_At | ArchitectureModuleConnectionUpdated_At | ArchitectureModuleConnectionModuleId | ArchitectureModuleConnectionLogo | ArchitectureModuleConnectionName | ArchitectureModuleConnectionDescription | ArchitectureModuleConnectionFeatures | ArchitectureModuleConnectionRoadmap | ArchitectureModuleConnectionType | ArchitectureModuleConnectionCreated_By | ArchitectureModuleConnectionUpdated_By | CreateArchitectureModulePayload | UpdateArchitectureModulePayload | DeleteArchitectureModulePayload | Global | UpdateGlobalPayload | DeleteGlobalPayload | Page | PageConnection | PageAggregator | PageGroupBy | PageConnectionId | PageConnectionCreated_At | PageConnectionUpdated_At | PageConnectionSlug | PageConnectionShortName | PageConnectionMetadata | PageConnectionStatus | PageConnectionCreated_By | PageConnectionUpdated_By | CreatePagePayload | UpdatePagePayload | DeletePagePayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_At | UploadFileConnectionUpdated_At | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | UploadFileConnectionCreated_By | UploadFileConnectionUpdated_By | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsRoleConnectionCreated_By | UsersPermissionsRoleConnectionUpdated_By | CreateRolePayload | UpdateRolePayload | DeleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionCreated_By | UsersPermissionsUserConnectionUpdated_By | CreateUserPayload | UpdateUserPayload | DeleteUserPayload | ComponentElementsFeatureColumn | ComponentElementsFeatureRow | ComponentElementsFeature | ComponentElementsFooterSection | ComponentElementsLogos | ComponentElementsNotificationBanner | ComponentElementsPlan | ComponentElementsTestimonial | ComponentLayoutFooter | ComponentLayoutNavbar | ComponentLinksButton | ComponentLinksLink | ComponentMetaMetadata | ComponentSectionsBottomActions | ComponentSectionsFeatureColumnsGroup | ComponentSectionsFeatureRowsGroup | ComponentSectionsHero | ComponentSectionsLargeVideo | ComponentSectionsPricing | ComponentSectionsRichText | ComponentSectionsTestimonialsGroup;
 
 export interface UsersPermissionsMe {
   __typename?: 'UsersPermissionsMe';
@@ -214,6 +229,212 @@ export interface UsersPermissionsLoginPayload {
 export interface UserPermissionsPasswordPayload {
   __typename?: 'UserPermissionsPasswordPayload';
   ok: Scalars['Boolean'];
+}
+
+export interface ArchitectureModuleConnection {
+  __typename?: 'ArchitectureModuleConnection';
+  values?: Maybe<Array<Maybe<ArchitectureModule>>>;
+  groupBy?: Maybe<ArchitectureModuleGroupBy>;
+  aggregate?: Maybe<ArchitectureModuleAggregator>;
+}
+
+export interface ArchitectureModuleGroupBy {
+  __typename?: 'ArchitectureModuleGroupBy';
+  id?: Maybe<Array<Maybe<ArchitectureModuleConnectionId>>>;
+  created_at?: Maybe<Array<Maybe<ArchitectureModuleConnectionCreated_At>>>;
+  updated_at?: Maybe<Array<Maybe<ArchitectureModuleConnectionUpdated_At>>>;
+  moduleId?: Maybe<Array<Maybe<ArchitectureModuleConnectionModuleId>>>;
+  logo?: Maybe<Array<Maybe<ArchitectureModuleConnectionLogo>>>;
+  name?: Maybe<Array<Maybe<ArchitectureModuleConnectionName>>>;
+  description?: Maybe<Array<Maybe<ArchitectureModuleConnectionDescription>>>;
+  features?: Maybe<Array<Maybe<ArchitectureModuleConnectionFeatures>>>;
+  roadmap?: Maybe<Array<Maybe<ArchitectureModuleConnectionRoadmap>>>;
+  type?: Maybe<Array<Maybe<ArchitectureModuleConnectionType>>>;
+  created_by?: Maybe<Array<Maybe<ArchitectureModuleConnectionCreated_By>>>;
+  updated_by?: Maybe<Array<Maybe<ArchitectureModuleConnectionUpdated_By>>>;
+}
+
+export interface ArchitectureModuleConnectionId {
+  __typename?: 'ArchitectureModuleConnectionId';
+  key?: Maybe<Scalars['ID']>;
+  connection?: Maybe<ArchitectureModuleConnection>;
+}
+
+export interface ArchitectureModuleConnectionCreated_At {
+  __typename?: 'ArchitectureModuleConnectionCreated_at';
+  key?: Maybe<Scalars['DateTime']>;
+  connection?: Maybe<ArchitectureModuleConnection>;
+}
+
+export interface ArchitectureModuleConnectionUpdated_At {
+  __typename?: 'ArchitectureModuleConnectionUpdated_at';
+  key?: Maybe<Scalars['DateTime']>;
+  connection?: Maybe<ArchitectureModuleConnection>;
+}
+
+export interface ArchitectureModuleConnectionModuleId {
+  __typename?: 'ArchitectureModuleConnectionModuleId';
+  key?: Maybe<Scalars['String']>;
+  connection?: Maybe<ArchitectureModuleConnection>;
+}
+
+export interface ArchitectureModuleConnectionLogo {
+  __typename?: 'ArchitectureModuleConnectionLogo';
+  key?: Maybe<Scalars['ID']>;
+  connection?: Maybe<ArchitectureModuleConnection>;
+}
+
+export interface ArchitectureModuleConnectionName {
+  __typename?: 'ArchitectureModuleConnectionName';
+  key?: Maybe<Scalars['String']>;
+  connection?: Maybe<ArchitectureModuleConnection>;
+}
+
+export interface ArchitectureModuleConnectionDescription {
+  __typename?: 'ArchitectureModuleConnectionDescription';
+  key?: Maybe<Scalars['String']>;
+  connection?: Maybe<ArchitectureModuleConnection>;
+}
+
+export interface ArchitectureModuleConnectionFeatures {
+  __typename?: 'ArchitectureModuleConnectionFeatures';
+  key?: Maybe<Scalars['String']>;
+  connection?: Maybe<ArchitectureModuleConnection>;
+}
+
+export interface ArchitectureModuleConnectionRoadmap {
+  __typename?: 'ArchitectureModuleConnectionRoadmap';
+  key?: Maybe<Scalars['String']>;
+  connection?: Maybe<ArchitectureModuleConnection>;
+}
+
+export interface ArchitectureModuleConnectionType {
+  __typename?: 'ArchitectureModuleConnectionType';
+  key?: Maybe<Scalars['String']>;
+  connection?: Maybe<ArchitectureModuleConnection>;
+}
+
+export interface ArchitectureModuleConnectionCreated_By {
+  __typename?: 'ArchitectureModuleConnectionCreated_by';
+  key?: Maybe<Scalars['ID']>;
+  connection?: Maybe<ArchitectureModuleConnection>;
+}
+
+export interface ArchitectureModuleConnectionUpdated_By {
+  __typename?: 'ArchitectureModuleConnectionUpdated_by';
+  key?: Maybe<Scalars['ID']>;
+  connection?: Maybe<ArchitectureModuleConnection>;
+}
+
+export interface ArchitectureModuleAggregator {
+  __typename?: 'ArchitectureModuleAggregator';
+  count?: Maybe<Scalars['Int']>;
+  totalCount?: Maybe<Scalars['Int']>;
+}
+
+export interface CreateArchitectureModulePayload {
+  __typename?: 'createArchitectureModulePayload';
+  architectureModule?: Maybe<ArchitectureModule>;
+}
+
+export interface UpdateArchitectureModulePayload {
+  __typename?: 'updateArchitectureModulePayload';
+  architectureModule?: Maybe<ArchitectureModule>;
+}
+
+export interface DeleteArchitectureModulePayload {
+  __typename?: 'deleteArchitectureModulePayload';
+  architectureModule?: Maybe<ArchitectureModule>;
+}
+
+export interface Global {
+  __typename?: 'Global';
+  id: Scalars['ID'];
+  created_at: Scalars['DateTime'];
+  updated_at: Scalars['DateTime'];
+  metadata?: Maybe<ComponentMetaMetadata>;
+  metaTitleSuffix: Scalars['String'];
+  favicon?: Maybe<UploadFile>;
+  notificationBanner?: Maybe<ComponentElementsNotificationBanner>;
+  navbar?: Maybe<ComponentLayoutNavbar>;
+  footer?: Maybe<ComponentLayoutFooter>;
+  created_by?: Maybe<AdminUser>;
+  updated_by?: Maybe<AdminUser>;
+}
+
+export interface ComponentMetaMetadata {
+  __typename?: 'ComponentMetaMetadata';
+  id: Scalars['ID'];
+  metaTitle: Scalars['String'];
+  metaDescription: Scalars['String'];
+  shareImage?: Maybe<UploadFile>;
+  twitterCardType?: Maybe<Enum_Componentmetametadata_Twittercardtype>;
+  twitterUsername?: Maybe<Scalars['String']>;
+}
+
+export enum Enum_Componentmetametadata_Twittercardtype {
+  Summary = 'summary',
+  SummaryLargeImage = 'summary_large_image',
+  App = 'app',
+  Player = 'player'
+}
+
+export interface ComponentElementsNotificationBanner {
+  __typename?: 'ComponentElementsNotificationBanner';
+  id: Scalars['ID'];
+  text?: Maybe<Scalars['String']>;
+  type: Enum_Componentelementsnotificationbanner_Type;
+}
+
+export enum Enum_Componentelementsnotificationbanner_Type {
+  Alert = 'alert',
+  Info = 'info',
+  Warning = 'warning'
+}
+
+export interface ComponentLayoutNavbar {
+  __typename?: 'ComponentLayoutNavbar';
+  id: Scalars['ID'];
+  logo?: Maybe<UploadFile>;
+  links?: Maybe<Array<Maybe<ComponentLinksLink>>>;
+  button?: Maybe<ComponentLinksButton>;
+}
+
+export interface ComponentLinksLink {
+  __typename?: 'ComponentLinksLink';
+  id: Scalars['ID'];
+  url?: Maybe<Scalars['String']>;
+  newTab?: Maybe<Scalars['Boolean']>;
+  text?: Maybe<Scalars['String']>;
+}
+
+export interface ComponentLinksButton {
+  __typename?: 'ComponentLinksButton';
+  id: Scalars['ID'];
+  url?: Maybe<Scalars['String']>;
+  newTab?: Maybe<Scalars['Boolean']>;
+  text?: Maybe<Scalars['String']>;
+  type?: Maybe<Enum_Componentlinksbutton_Type>;
+}
+
+export enum Enum_Componentlinksbutton_Type {
+  Primary = 'primary',
+  Secondary = 'secondary'
+}
+
+export interface ComponentLayoutFooter {
+  __typename?: 'ComponentLayoutFooter';
+  id: Scalars['ID'];
+  logo?: Maybe<UploadFile>;
+  columns?: Maybe<Array<Maybe<ComponentElementsFooterSection>>>;
+  smallText?: Maybe<Scalars['String']>;
+}
+
+export interface ComponentElementsFooterSection {
+  __typename?: 'ComponentElementsFooterSection';
+  id: Scalars['ID'];
+  title?: Maybe<Scalars['String']>;
+  links?: Maybe<Array<Maybe<ComponentLinksLink>>>;
 }
 
 export interface UpdateGlobalPayload {
@@ -253,20 +474,6 @@ export interface ComponentSectionsHero {
   buttons?: Maybe<Array<Maybe<ComponentLinksButton>>>;
 }
 
-export interface ComponentLinksButton {
-  __typename?: 'ComponentLinksButton';
-  id: Scalars['ID'];
-  url?: Maybe<Scalars['String']>;
-  newTab?: Maybe<Scalars['Boolean']>;
-  text?: Maybe<Scalars['String']>;
-  type?: Maybe<Enum_Componentlinksbutton_Type>;
-}
-
-export enum Enum_Componentlinksbutton_Type {
-  Primary = 'primary',
-  Secondary = 'secondary'
-}
-
 export interface ComponentSectionsBottomActions {
   __typename?: 'ComponentSectionsBottomActions';
   id: Scalars['ID'];
@@ -301,14 +508,6 @@ export interface ComponentElementsFeatureRow {
   description?: Maybe<Scalars['String']>;
   media?: Maybe<UploadFile>;
   link?: Maybe<ComponentLinksLink>;
-}
-
-export interface ComponentLinksLink {
-  __typename?: 'ComponentLinksLink';
-  id: Scalars['ID'];
-  url?: Maybe<Scalars['String']>;
-  newTab?: Maybe<Scalars['Boolean']>;
-  text?: Maybe<Scalars['String']>;
 }
 
 export interface ComponentSectionsTestimonialsGroup {
@@ -899,51 +1098,16 @@ export interface DeleteUserPayload {
   user?: Maybe<UsersPermissionsUser>;
 }
 
-export interface ComponentElementsFooterSection {
-  __typename?: 'ComponentElementsFooterSection';
-  id: Scalars['ID'];
-  title?: Maybe<Scalars['String']>;
-  links?: Maybe<Array<Maybe<ComponentLinksLink>>>;
-}
-
-export interface ComponentElementsNotificationBanner {
-  __typename?: 'ComponentElementsNotificationBanner';
-  id: Scalars['ID'];
-  text?: Maybe<Scalars['String']>;
-  type: Enum_Componentelementsnotificationbanner_Type;
-}
-
-export enum Enum_Componentelementsnotificationbanner_Type {
-  Alert = 'alert',
-  Info = 'info',
-  Warning = 'warning'
-}
-
-export interface ComponentLayoutFooter {
-  __typename?: 'ComponentLayoutFooter';
-  id: Scalars['ID'];
-  logo?: Maybe<UploadFile>;
-  columns?: Maybe<Array<Maybe<ComponentElementsFooterSection>>>;
-  smallText?: Maybe<Scalars['String']>;
-}
-
-export interface ComponentLayoutNavbar {
-  __typename?: 'ComponentLayoutNavbar';
-  id: Scalars['ID'];
-  logo?: Maybe<UploadFile>;
-  links?: Maybe<Array<Maybe<ComponentLinksLink>>>;
-  button?: Maybe<ComponentLinksButton>;
-}
-
-export enum Enum_Componentmetametadata_Twittercardtype {
-  Summary = 'summary',
-  SummaryLargeImage = 'summary_large_image',
-  App = 'app',
-  Player = 'player'
+export enum ArchitectureModuleType {
+  ApplicationArchitecture = 'ApplicationArchitecture',
+  InfrastructureArchitecture = 'InfrastructureArchitecture'
 }
 
 export interface Mutation {
   __typename?: 'Mutation';
+  createArchitectureModule?: Maybe<CreateArchitectureModulePayload>;
+  updateArchitectureModule?: Maybe<UpdateArchitectureModulePayload>;
+  deleteArchitectureModule?: Maybe<DeleteArchitectureModulePayload>;
   updateGlobal?: Maybe<UpdateGlobalPayload>;
   deleteGlobal?: Maybe<DeleteGlobalPayload>;
   createPage?: Maybe<CreatePagePayload>;
@@ -968,6 +1132,21 @@ export interface Mutation {
   forgotPassword?: Maybe<UserPermissionsPasswordPayload>;
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
   emailConfirmation?: Maybe<UsersPermissionsLoginPayload>;
+}
+
+
+export interface MutationCreateArchitectureModuleArgs {
+  input?: Maybe<CreateArchitectureModuleInput>;
+}
+
+
+export interface MutationUpdateArchitectureModuleArgs {
+  input?: Maybe<UpdateArchitectureModuleInput>;
+}
+
+
+export interface MutationDeleteArchitectureModuleArgs {
+  input?: Maybe<DeleteArchitectureModuleInput>;
 }
 
 
@@ -1065,6 +1244,47 @@ export interface MutationEmailConfirmationArgs {
   confirmation: Scalars['String'];
 }
 
+export interface CreateArchitectureModuleInput {
+  data?: Maybe<ArchitectureModuleInput>;
+}
+
+export interface ArchitectureModuleInput {
+  moduleId: Scalars['String'];
+  logo?: Maybe<Scalars['ID']>;
+  name: Scalars['String'];
+  description: Scalars['String'];
+  features: Scalars['String'];
+  roadmap: Scalars['String'];
+  type: ArchitectureModuleType;
+  created_by?: Maybe<Scalars['ID']>;
+  updated_by?: Maybe<Scalars['ID']>;
+}
+
+export interface UpdateArchitectureModuleInput {
+  where?: Maybe<InputId>;
+  data?: Maybe<EditArchitectureModuleInput>;
+}
+
+export interface InputId {
+  id: Scalars['ID'];
+}
+
+export interface EditArchitectureModuleInput {
+  moduleId?: Maybe<Scalars['String']>;
+  logo?: Maybe<Scalars['ID']>;
+  name?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  features?: Maybe<Scalars['String']>;
+  roadmap?: Maybe<Scalars['String']>;
+  type?: Maybe<ArchitectureModuleType>;
+  created_by?: Maybe<Scalars['ID']>;
+  updated_by?: Maybe<Scalars['ID']>;
+}
+
+export interface DeleteArchitectureModuleInput {
+  where?: Maybe<InputId>;
+}
+
 export interface UpdateGlobalInput {
   data?: Maybe<EditGlobalInput>;
 }
@@ -1156,10 +1376,6 @@ export interface ComponentMetaMetadatumInput {
 export interface UpdatePageInput {
   where?: Maybe<InputId>;
   data?: Maybe<EditPageInput>;
-}
-
-export interface InputId {
-  id: Scalars['ID'];
 }
 
 export interface EditPageInput {

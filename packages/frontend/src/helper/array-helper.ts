@@ -19,3 +19,12 @@ export function shuffle(array:any[]) {
 
   return array;
 }
+
+
+/**
+ * Helper function to cast convert a generic array into a string representing
+ * an array of strings
+ */
+export function convertToStringArray(array:any[]):string {
+  return "[\"" + array.join("\",\"") + "\"]"; 
+}
