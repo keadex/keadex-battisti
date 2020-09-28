@@ -66,6 +66,12 @@ class KeaLab extends BasePageComponent<KeaLabProps, KeaLabState> {
 
   //---------- setArchitectureType
   private setArchitectureType(architectureType:ArchitectureType) {
+    //reset the hash when the user selects another architecture type in order
+    //to avoid to keep in the url the selected module of the previous architecture type
+    if (window.location.href.indexOf('#') != -1){
+      window.location.href = window.location.href.split('#')[0]+"#"
+    }
+
     this.setState({architectureType:architectureType})
   }
 

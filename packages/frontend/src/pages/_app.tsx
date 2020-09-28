@@ -27,7 +27,6 @@ import Cookies from 'js-cookie';
 import { CookieConsent } from '../model/models';
 import sanitizeHtml from 'sanitize-html';
 
-console.log(sanitizeHtml.defaults.allowedAttributes);
 
 // smoothscroll.polyfill();
 
