@@ -153,8 +153,8 @@ export interface ArchitectureModule {
   logo?: Maybe<UploadFile>;
   name: Scalars['String'];
   description: Scalars['String'];
-  features: Scalars['String'];
-  roadmap: Scalars['String'];
+  features?: Maybe<Scalars['String']>;
+  roadmap?: Maybe<Scalars['String']>;
   type: ArchitectureModuleType;
   created_by?: Maybe<AdminUser>;
   updated_by?: Maybe<AdminUser>;
@@ -1253,8 +1253,8 @@ export interface ArchitectureModuleInput {
   logo?: Maybe<Scalars['ID']>;
   name: Scalars['String'];
   description: Scalars['String'];
-  features: Scalars['String'];
-  roadmap: Scalars['String'];
+  features?: Maybe<Scalars['String']>;
+  roadmap?: Maybe<Scalars['String']>;
   type: ArchitectureModuleType;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;

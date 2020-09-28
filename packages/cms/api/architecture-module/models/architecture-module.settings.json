@@ -21,7 +21,7 @@
         "images"
       ],
       "plugin": "upload",
-      "required": true
+      "required": false
     },
     "name": {
       "type": "string",
@@ -33,11 +33,11 @@
     },
     "features": {
       "type": "richtext",
-      "required": true
+      "required": false
     },
     "roadmap": {
       "type": "richtext",
-      "required": true
+      "required": false
     },
     "type": {
       "type": "enumeration",

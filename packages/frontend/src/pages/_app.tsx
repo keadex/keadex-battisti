@@ -25,6 +25,9 @@ import NetworkService, { GET_QUOTES_API } from '../core/network/network.service'
 import { initGA, logPageView } from '../core/google-analytics';
 import Cookies from 'js-cookie';
 import { CookieConsent } from '../model/models';
+import sanitizeHtml from 'sanitize-html';
+
+console.log(sanitizeHtml.defaults.allowedAttributes);
 
 // smoothscroll.polyfill();
 
@@ -70,6 +73,10 @@ const queries : Query = {
   upLg: '(min-width: 992px)',
   upXl: '(min-width: 1200px)'
 }
+
+
+//---------- Sanitize Html global configuration
+sanitizeHtml.defaults.allowedAttributes["*"] = ["class"]; //allow class attr on all tags
 
 
 //---------- COMPONENT
