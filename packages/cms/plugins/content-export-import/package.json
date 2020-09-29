@@ -1,0 +1,41 @@
+{
+  "name": "strapi-plugin-content-export-import",
+  "version": "0.0.2",
+  "description": "This is a plugin for content import and export.",
+  "strapi": {
+    "name": "Content Export & Import",
+    "icon": "plug",
+    "description": "Description of content-export-import plugin."
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "file-saver": "^2.0.2",
+    "pluralize": "^8.0.0",
+    "strapi-helper-plugin": "^3.0.0-beta.20"
+  },
+  "author": {
+    "name": "lazurey",
+    "email": "lazureys@gmail.com",
+    "url": ""
+  },
+  "maintainers": [
+    {
+      "name": "lazurey",
+      "email": "lazureys@gmail.com",
+      "url": ""
+    }
+  ],
+  "engines": {
+    "node": ">=12.0.0",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "babel-jest": "^25.4.0",
+    "jest": "^25.4.0"
+  }
+}
