@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_architecture_code_snippets",
+  "info": {
+    "name": "CodeSnippet",
+    "icon": "code"
+  },
+  "options": {},
+  "attributes": {
+    "filePath": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "code": {
+      "type": "richtext"
+    },
+    "language": {
+      "type": "enumeration",
+      "enum": [
+        "java",
+        "javascript",
+        "typescript",
+        "css",
+        "scss",
+        "html",
+        "tsx",
+        "jsx"
+      ],
+      "required": true
+    }
+  }
+}

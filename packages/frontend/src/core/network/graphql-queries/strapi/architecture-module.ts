@@ -14,7 +14,18 @@ export const ARCHITECTURE_MODULES = (types:ArchitectureModuleType[])=> {
           url
         }
         description
-        features
+        features {
+          id
+          title
+          description
+          codeSnippet {
+            id
+            filePath
+            description
+            code
+            language
+          }
+        }
         roadmap
       }
     }

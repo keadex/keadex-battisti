@@ -153,9 +153,10 @@ export interface ArchitectureModule {
   logo?: Maybe<UploadFile>;
   name: Scalars['String'];
   description: Scalars['String'];
-  features?: Maybe<Scalars['String']>;
+  featuresOld?: Maybe<Scalars['String']>;
   roadmap?: Maybe<Scalars['String']>;
   type: ArchitectureModuleType;
+  features?: Maybe<Array<Maybe<ComponentArchitectureArchitectureModuleFeature>>>;
   created_by?: Maybe<AdminUser>;
   updated_by?: Maybe<AdminUser>;
 }
@@ -200,7 +201,7 @@ export interface AdminUser {
   username?: Maybe<Scalars['String']>;
 }
 
-export type Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | ArchitectureModule | ArchitectureModuleConnection | ArchitectureModuleAggregator | ArchitectureModuleGroupBy | ArchitectureModuleConnectionId | ArchitectureModuleConnectionCreated_At | ArchitectureModuleConnectionUpdated_At | ArchitectureModuleConnectionModuleId | ArchitectureModuleConnectionLogo | ArchitectureModuleConnectionName | ArchitectureModuleConnectionDescription | ArchitectureModuleConnectionFeatures | ArchitectureModuleConnectionRoadmap | ArchitectureModuleConnectionType | ArchitectureModuleConnectionCreated_By | ArchitectureModuleConnectionUpdated_By | CreateArchitectureModulePayload | UpdateArchitectureModulePayload | DeleteArchitectureModulePayload | Global | UpdateGlobalPayload | DeleteGlobalPayload | Page | PageConnection | PageAggregator | PageGroupBy | PageConnectionId | PageConnectionCreated_At | PageConnectionUpdated_At | PageConnectionSlug | PageConnectionShortName | PageConnectionMetadata | PageConnectionStatus | PageConnectionCreated_By | PageConnectionUpdated_By | CreatePagePayload | UpdatePagePayload | DeletePagePayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_At | UploadFileConnectionUpdated_At | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | UploadFileConnectionCreated_By | UploadFileConnectionUpdated_By | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsRoleConnectionCreated_By | UsersPermissionsRoleConnectionUpdated_By | CreateRolePayload | UpdateRolePayload | DeleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionCreated_By | UsersPermissionsUserConnectionUpdated_By | CreateUserPayload | UpdateUserPayload | DeleteUserPayload | ComponentElementsFeatureColumn | ComponentElementsFeatureRow | ComponentElementsFeature | ComponentElementsFooterSection | ComponentElementsLogos | ComponentElementsNotificationBanner | ComponentElementsPlan | ComponentElementsTestimonial | ComponentLayoutFooter | ComponentLayoutNavbar | ComponentLinksButton | ComponentLinksLink | ComponentMetaMetadata | ComponentSectionsBottomActions | ComponentSectionsFeatureColumnsGroup | ComponentSectionsFeatureRowsGroup | ComponentSectionsHero | ComponentSectionsLargeVideo | ComponentSectionsPricing | ComponentSectionsRichText | ComponentSectionsTestimonialsGroup;
+export type Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | ArchitectureModule | ArchitectureModuleConnection | ArchitectureModuleAggregator | ArchitectureModuleGroupBy | ArchitectureModuleConnectionId | ArchitectureModuleConnectionCreated_At | ArchitectureModuleConnectionUpdated_At | ArchitectureModuleConnectionModuleId | ArchitectureModuleConnectionLogo | ArchitectureModuleConnectionName | ArchitectureModuleConnectionDescription | ArchitectureModuleConnectionFeaturesOld | ArchitectureModuleConnectionRoadmap | ArchitectureModuleConnectionType | ArchitectureModuleConnectionCreated_By | ArchitectureModuleConnectionUpdated_By | CreateArchitectureModulePayload | UpdateArchitectureModulePayload | DeleteArchitectureModulePayload | Global | UpdateGlobalPayload | DeleteGlobalPayload | Page | PageConnection | PageAggregator | PageGroupBy | PageConnectionId | PageConnectionCreated_At | PageConnectionUpdated_At | PageConnectionSlug | PageConnectionShortName | PageConnectionMetadata | PageConnectionStatus | PageConnectionCreated_By | PageConnectionUpdated_By | CreatePagePayload | UpdatePagePayload | DeletePagePayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_At | UploadFileConnectionUpdated_At | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | UploadFileConnectionCreated_By | UploadFileConnectionUpdated_By | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsRoleConnectionCreated_By | UsersPermissionsRoleConnectionUpdated_By | CreateRolePayload | UpdateRolePayload | DeleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionCreated_By | UsersPermissionsUserConnectionUpdated_By | CreateUserPayload | UpdateUserPayload | DeleteUserPayload | ComponentArchitectureArchitectureModuleFeature | ComponentArchitectureCodeSnippet | ComponentElementsFeatureColumn | ComponentElementsFeatureRow | ComponentElementsFeature | ComponentElementsFooterSection | ComponentElementsLogos | ComponentElementsNotificationBanner | ComponentElementsPlan | ComponentElementsTestimonial | ComponentLayoutFooter | ComponentLayoutNavbar | ComponentLinksButton | ComponentLinksLink | ComponentMetaMetadata | ComponentSectionsBottomActions | ComponentSectionsFeatureColumnsGroup | ComponentSectionsFeatureRowsGroup | ComponentSectionsHero | ComponentSectionsLargeVideo | ComponentSectionsPricing | ComponentSectionsRichText | ComponentSectionsTestimonialsGroup;
 
 export interface UsersPermissionsMe {
   __typename?: 'UsersPermissionsMe';
@@ -247,7 +248,7 @@ export interface ArchitectureModuleGroupBy {
   logo?: Maybe<Array<Maybe<ArchitectureModuleConnectionLogo>>>;
   name?: Maybe<Array<Maybe<ArchitectureModuleConnectionName>>>;
   description?: Maybe<Array<Maybe<ArchitectureModuleConnectionDescription>>>;
-  features?: Maybe<Array<Maybe<ArchitectureModuleConnectionFeatures>>>;
+  featuresOld?: Maybe<Array<Maybe<ArchitectureModuleConnectionFeaturesOld>>>;
   roadmap?: Maybe<Array<Maybe<ArchitectureModuleConnectionRoadmap>>>;
   type?: Maybe<Array<Maybe<ArchitectureModuleConnectionType>>>;
   created_by?: Maybe<Array<Maybe<ArchitectureModuleConnectionCreated_By>>>;
@@ -296,8 +297,8 @@ export interface ArchitectureModuleConnectionDescription {
   connection?: Maybe<ArchitectureModuleConnection>;
 }
 
-export interface ArchitectureModuleConnectionFeatures {
-  __typename?: 'ArchitectureModuleConnectionFeatures';
+export interface ArchitectureModuleConnectionFeaturesOld {
+  __typename?: 'ArchitectureModuleConnectionFeaturesOld';
   key?: Maybe<Scalars['String']>;
   connection?: Maybe<ArchitectureModuleConnection>;
 }
@@ -1098,6 +1099,34 @@ export interface DeleteUserPayload {
   user?: Maybe<UsersPermissionsUser>;
 }
 
+export interface ComponentArchitectureArchitectureModuleFeature {
+  __typename?: 'ComponentArchitectureArchitectureModuleFeature';
+  id: Scalars['ID'];
+  title: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  codeSnippet?: Maybe<Array<Maybe<ComponentArchitectureCodeSnippet>>>;
+}
+
+export interface ComponentArchitectureCodeSnippet {
+  __typename?: 'ComponentArchitectureCodeSnippet';
+  id: Scalars['ID'];
+  filePath?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
+  language: Enum_Componentarchitecturecodesnippet_Language;
+}
+
+export enum Enum_Componentarchitecturecodesnippet_Language {
+  Java = 'java',
+  Javascript = 'javascript',
+  Typescript = 'typescript',
+  Css = 'css',
+  Scss = 'scss',
+  Html = 'html',
+  Tsx = 'tsx',
+  Jsx = 'jsx'
+}
+
 export enum ArchitectureModuleType {
   ApplicationArchitecture = 'ApplicationArchitecture',
   InfrastructureArchitecture = 'InfrastructureArchitecture'
@@ -1253,11 +1282,25 @@ export interface ArchitectureModuleInput {
   logo?: Maybe<Scalars['ID']>;
   name: Scalars['String'];
   description: Scalars['String'];
-  features?: Maybe<Scalars['String']>;
+  featuresOld?: Maybe<Scalars['String']>;
   roadmap?: Maybe<Scalars['String']>;
   type: ArchitectureModuleType;
+  features?: Maybe<Array<Maybe<ComponentArchitectureArchitectureModuleFeatureInput>>>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
+}
+
+export interface ComponentArchitectureArchitectureModuleFeatureInput {
+  title: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  codeSnippet?: Maybe<Array<Maybe<ComponentArchitectureCodeSnippetInput>>>;
+}
+
+export interface ComponentArchitectureCodeSnippetInput {
+  filePath?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
+  language: Enum_Componentarchitecturecodesnippet_Language;
 }
 
 export interface UpdateArchitectureModuleInput {
@@ -1274,11 +1317,27 @@ export interface EditArchitectureModuleInput {
   logo?: Maybe<Scalars['ID']>;
   name?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  features?: Maybe<Scalars['String']>;
+  featuresOld?: Maybe<Scalars['String']>;
   roadmap?: Maybe<Scalars['String']>;
   type?: Maybe<ArchitectureModuleType>;
+  features?: Maybe<Array<Maybe<EditComponentArchitectureArchitectureModuleFeatureInput>>>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
+}
+
+export interface EditComponentArchitectureArchitectureModuleFeatureInput {
+  id?: Maybe<Scalars['ID']>;
+  title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  codeSnippet?: Maybe<Array<Maybe<EditComponentArchitectureCodeSnippetInput>>>;
+}
+
+export interface EditComponentArchitectureCodeSnippetInput {
+  id?: Maybe<Scalars['ID']>;
+  filePath?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
+  language?: Maybe<Enum_Componentarchitecturecodesnippet_Language>;
 }
 
 export interface DeleteArchitectureModuleInput {

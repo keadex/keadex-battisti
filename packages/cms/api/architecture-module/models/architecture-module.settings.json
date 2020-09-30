@@ -31,7 +31,7 @@
       "type": "richtext",
       "required": true
     },
-    "features": {
+    "featuresOld": {
       "type": "richtext",
       "required": false
     },
@@ -47,6 +47,11 @@
       ],
       "required": true,
       "enumName": "ArchitectureModuleType"
+    },
+    "features": {
+      "type": "component",
+      "repeatable": true,
+      "component": "architecture.architecture-module-feature"
     }
   }
 }
