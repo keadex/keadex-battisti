@@ -9,6 +9,7 @@ import KMDCheckbox from '../kmdcheckbox/kmdcheckbox';
 import { MDBIcon } from 'mdbreact';
 import NetworkService from '../../core/network/network.service';
 import { FORMATTED_MESSAGE_STANDARD_HTML_VALUES } from '../../core/app.constants';
+import { getStrapiMedia } from '../../helper/strapi-helper';
 
 
 //--------------- TYPES
@@ -66,7 +67,7 @@ class Resume extends React.Component<any, ResumeState> {
     this.tlDownloadResume!.to("#resume-pdf", 2, {opacity: `1`}, "-=2.5");
     
     this.tlDownloadResume!.addCallback(()=>{
-      NetworkService.getInstance().downloadFile(process.env.NEXT_PUBLIC_BASE_URL! + process.env.NEXT_PUBLIC_GET_RESUME_PDF_API!, "resume-giacomosimmi.pdf");
+      NetworkService.getInstance().downloadFile(getStrapiMedia(process.env.NEXT_PUBLIC_RESUME_PDF_URL!)!, "resume-giacomosimmi.pdf");
     }, "-=2.5");
     
     this.tlDownloadResume!.pause();
