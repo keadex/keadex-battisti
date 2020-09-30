@@ -11,7 +11,7 @@ export const KeadexPreview : React.FunctionComponent = React.memo((props) => {
   // const windowDimensions = useWindowDimensions();
   
   let isAnimationInitialized = false;
-  let timeline = new TimelineMax();
+  let timeline:TimelineMax|undefined;
   let morphTimelines:Map<string, MorphSVGTimeline>;
   
   let keaPath = [
@@ -70,6 +70,7 @@ export const KeadexPreview : React.FunctionComponent = React.memo((props) => {
   
   //----- initTimeline
   function initTimeline(){
+    timeline = new TimelineMax();
     isAnimationInitialized = true;
     svgBoundingClientRect = svgRef.current!.getBoundingClientRect();
     svgPath1BoundingClientRect = svgPathRef[0].current!.getBoundingClientRect();
@@ -143,9 +144,9 @@ export const KeadexPreview : React.FunctionComponent = React.memo((props) => {
         break;
     }
     
-    timeline.to("#techlabel-"+techLabelId, MATERIAL_ENTRANCE_SPEED/1000, {opacity: 1, top: -100, fontSize: "2rem", ease: Sine.easeOut});
-    timeline.to("#techlabel-"+techLabelId, MATERIAL_EXIT_SPEED/1000, {top: bubbleTop-svgBoundingClientRect.top+(bubbleHeight/2), left: bubbleLeft-svgBoundingClientRect.left+(bubbleWidth/2), transform: "translate(-50%, -50%) scale(0)", ease: Sine.easeIn}, "+=0.5");
-    timeline.to(bubbleSelector, 1, {opacity: 1, scale: bubbleScaleFactor, transformOrigin:"50% 50%", ease: Elastic.easeOut});
+    timeline!.to("#techlabel-"+techLabelId, MATERIAL_ENTRANCE_SPEED/1000, {opacity: 1, top: -100, fontSize: "2rem", ease: Sine.easeOut});
+    timeline!.to("#techlabel-"+techLabelId, MATERIAL_EXIT_SPEED/1000, {top: bubbleTop-svgBoundingClientRect.top+(bubbleHeight/2), left: bubbleLeft-svgBoundingClientRect.left+(bubbleWidth/2), transform: "translate(-50%, -50%) scale(0)", ease: Sine.easeIn}, "+=0.5");
+    timeline!.to(bubbleSelector, 1, {opacity: 1, scale: bubbleScaleFactor, transformOrigin:"50% 50%", ease: Elastic.easeOut});
   }
 
 
@@ -167,14 +168,14 @@ export const KeadexPreview : React.FunctionComponent = React.memo((props) => {
       value.current!.setAttribute("d", circlePath[index]);
     })
 
-    timeline.restart();
+    timeline!.restart();
   }
   
 
   //----- endAnimation
   function endAnimation(){
     initializeAnimation();
-    timeline.progress(1, true);
+    timeline!.progress(1, true);
     morphTimelines.forEach((value: MorphSVGTimeline, key: string) => {
       value.timeline.progress(1, false);
     });
