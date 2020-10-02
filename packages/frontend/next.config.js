@@ -3,7 +3,7 @@ const withCSS = require('@zeit/next-css');
 const withImages = require('next-images');
 const compose = require('next-compose')
 const withFonts = require('next-fonts');
-const withTM = require('next-transpile-modules')(['react-scrollmagic']);
+const withTM = require('next-transpile-modules')(['react-scrollmagic', 'react-syntax-highlighter']);
 
 // module.exports = withSass(withImages());
 

@@ -1114,6 +1114,7 @@ export interface ComponentArchitectureCodeSnippet {
   description?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
   language: Enum_Componentarchitecturecodesnippet_Language;
+  fileLink?: Maybe<Scalars['String']>;
 }
 
 export enum Enum_Componentarchitecturecodesnippet_Language {
@@ -1122,7 +1123,7 @@ export enum Enum_Componentarchitecturecodesnippet_Language {
   Typescript = 'typescript',
   Css = 'css',
   Scss = 'scss',
-  Html = 'html',
+  Markdown = 'markdown',
   Tsx = 'tsx',
   Jsx = 'jsx'
 }
@@ -1301,6 +1302,7 @@ export interface ComponentArchitectureCodeSnippetInput {
   description?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
   language: Enum_Componentarchitecturecodesnippet_Language;
+  fileLink?: Maybe<Scalars['String']>;
 }
 
 export interface UpdateArchitectureModuleInput {
@@ -1338,6 +1340,7 @@ export interface EditComponentArchitectureCodeSnippetInput {
   description?: Maybe<Scalars['String']>;
   code?: Maybe<Scalars['String']>;
   language?: Maybe<Enum_Componentarchitecturecodesnippet_Language>;
+  fileLink?: Maybe<Scalars['String']>;
 }
 
 export interface DeleteArchitectureModuleInput {

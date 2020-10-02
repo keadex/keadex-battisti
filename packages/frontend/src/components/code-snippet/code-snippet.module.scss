@@ -1,0 +1,9 @@
+@import '../shared/shared-imports.module.scss';
+
+.code-snippet__file-path{
+  font-size: $body2-text-size;
+
+  a{
+    color: $console-text-color !important;
+  }
+}

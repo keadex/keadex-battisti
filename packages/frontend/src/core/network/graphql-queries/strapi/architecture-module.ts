@@ -21,6 +21,7 @@ export const ARCHITECTURE_MODULES = (types:ArchitectureModuleType[])=> {
           codeSnippet {
             id
             filePath
+            fileLink
             description
             code
             language

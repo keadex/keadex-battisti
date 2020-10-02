@@ -26,6 +26,7 @@ import { initGA, logPageView } from '../core/google-analytics';
 import Cookies from 'js-cookie';
 import { CookieConsent } from '../model/models';
 import sanitizeHtml from 'sanitize-html';
+import { DefaultSeo } from 'next-seo';
 
 
 // smoothscroll.polyfill();
