@@ -31,10 +31,6 @@
       "type": "richtext",
       "required": true
     },
-    "featuresOld": {
-      "type": "richtext",
-      "required": false
-    },
     "roadmap": {
       "type": "richtext",
       "required": false
