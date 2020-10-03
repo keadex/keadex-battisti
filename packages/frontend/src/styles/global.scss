@@ -113,7 +113,12 @@ code {
 	color: $brand-color-1-dark;
 }
 
-
+.clickable {
+  cursor: pointer;
+  &:hover{
+    opacity: 0.5;
+  }
+}
 
 //NAV
 .nav-link{
