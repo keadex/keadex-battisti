@@ -207,6 +207,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
 
       {/* Global site metadata */}
+      <DefaultSeo
+        description={"Keadex is an ever-evolving experimental platform, fully free and open source. The goal of Keadex is to experiment technologies (client and server side) and to integrate them in a modular platform."}
+      />
       {/* <DefaultSeo
         titleTemplate={`%s | ${global.metaTitleSuffix}`}
         title={"Page"}
