@@ -21,7 +21,7 @@ export const ArchitectureModuleFeature : React.FC<ArchitectureModuleFeatureProps
   //----- render
   return (
     <div className={props.firstItem?"mt-3":"mt-5"}>
-      <h4 className="text-brand1 clickable" onClick={()=>props.onAccordionClick(props.feature.id)}>{props.feature.title} <MDBIcon icon={`fas ${props.isOpen?"fa-angle-down":"fa-angle-right"}`} /></h4>
+      <h4 className={`${props.isOpen?"text-brand1":""} clickable`} onClick={()=>props.onAccordionClick(props.feature.id)}>{props.feature.title} <MDBIcon icon={`fas ${props.isOpen?"fa-angle-down":"fa-angle-right"}`} /></h4>
       <MDBCollapse id={props.feature.id} isOpen={props.isOpen}>
         {props.feature.description && props.feature.description !== "" && (<div dangerouslySetInnerHTML={{__html: sanitizeHtml(props.feature.description)}} />)}
         {props.feature.codeSnippet && props.feature.codeSnippet.length > 0 && (
