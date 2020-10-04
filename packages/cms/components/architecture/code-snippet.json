@@ -25,7 +25,9 @@
         "scss",
         "markdown",
         "tsx",
-        "jsx"
+        "jsx",
+        "json",
+        "yaml"
       ],
       "required": true
     },
