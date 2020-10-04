@@ -13,9 +13,6 @@ const schema = loadSchemaSync(join(__dirname, 'schema.graphql'), { loaders: [new
 
 export default function runMockServer(mocksMap:Map<String,String>) {
   const mocks = {
-    // Horse: () => ({
-    //   description: () => faker.random.arrayElement(["ciao1", "coap2", "ciao3"])
-    // }),
     Query: () => ({
       experiences: ()=> require('../mocks/'+mocksMap.get("experiences")),
       quotes: ()=> require('../mocks/'+mocksMap.get("quotes")),
