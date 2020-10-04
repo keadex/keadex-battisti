@@ -115,7 +115,7 @@ code {
 
 .clickable {
   cursor: pointer;
-  &:hover{
+  body.hasHover &:hover{
     opacity: 0.5;
   }
 }
