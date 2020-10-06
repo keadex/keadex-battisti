@@ -27,6 +27,7 @@ import Cookies from 'js-cookie';
 import { CookieConsent } from '../model/models';
 import sanitizeHtml from 'sanitize-html';
 import { DefaultSeo } from 'next-seo';
+import { getStrapiMedia } from '../helper/strapi-helper';
 
 
 // smoothscroll.polyfill();
@@ -132,7 +133,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   
   //useSWR caches already done requests and doesn't resubmit the same request.
   //So it's not a problem if the following line is called multiple time: only a request is submitted
-  const quotesResp = useSWR(GET_QUOTES_API, (url)=>NetworkService.getInstance().__tmp_getQuotes());
+  const quotesResp = useSWR(getStrapiMedia(GET_QUOTES_API)!, (url)=>NetworkService.getInstance().__tmp_getQuotes());
 
   //---------- useEffect
   useEffect(() => {

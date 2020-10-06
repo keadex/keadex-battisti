@@ -1,1 +1,0 @@
-Actually this is a workaround to mock APIs in the Production environment.
