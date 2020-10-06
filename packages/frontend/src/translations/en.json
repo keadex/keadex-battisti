@@ -35,6 +35,7 @@
     "SECTORS": {
         "BANKING": "Banking",
         "ECOMMERCE": "eCommerce",
+        "HEALTHCARE": "Healthcare",
         "EDUCATION": "Education",
         "DIGITAL_SOLUTIONS": "Digital Solutions",
         "UTILITIES": "Energy & Utilities",
