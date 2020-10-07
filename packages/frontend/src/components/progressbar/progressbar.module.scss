@@ -1,0 +1,81 @@
+@import '../shared/shared-imports.module.scss';
+
+$border-size: 1px;
+// $height-progressbar: 50px;  moved in variable.scss
+$padding-progressbar: 10px;
+
+.progressbar {
+  display: inline-block;
+  border: dashed $border-size $primary-color-light;
+  // border-top: $border-size dashed white;
+  // border-bottom: $border-size dashed white;
+  border-image-source: url("../../../public/img/border-dash.png");
+  border-image-slice: 2;
+  border-image-repeat: round;  
+  width: 100%;
+  padding-top: $padding-progressbar;
+  padding-bottom: $padding-progressbar;
+  height: $height-progressbar;
+  margin-bottom: 20px;
+  background: rgba(28,28,28,0.58);
+}
+
+.progressbar__container{
+  width: 90%;
+  margin-left: 10px;
+}
+
+.progressbar__bar{
+  background: $primary-color-light;
+  height: $height-progressbar - ($padding-progressbar * 2) - ($border-size * 2);
+}
+
+.progress-bar__section-title{
+  position: absolute;
+  // left: 50%;
+  // transform: translateX(-50%);
+  width: 90%;
+  text-align: center;
+  mix-blend-mode: difference;
+  font-weight: bold;
+}
+
+
+@include media-breakpoint-down(lg) { 
+  .progressbar__container{
+    width: 85%;
+  }
+  .progress-bar__section-title{
+    width: 85%;
+  }
+}
+
+@include media-breakpoint-down(md) { 
+  .progressbar__container{
+    width: 80%;
+  }
+  .progress-bar__section-title{
+    width: 80%;
+  }
+}
+
+@include media-breakpoint-down(sm) { 
+  .progressbar__container{
+    width: 55%;
+  }
+  .progress-bar__section-title{
+    width: 55%;
+    font-size: 15px;
+    line-height: 24px;
+  }
+}
+
+
+
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /* IE10+ CSS styles go here */
+  .progress-bar__section-title {
+    color: $brand-color-1;
+  }
+}

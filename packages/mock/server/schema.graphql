@@ -1,0 +1,72 @@
+type Task {
+  id: String
+}
+
+type Company {
+  name: String
+  from: String
+  to: String
+  city: String
+  country: String
+  logoFilename: String
+}
+
+type Customer {
+  id: String
+  name: String
+  logoFilename: String
+}
+
+type Sector {
+  id: String
+}
+
+type Skill {
+  name: String
+  usagePercentage: Int
+}
+
+type Experience {
+  id: String!
+  from: String
+  to: String
+  avatarFilename: String
+  tasks: [Task]
+  companies: [Company]
+  customers: [Customer]
+  sectors: [Sector]
+  skills: [Skill]
+}
+
+type Quote {
+  quote: String!
+  author: String!
+  likes: Int
+  tags: [String]
+  pk: Int
+  image: String
+  language: String
+}
+
+type Node {
+  id: String!
+  name: String!
+  val: Int!
+  group: Int!
+}
+
+type Link {
+  source: String!
+  target: String!
+}
+
+type Graph {
+  nodes: [Node!]!
+  links: [Link!]!
+}
+
+type Query {
+  experiences: [Experience!]!
+  quotes: [Quote!]!
+  experienceGraph: Graph!
+}

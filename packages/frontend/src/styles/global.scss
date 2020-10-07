@@ -1,0 +1,434 @@
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+@import "./custom-template.scss";
+// @import "./custom-template-demo.scss";
+@import '~bootstrap/scss/bootstrap.scss';
+@import '../components/shared/scss/mdb.scss';
+
+@import '~animate.css/animate.min.css';
+@import '../components/shared/shared-imports.module.scss';
+
+
+@font-face {
+  font-family: 'Perfect DOS VGA 437';
+  font-style: sans-serif;
+  font-weight: 400;
+  src: url('/fonts/Perfect DOS VGA 437 Win.ttf'); 
+}
+
+
+body {
+  background: $primary-color;
+	// font-family: 'Inconsolata', monospace;
+	font-family: 'Perfect DOS VGA 437', sans-serif;
+	font-weight: 400;
+	color: $primary-color-text;
+}
+
+a {
+	color: $accent-color;
+	&:hover{
+		color: $accent-color;
+		opacity: 0.5;
+	}
+}
+
+
+button:focus {
+	outline: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.btn:hover, .btn:active, .btn:focus {
+	outline: none;
+}
+
+h1 {
+	color: $brand-color-1;
+}
+
+code {
+  color: $console-text-color;
+}
+
+::-webkit-scrollbar {
+  height: 6px !important;
+  width: 6px !important;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #6e6e6e;
+  outline: 1px solid #333;
+}
+
+
+//------------ Shared Styles
+.h6 {
+	font-size: $h6-text-size;
+}
+.page-body{
+  // height: 1600px;
+	padding: $page-body-padding-desktop;
+}
+.fill{
+	min-height: 100%;
+  height: 100%;
+}
+.text-console {
+	color: $console-text-color;
+}
+.out{
+	visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.5s, opacity 0s 0.5s;
+}
+.pointer-events-all{
+	pointer-events: all;
+}
+.pointer-events-none{
+	pointer-events: none;
+}
+
+.full-center{
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50% );
+}
+
+.text-accent{
+	color: $accent-color;
+}
+.text-primary{
+	color: $primary-color-text !important;
+}
+.text-primary-light{
+	color: $primary-color-light;
+}
+.text-brand1{
+	color: $brand-color-1;
+}
+.text-brand1-dark{
+	color: $brand-color-1-dark;
+}
+
+.clickable {
+  cursor: pointer;
+  body.hasHover &:hover{
+    opacity: 0.5;
+  }
+}
+
+//NAV
+.nav-link{
+	color: $primary-color-text;
+}
+.nav-link.active{
+	background-color: rgba(0,0,0,0.2);
+}
+
+.nav-link:hover{
+	color: $accent-color;
+}
+
+//BUTTON
+
+//Button Primary
+.btn-primary {
+	background-color: $brand-color-1 !important;
+	&:hover {
+		background-color: $brand-color-1 !important;
+	}
+}
+
+.btn-primary:not([disabled]):not(.disabled):active, .btn-primary:not([disabled]):not(.disabled).active, .show > .btn-primary.dropdown-toggle{
+	background-color: $brand-color-1-dark !important;
+}
+
+.btn-floating{
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	padding: 0;
+	margin: 10px;
+	overflow: hidden;
+	vertical-align: middle;
+	cursor: pointer;
+	border-radius: 50%;
+	box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+	transition: all .2s ease-in-out;
+	width: 47px;
+	height: 47px;
+
+	&.btn-sm{
+		width: 36px;
+		height: 36px;
+
+		i{
+			font-size: 1rem;
+			line-height: 36px;
+		}
+	}
+}
+
+//TAB
+.md-tabs {
+	position: relative;
+	z-index: 2;
+	margin-bottom: -20px;
+	background-color: $brand-color-1;
+	border: 0;
+	border-radius: .25rem;
+	-webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+	box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+}
+
+//CHECKBOX
+//https://codepen.io/hansmaad/pen/qaGrQL
+$md-checkbox-border-color: rgba(0, 0, 0, 0.54);
+$md-checkbox-border-color-disabled: rgba(0, 0, 0, 0.26);
+$md-checkbox-checked-color-disabled: rgba(0, 0, 0, 0.26);
+
+$md-checkbox-margin: 1em 0;
+$md-checkbox-size: 1.25em;
+$md-checkbox-padding: .25em;
+$md-checkbox-border-width: 2px;
+$md-checkbox-border-radius: 0.125em;
+$md-checkmark-width: 0.125em;
+$md-checkmark-color: #fff;
+$md-checkbox-label-padding: .75em;
+
+.md-checkbox {
+  position: relative;
+  margin: $md-checkbox-margin;
+  text-align: left;
+
+  &.md-checkbox-inline {
+    display: inline-block;
+  }
+  
+  label {
+    cursor: pointer;
+    display: inline;
+    line-height: $md-checkbox-size;
+    vertical-align: top;
+    clear: both;
+    padding-left: 1px;
+    &:not(:empty) {
+      padding-left: $md-checkbox-label-padding;
+    }
+    
+    &:before, &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    
+    &:before {
+      // box
+      width: $md-checkbox-size;
+      height: $md-checkbox-size;
+      background: #fff;
+      border-radius: $md-checkbox-border-radius;
+      cursor: pointer;
+      transition: background .3s;
+    }
+  
+    &:after {
+      // checkmark
+    }    
+  }
+  
+  input[type="checkbox"] {
+    outline: 0;
+    visibility: hidden;
+    width: $md-checkbox-size;
+    margin: 0;
+    display: block;
+    float: left;
+    font-size: inherit;
+
+    &:checked {
+       + label:before{
+        background: $brand-color-1;
+        border:none;
+      }
+      + label:after {
+        
+        $md-checkmark-size: $md-checkbox-size - 2 * $md-checkbox-padding;
+
+        transform: translate($md-checkbox-padding, ($md-checkbox-size / 2) - ($md-checkmark-size / 2.6)) rotate(-45deg);
+        width: $md-checkmark-size;
+        height: $md-checkmark-size / 2;
+        
+        border: $md-checkmark-width solid $md-checkmark-color;
+        border-top-style: none;
+        border-right-style: none;
+      } 
+    }
+    
+    &:disabled {
+      + label:before{
+        border-color: $md-checkbox-border-color-disabled;
+      }
+      &:checked {
+        + label:before{
+          background: $md-checkbox-checked-color-disabled;
+        }
+      }
+    }
+  }
+ 
+}
+
+
+//CARD
+.card{
+	background-color: $primary-color;
+}
+
+//AVATAR
+.avatar {
+	width: 120px;
+	height: 120px;
+	overflow: hidden;
+	border-radius: 50%;
+}
+
+
+//------------ Cookie Dialog
+#CybotCookiebotDialog{
+  top: inherit !important;
+  bottom: 0 !important;
+  background: $primary-color !important;
+  color: $primary-color-text !important;
+}
+a#CybotCookiebotDialogBodyLevelButtonLevelOptinDeclineAll{
+  width: inherit !important;
+  background: $brand-color-1 !important;
+  border: 1px solid $brand-color-1 !important;
+}
+a#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelection{
+  width: inherit !important;
+  background: $brand-color-1 !important;
+  border: 1px solid $brand-color-1 !important;
+}
+a#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll{
+  width: inherit !important;
+  background: $brand-color-1 !important;
+  border: 1px solid $brand-color-1 !important;
+}
+#CybotCookiebotDialogBodyContentTitle{
+  color: $brand-color-1 !important;
+}
+#CybotCookiebotDialogPoweredbyLink{
+  display: none !important;
+}
+#CybotCookiebotDialogBodyContent{
+  padding-left: 0px !important;
+}
+#CybotCookiebotDialogBodyLevelDetailsWrapper{
+  background: $primary-color-dark !important;
+  border-color: $secondary-text-color !important;
+}
+#CybotCookiebotDialogBodyLevelDetailsWrapper #CybotCookiebotDialogBodyButtonDetails:focus, #CybotCookiebotDialogBodyLevelDetailsWrapper #CybotCookiebotDialogBodyLevelDetailsButton:focus {
+  text-decoration: none;
+}
+
+#CybotCookiebotDialogBodyLevelButtonsSelectPane{
+  border-color: $secondary-text-color !important;
+}
+
+#CybotCookiebotDialogBodyLevelButtons{
+  margin-left: 0px !important;
+}
+
+#CybotCookiebotDialogDetail{
+  background: $primary-color !important;
+}
+
+#CybotCookiebotDialog a, #CybotCookiebotDialog a:hover{
+  color: $primary-color-text !important;
+}
+.CybotCookiebotDialogDetailBodyContentTabsItemSelected, #CybotCookiebotDialogDetailBodyContentTabsOverview:focus, #CybotCookiebotDialogDetailBodyContentTabsAbout:focus{
+  background: $primary-color !important;
+}
+.CybotCookiebotDialogDetailBodyContentTabsItem, #CybotCookiebotDialogDetailBodyContentTabsAbout:hover,
+#CybotCookiebotDialogDetailBodyContentTabsOverview:hover{
+  background-color: $primary-color-dark !important;
+}
+
+.CybotCookiebotDialogDetailBodyContentTab:first-child{
+  border-color: $secondary-text-color !important;
+}
+.CybotCookiebotDialogDetailBodyContentTabsItem, .CybotCookiebotDialogDetailBodyContentTabsItemSelected{
+  border-color: $secondary-text-color !important;
+}
+
+#CybotCookiebotDialogDetailBodyContent{
+  background: $primary-color !important;
+  color: $primary-color-text !important;
+  border-color: $secondary-text-color !important;
+}
+
+.CybotCookiebotDialogDetailBodyContentCookieTypeTableContainer .CybotCookiebotDialogDetailBodyContentCookieTypeTable thead td, .CybotCookiebotDialogDetailBodyContentCookieTypeTableContainer .CybotCookiebotDialogDetailBodyContentCookieTypeTable thead th{
+  background-color: $primary-color-dark !important;
+  color: $primary-color-text !important;
+  border-color: $secondary-text-color !important;
+}
+
+.CybotCookiebotDialogDetailBodyContentCookieTypeTableContainer .CybotCookiebotDialogDetailBodyContentCookieTypeTable tbody td{
+  color: $primary-color-text !important;
+  border-color: $secondary-text-color !important;
+}
+
+.CybotCookiebotDialogDetailBodyContentCookieContainerTypesSelected, .CybotCookiebotDialogDetailBodyContentCookieContainerTypesSelected:hover{
+  background-color: $primary-color !important;
+  border-color: $secondary-text-color !important;
+  border-right-color: $primary-color !important;
+  opacity: 1;
+}
+
+.CybotCookiebotDialogDetailBodyContentCookieContainerTypes, #CybotCookiebotDialogDetailBodyContentCookieContainerTypes a.CybotCookiebotDialogDetailBodyContentCookieContainerTypes:hover{
+  background-color: $primary-color-dark !important;
+  border-color: $secondary-text-color !important;
+}
+
+#CybotCookiebotDialogDetailFooter{
+  background-color: $primary-color !important;
+  color: $primary-color-text !important;
+  a{
+    text-decoration: none;
+  }
+}
+
+.notfound__logo {
+  height: 90vh;
+  width: 90%;
+}
+
+
+@include media-breakpoint-down(sm) {
+	h1 {
+		font-size: 2.1rem;
+	}
+	h2 {
+		font-size: 1.6rem;
+	}
+  .page-body{
+		padding: $page-body-padding-mobile;
+	}
+	.avatar{
+		width: 80px;
+		height: 80px;
+  }
+  #CybotCookiebotDialogBodyContent{
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+  .notfound__logo {
+    width: 95%;
+  }
+}

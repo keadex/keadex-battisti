@@ -1,0 +1,134 @@
+@import '../shared/shared-imports.module.scss';
+
+// :global(.page-body){
+//   height: auto;
+// }
+
+.architecture__chalkboard-container{
+  width: 70%;
+  height: 100%;
+  @include ie-only() {
+    height: 900px;
+  }
+  // left: 50%;
+  // transform: translate(-50%);
+  position: relative;
+  display: inline-block;
+  :global(.react-transform-component){
+    width: 100%;
+    height: 100%;
+    :global(.react-transform-element){
+      width: 100%;
+      height: 100%;
+      :global(.architecture__chalkboard){
+        div{
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+
+.architecture__chalkboard{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.architecture__chalkboard-toolbar .architecture__speed-dial{
+  position: absolute;
+  display: inline-block;
+  z-index: 1;
+  margin: 10px;
+  transform: translate(-50%, 0);
+  margin-left: 30px;
+  a{
+    background: $brand-color-1;
+    width: 36px;
+    height: 36px;
+
+    &:hover{
+      opacity: 1;
+    }
+  }
+}
+
+.architecture__chalkboard-toolbar-reset{
+  z-index: 2;
+}
+
+.architecture__module{
+  cursor: pointer;
+  :global(body.hasHover) &:hover{
+    // stroke: green;
+    // fill: green;
+    opacity: 0.2;
+  }
+}
+
+.architecture__module-dropdown{
+  position: absolute;
+  display: inline;
+}
+
+.architecture__module-logo{
+  width: 300px;
+}
+
+.architecture__module-details-toolbar{
+  position: absolute;
+  left: 50%;
+  top: -30px;
+  transform: translate(-50%);
+}
+.architecture__speed-dial{
+  a{
+    background: $brand-color-1-dark;
+    &:hover{
+      opacity: inherit;
+    }
+    :global(body.hasHover) &:hover{
+      opacity: 0.5;
+    }
+  }
+  ul{
+    li{
+      text-align: center;
+      background: $primary-color-text;
+      color: $primary-color;
+      border-radius: 15px;
+      width: inherit;
+      padding: 0 15px 0 15px;
+      :global(body.hasHover) &:hover{
+        opacity: 0.5;
+      }
+    }
+    a {
+      div {
+        position: relative;
+      }
+    }
+  }  
+}
+
+.architecture__chalkboard-type{
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+@include media-breakpoint-down(sm) {
+  .architecture__chalkboard-container{
+    width: 100%;
+  }
+  .architecture__module-logo{
+    width: 200px;
+  }
+  .architecture__chalkboard-toolbar-container{
+    left: -25px;
+    position: relative;
+  }
+  .architecture__chalkboard-type{
+    top: 0;
+    transform: inherit;
+  }
+}

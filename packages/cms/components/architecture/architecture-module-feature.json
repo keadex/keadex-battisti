@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_architecture_architecture_module_features",
+  "info": {
+    "name": "ArchitectureModuleFeature",
+    "icon": "list"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "codeSnippet": {
+      "type": "component",
+      "repeatable": true,
+      "component": "architecture.code-snippet"
+    }
+  }
+}
