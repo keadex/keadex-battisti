@@ -14,7 +14,7 @@ export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
 );
 
 //------------------ COMPONENT
-const CookieDeclaration : React.FunctionComponent<any> = () => {
+const PageNotFound : React.FunctionComponent<any> = () => {
   return (
     <PageLayout title="Keadex - Page not found">
       <div className='page-body'>
@@ -24,4 +24,4 @@ const CookieDeclaration : React.FunctionComponent<any> = () => {
   );
 }
 
-export default CookieDeclaration;
+export default PageNotFound;
