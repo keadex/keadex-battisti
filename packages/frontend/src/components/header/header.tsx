@@ -71,7 +71,7 @@ class Header extends React.Component<HeaderProps> {
             <a className="link link--social link--faded" href="https://www.linkedin.com/in/giacomosimmi/" target="_blank"><MDBIcon fab icon='linkedin' /><span className="text-hidden">LinkedIn</span></a>
             <a className="link link--social link--faded" href="https://github.com/keadex" target="_blank"><MDBIcon fab icon='github' /><span className="text-hidden">GitHub</span></a>
             <a className="link link--social link--faded" href="http://open.spotify.com/user/jacksimmi" target="_blank"><MDBIcon fab icon='spotify' /><span className="text-hidden">Spotify</span></a>
-            <a className="link link--social link--faded" href="https://www.instagram.com/jh4ck_/" target="_blank"><MDBIcon fab icon='instagram' /><span className="text-hidden">Instagram</span></a>
+            {/* <a className="link link--social link--faded" href="https://www.instagram.com/jh4ck_/" target="_blank"><MDBIcon fab icon='instagram' /><span className="text-hidden">Instagram</span></a> */}
           </div> 
         </nav>
         {/* /navigation*/}
