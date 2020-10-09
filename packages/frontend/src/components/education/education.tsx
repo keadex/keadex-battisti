@@ -16,6 +16,7 @@ import { ForceGraph } from '../../model/models';
 import { useBreakpoint } from '../../core/react-breakpoint';
 import { isClient } from '../../helper/generic-helper';
 import NoSSR from 'react-no-ssr';
+import OptimizedImage from '../optimized-image/optimized-image';
 
 let ForceGraph2D:any = undefined;
 if (isClient()){
@@ -183,7 +184,8 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             to={{css: {className: "animate__animated animate__fadeInLeft"}}}
             progress={adjustProgress(2, progress)}
             playState="stop">
-              <div><img className={`${styles["education__picture"]}`} src={happyHourBari} alt="Baresian happy hour" /></div>
+              {/* <div><img className={`${styles["education__picture"]}`} src={happyHourBari} alt="Baresian happy hour" /></div> */}
+              <div><OptimizedImage className={`${styles["education__picture"]}`} path={"education/happy-hour-bari.png"} alt="Baresian happy hour" /></div>
           </Tween>          
           <Tween            
             from={{css: {className: "animate__animated animate__fadeOutDown"}}}
