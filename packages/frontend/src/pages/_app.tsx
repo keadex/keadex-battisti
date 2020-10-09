@@ -148,7 +148,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     let cookieConsent = Cookies.get('CookieConsent');    
 
     //fix Cookiebot "CookieConsent" cookie json string (missing quotes)
-    cookieConsent = cookieConsent?.replaceAll('{', '{"').replaceAll(':', '":').replaceAll(',', ',"').replaceAll("'", '"');
+    // cookieConsent = cookieConsent?.replaceAll('{', '{"').replaceAll(':', '":').replaceAll(',', ',"').replaceAll("'", '"');
+    cookieConsent = cookieConsent?.replace(/{/gi, '{"').replace(/:/gi, '":').replace(/,/gi, ',"').replace(/'/gi, '"');
     
     if (!store.getState().app.isGAInitialized && cookieConsent && (JSON.parse(cookieConsent) as CookieConsent).statistics){
       initGA()
