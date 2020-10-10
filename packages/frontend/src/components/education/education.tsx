@@ -6,11 +6,6 @@ import occipitalLobe from "../../../public/img/education/occipital-lobe.png";
 import parietalLobe from "../../../public/img/education/parietal-lobe.png";
 import temporalLobe from "../../../public/img/education/temporal-lobe.png";
 import cerebellum from "../../../public/img/education/cerebellum.png";
-import happyHourBari from "../../../public/img/education/happy-hour-bari.png";
-import sochild from "../../../public/img/education/sochild.png";
-import marconi from "../../../public/img/education/marconi.png";
-import brainGraph from "../../../public/img/education/brain-graph.png";
-import jack from "../../../public/img/jack/jack.gif";
 import styles from './education.module.scss';
 import { ForceGraph } from '../../model/models';
 import { useBreakpoint } from '../../core/react-breakpoint';
@@ -136,7 +131,7 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
 
                 {/* SHOW INTERACTIVE BRAIN GRAPH ONLY ON DESKTOP */}
                 <div className={`d-block d-lg-none text-center ${styles["education__brain-container--mobile"]} ${(adjustProgress(1, progress)!=0?"out":"")}`}>
-                  <img className={`${styles["education__brain-graph"]}`} src={brainGraph} alt="Brain Graph" />
+                  <OptimizedImage className={`${styles["education__brain-graph"]}`} src={"education/brain-graph.png"} alt="Brain Graph" />
                   <div className={`${styles["education__brain-chart-banner"]}`}>
                     <div id="text"><FormattedMessage id="ABOUT_ME.EDUCATION.BRAIN_GRAPH_BANNER" /></div>
                   </div>
@@ -185,7 +180,7 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             progress={adjustProgress(2, progress)}
             playState="stop">
               {/* <div><img className={`${styles["education__picture"]}`} src={happyHourBari} alt="Baresian happy hour" /></div> */}
-              <div><OptimizedImage className={`${styles["education__picture"]}`} path={"education/happy-hour-bari.png"} alt="Baresian happy hour" /></div>
+              <div><OptimizedImage className={`${styles["education__picture"]}`} src={"education/happy-hour-bari.png"} alt="Baresian happy hour" /></div>
           </Tween>          
           <Tween            
             from={{css: {className: "animate__animated animate__fadeOutDown"}}}
@@ -205,7 +200,7 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             to={{css: {className: "animate__animated animate__fadeInLeft"}}}
             progress={adjustProgress(4, progress)}
             playState="stop">
-              <div><img className={`${styles["education__picture"]}`} src={marconi} alt="ITIS Guglielmo Marconi Bari" /></div>
+              <div><OptimizedImage className={`${styles["education__picture"]}`} src={"education/marconi.png"} alt="ITIS Guglielmo Marconi Bari" /></div>
           </Tween>          
           <Tween            
             from={{css: {className: "animate__animated animate__fadeOutDown"}}}
@@ -225,7 +220,7 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             to={{css: {className: "animate__animated animate__fadeInLeft"}}}
             progress={adjustProgress(6, progress)}
             playState="stop">
-              <div><img className={`${styles["education__picture"]}`} src={sochild} alt="SoChild" /></div>
+              <div><OptimizedImage className={`${styles["education__picture"]}`} src={"education/sochild.png"} alt="SoChild" /></div>
           </Tween>          
           <Tween            
             from={{css: {className: "animate__animated animate__fadeOutDown"}}}
@@ -246,7 +241,7 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             to={{css: {className: "animate__animated animate__fadeInLeft"}}}
             progress={adjustProgress(8, progress)}
             playState="stop">
-              <div><img className={`${styles["education__picture"]} ${styles["education__jack-avatar"]}`} src={jack} alt="Jack avatar" /></div>
+              <div><OptimizedImage className={`${styles["education__picture"]} ${styles["education__jack-avatar"]}`} src={"jack/jack.gif"} alt="Jack avatar" /></div>
           </Tween>          
           <Tween            
             from={{css: {className: "animate__animated animate__fadeOutDown"}}}
