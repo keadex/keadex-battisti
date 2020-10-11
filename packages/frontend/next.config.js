@@ -1,6 +1,6 @@
 // const withSass = require('@zeit/next-sass');
 // const withCSS = require('@zeit/next-css');
-const withImages = require('next-images');
+// const withImages = require('next-images');
 const compose = require('next-compose')
 // const withFonts = require('next-fonts');
 const optimizedImages = require('next-optimized-images');
