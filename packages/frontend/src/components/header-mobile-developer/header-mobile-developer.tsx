@@ -1,10 +1,9 @@
 import React from 'react';
-import androidBot from "../../../public/img/header-experience/android-bot.png";
-import appleLogo from "../../../public/img/header-experience/apple-logo.png";
 import styles from './header-mobile-developer.module.scss';
 import { ExperienceProps } from '../experience/experience';
 import { TimelineMax } from 'gsap';
 import { injectIntl } from 'react-intl';
+import OptimizedImage from '../optimized-image/optimized-image';
 
 
 //------------------ TYPES
@@ -46,8 +45,8 @@ class HeaderMobileDeveloper extends React.Component<ExperienceProps> {
     return (
         <div className={`${styles["header-mobile-root"]} position-relative`}>
           {/* <h2 className="text-center text-light">{this.props.experience.from} - {this.props.experience.to}</h2> */}
-          <img id="android-bot" className={`${styles["header-mobile-actors"]}`} src={androidBot} alt="Android bot" height="50px" />
-          <img id="apple-logo" className={`${styles["header-mobile-actors"]} ${styles["header-mobile-apple"]}`} src={appleLogo} alt="Apple logo" height="45px" />
+          <OptimizedImage id="android-bot" className={`${styles["header-mobile-actors"]}`} src={"header-experience/android-bot.png"} alt="Android bot" height="50px" />
+          <OptimizedImage id="apple-logo" className={`${styles["header-mobile-actors"]} ${styles["header-mobile-apple"]}`} src={"header-experience/apple-logo.png"} alt="Apple logo" height="45px" />
         </div>
     );
   }

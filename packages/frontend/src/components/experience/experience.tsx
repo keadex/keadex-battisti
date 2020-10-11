@@ -211,7 +211,6 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                           <MDBCardTitle className="text-center">
                             <div className={`avatar d-inline-block ${styles["experience__avatar"]}`}>
                               <OptimizedImage src={this.jackImages[this.props.experience.avatarFilename]} alt="avatar position"/>
-                              {/* <img src={`../../../public/img/jack/${this.props.experience.avatarFilename}`} alt="avatar position"/> */}
                             </div>
                             <div className={`${styles["experience__title-position"]} text-left text-md-center`}>
                               <FormattedMessage id={"POSITIONS." + this.props.experience.id} /><br />

@@ -1,13 +1,8 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Tween } from 'react-gsap';
-import box from "../../../public/img/hobbies/box.png";
-import sport from "../../../public/img/hobbies/sport.png";
-import martialArts from "../../../public/img/hobbies/martial-arts.png";
-import music from "../../../public/img/hobbies/music.png";
-import spearfishing from "../../../public/img/hobbies/spearfishing.png";
-import cinema from "../../../public/img/hobbies/cinema.png";
 import styles from './hobbies.module.scss';
+import OptimizedImage from '../optimized-image/optimized-image';
 
 //------------------ TYPES
 export interface IEducationProps{
@@ -64,7 +59,7 @@ class Education extends React.Component<IEducationProps> {
             to={{ rotation:135 }}
             progress={progress*5}
             playState="stop">
-              <img className={`${styles["hobbies__box"]}`} src={box} alt="Hobbies box" />
+              <OptimizedImage className={`${styles["hobbies__box"]}`} src={"hobbies/box.png"} alt="Hobbies box" />
           </Tween>
 
           {/* SPORT */}
@@ -73,7 +68,7 @@ class Education extends React.Component<IEducationProps> {
             to={{ rotation:0, top: "70vh", opacity: 1 }}
             progress={this.adjustProgress(1, progress)}
             playState="stop">
-              <img className={`${styles["hobbies__hobby"]}`} src={sport} alt="Sport hobby" />
+              <OptimizedImage className={`${styles["hobbies__hobby"]}`} src={"hobbies/sport.png"} alt="Sport hobby" />
           </Tween>
           <div className={`${styles["hobbies__hobby-description"]} ${(this.adjustProgress(1.1, progress)==0?"out":"")}`}>
             <Tween            
@@ -94,7 +89,7 @@ class Education extends React.Component<IEducationProps> {
             to={{ rotation:-80, left:"-20%", top: "65vh", opacity: 1 }}
             progress={this.adjustProgress(2, progress)}
             playState="stop">
-              <img className={`${styles["hobbies__hobby"]} ${styles["hobbies__hobby-martial-arts"]}`} src={martialArts} alt="Martial Arts hobby" />
+              <OptimizedImage className={`${styles["hobbies__hobby"]} ${styles["hobbies__hobby-martial-arts"]}`} src={"hobbies/martial-arts.png"} alt="Martial Arts hobby" />
           </Tween>
           <div className={`${styles["hobbies__hobby-description"]} ${(this.adjustProgress(2.1, progress)==0?"out":"")}`}>
             <Tween            
@@ -122,7 +117,7 @@ class Education extends React.Component<IEducationProps> {
             to={{ rotation:80, left:"20%", top: "68vh", opacity: 1 }}
             progress={this.adjustProgress(3, progress)}
             playState="stop">
-              <img className={`${styles["hobbies__hobby"]} ${styles["hobbies__hobby-martial-arts"]}`} src={music} alt="Music hobby" />
+              <OptimizedImage className={`${styles["hobbies__hobby"]} ${styles["hobbies__hobby-martial-arts"]}`} src={"hobbies/music.png"} alt="Music hobby" />
           </Tween>
           <div className={`${styles["hobbies__hobby-description"]} ${(this.adjustProgress(3.1, progress)==0?"out":"")}`}>
             <Tween            
@@ -143,7 +138,7 @@ class Education extends React.Component<IEducationProps> {
             to={{ rotation:10, left:"10%", opacity: 1, className: `${styles["hobbies__hobby"]} ${styles["hobbies__hobby-spearfishing"]} ${styles["hobbies__hobby-spearfishing-end"]}` }}
             progress={this.adjustProgress(4, progress)}
             playState="stop">
-              <img className={`${styles["hobbies__hobby"]} ${styles["hobbies__hobby-spearfishing"]}`} src={spearfishing} alt="Spearfishing hobby" />
+              <OptimizedImage className={`${styles["hobbies__hobby"]} ${styles["hobbies__hobby-spearfishing"]}`} src={"hobbies/spearfishing.png"} alt="Spearfishing hobby" />
           </Tween>
           <div className={`${styles["hobbies__hobby-description"]} ${(this.adjustProgress(4.1, progress)==0?"out":"")}`}>
             <Tween            
@@ -164,7 +159,7 @@ class Education extends React.Component<IEducationProps> {
             to={{ rotation:-10, left:"-10%", opacity: 1, className: `${styles["hobbies__hobby"]} ${styles["hobbies__hobby-cinema"]} ${styles["hobbies__hobby-cinema-end"]}` }}
             progress={this.adjustProgress(5, progress)}
             playState="stop">
-              <img className={`${styles["hobbies__hobby"]} ${styles["hobbies__hobby-cinema"]}`} src={cinema} alt="Cinema hobby" />
+              <OptimizedImage className={`${styles["hobbies__hobby"]} ${styles["hobbies__hobby-cinema"]}`} src={"hobbies/cinema.png"} alt="Cinema hobby" />
           </Tween>
           <div className={`${styles["hobbies__hobby-description"]} ${(this.adjustProgress(5.1, progress)==0?"out":"")}`}>
             <Tween            

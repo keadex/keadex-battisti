@@ -1,19 +1,11 @@
 import React from 'react';
 
-import orderManagerShape from "../../../public/img/header-experience/order-manager.png";
-import devOpsShape from "../../../public/img/header-experience/devops.png";
-import cloudAIShape from "../../../public/img/header-experience/cloud-ai.png";
-import microservicesShape from "../../../public/img/header-experience/microservices.png";
-import microfrontendShape from "../../../public/img/header-experience/micro-frontends.png";
-import crmShape from "../../../public/img/header-experience/crm.png";
-import tetrisStatistics from "../../../public/img/header-experience/tetris-statistics.png";
-import tetrisScore from "../../../public/img/header-experience/tetris-score.png";
-import tetrisHelp from "../../../public/img/header-experience/tetris-help.png";
 import styles from './header-architect.module.scss';
 import { ExperienceProps } from '../experience/experience';
 import { TimelineMax } from 'gsap';
 import { withHooksBreakpoint } from '../../core/react-breakpoint';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
+import OptimizedImage from '../optimized-image/optimized-image';
 
 
 interface HeaderArchitectProps extends WrappedComponentProps, ExperienceProps{}
@@ -76,17 +68,17 @@ class HeaderArchitect extends React.Component<HeaderArchitectProps> {
           <div className={`${styles["header-architect__game-container"]}`}>
             <div className={`${styles["header-architect__game-bg"]} position-absolute`}></div>
             <div className={`${styles["header-architect__tetriminos-container"]}`} style={{width:this.widthBoxShape*7}}>
-              <img id="order-manager-shape" className={`${styles["header-architect__shape"]}`} src={orderManagerShape} alt="Order Manager shape" width={(this.widthBoxShape*2)+"px"} style={{left: this.getLeftShape(1)}}/>
-              <img id="microservices-shape" className={`${styles["header-architect__shape"]}`} src={microservicesShape} alt="Microservices shape" width={(this.widthBoxShape*3)+"px"} style={{left: this.getLeftShape(2)}}/>
-              <img id="cloud-ai-shape" className={`${styles["header-architect__shape"]}`} src={cloudAIShape} alt="Cloud shape" width={(this.widthBoxShape*3)+"px"} style={{left: this.getLeftShape(3)}}/>
-              <img id="devops-shape" className={`${styles["header-architect__shape"]}`} src={devOpsShape} alt="DevOps shape" width={(this.widthBoxShape*3)+"px"} style={{left: this.getLeftShape(4)}}/>
-              <img id="micro-frontends-shape" className={`${styles["header-architect__shape"]}`} src={microfrontendShape} alt="Micro Frontends shape" width={(this.widthBoxShape*2)+"px"} style={{left: this.getLeftShape(5)}}/>
-              <img id="crm-shape" className={`${styles["header-architect__shape"]}`} src={crmShape} alt="Micro Frontends shape" width={(this.widthBoxShape*2)+"px"} style={{left: this.getLeftShape(6)}}/>
+              <OptimizedImage id="order-manager-shape" className={`${styles["header-architect__shape"]}`} src={"header-experience/order-manager.png"} alt="Order Manager shape" width={(this.widthBoxShape*2)+"px"} style={{left: this.getLeftShape(1)}}/>
+              <OptimizedImage id="microservices-shape" className={`${styles["header-architect__shape"]}`} src={"header-experience/microservices.png"} alt="Microservices shape" width={(this.widthBoxShape*3)+"px"} style={{left: this.getLeftShape(2)}}/>
+              <OptimizedImage id="cloud-ai-shape" className={`${styles["header-architect__shape"]}`} src={"header-experience/cloud-ai.png"} alt="Cloud shape" width={(this.widthBoxShape*3)+"px"} style={{left: this.getLeftShape(3)}}/>
+              <OptimizedImage id="devops-shape" className={`${styles["header-architect__shape"]}`} src={"header-experience/devops.png"} alt="DevOps shape" width={(this.widthBoxShape*3)+"px"} style={{left: this.getLeftShape(4)}}/>
+              <OptimizedImage id="micro-frontends-shape" className={`${styles["header-architect__shape"]}`} src={"header-experience/micro-frontends.png"} alt="Micro Frontends shape" width={(this.widthBoxShape*2)+"px"} style={{left: this.getLeftShape(5)}}/>
+              <OptimizedImage id="crm-shape" className={`${styles["header-architect__shape"]}`} src={"header-experience/crm.png"} alt="Micro Frontends shape" width={(this.widthBoxShape*2)+"px"} style={{left: this.getLeftShape(6)}}/>
             </div>
           </div>
-          <img src={tetrisScore} alt="Tetris score" className={`${styles["header-architect__tetris-score"]} d-lg-block d-none`}/>
-          <img src={tetrisHelp} alt="Tetris help" className={`${styles["header-architect__tetris-help"]} d-lg-block d-none`}/>
-          <img src={tetrisStatistics} alt="Tetris statistics" className={`${styles["header-architect__tetris-statistics"]} d-lg-block d-none`}/>
+          <OptimizedImage src={"header-experience/tetris-score.png"} alt="Tetris score" className={`${styles["header-architect__tetris-score"]} d-lg-block d-none`}/>
+          <OptimizedImage src={"header-experience/tetris-help.png"} alt="Tetris help" className={`${styles["header-architect__tetris-help"]} d-lg-block d-none`}/>
+          <OptimizedImage src={"header-experience/tetris-statistics.png"} alt="Tetris statistics" className={`${styles["header-architect__tetris-statistics"]} d-lg-block d-none`}/>
           <div id="game-over" className={`${styles["header-architect__game-over-root"]} animate__animated animate__fadeOut`}>
             <span className={`${styles["header-architect__game-over-text"]}`}>Game Over</span>
           </div>

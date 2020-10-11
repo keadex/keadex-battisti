@@ -1,8 +1,8 @@
 import React from "react";
 import PageLayout from "../components/page-layout/page-layout";
-import notFoundImage from '../../public/img/404.svg'; 
 import { GetStaticProps } from "next";
 import { wrapper } from "../core/store/store";
+import OptimizedImage from '../components/optimized-image/optimized-image';
 
 //---------- getStaticProps
 export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
@@ -18,7 +18,7 @@ const PageNotFound : React.FunctionComponent<any> = () => {
   return (
     <PageLayout title="Keadex - Page not found">
       <div className='page-body'>
-        <img src={notFoundImage} className="full-center position-absolute text-center notfound__logo"/>
+        <OptimizedImage src={"404.svg"} className="full-center position-absolute text-center notfound__logo"/>
       </div>
     </PageLayout>
   );

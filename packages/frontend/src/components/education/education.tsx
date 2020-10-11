@@ -179,7 +179,6 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             to={{css: {className: "animate__animated animate__fadeInLeft"}}}
             progress={adjustProgress(2, progress)}
             playState="stop">
-              {/* <div><img className={`${styles["education__picture"]}`} src={happyHourBari} alt="Baresian happy hour" /></div> */}
               <div><OptimizedImage className={`${styles["education__picture"]}`} src={"education/happy-hour-bari.png"} alt="Baresian happy hour" /></div>
           </Tween>          
           <Tween            

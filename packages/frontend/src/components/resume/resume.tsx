@@ -1,6 +1,5 @@
 import React, { RefObject } from 'react';
 
-import pdfIcon from "../../../public/img/pdf-icon-glitch.gif";
 import styles from './resume.module.scss';
 import { TimelineMax, Linear } from 'gsap';
 import { FormattedMessage } from 'react-intl';
@@ -10,6 +9,7 @@ import { MDBIcon } from 'mdbreact';
 import NetworkService from '../../core/network/network.service';
 import { FORMATTED_MESSAGE_STANDARD_HTML_VALUES } from '../../core/app.constants';
 import { getStrapiMedia } from '../../helper/strapi-helper';
+import OptimizedImage from '../optimized-image/optimized-image';
 
 
 //--------------- TYPES
@@ -115,7 +115,7 @@ class Resume extends React.Component<any, ResumeState> {
 
         {/* PDF ICON */}
         <div id="resume-pdf" className={`full-center ${styles["resume__pdf"]} text-center w-100`}>
-          <img src={pdfIcon} width="160px" />
+          <OptimizedImage src={"pdf-icon-glitch.gif"} width="160px" />
           {/* <div className="text-console">resume-giacomosimmi.pdf</div> */}
           <h4><MDBIcon icon="undo-alt" className="mt-3" style={{cursor: "pointer"}} onClick={()=>{this.restartAnimation()}}/></h4>
         </div>

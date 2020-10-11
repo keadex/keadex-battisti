@@ -2,11 +2,7 @@ import React, { RefObject } from 'react';
 import ScrollAnimation from 'react-animate-on-scroll';
 import { FormattedMessage } from 'react-intl';
 import BasePageComponent from '../components/base-page-component/base-page-component';
-import styles from './index.module.scss'; 
-import keadexLogo from "../../public/img/keadex-logo.png"
-import notWebsite from "../../public/img/not-website.png";
-import knwoledge from "../../public/img/knwoledge.png";
-import learn from "../../public/img/learn.png";
+import styles from './index.module.scss';
 import styled from 'styled-components';
 import ReactPlayer from 'react-player'
 import { MorphSVGTimeline, generateMorphSVGTimelines } from '../helper/animation-helper';
@@ -22,6 +18,7 @@ import { disableScrollIntoView } from '../helper/generic-helper';
 import { KeadexPreview } from '../components/keadex-preview/keadex-preview';
 import { GetStaticProps } from 'next';
 import { wrapper } from '../core/store/store';
+import OptimizedImage from '../components/optimized-image/optimized-image';
 
 const FooterDiv:any = styled.div<any>`
   position:absolute; width: 100%; top: ${(props)=>(props.vpHeight && props.logoContainerHeight)?(props.vpHeight-props.logoContainerHeight - 100) + "px":"0px"}
@@ -357,7 +354,7 @@ class Home extends BasePageComponent<any, HomeState> {
                       <MDBCard className="h-100 w-100">
                         <MDBCardBody>
                           <h4 className="text-brand1"><FormattedMessage id="HOME.TITLE_NOT_WEBSITE" /></h4>
-                          <img className="mt-4 mb-4" src={notWebsite} />
+                          <OptimizedImage className="mt-4 mb-4" src={"not-website.png"} />
                           <div><FormattedMessage id="HOME.TEXT_NOT_WEBSITE" values={FORMATTED_MESSAGE_STANDARD_HTML_VALUES}/></div>
                         </MDBCardBody>
                       </MDBCard>
@@ -370,7 +367,7 @@ class Home extends BasePageComponent<any, HomeState> {
                       <MDBCard className="h-100 w-100">
                         <MDBCardBody>
                           <h4 className="text-brand1"><FormattedMessage id="HOME.TITLE_KNOW" /></h4>
-                          <img className="mt-4 mb-4" src={knwoledge} />
+                          <OptimizedImage className="mt-4 mb-4" src={"knwoledge.png"} />
                           <div><FormattedMessage id="HOME.TEXT_KNOW" values={FORMATTED_MESSAGE_STANDARD_HTML_VALUES}/></div>
                         </MDBCardBody>
                       </MDBCard>
@@ -383,7 +380,7 @@ class Home extends BasePageComponent<any, HomeState> {
                       <MDBCard className="h-100 w-100">
                         <MDBCardBody>
                           <h4 className="text-brand1"><FormattedMessage id="HOME.TITLE_WILL_KNOW" /></h4>
-                          <img className="mt-4 mb-4" src={learn} />
+                          <OptimizedImage className="mt-4 mb-4" src={"learn.png"} />
                           <div><FormattedMessage id="HOME.TEXT_WILL_KNOW" values={FORMATTED_MESSAGE_STANDARD_HTML_VALUES}/></div>
                         </MDBCardBody>
                       </MDBCard>

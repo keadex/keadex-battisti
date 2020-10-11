@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { withRouter } from 'next/router'
 import { WithRouterProps } from 'next/dist/client/with-router';
 import { IStoreState } from '../../core/store/store.type';
+import OptimizedImage from '../optimized-image/optimized-image';
 
 
 //--------------- TYPES
@@ -54,7 +55,7 @@ class Header extends React.Component<HeaderProps> {
       <div>
         {/* navigation */}
         <nav className="pages-nav">
-        <img src={logo} className="nav-logo" alt="logo" />
+          <div className="w-100 text-center"><OptimizedImage src={"keadex-logo.png"} className="nav-logo" alt="logo" /></div>
           <div className="pages-nav__item"><Link replace href={HOME_URL} scroll={false} ><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((this.currentUrl.endsWith(HOME_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.HOME" /></a></Link></div>
           <div className="pages-nav__item"><Link replace href={WHY_KEADEX_URL} scroll={false} ><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((this.currentUrl.endsWith(WHY_KEADEX_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.WHY_KEADEX" /></a></Link></div>
           <div className="pages-nav__item"><Link replace href={WHATS_KEADEX_URL} scroll={false} ><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((this.currentUrl.endsWith(WHATS_KEADEX_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.WHATS_KEADEX" /></a></Link></div>
