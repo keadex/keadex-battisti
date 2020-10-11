@@ -1,36 +1,31 @@
 import React, { useEffect } from 'react';
-
 import App, { AppContext } from "next/app";
 import type { AppProps } from 'next/app'
 import {useRouter} from 'next/router'
-import Head from 'next/head'
-import '../styles/global.scss'
 import { BreakpointProvider, Query } from '../core/react-breakpoint'
-import { wrapper, StoreService } from '../core/store/store';
-import { IntlProvider } from 'react-intl'
+import { watchForHover } from '../helper/generic-helper';
 import flatten from 'flat'
-import { toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred, setIsAppInitialized, setIsGaInitialized, setQuotes } from '../core/store/reducers/app.reducer';
-
-// import 'react-app-polyfill/ie9';
-// import 'react-app-polyfill/stable';
-// import 'svg-classlist-polyfill'
-// import smoothscroll from 'smoothscroll-polyfill';
-import { watchForHover, isClient } from '../helper/generic-helper';
-import Spinner from '../components/spinner/spinner';
-import Header from '../components/header/header';
-import Body from '../components/body/body';
 import {useStore} from 'react-redux';
+import dynamic from 'next/dynamic'
 import useSWR from 'swr';
+import '../styles/global.scss'
+import { wrapper, StoreService } from '../core/store/store';
+import { toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred, setIsAppInitialized, setIsGaInitialized, setQuotes } from '../core/store/reducers/app.reducer';
 import NetworkService, { GET_QUOTES_API } from '../core/network/network.service';
-import { initGA, logPageView } from '../core/google-analytics';
 import Cookies from 'js-cookie';
-import { CookieConsent } from '../model/models';
+import { initGA, logPageView } from '../core/google-analytics';
 import sanitizeHtml from 'sanitize-html';
-import { DefaultSeo } from 'next-seo';
+import { CookieConsent } from '../model/models';
 import { getStrapiMedia } from '../helper/strapi-helper';
 
+const Head = dynamic(() => import('next/head'));
+const Spinner:any = dynamic(() => import('../components/spinner/spinner'));
+const Header:any = dynamic(() => import('../components/header/header'));
+const Body:any = dynamic(() => import('../components/body/body'));
+const IntlProvider:any = dynamic(() => import('react-intl').then((mod:any) => mod.IntlProvider));
+const DefaultSeo:any = dynamic(() => import('next-seo').then((mod:any) => mod.DefaultSeo));
 
-// smoothscroll.polyfill();
+
 
 //---------- Disable debug and log levels in production
 if (process.env.NODE_ENV === "production"){
@@ -133,7 +128,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   
   //useSWR caches already done requests and doesn't resubmit the same request.
   //So it's not a problem if the following line is called multiple time: only a request is submitted
-  const quotesResp = useSWR(getStrapiMedia(GET_QUOTES_API)!, (url)=>NetworkService.getInstance().__tmp_getQuotes());
+  const quotesResp = useSWR(getStrapiMedia(GET_QUOTES_API)!, ()=>NetworkService.getInstance().__tmp_getQuotes());
 
   //---------- useEffect
   useEffect(() => {
@@ -145,12 +140,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
 
     //---- start to use Google Analytics only if the user has given the consensus
-    let cookieConsent = Cookies.get('CookieConsent');    
+    let cookieConsentValue = Cookies.get('CookieConsent');    
 
     //fix Cookiebot "CookieConsent" cookie json string (missing quotes)
-    cookieConsent = cookieConsent?.replace(/{/gi, '{"').replace(/:/gi, '":').replace(/,/gi, ',"').replace(/'/gi, '"');
+    cookieConsentValue = cookieConsentValue?.replace(/{/gi, '{"').replace(/:/gi, '":').replace(/,/gi, ',"').replace(/'/gi, '"');
     
-    if (!store.getState().app.isGAInitialized && cookieConsent && (JSON.parse(cookieConsent) as CookieConsent).statistics){
+    if (!store.getState().app.isGAInitialized && cookieConsentValue && (JSON.parse(cookieConsentValue) as CookieConsent).statistics){
       initGA()
       store.dispatch(setIsGaInitialized(true));
     }

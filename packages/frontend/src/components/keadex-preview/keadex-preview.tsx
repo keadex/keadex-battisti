@@ -7,7 +7,7 @@ import { shuffle } from '../../helper/array-helper';
 
 
 //------------------ COMPONENT
-export const KeadexPreview : React.FunctionComponent = React.memo((props) => {
+const KeadexPreview : React.FunctionComponent = React.memo((props) => {
   // const windowDimensions = useWindowDimensions();
   
   let isAnimationInitialized = false;
@@ -230,3 +230,5 @@ export const KeadexPreview : React.FunctionComponent = React.memo((props) => {
     </React.Fragment>
   );
 })
+
+export default KeadexPreview;

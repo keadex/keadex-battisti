@@ -1,24 +1,28 @@
 import React, { RefObject } from 'react';
-import ScrollAnimation from 'react-animate-on-scroll';
-import { FormattedMessage } from 'react-intl';
+
+// import ScrollAnimation from 'react-animate-on-scroll';
+const ScrollAnimation = dynamic(() => import('react-animate-on-scroll'));
+
 import BasePageComponent from '../components/base-page-component/base-page-component';
 import styles from './index.module.scss';
-import ReactPlayer from 'react-player'
 import { MorphSVGTimeline, generateMorphSVGTimelines } from '../helper/animation-helper';
-import { MDBCard } from 'mdbreact';
-import { MDBView, MDBCardBody } from 'mdbreact';
-import { DosButton } from '../components/dos-button/dos-button';
 import { KEA_LAB_URL, PAGE_ROOT_ID, WHY_KEADEX_ID, WHATS_KEADEX_ID } from '../core/route.constants';
-import { Background } from '../components/background/background';
-import graph from "../../public/img/graph-bg.jpg";
 import { FORMATTED_MESSAGE_STANDARD_HTML_VALUES } from '../core/app.constants';
-import PageLayout from '../components/page-layout/page-layout';
 import { disableScrollIntoView } from '../helper/generic-helper';
-import { KeadexPreview } from '../components/keadex-preview/keadex-preview';
 import { GetStaticProps } from 'next';
 import { wrapper } from '../core/store/store';
-import OptimizedImage from '../components/optimized-image/optimized-image';
+import dynamic from 'next/dynamic'
 
+const FormattedMessage:any = dynamic(() => import('react-intl').then((mod:any) => mod.FormattedMessage));
+const MDBCard:any = dynamic(() => import('mdbreact').then((mod:any) => mod.MDBCard));
+const MDBView:any = dynamic(() => import('mdbreact').then((mod:any) => mod.MDBView));
+const MDBCardBody:any = dynamic(() => import('mdbreact').then((mod:any) => mod.MDBCardBody));
+const ReactPlayer = dynamic(() => import('react-player'));
+const OptimizedImage = dynamic(() => import('../components/optimized-image/optimized-image'));
+const DosButton = dynamic(() => import('../components/dos-button/dos-button'));
+const Background = dynamic(() => import('../components/background/background'));
+const PageLayout = dynamic(() => import('../components/page-layout/page-layout'));
+const KeadexPreview = dynamic(() => import('../components/keadex-preview/keadex-preview'));
 
 
 //--------------- TYPES
@@ -218,7 +222,7 @@ class Home extends BasePageComponent<any, HomeState> {
 
           {/* WHY KEADEX */}
           <div id="why-keadex" ref={this.anchorRefs.get("why-keadex")} className={`${styles["home__section"]} ${styles["home__why-keadex"]}`}>
-            <Background id={`bg`} img={graph} overlayColor="#131313"/>
+            <Background id={`bg`} img={"graph-bg.jpg"} overlayColor="#131313"/>
             <div className={`${styles["home__section-content"]}`}>
               <div className="row m-0">
                 <div className="col-12">
