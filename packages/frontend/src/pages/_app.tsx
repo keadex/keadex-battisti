@@ -17,7 +17,7 @@ import { initGA, logPageView } from '../core/google-analytics';
 import sanitizeHtml from 'sanitize-html';
 import { CookieConsent } from '../model/models';
 import { getStrapiMedia } from '../helper/strapi-helper';
-
+ 
 const Head = dynamic(() => import('next/head'));
 const Spinner:any = dynamic(() => import('../components/spinner/spinner'));
 const Header:any = dynamic(() => import('../components/header/header'));
