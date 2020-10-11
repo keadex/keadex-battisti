@@ -3,7 +3,6 @@ import ScrollAnimation from 'react-animate-on-scroll';
 import { FormattedMessage } from 'react-intl';
 import BasePageComponent from '../components/base-page-component/base-page-component';
 import styles from './index.module.scss';
-import styled from 'styled-components';
 import ReactPlayer from 'react-player'
 import { MorphSVGTimeline, generateMorphSVGTimelines } from '../helper/animation-helper';
 import { MDBCard } from 'mdbreact';
@@ -20,9 +19,6 @@ import { GetStaticProps } from 'next';
 import { wrapper } from '../core/store/store';
 import OptimizedImage from '../components/optimized-image/optimized-image';
 
-const FooterDiv:any = styled.div<any>`
-  position:absolute; width: 100%; top: ${(props)=>(props.vpHeight && props.logoContainerHeight)?(props.vpHeight-props.logoContainerHeight - 100) + "px":"0px"}
-`;
 
 
 //--------------- TYPES
@@ -52,7 +48,6 @@ export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
 class Home extends BasePageComponent<any, HomeState> {
 
   //ATTRS
-  private logoContRef:RefObject<HTMLDivElement>;
   private svgPathRef:RefObject<SVGPathElement>[];
   private listRefs:Map<string, RefObject<HTMLLIElement>>;
   private experimentPath:string[] = [
@@ -94,7 +89,6 @@ class Home extends BasePageComponent<any, HomeState> {
     ];
     this.state = { width: 0, height: 0 };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
-    this.logoContRef = React.createRef<HTMLDivElement>();
     this.listRefs = new Map<string, RefObject<HTMLLIElement>>();
     this.listRefs.set(ListItem.experiment, React.createRef<HTMLLIElement>());
     this.listRefs.set(ListItem.modular, React.createRef<HTMLLIElement>());
@@ -210,14 +204,6 @@ class Home extends BasePageComponent<any, HomeState> {
   }
 
 
-  //------------ getDaysFromLaunch
-  // private getDaysFromLaunch(){
-  //   let today: Moment = moment();
-  //   let launchDay: Moment = moment(process.env.NEXT_PUBLIC_LAUNCH_DATE);
-  //   return today.diff(launchDay, "days");
-  // }
-
-
   //------------ render
   public render() {
     
@@ -229,23 +215,6 @@ class Home extends BasePageComponent<any, HomeState> {
           <div className={`${styles["home__section"]} ${styles["home__cover"]} animate__animated animate__fadeIn animate__slow`} id="home-section">
             <KeadexPreview />
           </div>
-          {/* <div className={`${styles["home__section"]} ${styles["home__cover"]}`} id="home-section">
-            <div className="full-center position-relative text-center" ref={this.logoContRef}>
-              <ScrollAnimation scrollableParentSelector={"#"+PAGE_ROOT_ID} offset={0} animateIn='animate__fadeIn animate__slow' animateOut='animate__fadeOut'>
-                <img id="keadex-logo" src={keadexLogo} width={300}/>
-              </ScrollAnimation>
-              <ScrollAnimation scrollableParentSelector={"#"+PAGE_ROOT_ID} offset={0} delay={350} animateIn='animate__fadeIn animate__slow' animateOut='animate__fadeOut'>
-                <div className={`${styles["home__title"]}`}><FormattedMessage id="HOME.TITLE" /></div>
-              </ScrollAnimation>
-            </div>
-            <div className={`${styles["home__footer-text"]} text-uppercase`}>
-              <ScrollAnimation scrollableParentSelector={"#"+PAGE_ROOT_ID} animateIn='animate__fadeIn animate__slow' animateOut='animate__fadeOut'>
-                <div className={`${styles["home__footer-text-text"]}`}>
-                  <FooterDiv vpHeight={this.state.height} logoContainerHeight={(this.logoContRef.current)?this.logoContRef.current.offsetHeight:"0"}>Version {process.env.NEXT_PUBLIC_APP_VERSION}</FooterDiv>
-                </div>
-              </ScrollAnimation>
-            </div>
-          </div> */}
 
           {/* WHY KEADEX */}
           <div id="why-keadex" ref={this.anchorRefs.get("why-keadex")} className={`${styles["home__section"]} ${styles["home__why-keadex"]}`}>
