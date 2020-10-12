@@ -84,7 +84,7 @@
   },
   "scripts": {
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
-    "build": "apt-get install dh-autoreconf",
+    "build": "next build",
     "start": "next start",
     "type-check": "tsc",
     "graphql-codegen": "graphql-codegen --config strapi-graphql-codegen.yml"
