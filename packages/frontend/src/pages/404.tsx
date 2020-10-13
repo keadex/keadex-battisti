@@ -2,7 +2,9 @@ import React from "react";
 import PageLayout from "../components/page-layout/page-layout";
 import { GetStaticProps } from "next";
 import { wrapper } from "../core/store/store";
-import OptimizedImage from '../components/optimized-image/optimized-image';
+import dynamic from "next/dynamic";
+
+const OptimizedImage:any = dynamic(() => import('../components/optimized-image/optimized-image'));
 
 //---------- getStaticProps
 export const getStaticProps: GetStaticProps = wrapper.getStaticProps(

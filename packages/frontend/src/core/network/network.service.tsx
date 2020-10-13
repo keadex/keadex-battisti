@@ -1,7 +1,7 @@
 import {BaseResponse, StrapiResponse} from '../../model/models';
 import axios, { AxiosPromise, AxiosResponse } from 'axios';
 import { Quote, Experience, ForceGraph } from '../../model/models';
-import { print } from 'graphql';
+import { print } from 'graphql/language';
 import { EXPERIENCES_QUERY, EXPERIENCE_GRAPH_QUERY } from './graphql-queries/experience';
 import { QUOTES_QUERY } from './graphql-queries/quote';
 import { getStrapiMedia, getStrapiURL } from '../../helper/strapi-helper';

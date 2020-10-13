@@ -10,7 +10,7 @@ import { FloatingMenu, MainButton, ChildButton } from 'react-floating-button-men
 import { ArchitectureChalkboardToolbar } from './architecture-chalkboard-toolbar';
 import { ArchitectureType } from '../../pages/kealab';
 import { PAGE_ROOT_ID } from '../../core/route.constants';
-import { scrollToSection as scrollToSectionHelper, isClient, disableScrollIntoView } from '../../helper/generic-helper';
+import { scrollToSection as scrollToSectionHelper, isClient, disableScrollIntoView, mySanitizeHtml } from '../../helper/generic-helper';
 import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import { IStoreState } from '../../core/store/store.type';
@@ -154,7 +154,7 @@ const Architecture : React.FunctionComponent<ArchitectureProps> = (props) => {
                     </div>
                     <div ref={moduleDescriptionRef} id="module-description">
                       <h1><FormattedMessage id="KEALAB.MODULE_DETAILS.MENU.DESCRIPTION" /></h1>
-                      <div dangerouslySetInnerHTML={{__html: sanitizeHtml(module.description)}} />
+                      <div dangerouslySetInnerHTML={{__html: mySanitizeHtml(sanitizeHtml, sanitizeHtml.defaults, module.description)}} />
                     </div>
                     {module.features && module.features.length > 0 && (
                       <>
@@ -171,7 +171,7 @@ const Architecture : React.FunctionComponent<ArchitectureProps> = (props) => {
                       <>
                         <div className="mt-5" ref={moduleRoadmapRef} id="module-roadmap">
                           <h1><FormattedMessage id="KEALAB.MODULE_DETAILS.MENU.ROADMAP" /></h1>
-                          <div dangerouslySetInnerHTML={{__html: sanitizeHtml(module.roadmap)}} />
+                          <div dangerouslySetInnerHTML={{__html: mySanitizeHtml(sanitizeHtml, sanitizeHtml.defaults, module.roadmap)}} />
                         </div>
                       </>
                     )}

@@ -11,20 +11,16 @@ import useSWR from 'swr';
 import '../styles/global.scss'
 import { wrapper, StoreService } from '../core/store/store';
 import { toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred, setIsAppInitialized, setIsGaInitialized, setQuotes } from '../core/store/reducers/app.reducer';
-import NetworkService, { GET_QUOTES_API } from '../core/network/network.service';
 import Cookies from 'js-cookie';
 import { initGA, logPageView } from '../core/google-analytics';
-import sanitizeHtml from 'sanitize-html';
 import { CookieConsent } from '../model/models';
-import { getStrapiMedia } from '../helper/strapi-helper';
- 
+
 const Head = dynamic(() => import('next/head'));
 const Spinner:any = dynamic(() => import('../components/spinner/spinner'));
 const Header:any = dynamic(() => import('../components/header/header'));
 const Body:any = dynamic(() => import('../components/body/body'));
 const IntlProvider:any = dynamic(() => import('react-intl').then((mod:any) => mod.IntlProvider));
 const DefaultSeo:any = dynamic(() => import('next-seo').then((mod:any) => mod.DefaultSeo));
-
 
 
 //---------- Disable debug and log levels in production
@@ -45,8 +41,8 @@ declare global {
 
 //---------- react-intl configuration
 if (!Intl.PluralRules) {
-    require('@formatjs/intl-pluralrules/polyfill');
-    require('@formatjs/intl-pluralrules/locale-data/en'); // Add locale data for en
+  // require('@formatjs/intl-pluralrules/polyfill');
+  // require('@formatjs/intl-pluralrules/locale-data/en'); // Add locale data for en
 }
 
 var messages_en:any = flatten(require('../translations/en.json'));
@@ -69,10 +65,6 @@ const queries : Query = {
   upLg: '(min-width: 992px)',
   upXl: '(min-width: 1200px)'
 }
-
-
-//---------- Sanitize Html global configuration
-sanitizeHtml.defaults.allowedAttributes["*"] = ["class"]; //allow class attr on all tags
 
 
 //---------- COMPONENT
@@ -128,7 +120,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   
   //useSWR caches already done requests and doesn't resubmit the same request.
   //So it's not a problem if the following line is called multiple time: only a request is submitted
-  const quotesResp = useSWR(getStrapiMedia(GET_QUOTES_API)!, ()=>NetworkService.getInstance().__tmp_getQuotes());
+  // const quotesResp = useSWR(getStrapiMedia(GET_QUOTES_API)!, ()=>NetworkService.getInstance().__tmp_getQuotes());
 
   //---------- useEffect
   useEffect(() => {
@@ -154,10 +146,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
     //---- 
 
-    if (!quotesResp.error && quotesResp && quotesResp.data && quotesResp.data.data
-      && quotesResp.data.data.data && quotesResp.data.data.data.quotes && store.getState().app.quotes.length == 0){
+    // console.log(pageProps.quotesResp);
+    if (pageProps.quotesResp && pageProps.quotesResp.data && pageProps.quotesResp.data.quotes && store.getState().app.quotes.length == 0){
       //save quotes only if not already saved
-      store.dispatch(setQuotes(quotesResp.data.data.data.quotes));
+      store.dispatch(setQuotes(pageProps.quotesResp.data.quotes));
     }
 
     //---------- Bind router events to show loader
@@ -259,16 +251,19 @@ MyApp.getInitialProps = async (appCtx:AppContext) => {
   // Calls page's `getInitialProps` and fills `appProps.pageProps`
   const appProps = await App.getInitialProps(appCtx);
   
+  const NetworkService = (await import("../core/network/network.service")).default;
+  const quotesResp = await NetworkService.getInstance().__tmp_getQuotes();
+  // console.log(quotesResp);
   if(appCtx.ctx.pathname.indexOf("/strapi") != -1){
-    // Fetch global site settings from Strapi, only for pages retrieved by Strapi 
+    // Fetch global site settings from Strapi, only for pages retrieved by Strapi
     const global = await NetworkService.getInstance().getStrapiGlobalData();
     const globalData = global.data.data?.global;
     // console.debug("Global data");
     // console.debug(globalData);
     // Pass the data to our page via props
-    return { ...appProps, pageProps: { globalData, path: appCtx.ctx.pathname } };
+    return { ...appProps, pageProps: { globalData, path: appCtx.ctx.pathname, quotesResp: quotesResp.data } };
   }else{
-    return { ...appProps };
+    return { ...appProps, pageProps: { quotesResp: quotesResp.data } };
   }
 };
 

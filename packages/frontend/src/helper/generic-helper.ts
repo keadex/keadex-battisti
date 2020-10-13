@@ -1,5 +1,5 @@
-import { RefObject } from "react";
-
+import type { RefObject } from "react";
+import type sanitize from 'sanitize-html';
 const materialColors = require("material-colors").default
 
 
@@ -115,4 +115,12 @@ export function disableScrollIntoView(elementIds:string[]|null, elementNames:str
       }
     })
   }
+}
+
+
+//----- mySanitizeHtml
+export function mySanitizeHtml(sanitizeHtml:(dirty: string, options?: sanitize.IOptions)=> string, defaults:sanitize.IDefaults, dirty:string):string{
+  let allowedAttributes = defaults.allowedAttributes;
+  allowedAttributes["*"] = ["class"];
+  return sanitizeHtml(dirty, {allowedAttributes: allowedAttributes});
 }

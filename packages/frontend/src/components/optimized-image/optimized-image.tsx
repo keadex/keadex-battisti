@@ -1,6 +1,6 @@
 
 import 'lazysizes';
-import React, { MutableRefObject, RefObject } from 'react';
+import React, { MutableRefObject } from 'react';
 import { CSSProperties } from 'react';
 
 //------------------ TYPES

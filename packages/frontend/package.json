@@ -85,6 +85,7 @@
   "scripts": {
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
+    "build-analyze": "cross-env ANALYZE=true yarn build",
     "start": "next start",
     "type-check": "tsc",
     "graphql-codegen": "graphql-codegen --config strapi-graphql-codegen.yml"
@@ -102,6 +103,7 @@
     "@graphql-codegen/cli": "1.17.8",
     "@graphql-codegen/typescript": "1.17.8",
     "@graphql-codegen/typescript-operations": "1.17.8",
+    "@next/bundle-analyzer": "^9.5.5",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
     "autoprefixer": "^9.8.6",

@@ -7,7 +7,9 @@ const optimizedImages = require('next-optimized-images');
 const withTM = require('next-transpile-modules')(['react-scrollmagic', 'react-syntax-highlighter']);
 
 // module.exports = withSass(withImages());
-
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
 module.exports = compose([
   // [withSass],
   // [withCSS],
@@ -15,6 +17,7 @@ module.exports = compose([
   // [withImages],
   [optimizedImages],
   [withTM],
+  [withBundleAnalyzer],
   {
     webpack: cfg => {
       const originalEntry = cfg.entry
