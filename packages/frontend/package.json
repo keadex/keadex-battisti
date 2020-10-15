@@ -84,6 +84,7 @@
   },
   "scripts": {
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
+    "build": "next build",
     "build-analyze": "cross-env ANALYZE=true yarn build",
     "start": "next start",
     "type-check": "tsc",
@@ -109,7 +110,6 @@
     "babel-plugin-styled-components": "latest",
     "cross-env": "^7.0.2",
     "file-loader": "^6.0.0",
-    "imagemin-gifsicle": "^7.0.0",
     "imagemin-mozjpeg": "^9.0.0",
     "imagemin-optipng": "^8.0.0",
     "imagemin-svgo": "^8.0.0",
