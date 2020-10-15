@@ -84,7 +84,6 @@
   },
   "scripts": {
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
-    "build": "next build",
     "build-analyze": "cross-env ANALYZE=true yarn build",
     "start": "next start",
     "type-check": "tsc",
