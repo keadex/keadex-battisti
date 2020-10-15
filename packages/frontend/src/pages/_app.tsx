@@ -7,7 +7,6 @@ import { watchForHover } from '../helper/generic-helper';
 import flatten from 'flat'
 import {useStore} from 'react-redux';
 import dynamic from 'next/dynamic'
-import useSWR from 'swr';
 import '../styles/global.scss'
 import { wrapper, StoreService } from '../core/store/store';
 import { toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred, setIsAppInitialized, setIsGaInitialized, setQuotes } from '../core/store/reducers/app.reducer';

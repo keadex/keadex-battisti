@@ -5,7 +5,7 @@ import Architecture, { ArchitectureImplProps} from './architecture';
 
 
 //------------------ COMPONENT
-export const ApplicationArchitecture : React.FunctionComponent<ArchitectureImplProps> = (props:ArchitectureImplProps) => {
+const ApplicationArchitecture : React.FunctionComponent<ArchitectureImplProps> = (props:ArchitectureImplProps) => {
   
   //----- render
   return (
@@ -18,3 +18,5 @@ export const ApplicationArchitecture : React.FunctionComponent<ArchitectureImplP
     </React.Fragment>
   );
 }
+
+export default ApplicationArchitecture;

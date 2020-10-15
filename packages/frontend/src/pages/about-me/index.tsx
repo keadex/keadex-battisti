@@ -1,23 +1,34 @@
 import React from 'react';
 import styles from './about-me.module.scss';
-import { FormattedMessage } from 'react-intl';
+// import { FormattedMessage } from 'react-intl';
 import { Controller, Scene } from 'react-scrollmagic';
-import ProgressBar from '../../components/progressbar/progressbar';
+// import ProgressBar from '../../components/progressbar/progressbar';
 import { connect } from 'react-redux';
 import { setCurrentScene, setProgress, setExperience, resetState } from '../../core/store/reducers/aboutme.reducer';
 import { getDefaultAboutMeState, IAboutMeState, IStoreState } from '../../core/store/store.type';
-import Education from '../../components/education/education';
-import Hobbies from '../../components/hobbies/hobbies';
-import Experience from '../../components/experience/experience';
+// import Education from '../../components/education/education';
+// import Hobbies from '../../components/hobbies/hobbies';
+// import Experience from '../../components/experience/experience';
 import {Experience as IExperience, ForceGraph} from '../../model/models';
-import NetworkService from '../../core/network/network.service';
-import Resume from '../../components/resume/resume';
+// import NetworkService from '../../core/network/network.service';
+// import Resume from '../../components/resume/resume';
 import BasePageComponent from '../../components/base-page-component/base-page-component';
 import { PAGE_ROOT_ID } from '../../core/route.constants';
 import { GetStaticProps } from 'next';
 import { wrapper } from '../../core/store/store';
-import PageLayout from '../../components/page-layout/page-layout';
+// import PageLayout from '../../components/page-layout/page-layout';
 import { DEFAULT_REVALIDATE_SECONDS } from '../../core/app.constants';
+import dynamic from 'next/dynamic';
+
+const FormattedMessage:any = dynamic(() => import('react-intl').then((mod:any) => mod.FormattedMessage));
+// const Controller:any = dynamic(() => import('react-scrollmagic').then((mod:any) => mod.Controller));
+// const Scene:any = dynamic(() => import('react-scrollmagic').then((mod:any) => mod.Scene));
+const ProgressBar = dynamic(() => import('../../components/progressbar/progressbar'));
+const Education = dynamic(() => import('../../components/education/education'));
+const Hobbies = dynamic(() => import('../../components/hobbies/hobbies'));
+const Experience = dynamic(() => import('../../components/experience/experience'));
+const Resume = dynamic(() => import('../../components/resume/resume'));
+const PageLayout = dynamic(() => import('../../components/page-layout/page-layout'));
 
 
 //--------------- TYPES
@@ -31,21 +42,12 @@ interface AboutMeProps {
   experienceGraph?: ForceGraph.Graph
 }
 
-// export const getServerSideProps = wrapper.getServerSideProps(
-//   ({store, req, res, ...etc}) => {
-//     console.log("getServerSideProps aboutme before " + store.getState().app.previousUrl);
-//     store.dispatch(setPreviousUrl("blaaa"));
-//     console.log("getServerSideProps aboutme after " + store.getState().app.previousUrl);
-//     return {
-//       props: {
-//         prova: store.getState().app.previousUrl
-//       },
-//     }
-//   }
-// );
-export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
+
+  //---------- getStaticProps
+  export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
   async ({store}) => {
-    let expResp = await NetworkService.getInstance().__tmp_getExperiences();
+  const NetworkService = (await import("../../core/network/network.service")).default;
+  let expResp = await NetworkService.getInstance().__tmp_getExperiences();
     if (expResp.data && expResp.data.data && expResp.data.data.experiences) {
       store.dispatch(setExperience(expResp.data.data.experiences));
     }

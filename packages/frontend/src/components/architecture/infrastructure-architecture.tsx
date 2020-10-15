@@ -5,7 +5,7 @@ import InfrArchSvg from '../../../public/img/infrastructure-architecture.svg';
 
 
 //------------------ COMPONENT
-export const InfrastructureArchitecture : React.FunctionComponent<ArchitectureImplProps> = (props:ArchitectureImplProps) => {
+const InfrastructureArchitecture : React.FunctionComponent<ArchitectureImplProps> = (props:ArchitectureImplProps) => {
   
   //----- render
   return (
@@ -18,3 +18,5 @@ export const InfrastructureArchitecture : React.FunctionComponent<ArchitectureIm
     </React.Fragment>
   );
 }
+
+export default InfrastructureArchitecture;
