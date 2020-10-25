@@ -70,6 +70,7 @@
     "react-scrollmagic": "file:./patch/react-scrollmagic",
     "react-svg": "^11.0.27",
     "react-syntax-highlighter": "^13.5.3",
+    "react-use": "^15.3.4",
     "react-zoom-pan-pinch": "^1.6.1",
     "recharts": "2.0.0-beta.5",
     "redux-actions": "^2.6.5",
