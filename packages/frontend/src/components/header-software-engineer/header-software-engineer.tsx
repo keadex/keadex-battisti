@@ -49,7 +49,7 @@ class HeaderSoftwareEngineer extends React.Component<ExperienceProps> {
           {/* <h2 className="text-md-right text-center text-light mr-md-5">{this.props.experience.from} - {this.props.experience.to}</h2> */}
           <OptimizedImage id="sw-stack" className={`${styles["header-sw-eng__sw-stack"]}`} src={"header-experience/sw-stack.png"} alt="Software Stack"  ref={this.swStackRef} height={{default: "90%", sm: "70%"}} srcWidth={847} srcHeight={579}/>
           <div className={`${styles["header-sw-eng-root--ground"]} position-absolute fixed-top`} />
-          <EngineerImg id="engineer" className={`animate__animated animate__fadeIn ${styles["header-sw-eng__engineer"]}`} src={"header-experience/engineer.gif"} alt="Software Engineer" height="80px" width="auto" swStackWidth={(this.swStackRef.current)?this.swStackRef.current.offsetWidth:"0"} srcWidth={161} srcHeight={248}/>
+          <EngineerImg id="engineer" className={`animate__animated animate__fadeIn ${styles["header-sw-eng__engineer"]}`} src={"header-experience/engineer.gif"} alt="Software Engineer" height="80px" swStackWidth={(this.swStackRef.current)?this.swStackRef.current.offsetWidth:"0"} srcWidth={161} srcHeight={248}/>
         </div>
     );
   }
