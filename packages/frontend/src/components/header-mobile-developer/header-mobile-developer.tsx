@@ -45,8 +45,8 @@ class HeaderMobileDeveloper extends React.Component<ExperienceProps> {
     return (
         <div className={`${styles["header-mobile-root"]} position-relative`}>
           {/* <h2 className="text-center text-light">{this.props.experience.from} - {this.props.experience.to}</h2> */}
-          <OptimizedImage id="android-bot" className={`${styles["header-mobile-actors"]}`} src={"header-experience/android-bot.png"} alt="Android bot" height="50px" />
-          <OptimizedImage id="apple-logo" className={`${styles["header-mobile-actors"]} ${styles["header-mobile-apple"]}`} src={"header-experience/apple-logo.png"} alt="Apple logo" height="45px" />
+          <OptimizedImage id="android-bot" className={`${styles["header-mobile-actors"]}`} src={"header-experience/android-bot.png"} alt="Android bot" height="50px" srcWidth={347} srcHeight={312} />
+          <OptimizedImage id="apple-logo" className={`${styles["header-mobile-actors"]} ${styles["header-mobile-apple"]}`} src={"header-experience/apple-logo.png"} alt="Apple logo" height="45px" srcWidth={227} srcHeight={290} />
         </div>
     );
   }

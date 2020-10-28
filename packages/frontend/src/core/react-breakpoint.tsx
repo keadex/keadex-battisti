@@ -5,8 +5,13 @@ import React, {
   useContext} from 'react';
 
 //------------ TYPES
+export enum QueryBreakpoint {
+  default="default", xs="xs", sm="sm", md="md", lg="lg", xl="xl",
+  upXs="upXs", upSm="upSm", upMd="upMd", upLg="upLg", upXl="upXl"
+}
+
 export type Query = {
-  [index:string]: string,
+  [index in QueryBreakpoint]?: string
 }
 
 type BreakpointProviderProps = {
@@ -26,7 +31,7 @@ const BreakpointProvider = ({children, queries}:BreakpointProviderProps) => {
 
   useEffect(() => {
     const mediaQueryLists : any = {};
-    const keys = Object.keys(queries);
+    const keys = (Object.keys(queries) as QueryBreakpoint[]);//Object.keys(queries);
     let isAttached = false;
 
     const handleQueryListener = () => {
@@ -39,9 +44,9 @@ const BreakpointProvider = ({children, queries}:BreakpointProviderProps) => {
 
     if (window && window.matchMedia) {
       const matches : any = {};
-      keys.forEach((media:string) => {
+      keys.forEach((media:QueryBreakpoint) => {
         if (typeof queries[media] === 'string') {
-          mediaQueryLists[media] = window.matchMedia(queries[media]);
+          mediaQueryLists[media] = window.matchMedia(queries[media]!);
           matches[media] = mediaQueryLists[media].matches
         } else {
           matches[media] = false

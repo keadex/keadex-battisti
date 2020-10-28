@@ -68,17 +68,17 @@ class HeaderArchitect extends React.Component<HeaderArchitectProps> {
           <div className={`${styles["header-architect__game-container"]}`}>
             <div className={`${styles["header-architect__game-bg"]} position-absolute`}></div>
             <div className={`${styles["header-architect__tetriminos-container"]}`} style={{width:this.widthBoxShape*7}}>
-              <OptimizedImage id="order-manager-shape" className={`${styles["header-architect__shape"]}`} src={"header-experience/order-manager.png"} alt="Order Manager shape" width={(this.widthBoxShape*2)+"px"} style={{left: this.getLeftShape(1)}}/>
-              <OptimizedImage id="microservices-shape" className={`${styles["header-architect__shape"]}`} src={"header-experience/microservices.png"} alt="Microservices shape" width={(this.widthBoxShape*3)+"px"} style={{left: this.getLeftShape(2)}}/>
-              <OptimizedImage id="cloud-ai-shape" className={`${styles["header-architect__shape"]}`} src={"header-experience/cloud-ai.png"} alt="Cloud shape" width={(this.widthBoxShape*3)+"px"} style={{left: this.getLeftShape(3)}}/>
-              <OptimizedImage id="devops-shape" className={`${styles["header-architect__shape"]}`} src={"header-experience/devops.png"} alt="DevOps shape" width={(this.widthBoxShape*3)+"px"} style={{left: this.getLeftShape(4)}}/>
-              <OptimizedImage id="micro-frontends-shape" className={`${styles["header-architect__shape"]}`} src={"header-experience/micro-frontends.png"} alt="Micro Frontends shape" width={(this.widthBoxShape*2)+"px"} style={{left: this.getLeftShape(5)}}/>
-              <OptimizedImage id="crm-shape" className={`${styles["header-architect__shape"]}`} src={"header-experience/crm.png"} alt="Micro Frontends shape" width={(this.widthBoxShape*2)+"px"} style={{left: this.getLeftShape(6)}}/>
+              <OptimizedImage id="order-manager-shape" className={`${styles["header-architect__shape"]}`} src={"header-experience/order-manager.png"} alt="Order Manager shape" width={(this.widthBoxShape*2)+"px"} style={{left: this.getLeftShape(1)}} srcWidth={128} srcHeight={191}/>
+              <OptimizedImage id="microservices-shape" className={`${styles["header-architect__shape"]}`} src={"header-experience/microservices.png"} alt="Microservices shape" width={(this.widthBoxShape*3)+"px"} style={{left: this.getLeftShape(2)}} srcWidth={191} srcHeight={65}/>
+              <OptimizedImage id="cloud-ai-shape" className={`${styles["header-architect__shape"]}`} src={"header-experience/cloud-ai.png"} alt="Cloud shape" width={(this.widthBoxShape*3)+"px"} style={{left: this.getLeftShape(3)}} srcWidth={191} srcHeight={128}/>
+              <OptimizedImage id="devops-shape" className={`${styles["header-architect__shape"]}`} src={"header-experience/devops.png"} alt="DevOps shape" width={(this.widthBoxShape*3)+"px"} style={{left: this.getLeftShape(4)}} srcWidth={190} srcHeight={127}/>
+              <OptimizedImage id="micro-frontends-shape" className={`${styles["header-architect__shape"]}`} src={"header-experience/micro-frontends.png"} alt="Micro Frontends shape" width={(this.widthBoxShape*2)+"px"} style={{left: this.getLeftShape(5)}} srcWidth={128} srcHeight={128}/>
+              <OptimizedImage id="crm-shape" className={`${styles["header-architect__shape"]}`} src={"header-experience/crm.png"} alt="Micro Frontends shape" width={(this.widthBoxShape*2)+"px"} style={{left: this.getLeftShape(6)}} srcWidth={128} srcHeight={191}/>
             </div>
           </div>
-          <OptimizedImage src={"header-experience/tetris-score.png"} alt="Tetris score" className={`${styles["header-architect__tetris-score"]} d-lg-block d-none`}/>
-          <OptimizedImage src={"header-experience/tetris-help.png"} alt="Tetris help" className={`${styles["header-architect__tetris-help"]} d-lg-block d-none`}/>
-          <OptimizedImage src={"header-experience/tetris-statistics.png"} alt="Tetris statistics" className={`${styles["header-architect__tetris-statistics"]} d-lg-block d-none`}/>
+          <OptimizedImage src={"header-experience/tetris-score.png"} alt="Tetris score" className={`${styles["header-architect__tetris-score"]} d-lg-block d-none`} height="100%" srcWidth={409} srcHeight={422}/>
+          <OptimizedImage src={"header-experience/tetris-help.png"} alt="Tetris help" className={`${styles["header-architect__tetris-help"]} d-lg-block d-none`} height="100%" srcWidth={409} srcHeight={422}/>
+          <OptimizedImage src={"header-experience/tetris-statistics.png"} alt="Tetris statistics" className={`${styles["header-architect__tetris-statistics"]} d-lg-block d-none`} height="100%" srcWidth={791} srcHeight={423}/>
           <div id="game-over" className={`${styles["header-architect__game-over-root"]} animate__animated animate__fadeOut`}>
             <span className={`${styles["header-architect__game-over-text"]}`}>Game Over</span>
           </div>

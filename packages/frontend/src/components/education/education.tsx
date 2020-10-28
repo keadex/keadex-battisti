@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback, MutableRefObject } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Tween } from 'react-gsap';
-import frontalLobe from "../../../public/img/education/frontal-lobe.png";
+import { PlayState, Tween } from 'react-gsap';import frontalLobe from "../../../public/img/education/frontal-lobe.png";
 import occipitalLobe from "../../../public/img/education/occipital-lobe.png";
 import parietalLobe from "../../../public/img/education/parietal-lobe.png";
 import temporalLobe from "../../../public/img/education/temporal-lobe.png";
@@ -11,7 +10,12 @@ import { ForceGraph } from '../../model/models';
 import { useBreakpoint } from '../../core/react-breakpoint';
 import { isClient } from '../../helper/generic-helper';
 import NoSSR from 'react-no-ssr';
-import OptimizedImage from '../optimized-image/optimized-image';
+import dynamic from 'next/dynamic';
+
+const OptimizedImage = dynamic(
+  () => import('../optimized-image/optimized-image'),
+  { ssr: false }
+)
 
 let ForceGraph2D:any = undefined;
 if (isClient()){
@@ -121,7 +125,7 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             from={{css: {className: "position-relative animate__animated animate__fadeIn"}}}
             to={{css: {className: "position-relative animate__animated animate__fadeOut"}}}
             progress={adjustProgress(1, progress)}
-            playState="stop">
+            playState={PlayState.stop}>
               <div>
                 <div className={`${styles["education__cosmo"]}`} />
                 <div className={`${styles["education__quote-container"]}`}>
@@ -131,7 +135,7 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
 
                 {/* SHOW INTERACTIVE BRAIN GRAPH ONLY ON DESKTOP */}
                 <div className={`d-block d-lg-none text-center ${styles["education__brain-container--mobile"]} ${(adjustProgress(1, progress)!=0?"out":"")}`}>
-                  <OptimizedImage className={`${styles["education__brain-graph"]}`} src={"education/brain-graph.png"} alt="Brain Graph" />
+                  <OptimizedImage className={`${styles["education__brain-graph"]}`} src={"education/brain-graph.png"} alt="Brain Graph" width={{default: "85%"}} srcWidth={852} srcHeight={751} />
                   <div className={`${styles["education__brain-chart-banner"]}`}>
                     <div id="text"><FormattedMessage id="ABOUT_ME.EDUCATION.BRAIN_GRAPH_BANNER" /></div>
                   </div>
@@ -178,14 +182,14 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             from={{css: {className: "animate__animated animate__fadeOutRight"}}}
             to={{css: {className: "animate__animated animate__fadeInLeft"}}}
             progress={adjustProgress(2, progress)}
-            playState="stop">
-              <div><OptimizedImage className={`${styles["education__picture"]}`} src={"education/happy-hour-bari.png"} alt="Baresian happy hour" /></div>
+            playState={PlayState.stop}>
+              <div><OptimizedImage className={`${styles["education__picture"]}`} src={"education/happy-hour-bari.png"} alt="Baresian happy hour" width={{default: "350px", sm: "200px"}} srcWidth={612} srcHeight={612} /></div>
           </Tween>          
           <Tween            
             from={{css: {className: "animate__animated animate__fadeOutDown"}}}
             to={{css: {className: "animate__animated animate__fadeInDown"}}}
             progress={adjustProgress(3, progress)}
-            playState="stop">
+            playState={PlayState.stop}>
               <div>
                 <div className="mt-md-6 mt-5"><FormattedMessage id="ABOUT_ME.EDUCATION.HAPPY_HOUR" /></div>
               </div>
@@ -198,14 +202,14 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             from={{css: {className: "animate__animated animate__fadeOutRight"}}}
             to={{css: {className: "animate__animated animate__fadeInLeft"}}}
             progress={adjustProgress(4, progress)}
-            playState="stop">
-              <div><OptimizedImage className={`${styles["education__picture"]}`} src={"education/marconi.png"} alt="ITIS Guglielmo Marconi Bari" /></div>
+            playState={PlayState.stop}>
+              <div><OptimizedImage className={`${styles["education__picture"]}`} src={"education/marconi.png"} alt="ITIS Guglielmo Marconi Bari" width={{default: "350px", sm: "200px"}} srcWidth={612} srcHeight={612} /></div>
           </Tween>          
           <Tween            
             from={{css: {className: "animate__animated animate__fadeOutDown"}}}
             to={{css: {className: "animate__animated animate__fadeInDown"}}}
             progress={adjustProgress(5, progress)}
-            playState="stop">
+            playState={PlayState.stop}>
               <div>
                 <div className="mt-md-6 mt-5"><FormattedMessage id="ABOUT_ME.EDUCATION.HIGH_SCHOOL" /></div>
               </div>
@@ -218,14 +222,14 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             from={{css: {className: "animate__animated animate__fadeOutRight"}}}
             to={{css: {className: "animate__animated animate__fadeInLeft"}}}
             progress={adjustProgress(6, progress)}
-            playState="stop">
-              <div><OptimizedImage className={`${styles["education__picture"]}`} src={"education/sochild.png"} alt="SoChild" /></div>
+            playState={PlayState.stop}>
+              <div><OptimizedImage className={`${styles["education__picture"]}`} src={"education/sochild.png"} alt="SoChild" width={{default: "350px", sm: "200px"}} srcWidth={612} srcHeight={612}/></div>
           </Tween>          
           <Tween            
             from={{css: {className: "animate__animated animate__fadeOutDown"}}}
             to={{css: {className: "animate__animated animate__fadeInDown"}}}
             progress={adjustProgress(7, progress)}
-            playState="stop">
+            playState={PlayState.stop}>
               <div>
                 <div className="mt-md-6 mt-5"><FormattedMessage id="ABOUT_ME.EDUCATION.UNIVERSITY" /></div>
               </div>
@@ -239,14 +243,14 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             from={{css: {className: "animate__animated animate__fadeOutRight"}}}
             to={{css: {className: "animate__animated animate__fadeInLeft"}}}
             progress={adjustProgress(8, progress)}
-            playState="stop">
-              <div><OptimizedImage className={`${styles["education__picture"]} ${styles["education__jack-avatar"]}`} src={"jack/jack.gif"} alt="Jack avatar" /></div>
+            playState={PlayState.stop}>
+              <div><OptimizedImage className={`${styles["education__picture"]} ${styles["education__jack-avatar"]}`} src={"jack/jack.gif"} alt="Jack avatar" width={{default: "200px", sm: "130px"}} srcWidth={150} srcHeight={269} /></div>
           </Tween>          
           <Tween            
             from={{css: {className: "animate__animated animate__fadeOutDown"}}}
             to={{css: {className: "animate__animated animate__fadeInDown"}}}
             progress={adjustProgress(9, progress)}
-            playState="stop">
+            playState={PlayState.stop}>
               <div>
                 <div className="mt-md-6 mt-5"><FormattedMessage id="ABOUT_ME.EDUCATION.JACK" /></div>
               </div>

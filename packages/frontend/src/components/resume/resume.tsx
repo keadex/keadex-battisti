@@ -9,8 +9,12 @@ import { MDBIcon } from 'mdbreact';
 import NetworkService from '../../core/network/network.service';
 import { FORMATTED_MESSAGE_STANDARD_HTML_VALUES } from '../../core/app.constants';
 import { getStrapiMedia } from '../../helper/strapi-helper';
-import OptimizedImage from '../optimized-image/optimized-image';
+import dynamic from 'next/dynamic';
 
+const OptimizedImage = dynamic(
+  () => import('../optimized-image/optimized-image'),
+  { ssr: false }
+)
 
 //--------------- TYPES
 interface ResumeState{
@@ -66,7 +70,7 @@ class Resume extends React.Component<any, ResumeState> {
     this.tlDownloadResume!.to("#resume-binary-content", 3, {transform: `translate(0, 100%)`, opacity: 1, ease:Linear.easeNone}, "-=2");
     this.tlDownloadResume!.to("#resume-pdf", 2, {opacity: `1`}, "-=2.5");
     
-    this.tlDownloadResume!.addCallback(()=>{
+    this.tlDownloadResume!.add(()=>{
       NetworkService.getInstance().downloadFile(getStrapiMedia(process.env.NEXT_PUBLIC_RESUME_PDF_URL!)!, "resume-giacomosimmi.pdf");
     }, "-=2.5");
     
@@ -115,7 +119,7 @@ class Resume extends React.Component<any, ResumeState> {
 
         {/* PDF ICON */}
         <div id="resume-pdf" className={`full-center ${styles["resume__pdf"]} text-center w-100`}>
-          <OptimizedImage src={"pdf-icon-glitch.gif"} width="160px" />
+          <OptimizedImage src={"pdf-icon-glitch.gif"} width="160px" srcWidth={300} srcHeight={204} />
           {/* <div className="text-console">resume-giacomosimmi.pdf</div> */}
           <h4><MDBIcon icon="undo-alt" className="mt-3" style={{cursor: "pointer"}} onClick={()=>{this.restartAnimation()}}/></h4>
         </div>

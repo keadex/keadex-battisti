@@ -12,7 +12,7 @@ const Image = ({ media, className }:ImageProps) => {
   const fullUrl:string = getStrapiMedia(url)!;
 
   return (
-    <OptimizedImage src={fullUrl} alt={alternativeText || ""} className={className} />
+    <img src={fullUrl} alt={alternativeText || ""} className={className} />
   );
 };
 
