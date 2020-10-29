@@ -73,10 +73,10 @@ class Header extends React.Component<HeaderProps> {
           <div className="pages-nav__item pages-nav__item--small"><a className="link link--page link--faded" href="#page-blog">Blog &amp; News</a></div>
           <div className="pages-nav__item pages-nav__item--small"><a className="link link--page link--faded" href="#page-contact">Contact</a></div> */}
           <div className="pages-nav__item pages-nav__item--social text-center"> 
-            <a className="link link--social link--faded" href="https://www.linkedin.com/in/giacomosimmi/" target="_blank"><MDBIcon fab icon='linkedin' /><span className="text-hidden">LinkedIn</span></a>
-            <a className="link link--social link--faded" href="https://github.com/keadex" target="_blank"><MDBIcon fab icon='github' /><span className="text-hidden">GitHub</span></a>
-            <a className="link link--social link--faded" href="http://open.spotify.com/user/jacksimmi" target="_blank"><MDBIcon fab icon='spotify' /><span className="text-hidden">Spotify</span></a>
-            {/* <a className="link link--social link--faded" href="https://www.instagram.com/jh4ck_/" target="_blank"><MDBIcon fab icon='instagram' /><span className="text-hidden">Instagram</span></a> */}
+            <a className="link link--social link--faded" href="https://www.linkedin.com/in/giacomosimmi/" target="_blank" rel="external nofollow noopener"><MDBIcon fab icon='linkedin' /><span className="text-hidden">LinkedIn</span></a>
+            <a className="link link--social link--faded" href="https://github.com/keadex" target="_blank" rel="external nofollow noopener"><MDBIcon fab icon='github' /><span className="text-hidden">GitHub</span></a>
+            <a className="link link--social link--faded" href="http://open.spotify.com/user/jacksimmi" target="_blank" rel="external nofollow noopener"><MDBIcon fab icon='spotify' /><span className="text-hidden">Spotify</span></a>
+            {/* <a className="link link--social link--faded" href="https://www.instagram.com/jh4ck_/" target="_blank" rel="external nofollow noopener"><MDBIcon fab icon='instagram' /><span className="text-hidden">Instagram</span></a> */}
           </div> 
         </nav>
         {/* /navigation*/}

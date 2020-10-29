@@ -68,9 +68,9 @@ export function watchForHover() {
     lastTouchTime = (new Date()).getMilliseconds();
   }
 
-  document.addEventListener('touchstart', updateLastTouchTime, true);
-  document.addEventListener('touchstart', disableHover, true);
-  document.addEventListener('mousemove', enableHover, true);
+  document.addEventListener('touchstart', updateLastTouchTime, {passive: true});
+  document.addEventListener('touchstart', disableHover, {passive: true});
+  document.addEventListener('mousemove', enableHover, {passive: true});
 
   enableHover()
 }
