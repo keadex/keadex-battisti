@@ -123,7 +123,7 @@ class Education extends React.Component<IEducationProps> {
                     <FormattedMessage
                       id="ABOUT_ME.HOBBIES.DESCRIPTION_MARTIAL_ARTS"
                       values={{
-                        a: (chunks:any) => (<a href='http://www.kyohansimmi.it' target='_blank'>{chunks}</a>)
+                        a: (chunks:any) => (<a href='http://www.kyohansimmi.it' target='_blank' rel="noopener">{chunks}</a>)
                       }
                     }/>
                   </div>
