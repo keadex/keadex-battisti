@@ -90,7 +90,8 @@
     "build-analyze": "cross-env ANALYZE=true yarn build",
     "start": "next start",
     "type-check": "tsc",
-    "graphql-codegen": "graphql-codegen --config strapi-graphql-codegen.yml"
+    "graphql-codegen": "graphql-codegen --config strapi-graphql-codegen.yml",
+    "build-start": "yarn build & yarn start"
   },
   "eslintConfig": {
     "extends": "react-app"
