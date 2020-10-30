@@ -16,7 +16,7 @@ const EngineerImg:any = styled(OptimizedImage)`
 class HeaderSoftwareEngineer extends React.Component<ExperienceProps> {
 
   //ATTRS
-  private tlBotAndroid:TimelineMax|undefined;
+  private tlSwStack:TimelineMax|undefined;
   private swStackRef: RefObject<any>;
 
   //FUNCS
@@ -30,20 +30,21 @@ class HeaderSoftwareEngineer extends React.Component<ExperienceProps> {
 
   //----- componentDidMount
   componentDidMount(){
-    this.tlBotAndroid = new TimelineMax();
+    this.tlSwStack = new TimelineMax();
     this.initTimeline();
   }
 
 
   //----- initTimeline
   private initTimeline(){    
-    this.tlBotAndroid!.to("#sw-stack", 1, {transform: "translate(-50%, 0%)"});
-    this.tlBotAndroid!.pause()
+    this.tlSwStack!.fromTo("#sw-stack", 1, {xPercent: -50, yPercent: 0}, {xPercent: -50, yPercent: -100});
+    // this.tlSwStack!.to("#sw-stack", 1, {transform: "translate(-50%, 0%)"});
+    this.tlSwStack!.pause()
   }
 
   //------------ render
   public render() {
-    this.tlBotAndroid?.progress(this.props.progress);
+    this.tlSwStack?.progress(this.props.progress);
     return (
         <div className={`${styles["header-sw-eng-root--landscape"]} position-relative overflow-hidden`}>
           {/* <h2 className="text-md-right text-center text-light mr-md-5">{this.props.experience.from} - {this.props.experience.to}</h2> */}
