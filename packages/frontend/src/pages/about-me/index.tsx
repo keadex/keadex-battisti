@@ -1,28 +1,18 @@
 import React from 'react';
 import styles from './about-me.module.scss';
-// import { FormattedMessage } from 'react-intl';
 import { Controller, Scene } from 'react-scrollmagic';
-// import ProgressBar from '../../components/progressbar/progressbar';
 import { connect } from 'react-redux';
 import { setCurrentScene, setProgress, setExperience, resetState } from '../../core/store/reducers/aboutme.reducer';
 import { getDefaultAboutMeState, IAboutMeState, IStoreState } from '../../core/store/store.type';
-// import Education from '../../components/education/education';
-// import Hobbies from '../../components/hobbies/hobbies';
-// import Experience from '../../components/experience/experience';
 import {Experience as IExperience, ForceGraph} from '../../model/models';
-// import NetworkService from '../../core/network/network.service';
-// import Resume from '../../components/resume/resume';
 import BasePageComponent from '../../components/base-page-component/base-page-component';
 import { PAGE_ROOT_ID } from '../../core/route.constants';
 import { GetStaticProps } from 'next';
 import { wrapper } from '../../core/store/store';
-// import PageLayout from '../../components/page-layout/page-layout';
 import { DEFAULT_REVALIDATE_SECONDS } from '../../core/app.constants';
 import dynamic from 'next/dynamic';
 
 const FormattedMessage:any = dynamic(() => import('react-intl').then((mod:any) => mod.FormattedMessage));
-// const Controller:any = dynamic(() => import('react-scrollmagic').then((mod:any) => mod.Controller));
-// const Scene:any = dynamic(() => import('react-scrollmagic').then((mod:any) => mod.Scene));
 const ProgressBar = dynamic(() => import('../../components/progressbar/progressbar'));
 const Education = dynamic(() => import('../../components/education/education'));
 const Hobbies = dynamic(() => import('../../components/hobbies/hobbies'));
