@@ -8,14 +8,14 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html className="js">
+      <Html className="js" lang="en">
         <Head />
         <body>
           <Main />
           <NextScript />
           <script src="../../custom_template/js/classie.min.js" async/>
           <script src="../../custom_template/js/main.min.js" async/>
-          <script src="https://code.jquery.com/jquery-3.4.0.min.js" />
+          <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" />
         </body>
       </Html>
     )

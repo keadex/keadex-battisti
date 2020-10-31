@@ -181,14 +181,14 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
               <div className={`${styles["experience__body"]}`} onMouseOver={()=>{this.stopSlideshow()}} onMouseOut={()=>{this.startSlideshow()}} onTouchStart={()=>{this.stopSlideshow()}} onTouchEnd={()=>{this.startSlideshow()}}>
               
               {/* TAB */}
-              <MDBNav tabs className="nav-justified pointer-events-all" color='indigo'>
+              <MDBNav tabs className="nav-justified pointer-events-all" color='indigo' role="tablist" aria-owns={`summary-${this.props.experience.id} skills-${this.props.experience.id}`}>
                 <MDBNavItem>
-                  <a className={`nav-link ${this.state.activeItem == 1?"active":""}`} role="tab" onClick={(event)=>this.onTabBtnClick(event, 1)}>
+                  <a id={`summary-${this.props.experience.id}`} className={`nav-link ${this.state.activeItem == 1?"active":""}`} role="tab" onClick={(event)=>this.onTabBtnClick(event, 1)}>
                     <MDBIcon icon="address-card" /> <FormattedMessage id={"ABOUT_ME.EXPERIENCE.SUMMARY"} />
                   </a>
                 </MDBNavItem>
                 <MDBNavItem>
-                  <a className={`nav-link ${this.state.activeItem == 2?"active":""}`} role="tab" onClick={(event)=>this.onTabBtnClick(event, 2)}>
+                  <a id={`skills-${this.props.experience.id}`} className={`nav-link ${this.state.activeItem == 2?"active":""}`} role="tab" onClick={(event)=>this.onTabBtnClick(event, 2)}>
                     <MDBIcon icon="list-ul" /> <FormattedMessage id={"ABOUT_ME.EXPERIENCE.SKILLS"} />
                   </a>
                 </MDBNavItem>
