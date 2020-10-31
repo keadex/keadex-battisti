@@ -135,7 +135,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
   public render() {
     return (
       <PageLayout title="Keadex - About me">
-        <header className="bp-header cf">
+        <header className="bp-header cf position-relative z-index-1">
           <h1 className="bp-header__title text-brand1-dark">
             <FormattedMessage id="ABOUT_ME.TITLE" values={{
               span: (chunks:any) => (<span className='d-sm-none'>{chunks}</span>),
