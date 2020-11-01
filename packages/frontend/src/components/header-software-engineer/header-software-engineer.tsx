@@ -1,11 +1,10 @@
 import React, { RefObject } from 'react';
 import { ExperienceProps } from '../experience/experience';
-import { TimelineMax } from 'gsap';
 import styled from 'styled-components';
 import styles from './header-software-engineer.module.scss';
 import { injectIntl } from 'react-intl';
 import OptimizedImage from '../optimized-image/optimized-image';
-
+import gsap from "gsap";
 
 const EngineerImg:any = styled(OptimizedImage)`
   left: ${(props:any)=>(props.swStackWidth)?"calc(50% - " + (props.swStackWidth/2) + "px)":"0px"}
@@ -16,7 +15,7 @@ const EngineerImg:any = styled(OptimizedImage)`
 class HeaderSoftwareEngineer extends React.Component<ExperienceProps> {
 
   //ATTRS
-  private tlSwStack:TimelineMax|undefined;
+  private tlSwStack:GSAPTimeline|undefined;
   private swStackRef: RefObject<any>;
 
   //FUNCS
@@ -30,15 +29,14 @@ class HeaderSoftwareEngineer extends React.Component<ExperienceProps> {
 
   //----- componentDidMount
   componentDidMount(){
-    this.tlSwStack = new TimelineMax();
+    this.tlSwStack = gsap.timeline();
     this.initTimeline();
   }
 
 
   //----- initTimeline
   private initTimeline(){    
-    this.tlSwStack!.fromTo("#sw-stack", 1, {xPercent: -50, yPercent: 0}, {xPercent: -50, yPercent: -100});
-    // this.tlSwStack!.to("#sw-stack", 1, {transform: "translate(-50%, 0%)"});
+    this.tlSwStack!.fromTo("#sw-stack", {duration: 1, xPercent: -50, yPercent: 0}, {duration: 1, xPercent: -50, yPercent: -100});
     this.tlSwStack!.pause()
   }
 

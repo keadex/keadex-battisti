@@ -1,15 +1,16 @@
 import React, { RefObject } from 'react';
 
 import styles from './resume.module.scss';
-import { TimelineMax, Linear } from 'gsap';
+import { Linear } from 'gsap';
 import { FormattedMessage } from 'react-intl';
 import { MDBBtn } from 'mdbreact';
 import KMDCheckbox from '../kmdcheckbox/kmdcheckbox';
 import { MDBIcon } from 'mdbreact';
-import NetworkService from '../../core/network/network.service';
 import { FORMATTED_MESSAGE_STANDARD_HTML_VALUES } from '../../core/app.constants';
-import { getStrapiMedia } from '../../helper/strapi-helper';
 import dynamic from 'next/dynamic';
+import gsap from "gsap";
+import NetworkService from '../../core/network/network.service';
+import { getStrapiMedia } from '../../helper/strapi-helper';
 
 const OptimizedImage = dynamic(
   () => import('../optimized-image/optimized-image'),
@@ -25,7 +26,7 @@ interface ResumeState{
 class Resume extends React.Component<any, ResumeState> {
 
   //ATTRS
-  private tlDownloadResume : TimelineMax|undefined;
+  private tlDownloadResume : GSAPTimeline|undefined;
   private resumeAgreeContRef : RefObject<HTMLDivElement>;
   private resumeBinaryContRef : RefObject<HTMLDivElement>;
   private isAnimationInitialized : boolean;
@@ -48,7 +49,7 @@ class Resume extends React.Component<any, ResumeState> {
 
   //----- componentDidMount
   componentDidMount(){
-    this.tlDownloadResume = new TimelineMax();
+    this.tlDownloadResume = gsap.timeline();
   }
   
 
@@ -62,16 +63,16 @@ class Resume extends React.Component<any, ResumeState> {
     let agreeContainerStyle = window.getComputedStyle(this.resumeAgreeContRef.current!);
     let agreeContainerHeight = parseFloat(agreeContainerStyle!.height!.replace("px", ""));
     
-    this.tlDownloadResume!.to("#resume-agree-bg", 1, {opacity: `1`});
-    this.tlDownloadResume!.to("#resume-agree-container", 1, {top: `${top + (-1*((agreeContainerHeight*scaleFactor/2)+(agreeContainerHeight*scaleFactor/4)))}px`, scale: scaleFactor, xPercent: -50, yPercent: 0}, "-=1");
-    this.tlDownloadResume!.to("#resume-binary-container", 1, {top: `${top + (agreeContainerHeight*scaleFactor)}px`,  xPercent: -50, yPercent: 0}, "-=1");
-    this.tlDownloadResume!.to("#resume-agree-content", 2, {xPercent: 0, yPercent: 100});
-    this.tlDownloadResume!.to("#resume-agree-bg", 2, {xPercent: 0, yPercent: 101}, "-=2");
-    this.tlDownloadResume!.to("#resume-binary-content", 3, {xPercent: 0, yPercent: 100, opacity: 0, ease:Linear.easeNone}, "-=2");
-    this.tlDownloadResume!.to("#resume-pdf", 2, {opacity: `1`}, "-=2.5");
+    this.tlDownloadResume!.to("#resume-agree-bg", {duration: 1, opacity: `1`});
+    this.tlDownloadResume!.to("#resume-agree-container", {duration: 1, top: `${top + (-1*((agreeContainerHeight*scaleFactor/2)+(agreeContainerHeight*scaleFactor/4)))}px`, scale: scaleFactor, xPercent: -50, yPercent: 0}, "-=1");
+    this.tlDownloadResume!.to("#resume-binary-container", {duration: 1, top: `${top + (agreeContainerHeight*scaleFactor)}px`,  xPercent: -50, yPercent: 0}, "-=1");
+    this.tlDownloadResume!.to("#resume-agree-content", {duration: 2, xPercent: 0, yPercent: 100});
+    this.tlDownloadResume!.to("#resume-agree-bg", {duration: 2, xPercent: 0, yPercent: 101}, "-=2");
+    this.tlDownloadResume!.to("#resume-binary-content", {duration: 3, xPercent: 0, yPercent: 100, opacity: 0, ease:Linear.easeNone}, "-=2");
+    this.tlDownloadResume!.to("#resume-pdf", {duration: 2, opacity: `1`}, "-=2.5");
     
     this.tlDownloadResume!.add(()=>{
-      // NetworkService.getInstance().downloadFile(getStrapiMedia(process.env.NEXT_PUBLIC_RESUME_PDF_URL!)!, "resume-giacomosimmi.pdf");
+      NetworkService.getInstance().downloadFile(getStrapiMedia(process.env.NEXT_PUBLIC_RESUME_PDF_URL!)!, "resume-giacomosimmi.pdf");
     }, "-=2.5");
     
     this.tlDownloadResume!.pause();

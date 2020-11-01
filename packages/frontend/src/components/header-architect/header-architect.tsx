@@ -2,19 +2,21 @@ import React from 'react';
 
 import styles from './header-architect.module.scss';
 import { ExperienceProps } from '../experience/experience';
-import { TimelineMax } from 'gsap';
 import { withHooksBreakpoint } from '../../core/react-breakpoint';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import OptimizedImage from '../optimized-image/optimized-image';
+import gsap from "gsap";
 
 
+//------------------ TYPES
 interface HeaderArchitectProps extends WrappedComponentProps, ExperienceProps{}
+
 
 //--------------- COMPONENT
 class HeaderArchitect extends React.Component<HeaderArchitectProps> {
 
   //ATTRS
-  private tlBotAndroid:TimelineMax|undefined;
+  private tlBotAndroid:GSAPTimeline|undefined;
   private widthBoxShape:number = 38;
 
 
@@ -27,19 +29,19 @@ class HeaderArchitect extends React.Component<HeaderArchitectProps> {
 
   //----- componentDidMount
   componentDidMount(){
-    this.tlBotAndroid = new TimelineMax();
+    this.tlBotAndroid = gsap.timeline();
     this.initTimeline();
   }
 
   //----- initTimeline
   private initTimeline(){    
-    this.tlBotAndroid!.to("#order-manager-shape", 1, {bottom: "0px"});
-    this.tlBotAndroid!.to("#microservices-shape", 1, {bottom: "0px"});
-    this.tlBotAndroid!.to("#cloud-ai-shape", 1, {bottom: "0px"});
-    this.tlBotAndroid!.to("#devops-shape", 1, {bottom: this.widthBoxShape+"px"});
-    this.tlBotAndroid!.to("#micro-frontends-shape", 1, {bottom: this.widthBoxShape+"px"});
-    this.tlBotAndroid!.to("#crm-shape", 1, {bottom: this.widthBoxShape+"px"});
-    this.tlBotAndroid!.to("#game-over", 1, {className: `${styles["header-architect__game-over-root"]} animate__animated animate__fadeIn`});
+    this.tlBotAndroid!.to("#order-manager-shape", {duration: 1, bottom: "0px"});
+    this.tlBotAndroid!.to("#microservices-shape", {duration: 1, bottom: "0px"});
+    this.tlBotAndroid!.to("#cloud-ai-shape", {duration: 1, bottom: "0px"});
+    this.tlBotAndroid!.to("#devops-shape", {duration: 1, bottom: this.widthBoxShape+"px"});
+    this.tlBotAndroid!.to("#micro-frontends-shape", {duration: 1, bottom: this.widthBoxShape+"px"});
+    this.tlBotAndroid!.to("#crm-shape", {duration: 1, bottom: this.widthBoxShape+"px"});
+    this.tlBotAndroid!.to("#game-over", {duration: 1, className: `${styles["header-architect__game-over-root"]} animate__animated animate__fadeIn`});
 
     this.tlBotAndroid!.pause()
   }

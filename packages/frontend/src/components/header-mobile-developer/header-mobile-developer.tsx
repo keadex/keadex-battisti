@@ -1,19 +1,16 @@
 import React from 'react';
 import styles from './header-mobile-developer.module.scss';
 import { ExperienceProps } from '../experience/experience';
-import { TimelineMax } from 'gsap';
 import { injectIntl } from 'react-intl';
 import OptimizedImage from '../optimized-image/optimized-image';
-
-
-//------------------ TYPES
+import gsap from "gsap";
 
 
 //--------------- COMPONENT
 class HeaderMobileDeveloper extends React.Component<ExperienceProps> {
 
   //ATTRS
-  private tlBotAndroid:TimelineMax|undefined;
+  private tlBotAndroid:GSAPTimeline|undefined;
 
 
   //FUNCS
@@ -25,17 +22,17 @@ class HeaderMobileDeveloper extends React.Component<ExperienceProps> {
 
   //----- componentDidMount
   componentDidMount(){
-    this.tlBotAndroid = new TimelineMax();
+    this.tlBotAndroid = gsap.timeline();
     this.initTimeline();
   }
 
   //----- initTimeline
   private initTimeline(){    
-    this.tlBotAndroid!.to("#android-bot", 1, {left:"26%"});
-    this.tlBotAndroid!.to("#apple-logo", 1, {left:"26%"}, "-=1");
-    this.tlBotAndroid!.to("#android-bot", 0.5, {bottom:"90px"}, "-=0.5");
-    this.tlBotAndroid!.to("#android-bot", 0.5, {bottom:"19px"});
-    this.tlBotAndroid!.to("#apple-logo", 0.5, {height:"5px"}, "-=0.4");
+    this.tlBotAndroid!.to("#android-bot", {duration: 1, left:"26%"});
+    this.tlBotAndroid!.to("#apple-logo", {duration: 1, left:"26%"}, "-=1");
+    this.tlBotAndroid!.to("#android-bot", {duration: 0.5, bottom:"90px"}, "-=0.5");
+    this.tlBotAndroid!.to("#android-bot", {duration: 0.5, bottom:"19px"});
+    this.tlBotAndroid!.to("#apple-logo", {duration: 0.5, height:"5px"}, "-=0.4");
     this.tlBotAndroid!.pause()
   }
 
