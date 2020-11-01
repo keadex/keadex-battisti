@@ -187,7 +187,7 @@ const KeadexPreview : React.FunctionComponent = React.memo((props) => {
     let divs:JSX.Element[] = [];
     for (let i=0; i<techLabels.length; i++){
       divs.push(
-        <div className={`text-center ${styles["keadex-preview__tech-label"]}`} id={"techlabel-"+i} key={"techlabel-"+i}>
+        <div className={`text-center ${styles["keadex-preview__tech-label"]}`} id={"techlabel-"+i} key={"techlabel-"+i} style={{opacity: 0}}>
           {
             techLabels[i].split('\n').map((item, i) => {
               return <p key={i}>{item}</p>;
@@ -220,11 +220,11 @@ const KeadexPreview : React.FunctionComponent = React.memo((props) => {
             <path id="target3" d={circlePath[2]} ref={svgPathRef[2]} style={{opacity: "0"}}></path>
           </svg>
           </div>
-          <div className={`${styles["keadex-preview__slogan"]}`} id="slogan"><FormattedMessage id="HOME.SLOGAN"/></div>         
+          <div className={`${styles["keadex-preview__slogan"]}`} id="slogan" style={{opacity: 0}}><FormattedMessage id="HOME.SLOGAN"/></div>         
         </div>
       </div>
 
-      <div className={`${styles["keadex-preview__footer"]} text-uppercase`} id="alpha-launch">
+      <div className={`${styles["keadex-preview__footer"]} text-uppercase`} id="alpha-launch" style={{opacity: 0}}>
         Version {process.env.NEXT_PUBLIC_APP_VERSION}
       </div>
     </React.Fragment>
