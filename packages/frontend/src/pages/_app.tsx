@@ -3,7 +3,7 @@ import App, { AppContext } from "next/app";
 import type { AppProps } from 'next/app'
 import {useRouter} from 'next/router'
 import { BreakpointProvider, Query } from '../core/react-breakpoint'
-import { watchForHover } from '../helper/generic-helper';
+import { watchForHover, isClient } from '../helper/generic-helper';
 import flatten from 'flat'
 import {useStore} from 'react-redux';
 import dynamic from 'next/dynamic'
@@ -13,6 +13,10 @@ import { toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigat
 import Cookies from 'js-cookie';
 import { initGA, logPageView } from '../core/google-analytics';
 import { CookieConsent } from '../model/models';
+import Modernizr from 'modernizr';
+if (isClient()){
+  window.Modernizr = Modernizr;
+}
 
 const Head = dynamic(() => import('next/head'));
 const Spinner:any = dynamic(() => import('../components/spinner/spinner'));
@@ -34,7 +38,7 @@ export interface CustomTemplate{
   openPage: (id:string, skipMenu?:boolean)=>void;
 }
 declare global {
-  interface Window { CustomTemplate: CustomTemplate; }
+  interface Window { CustomTemplate: CustomTemplate; Modernizr: any }
 }
 
 
@@ -124,7 +128,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   //---------- useEffect
   useEffect(() => {
     // console.debug("_app");
-
     if (!store.getState().app.isAppInitialized){
       watchForHover();
       store.dispatch(setIsAppInitialized(true));
@@ -184,7 +187,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         {/* <link rel="stylesheet" type="text/css" href="../../custom_template/css/demo.css" /> */}
         {/* <link rel="stylesheet" type="text/css" href="../../custom_template/css/component.css" /> */}
         <link rel="shortcut icon" href="/favicon.ico" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" /><script src="../../custom_template/js/modernizr-custom.min.js" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        {/* <script src="../../custom_template/js/modernizr-custom.min.js" /> */}
         <link rel="manifest" href="/manifest.json" />
         <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;display=swap" rel="stylesheet" />
         {/* <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet" /> */}

@@ -1,20 +1,16 @@
 // const withSass = require('@zeit/next-sass');
 // const withCSS = require('@zeit/next-css');
-// const withImages = require('next-images');
 const compose = require('next-compose')
-// const withFonts = require('next-fonts');
 const optimizedImages = require('next-optimized-images');
 const withTM = require('next-transpile-modules')(['react-scrollmagic', 'react-syntax-highlighter']);
+const withModernizr = require("next-plugin-modernizr");
 
-// module.exports = withSass(withImages());
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
+
 module.exports = compose([
-  // [withSass],
-  // [withCSS],
-  // [withFonts],
-  // [withImages],
+  [withModernizr],
   [optimizedImages],
   [withTM],
   [withBundleAnalyzer],

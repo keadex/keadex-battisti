@@ -1,0 +1,12 @@
+module.exports = {
+  "options": [
+    "addTest",
+    "setClasses",
+    "prefixed"
+  ],
+  "feature-detects": [
+    "css/cssgrid",
+    "css/transitions",
+    "img/webp"
+  ]
+}

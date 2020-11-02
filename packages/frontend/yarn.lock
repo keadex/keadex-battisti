@@ -2230,11 +2230,6 @@
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
 
-"@types/modernizr@^3.5.3":
-  version "3.5.3"
-  resolved "https://registry.yarnpkg.com/@types/modernizr/-/modernizr-3.5.3.tgz#8ef99e6252191c1d88647809109dc29884ba6d7a"
-  integrity sha512-jhMOZSS0UGYTS9pqvt6q3wtT3uvOSve5piTEmTMx3zzTuBLvSIMxSIBIc3d5lajVD5h4xc41AMZD2M5orN3PxA==
-
 "@types/moment@^2.13.0":
   version "2.13.0"
   resolved "https://registry.yarnpkg.com/@types/moment/-/moment-2.13.0.tgz#604ebd189bc3bc34a1548689404e61a2a4aac896"
@@ -10580,7 +10575,7 @@ loader-utils@2.0.0, loader-utils@^2.0.0:
     emojis-list "^3.0.0"
     json5 "^2.1.2"
 
-loader-utils@^1.0.1, loader-utils@^1.0.2, loader-utils@^1.1.0, loader-utils@^1.2.3:
+loader-utils@^1.0.0, loader-utils@^1.0.1, loader-utils@^1.0.2, loader-utils@^1.1.0, loader-utils@^1.2.3:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-1.4.0.tgz#c579b5e34cb34b1a74edc6c1fb36bfa371d5a613"
   integrity sha512-qH0WSMBtn/oHuwjy/NucEgbx5dbxxnxup9s4PVXJUDHZBQY+s0NWA9rJf53RBnQZxfch7euUui7hpoAPvALZdA==
@@ -11535,6 +11530,13 @@ next-optimized-images@^2.6.2:
     img-loader "^3.0.1"
     raw-loader "^2.0.0"
     url-loader "^1.1.2"
+
+next-plugin-modernizr@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/next-plugin-modernizr/-/next-plugin-modernizr-0.0.3.tgz#e26693fc5ca101b12e760552c8a64ce7ced78048"
+  integrity sha512-z+viNw7fCR9lCSeOafP2RM3XJ0DE8uo+i8ErTewEDErqFrVsUsikRkhLP4uD9TrMuJetaCtuBYAqaFYQi8L4rA==
+  dependencies:
+    webpack-modernizr-loader "^5.0.0"
 
 next-redux-wrapper@^6.0.2:
   version "6.0.2"
@@ -17274,6 +17276,14 @@ webpack-manifest-plugin@2.0.4:
     fs-extra "^7.0.0"
     lodash ">=3.5 <5"
     tapable "^1.0.0"
+
+webpack-modernizr-loader@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/webpack-modernizr-loader/-/webpack-modernizr-loader-5.0.0.tgz#6a7c07d3fac4b6e02964ee3be61819cf9ab811cc"
+  integrity sha512-D+FIZ03QtWNV536+cGp046qbJIcxPYEF0kGqP6YrM8Y1g6PqzXGdx8VYnK7VkfRuBdtqLL5rCerWYk1ncOSjJQ==
+  dependencies:
+    loader-utils "^1.0.0"
+    modernizr "^3.7.1"
 
 webpack-sources@1.4.3, webpack-sources@^1.1.0, webpack-sources@^1.2.0, webpack-sources@^1.4.0, webpack-sources@^1.4.1:
   version "1.4.3"

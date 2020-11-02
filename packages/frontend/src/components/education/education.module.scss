@@ -64,6 +64,9 @@
   width: 100%;
   opacity: 0.3;
 }
+:global(.webp) .education__cosmo{
+  background: url("../../../public/img/cosmo.webp");
+}
 
 .education__brain-chart-banner {
   position: absolute;
