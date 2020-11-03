@@ -5,9 +5,13 @@ import { CSSProperties } from 'react';
 import { useMeasure } from "react-use";
 import { mergeRefs } from '../../helper/react-helper';
 import { Query, useBreakpoint, QueryBreakpoint } from '../../core/react-breakpoint';
+import { isClient } from '../../helper/generic-helper';
+if (isClient()){
+  require('lazysizes/plugins/unveilhooks/ls.unveilhooks');
+}
 
 //------------------ TYPES
-export interface ImageProps {
+export interface MediaProps {
   src: string,
   className?: string,
   style?: CSSProperties,
@@ -16,15 +20,24 @@ export interface ImageProps {
   srcWidth: number,
   srcHeight: number,
   width?: number | string | Query,
-  height?: number | string | Query
+  height?: number | string | Query,
+  type?: MediaType,
+  loop?: boolean,
+  autoPlay?: boolean,
+  preload?: string
 };
 
 enum DimensionType {
   Width="Width", Height="Height"
 }
 
+export enum MediaType {
+  Video="Video", Picture="Picture"
+}
+
+
 //------------------ COMPONENT
-const OptimizedImage = React.forwardRef(({ src, className, alt, id, srcWidth:oldWidth, srcHeight:oldHeight, width:newWidth, height:newHeight, style }:ImageProps, fwRef:MutableRefObject<any> | ((instance: any) => void) | null) => {
+const OptimizedMedia = React.forwardRef(({ src, className, alt, id, srcWidth:oldWidth, srcHeight:oldHeight, width:newWidth, height:newHeight, style, type=MediaType.Picture, loop, autoPlay, preload }:MediaProps, fwRef:MutableRefObject<any> | ((instance: any) => void) | null) => {
   const [ref, { width:sizedImgWidth, height:sizedImgHeight }] = useMeasure();
   let breakpoints = useBreakpoint();
   let responsiveWidth = getResponsiveDimension(newWidth);
@@ -78,8 +91,6 @@ const OptimizedImage = React.forwardRef(({ src, className, alt, id, srcWidth:old
         throw new Error("Format of the dimension not supported.")
       }
     }
-    debugger;
-    console.log(src + " --- " + newWidth + " --- " + newHeight);
     throw new Error("You must specify at least one dimension.");
   }
 
@@ -111,34 +122,53 @@ const OptimizedImage = React.forwardRef(({ src, className, alt, id, srcWidth:old
   // console.log(width + " -------- " + height);
 
   if (!src.startsWith("http")){
-    //return webp optimized pic only for local pictures thanks to "next-optimized-images" plugin
+    //return webp/webm optimized media only for local media thanks to "next-optimized-images"/"next-videos" plugin
     
-    //next-optimize-images inlines small images to save HTTP requests and additional roundtrips.
-    //So, before putting the require into data-srcset or data-src attributes, check if it
-    //contains the inline images instead of the path
-    let dataSrcset = require(`../../../public/img/${src}?webp`);
-    if (!(typeof dataSrcset === "string")){
-      dataSrcset = dataSrcset.default;
-    }
+    if (type == MediaType.Picture){
+      //next-optimize-images inlines small images to save HTTP requests and additional roundtrips.
+      //So, before putting the require into data-srcset or data-src attributes, check if it
+      //contains the inline images instead of the path
+      let dataSrcset = require(`../../../public/img/${src}?webp`);
+      if (!(typeof dataSrcset === "string")){
+        dataSrcset = dataSrcset.default;
+      }
 
-    let dataSrc = require(`../../../public/img/${src}`);
-    if (!(typeof dataSrc === "string")){
-      dataSrc = dataSrc.default;
-    }
+      let dataSrc = require(`../../../public/img/${src}`);
+      if (!(typeof dataSrc === "string")){
+        dataSrc = dataSrc.default;
+      }
 
-    //svg files cannot be converted to WebP
-    return (
-      <picture>
-        {!src.endsWith(".svg") && <source data-srcset={dataSrcset} type="image/webp" />}
-        <img id={id??''} data-src={dataSrc} className={"lazyload " + (className??'')} alt={alt??''} width={getDimension(DimensionType.Width)} height={getDimension(DimensionType.Height)} style={style??{}} ref={mergeRefs(ref, fwRef)}/>
-      </picture>
-    );
+      //svg files cannot be converted to WebP
+      return (
+        <picture>
+          {!src.endsWith(".svg") && <source data-srcset={dataSrcset} type="image/webp" />}
+          <img id={id??''} data-src={dataSrc} className={"lazyload " + (className??'')} alt={alt??''} width={getDimension(DimensionType.Width)} height={getDimension(DimensionType.Height)} style={style??{}} ref={mergeRefs(ref, fwRef)}/>
+        </picture>
+      );
+
+    }else if (type == MediaType.Video){
+      return (
+        <video width={getDimension(DimensionType.Width)} height={getDimension(DimensionType.Height)} autoPlay={autoPlay??false} loop={loop??false} preload={preload??"auto"} className={"lazyload " + (className??'')} >
+          <source src={require(`../../../public/video/${src}.webm`)} type="video/webm" />
+          <source src={require(`../../../public/video/${src}.mp4`)} type="video/mp4" />
+          Sorry, your browser doesn't support embedded videos.
+        </video>
+      )
+    }else{
+      return <div>Unsupported media</div>
+    }
   }else{
-    return (
-      <img id={id??''} data-src={src} className={"lazyload " + (className??'')} alt={alt??''} width={getDimension(DimensionType.Width)} height={getDimension(DimensionType.Height)} style={style??{}} ref={mergeRefs(ref, fwRef)}/>
-    );
+    if (type == MediaType.Picture){
+      return (
+        <img id={id??''} data-src={src} className={"lazyload " + (className??'')} alt={alt??''} width={getDimension(DimensionType.Width)} height={getDimension(DimensionType.Height)} style={style??{}} ref={mergeRefs(ref, fwRef)}/>
+      );
+    }else if (type == MediaType.Video){
+      return (<video src={src} width={getDimension(DimensionType.Width)} height={getDimension(DimensionType.Height)} autoPlay={autoPlay??false} loop={loop??false} preload={preload??"auto"} className={"lazyload " + (className??'')} />)
+    }else{
+      return <div>Unsupported media</div>
+    }
   }
   // return (<div></div>);
 });
 
-export default OptimizedImage;
+export default OptimizedMedia;

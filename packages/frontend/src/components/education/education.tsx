@@ -11,9 +11,10 @@ import { useBreakpoint } from '../../core/react-breakpoint';
 import { isClient } from '../../helper/generic-helper';
 import NoSSR from 'react-no-ssr';
 import dynamic from 'next/dynamic';
+import { MediaType } from '../optimized-media/optimized-media';
 
-const OptimizedImage = dynamic(
-  () => import('../optimized-image/optimized-image'),
+const OptimizedMedia = dynamic(
+  () => import('../optimized-media/optimized-media'),
   { ssr: false }
 )
 
@@ -127,7 +128,7 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             progress={adjustProgress(1, progress)}
             playState={PlayState.stop}>
               <div>
-                <div className={`${styles["education__cosmo"]}`} />
+                <div className={`${styles["education__cosmo"]} lazyload`} />
                 <div className={`${styles["education__quote-container"]}`}>
                   <span id="quote">"No, I'm not interested in developing a powerful brain..."</span><br />
                   <span id="author" className="text-right">Alan Turing</span>
@@ -135,7 +136,7 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
 
                 {/* SHOW INTERACTIVE BRAIN GRAPH ONLY ON DESKTOP */}
                 <div className={`d-block d-lg-none text-center ${styles["education__brain-container--mobile"]} ${(adjustProgress(1, progress)!=0?"out":"")}`}>
-                  <OptimizedImage className={`${styles["education__brain-graph"]}`} src={"education/brain-graph.png"} alt="Brain Graph" width={{default: "85%"}} srcWidth={852} srcHeight={751} />
+                  <OptimizedMedia className={`${styles["education__brain-graph"]}`} src={"education/brain-graph.png"} alt="Brain Graph" width={{default: "85%"}} srcWidth={852} srcHeight={751} />
                   <div className={`${styles["education__brain-chart-banner"]}`}>
                     <div id="text"><FormattedMessage id="ABOUT_ME.EDUCATION.BRAIN_GRAPH_BANNER" /></div>
                   </div>
@@ -183,7 +184,7 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             to={{css: {className: "animate__animated animate__fadeInLeft"}}}
             progress={adjustProgress(2, progress)}
             playState={PlayState.stop}>
-              <div><OptimizedImage className={`${styles["education__picture"]}`} src={"education/happy-hour-bari.png"} alt="Baresian happy hour" width={{default: "350px", sm: "200px"}} srcWidth={612} srcHeight={612} /></div>
+              <div><OptimizedMedia className={`${styles["education__picture"]}`} src={"education/happy-hour-bari.png"} alt="Baresian happy hour" width={{default: "350px", sm: "200px"}} srcWidth={612} srcHeight={612} /></div>
           </Tween>          
           <Tween            
             from={{css: {className: "animate__animated animate__fadeOutDown"}}}
@@ -203,7 +204,7 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             to={{css: {className: "animate__animated animate__fadeInLeft"}}}
             progress={adjustProgress(4, progress)}
             playState={PlayState.stop}>
-              <div><OptimizedImage className={`${styles["education__picture"]}`} src={"education/marconi.png"} alt="ITIS Guglielmo Marconi Bari" width={{default: "350px", sm: "200px"}} srcWidth={612} srcHeight={612} /></div>
+              <div><OptimizedMedia className={`${styles["education__picture"]}`} src={"education/marconi.png"} alt="ITIS Guglielmo Marconi Bari" width={{default: "350px", sm: "200px"}} srcWidth={612} srcHeight={612} /></div>
           </Tween>          
           <Tween            
             from={{css: {className: "animate__animated animate__fadeOutDown"}}}
@@ -223,7 +224,7 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             to={{css: {className: "animate__animated animate__fadeInLeft"}}}
             progress={adjustProgress(6, progress)}
             playState={PlayState.stop}>
-              <div><OptimizedImage className={`${styles["education__picture"]}`} src={"education/sochild.png"} alt="SoChild" width={{default: "350px", sm: "200px"}} srcWidth={612} srcHeight={612}/></div>
+              <div><OptimizedMedia className={`${styles["education__picture"]}`} src={"education/sochild.png"} alt="SoChild" width={{default: "350px", sm: "200px"}} srcWidth={612} srcHeight={612}/></div>
           </Tween>          
           <Tween            
             from={{css: {className: "animate__animated animate__fadeOutDown"}}}
@@ -244,7 +245,7 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             to={{css: {className: "animate__animated animate__fadeInLeft"}}}
             progress={adjustProgress(8, progress)}
             playState={PlayState.stop}>
-              <div><OptimizedImage className={`${styles["education__picture"]} ${styles["education__jack-avatar"]}`} src={"jack/jack.gif"} alt="Jack avatar" width={{default: "200px", sm: "130px"}} srcWidth={150} srcHeight={269} /></div>
+              <div><OptimizedMedia width={{default: "200px", sm: "130px"}} srcWidth={150} srcHeight={268} autoPlay loop className={`${styles["education__picture"]} ${styles["education__jack-avatar"]}`} preload="none" src={"jack/jack"} type={MediaType.Video} /></div>
           </Tween>          
           <Tween            
             from={{css: {className: "animate__animated animate__fadeOutDown"}}}

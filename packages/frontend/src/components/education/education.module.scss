@@ -56,7 +56,7 @@
 .education__cosmo{
   position: fixed;
   pointer-events: none;
-  background: url("../../../public/img/cosmo.png");
+  // background: url("../../../public/img/cosmo.png");
   background-size: auto;
   left: 0;
   bottom: 0;
@@ -64,7 +64,10 @@
   width: 100%;
   opacity: 0.3;
 }
-:global(.webp) .education__cosmo{
+.education__cosmo:global(.lazyloaded){
+  background: url("../../../public/img/cosmo.png");
+}
+:global(.webp) .education__cosmo:global(.lazyloaded){
   background: url("../../../public/img/cosmo.webp");
 }
 

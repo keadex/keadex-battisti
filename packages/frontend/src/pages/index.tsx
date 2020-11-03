@@ -18,8 +18,8 @@ const MDBCard:any = dynamic(() => import('mdbreact').then((mod:any) => mod.MDBCa
 const MDBView:any = dynamic(() => import('mdbreact').then((mod:any) => mod.MDBView));
 const MDBCardBody:any = dynamic(() => import('mdbreact').then((mod:any) => mod.MDBCardBody));
 const ReactPlayer = dynamic(() => import('react-player'));
-const OptimizedImage = dynamic(
-  () => import('../components/optimized-image/optimized-image'),
+const OptimizedMedia = dynamic(
+  () => import('../components/optimized-media/optimized-media'),
   { ssr: false }
 )
 const DosButton = dynamic(() => import('../components/dos-button/dos-button'));
@@ -330,7 +330,7 @@ class Home extends BasePageComponent<any, HomeState> {
                       <MDBCard className="h-100 w-100">
                         <MDBCardBody>
                           <h4 className="text-brand1"><FormattedMessage id="HOME.TITLE_NOT_WEBSITE" /></h4>
-                          <OptimizedImage className="mt-4 mb-4" src={"not-website.png"} width="150px" srcWidth={925} srcHeight={701} />
+                          <OptimizedMedia className="mt-4 mb-4" src={"not-website.png"} width="150px" srcWidth={925} srcHeight={701} />
                           <div><FormattedMessage id="HOME.TEXT_NOT_WEBSITE" values={FORMATTED_MESSAGE_STANDARD_HTML_VALUES}/></div>
                         </MDBCardBody>
                       </MDBCard>
@@ -343,7 +343,7 @@ class Home extends BasePageComponent<any, HomeState> {
                       <MDBCard className="h-100 w-100">
                         <MDBCardBody>
                           <h4 className="text-brand1"><FormattedMessage id="HOME.TITLE_KNOW" /></h4>
-                          <OptimizedImage className="mt-4 mb-4" src={"knwoledge.png"} width="150px" srcWidth={925} srcHeight={710} />
+                          <OptimizedMedia className="mt-4 mb-4" src={"knwoledge.png"} width="150px" srcWidth={925} srcHeight={710} />
                           <div><FormattedMessage id="HOME.TEXT_KNOW" values={FORMATTED_MESSAGE_STANDARD_HTML_VALUES}/></div>
                         </MDBCardBody>
                       </MDBCard>
@@ -356,7 +356,7 @@ class Home extends BasePageComponent<any, HomeState> {
                       <MDBCard className="h-100 w-100">
                         <MDBCardBody>
                           <h4 className="text-brand1"><FormattedMessage id="HOME.TITLE_WILL_KNOW" /></h4>
-                          <OptimizedImage className="mt-4 mb-4" src={"learn.png"} width="150px" srcWidth={925} srcHeight={723} />
+                          <OptimizedMedia className="mt-4 mb-4" src={"learn.png"} width="150px" srcWidth={925} srcHeight={723} />
                           <div><FormattedMessage id="HOME.TEXT_WILL_KNOW" values={FORMATTED_MESSAGE_STANDARD_HTML_VALUES}/></div>
                         </MDBCardBody>
                       </MDBCard>

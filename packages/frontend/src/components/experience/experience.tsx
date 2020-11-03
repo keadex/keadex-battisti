@@ -9,7 +9,7 @@ import HeaderMobileDeveloper from '../header-mobile-developer/header-mobile-deve
 import { HooksBreakpointProps } from '../../core/react-breakpoint';
 import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBCard, MDBCardBody, MDBCardTitle, MDBNav, MDBNavItem, MDBNavLink, MDBIcon  } from "mdbreact";
 import { generateColors } from '../../helper/generic-helper';
-import OptimizedImage from '../optimized-image/optimized-image';
+import OptimizedMedia from '../optimized-media/optimized-media';
 
 //------------------ TYPES
 export interface ExperienceProps extends HooksBreakpointProps, WrappedComponentProps {
@@ -207,7 +207,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                           {/* POSITION */}                          
                           <MDBCardTitle className="text-center">
                             <div className={`avatar d-inline-block ${styles["experience__avatar"]}`}>
-                              <OptimizedImage src={this.jackImages[this.props.experience.avatarFilename]} alt="avatar position" width={{default: "90px", sm: "40px"}} height={{default: "90px", sm: "40px"}} srcWidth={2240} srcHeight={2240}/>
+                              <OptimizedMedia src={this.jackImages[this.props.experience.avatarFilename]} alt="avatar position" width={{default: "90px", sm: "40px"}} height={{default: "90px", sm: "40px"}} srcWidth={2240} srcHeight={2240}/>
                             </div>
                             <div className={`${styles["experience__title-position"]} text-left text-md-center`}>
                               <FormattedMessage id={"POSITIONS." + this.props.experience.id} /><br />
@@ -246,7 +246,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                                 <div className={`${styles["experience__section-title"]} mb-md-3 mb-2`}>{"<"}<FormattedMessage id={"ABOUT_ME.EXPERIENCE.COMPANIES"} />{"/>"}</div>
                                 {
                                   this.props.experience.companies.map((value, index) =>{
-                                    return <div className="d-inline d-md-block mx-1 mx-md-0" key={index}><OptimizedImage src={this.logo[value.logoFilename][0]} className={`mb-3 mb-md-4 ${styles["experience__logo-brands"]} d-inline`} alt={`${value.name}`} height={{default: "25px", md: "15px"}}
+                                    return <div className="d-inline d-md-block mx-1 mx-md-0" key={index}><OptimizedMedia src={this.logo[value.logoFilename][0]} className={`mb-3 mb-md-4 ${styles["experience__logo-brands"]} d-inline`} alt={`${value.name}`} height={{default: "25px", md: "15px"}}
                                      srcWidth={this.logo[value.logoFilename][1]} srcHeight={this.logo[value.logoFilename][2]}/></div>
                                     // return <div className="d-inline d-md-block mx-1 mx-md-0" key={index}><img src={this.logo[value.logoFilename][0]} className={`mb-3 mb-md-4 ${styles["experience__logo-brands"]} d-inline`} alt={`${value.name}`} /></div>
                                   })

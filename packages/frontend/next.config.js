@@ -4,6 +4,7 @@ const compose = require('next-compose')
 const optimizedImages = require('next-optimized-images');
 const withTM = require('next-transpile-modules')(['react-scrollmagic', 'react-syntax-highlighter']);
 const withModernizr = require("next-plugin-modernizr");
+const withVideos = require('next-videos')
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -11,6 +12,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 module.exports = compose([
   [withModernizr],
+  [withVideos],
   [optimizedImages],
   [withTM],
   [withBundleAnalyzer],

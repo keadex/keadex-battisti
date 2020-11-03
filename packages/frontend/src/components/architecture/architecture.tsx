@@ -20,8 +20,8 @@ import sanitizeHtml from 'sanitize-html';
 import { ArchitectureModuleFeature } from '../architecture-module-feature/architecture-module-feature';
 import dynamic from 'next/dynamic';
 
-const OptimizedImage = dynamic(
-  () => import('../optimized-image/optimized-image'),
+const OptimizedMedia = dynamic(
+  () => import('../optimized-media/optimized-media'),
   { ssr: false }
 )
 
@@ -123,7 +123,7 @@ const Architecture : React.FunctionComponent<ArchitectureProps> = (props) => {
               (currentUrl.indexOf("#"+module.moduleId) != -1)&&<div key={module.moduleId} data-modulename={module.moduleId} className={(currentUrl.indexOf("#"+module.moduleId) == -1)?"d-none":""}>
                 {module.logo && (
                   <div className="mt-6 mb-4 w-100 text-center">
-                    <OptimizedImage className={`${styles["architecture__module-logo"]}`} src={getStrapiMedia(module.logo.url)!} width={{default: "300px", sm: "200px"}} srcWidth={2274} srcHeight={408} />
+                    <OptimizedMedia className={`${styles["architecture__module-logo"]}`} src={getStrapiMedia(module.logo.url)!} width={{default: "300px", sm: "200px"}} srcWidth={2274} srcHeight={408} />
                   </div>
                 )}
                 <MDBCard className="h-100 w-100 mt-5">
