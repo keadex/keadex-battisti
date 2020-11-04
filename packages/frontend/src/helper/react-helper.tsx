@@ -13,3 +13,9 @@ export function mergeRefs(...refs:any[]){
     }
   };
 };
+
+
+//----- isClient
+export function isClient():boolean{
+  return typeof window !== 'undefined';
+}

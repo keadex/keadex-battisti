@@ -10,7 +10,7 @@ import { FloatingMenu, MainButton, ChildButton } from 'react-floating-button-men
 import { ArchitectureChalkboardToolbar } from './architecture-chalkboard-toolbar';
 import { ArchitectureType } from '../../pages/kealab';
 import { PAGE_ROOT_ID } from '../../core/route.constants';
-import { scrollToSection as scrollToSectionHelper, isClient, disableScrollIntoView, mySanitizeHtml } from '../../helper/generic-helper';
+import { scrollToSection as scrollToSectionHelper, disableScrollIntoView, mySanitizeHtml } from '../../helper/generic-helper';
 import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import { IStoreState } from '../../core/store/store.type';

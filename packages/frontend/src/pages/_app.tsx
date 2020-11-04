@@ -3,7 +3,7 @@ import App, { AppContext } from "next/app";
 import type { AppProps } from 'next/app'
 import {useRouter} from 'next/router'
 import { BreakpointProvider, Query } from '../core/react-breakpoint'
-import { watchForHover, isClient } from '../helper/generic-helper';
+import { isClient } from '../helper/react-helper';
 import flatten from 'flat'
 import {useStore} from 'react-redux';
 import dynamic from 'next/dynamic'
@@ -69,6 +69,32 @@ const queries : Query = {
   upXl: '(min-width: 1200px)'
 }
 
+
+//---------- watchForHover
+function watchForHover() {
+  console.debug("watch for hover");
+  // lastTouchTime is used for ignoring emulated mousemove events
+  let lastTouchTime = 0
+
+  function enableHover() {
+    if ((new Date()).getMilliseconds() - lastTouchTime < 500) return;
+    document.body.classList.add('hasHover');
+  }
+
+  function disableHover() {
+    document.body.classList.remove('hasHover');
+  }
+
+  function updateLastTouchTime() {
+    lastTouchTime = (new Date()).getMilliseconds();
+  }
+
+  document.addEventListener('touchstart', updateLastTouchTime, {passive: true});
+  document.addEventListener('touchstart', disableHover, {passive: true});
+  document.addEventListener('mousemove', enableHover, {passive: true});
+
+  enableHover()
+}
 
 //---------- COMPONENT
 function MyApp({ Component, pageProps }: AppProps) {

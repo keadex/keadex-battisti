@@ -5,7 +5,7 @@ import { CSSProperties } from 'react';
 import { useMeasure } from "react-use";
 import { mergeRefs } from '../../helper/react-helper';
 import { Query, useBreakpoint, QueryBreakpoint } from '../../core/react-breakpoint';
-import { isClient } from '../../helper/generic-helper';
+import { isClient } from '../../helper/react-helper';
 if (isClient()){
   require('lazysizes/plugins/unveilhooks/ls.unveilhooks');
 }

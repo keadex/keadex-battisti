@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { isClient } from "../../helper/generic-helper";
+import { isClient } from "../../helper/react-helper";
 
 if (isClient()){
   require('lazysizes/plugins/unveilhooks/ls.unveilhooks');

@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import { aboutMeReducer } from "./reducers/aboutme.reducer";
 import { appReducer } from "./reducers/app.reducer";
 import { MakeStore, Context, createWrapper } from "next-redux-wrapper";
-import { isClient } from '../../helper/generic-helper';
+import { isClient } from '../../helper/react-helper';
 
 
 /**

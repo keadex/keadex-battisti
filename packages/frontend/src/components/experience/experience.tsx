@@ -8,7 +8,7 @@ import HeaderArchitect from '../header-architect/header-architect';
 import HeaderMobileDeveloper from '../header-mobile-developer/header-mobile-developer';
 import { HooksBreakpointProps } from '../../core/react-breakpoint';
 import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBCard, MDBCardBody, MDBCardTitle, MDBNav, MDBNavItem, MDBNavLink, MDBIcon  } from "mdbreact";
-import { generateColors } from '../../helper/generic-helper';
+import { generateColors } from '../../helper/colors-helper';
 import OptimizedMedia from '../optimized-media/optimized-media';
 
 //------------------ TYPES

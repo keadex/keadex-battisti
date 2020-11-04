@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback, MutableRefObject } from 'react';
+import React, { useRef, useEffect, useCallback, MutableRefObject } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { PlayState, Tween } from 'react-gsap';import frontalLobe from "../../../public/img/education/frontal-lobe.png";
 import occipitalLobe from "../../../public/img/education/occipital-lobe.png";
@@ -8,7 +8,7 @@ import cerebellum from "../../../public/img/education/cerebellum.png";
 import styles from './education.module.scss';
 import { ForceGraph } from '../../model/models';
 import { useBreakpoint } from '../../core/react-breakpoint';
-import { isClient } from '../../helper/generic-helper';
+import { isClient } from '../../helper/react-helper';
 import NoSSR from 'react-no-ssr';
 import dynamic from 'next/dynamic';
 import { MediaType } from '../optimized-media/optimized-media';
