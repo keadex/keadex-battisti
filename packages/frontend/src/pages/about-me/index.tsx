@@ -177,7 +177,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
                   progress = this.onSceneEvent(1, progress, event);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>
-                      {/* <Hobbies progress={progress}/> */}
+                      <Hobbies progress={progress}/>
                     </div>
                   )
                 }}
