@@ -165,7 +165,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
                   // console.log(event);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>
-                      {/* <Education progress={progress} experienceGraph={this.props.experienceGraph}/> */}
+                      <Education progress={progress} experienceGraph={this.props.experienceGraph}/>
                     </div>
                   )
                 }}
