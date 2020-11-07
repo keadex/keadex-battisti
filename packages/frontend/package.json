@@ -4,7 +4,6 @@
   "private": false,
   "license": "MIT",
   "author": "Keadex",
-  "sideEffects": false,
   "dependencies": {
     "@formatjs/intl-pluralrules": "^3.2.3",
     "@fortawesome/fontawesome-free": "^5.14.0",
