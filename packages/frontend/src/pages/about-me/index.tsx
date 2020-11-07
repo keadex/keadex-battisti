@@ -165,7 +165,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
                   // console.log(event);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>
-                      {/* <Education progress={progress} experienceGraph={this.props.experienceGraph}/> */}
+                      <Education progress={progress} experienceGraph={this.props.experienceGraph}/>
                     </div>
                   )
                 }}
@@ -177,7 +177,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
                   progress = this.onSceneEvent(1, progress, event);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>
-                      {/* <Hobbies progress={progress}/> */}
+                      <Hobbies progress={progress}/>
                     </div>
                   )
                 }}
@@ -189,7 +189,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
                   progress = this.onSceneEvent(2, progress, event, (this.props.experience[0] != undefined)?this.props.experience[0].id:undefined);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>
-                      {/* <Experience progress={progress} experience={this.props.experience[0]}/> */}
+                      <Experience progress={progress} experience={this.props.experience[0]}/>
                     </div>
                   )
                 }}
@@ -201,7 +201,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
                   progress = this.onSceneEvent(3, progress, event, (this.props.experience[1] != undefined)?this.props.experience[1].id:undefined);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>
-                      {/* <Experience progress={progress} experience={this.props.experience[1]}/> */}
+                      <Experience progress={progress} experience={this.props.experience[1]}/>
                     </div>
                   )
                 }}
@@ -213,7 +213,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
                   progress = this.onSceneEvent(4, progress, event, (this.props.experience[2] != undefined)?this.props.experience[2].id:undefined);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>
-                      {/* <Experience progress={progress} experience={this.props.experience[2]}/> */}
+                      <Experience progress={progress} experience={this.props.experience[2]}/>
                     </div>
                   )
                 }}
@@ -225,7 +225,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
                   progress = this.onSceneEvent(5, progress, event);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>
-                      {/* <Resume /> */}
+                      <Resume />
                     </div>
                   )
                 }}
