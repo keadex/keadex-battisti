@@ -47,8 +47,8 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
   //FUNCS
 
   //----------- constructor
-  constructor(props:ExperienceProps, state: ExperienceState){
-    super(props, state);
+  constructor(props:ExperienceProps){
+    super(props);
     this.state = {
       chartKey: 1,
       activeItem: 1
@@ -75,35 +75,10 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
   }
 
 
-  //------------ adjustProgress
-  public adjustProgress(idTween:number, inProgress: number):number{
-    switch (idTween){
-      case 2: 
-      case 3: var progress = inProgress-0.1;
-              return (progress < 0 || progress > 0.3)?0:progress;
-      case 4: 
-      case 5: var progress = inProgress-0.4;
-              return (progress < 0 || progress > 0.3)?0:progress;
-      case 6: 
-      case 7: var progress = inProgress-0.8;
-              return (progress < 0 || progress > 0.3)?0:progress;
-    }
-    return inProgress;
-  }
-
-
   //------------ getPlayState
   public getPlayState(inProgress: number):PlayState{
     if (inProgress > 0) return PlayState.play; else return PlayState.reverse;
   }
-
-
-  // //------------ updateChart
-  // public updateChart(progress:number){
-  //   if (progress == 0.01){
-  //     this.setState({chartKey: this.state.chartKey + 1});
-  //   }
-  // }
 
 
   //------------ getHeader
@@ -146,15 +121,11 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
   //------------ render
   public render() {
     let progress = this.props.progress;
-    let i = -1;
-    let legend : Map<number, JSX.Element[]> = new Map();
     
     if (this.props.experience && this.colors.length == 0) {
       this.colors = generateColors(this.props.experience.skills.length);
     }
-    // if (this.props.experience === undefined) return (<React.Fragment><div></div></React.Fragment>);
-    // this.updateChart(progress);
-    let colSize = this.props.experience && this.props.experience.customers?"col-md-3":"col-md-4";
+    
     return (      
       <React.Fragment>
         { this.props.experience === undefined && (

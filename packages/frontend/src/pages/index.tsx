@@ -84,8 +84,8 @@ class Home extends BasePageComponent<any, HomeState> {
   //FUNCS
 
   //------------ constructor
-  constructor(props:any, state:HomeState){
-    super(props, state);
+  constructor(props:any){
+    super(props);
     this.anchorRefs.set(WHY_KEADEX_ID, React.createRef<any>());
     this.anchorRefs.set(WHATS_KEADEX_ID, React.createRef<any>());
     this.svgPathRef = [

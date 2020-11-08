@@ -14,8 +14,8 @@ class BasePageComponent<K,V> extends React.Component<K,V> {
   //FUNCS
 
   //------------ constructor
-  constructor(props:K, state:V){
-    super(props, state);
+  constructor(props:K){
+    super(props);
     this.anchorRefs = new Map<string, RefObject<any>>();
   }
 

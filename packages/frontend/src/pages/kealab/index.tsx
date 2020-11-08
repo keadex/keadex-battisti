@@ -53,8 +53,8 @@ class KeaLab extends BasePageComponent<KeaLabProps, KeaLabState> {
   //------ FUNCTIONS
 
   //---------- constructor
-  constructor(props: any, state: KeaLabState) {
-    super(props, state);
+  constructor(props: any) {
+    super(props);
     this.state = {architectureType: ArchitectureType.application};
     this.setArchitectureType = this.setArchitectureType.bind(this);
   }

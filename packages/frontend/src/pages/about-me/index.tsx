@@ -64,8 +64,8 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
   //------ FUNCTIONS
 
   //---------- constructor
-  constructor(props: AboutMeProps, state: any) {
-    super(props, state);
+  constructor(props: AboutMeProps) {
+    super(props);
     this.defaultState = getDefaultAboutMeState();
     this.onSceneEvent = this.onSceneEvent.bind(this);
   }
