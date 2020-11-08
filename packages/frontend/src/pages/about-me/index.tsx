@@ -175,7 +175,10 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
               <Scene pin duration={this.defaultState.progress[1].duration} indicators={false}>
                 {(progress: any, event: any) => {
                   progress = this.onSceneEvent(1, progress, event);
-                  return (
+                  // console.log("Hobbies: " + progress);
+                  if (progress == 0)
+                    return (<div></div>)
+                  else return (
                     <div className={`${styles["about-me__panel"]}`}>
                       <Hobbies progress={progress}/>
                     </div>
@@ -187,7 +190,10 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
               <Scene pin duration={this.defaultState.progress[2].duration} indicators={false}>
                 {(progress: any, event: any) => {
                   progress = this.onSceneEvent(2, progress, event, (this.props.experience[0] != undefined)?this.props.experience[0].id:undefined);
-                  return (
+                  // console.log("EXPERIENCE: MOBILE: " + progress);
+                  if (progress == 0)
+                    return (<div></div>)
+                  else return (
                     <div className={`${styles["about-me__panel"]}`}>
                       <Experience progress={progress} experience={this.props.experience[0]}/>
                     </div>
@@ -199,7 +205,10 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
               <Scene pin duration={this.defaultState.progress[3].duration} indicators={false}>
                 {(progress: any, event: any) => {
                   progress = this.onSceneEvent(3, progress, event, (this.props.experience[1] != undefined)?this.props.experience[1].id:undefined);
-                  return (
+                  // console.log("EXPERIENCE: FULL STACK: " + progress);
+                  if (progress == 0)
+                    return (<div></div>)
+                  else return (
                     <div className={`${styles["about-me__panel"]}`}>
                       <Experience progress={progress} experience={this.props.experience[1]}/>
                     </div>
@@ -211,7 +220,10 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
               <Scene pin duration={this.defaultState.progress[4].duration} indicators={false}>
                 {(progress: any, event: any) => {
                   progress = this.onSceneEvent(4, progress, event, (this.props.experience[2] != undefined)?this.props.experience[2].id:undefined);
-                  return (
+                  // console.log("EXPERIENCE: IT SOLUTION ARCHITECT: " + progress);
+                  if (progress == 0)
+                    return (<div></div>)
+                  else return (
                     <div className={`${styles["about-me__panel"]}`}>
                       <Experience progress={progress} experience={this.props.experience[2]}/>
                     </div>
@@ -223,7 +235,10 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
               <Scene pin duration={this.defaultState.progress[5].duration}>
                 {(progress: any, event: any) => {
                   progress = this.onSceneEvent(5, progress, event);
-                  return (
+                  // console.log("Resume: " + progress);
+                  if (progress == 0)
+                    return (<div></div>)
+                  else return (
                     <div className={`${styles["about-me__panel"]}`}>
                       <Resume />
                     </div>

@@ -7,7 +7,7 @@ import temporalLobe from "../../../public/img/education/temporal-lobe.png";
 import cerebellum from "../../../public/img/education/cerebellum.png";
 import styles from './education.module.scss';
 import { ForceGraph } from '../../model/models';
-import { useBreakpoint } from '../../core/react-breakpoint';
+import { HooksBreakpointProps, useBreakpoint } from '../../core/react-breakpoint';
 import { isClient } from '../../helper/react-helper';
 import NoSSR from 'react-no-ssr';
 import dynamic from 'next/dynamic';
@@ -24,7 +24,7 @@ if (isClient()){
 }
 
 //------------------ TYPES
-export interface EducationProps {
+export interface EducationProps extends HooksBreakpointProps {
   progress: number,
   experienceGraph?: ForceGraph.Graph
 }
@@ -116,6 +116,7 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
 
   //------------ render
   let progress = props.progress;
+  console.log(breakpoints);
   return (
     <React.Fragment>
       <div className="row m-0">
@@ -126,7 +127,8 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             from={{css: {className: "position-relative animate__animated animate__fadeIn"}}}
             to={{css: {className: "position-relative animate__animated animate__fadeOut"}}}
             progress={adjustProgress(1, progress)}
-            playState={PlayState.stop}>
+            playState={PlayState.stop}
+            lazy>
               <div>
                 <div className={`${styles["education__cosmo"]} lazyload`} />
                 <div className={`${styles["education__quote-container"]}`}>
@@ -135,15 +137,15 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
                 </div>
 
                 {/* SHOW INTERACTIVE BRAIN GRAPH ONLY ON DESKTOP */}
-                <div className={`d-block d-lg-none text-center ${styles["education__brain-container--mobile"]} ${(adjustProgress(1, progress)!=0?"out":"")}`}>
+                {(breakpoints.xs || breakpoints.sm || breakpoints.md) && (<div className={`d-block d-lg-none text-center ${styles["education__brain-container--mobile"]} ${(adjustProgress(1, progress)!=0?"out":"")}`}>
                   <OptimizedMedia className={`${styles["education__brain-graph"]}`} src={"education/brain-graph.png"} alt="Brain Graph" width={{default: "85%"}} srcWidth={852} srcHeight={751} />
                   <div className={`${styles["education__brain-chart-banner"]}`}>
                     <div id="text"><FormattedMessage id="ABOUT_ME.EDUCATION.BRAIN_GRAPH_BANNER" /></div>
                   </div>
-                </div>
+                </div>)}
                 
                 {/* SHOW INTERACTIVE BRAIN GRAPH ONLY ON DESKTOP */}
-                <div className={`d-none d-lg-block ${styles["education__brain-container--desktop"]} ${(adjustProgress(1, progress)!=0?"out":"")} ${(progress==0?"pointer-events-none":"")}`}>
+                {(breakpoints.lg || breakpoints.xl) && (<div className={`d-none d-lg-block ${styles["education__brain-container--desktop"]} ${(adjustProgress(1, progress)!=0?"out":"")} ${(progress==0?"pointer-events-none":"")}`}>
                   <NoSSR>
                     {ForceGraph2D && <ForceGraph2D ref={forceGraphRef} graphData={props.experienceGraph} linkColor={() => '#fff'} nodeAutoColorBy="group" enableNodeDrag={true} enableZoomPanInteraction={false}
                       nodeCanvasObjectMode={()=>"replace"} nodeCanvasObject={(node:any, ctx:any, globalScale:any) => {
@@ -151,7 +153,7 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
                       if (node != undefined && node.id != undefined && node.x != undefined && node.y != undefined){
                         if (node.id == "occipital-lobe" || node.id == "temporal-lobe" || node.id == "parietal-lobe" || node.id == "cerebellum" || node.id == "frontal-lobe"){
                           let percentage = 85;
-                          if (breakpoints!.xs && breakpoints!.sm) percentage = 75;
+                          // if (breakpoints!.xs && breakpoints!.sm) percentage = 75;
                           const image = brain.current.get(node.id);
                           if (image){
                             const width = image.width - Math.ceil((image!.width * percentage)/100);
@@ -172,7 +174,8 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
                       }
                     }} />}
                   </NoSSR>
-                </div>
+                </div>)}
+
               </div>                
           </Tween>
         </div>
@@ -183,14 +186,16 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             from={{css: {className: "animate__animated animate__fadeOutRight"}}}
             to={{css: {className: "animate__animated animate__fadeInLeft"}}}
             progress={adjustProgress(2, progress)}
-            playState={PlayState.stop}>
+            playState={PlayState.stop}
+            lazy>
               <div><OptimizedMedia className={`${styles["education__picture"]}`} src={"education/happy-hour-bari.png"} alt="Baresian happy hour" width={{default: "350px", sm: "200px"}} srcWidth={612} srcHeight={612} /></div>
           </Tween>          
           <Tween            
             from={{css: {className: "animate__animated animate__fadeOutDown"}}}
             to={{css: {className: "animate__animated animate__fadeInDown"}}}
             progress={adjustProgress(3, progress)}
-            playState={PlayState.stop}>
+            playState={PlayState.stop}
+            lazy>
               <div>
                 <div className="mt-md-6 mt-5"><FormattedMessage id="ABOUT_ME.EDUCATION.HAPPY_HOUR" /></div>
               </div>
@@ -203,14 +208,16 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             from={{css: {className: "animate__animated animate__fadeOutRight"}}}
             to={{css: {className: "animate__animated animate__fadeInLeft"}}}
             progress={adjustProgress(4, progress)}
-            playState={PlayState.stop}>
+            playState={PlayState.stop}
+            lazy>
               <div><OptimizedMedia className={`${styles["education__picture"]}`} src={"education/marconi.png"} alt="ITIS Guglielmo Marconi Bari" width={{default: "350px", sm: "200px"}} srcWidth={612} srcHeight={612} /></div>
           </Tween>          
           <Tween            
             from={{css: {className: "animate__animated animate__fadeOutDown"}}}
             to={{css: {className: "animate__animated animate__fadeInDown"}}}
             progress={adjustProgress(5, progress)}
-            playState={PlayState.stop}>
+            playState={PlayState.stop}
+            lazy>
               <div>
                 <div className="mt-md-6 mt-5"><FormattedMessage id="ABOUT_ME.EDUCATION.HIGH_SCHOOL" /></div>
               </div>
@@ -223,14 +230,16 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             from={{css: {className: "animate__animated animate__fadeOutRight"}}}
             to={{css: {className: "animate__animated animate__fadeInLeft"}}}
             progress={adjustProgress(6, progress)}
-            playState={PlayState.stop}>
+            playState={PlayState.stop}
+            lazy>
               <div><OptimizedMedia className={`${styles["education__picture"]}`} src={"education/sochild.png"} alt="SoChild" width={{default: "350px", sm: "200px"}} srcWidth={612} srcHeight={612}/></div>
           </Tween>          
           <Tween            
             from={{css: {className: "animate__animated animate__fadeOutDown"}}}
             to={{css: {className: "animate__animated animate__fadeInDown"}}}
             progress={adjustProgress(7, progress)}
-            playState={PlayState.stop}>
+            playState={PlayState.stop}
+            lazy>
               <div>
                 <div className="mt-md-6 mt-5"><FormattedMessage id="ABOUT_ME.EDUCATION.UNIVERSITY" /></div>
               </div>
@@ -244,14 +253,16 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
             from={{css: {className: "animate__animated animate__fadeOutRight"}}}
             to={{css: {className: "animate__animated animate__fadeInLeft"}}}
             progress={adjustProgress(8, progress)}
-            playState={PlayState.stop}>
+            playState={PlayState.stop}
+            lazy>
               <div><OptimizedMedia width={{default: "200px", sm: "130px"}} srcWidth={150} srcHeight={268} autoPlay loop className={`${styles["education__picture"]} ${styles["education__jack-avatar"]}`} preload="none" src={"jack/jack"} type={MediaType.Video} /></div>
           </Tween>          
           <Tween            
             from={{css: {className: "animate__animated animate__fadeOutDown"}}}
             to={{css: {className: "animate__animated animate__fadeInDown"}}}
             progress={adjustProgress(9, progress)}
-            playState={PlayState.stop}>
+            playState={PlayState.stop}
+            lazy>
               <div>
                 <div className="mt-md-6 mt-5"><FormattedMessage id="ABOUT_ME.EDUCATION.JACK" /></div>
               </div>

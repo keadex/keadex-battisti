@@ -3,11 +3,11 @@ import { FormattedMessage } from 'react-intl';
 import { PlayState, Tween } from 'react-gsap';
 import styles from './hobbies.module.scss';
 import OptimizedMedia from '../optimized-media/optimized-media';
-import { HooksBreakpointProps, Query, withHooksBreakpoint } from '../../core/react-breakpoint';
+import { HooksBreakpointProps, withHooksBreakpoint } from '../../core/react-breakpoint';
 
 
 //------------------ TYPES
-export interface IEducationProps extends HooksBreakpointProps{
+export interface HobbiesProps extends HooksBreakpointProps{
   progress: number
 }
 enum TweenElement{
@@ -15,7 +15,7 @@ enum TweenElement{
 }
 
 //--------------- COMPONENT
-class Education extends React.Component<IEducationProps> {
+class Hobbies extends React.Component<HobbiesProps> {
 
   //------------ adjustProgress
   public adjustProgress(idTween:number, inProgress: number):number{
@@ -78,7 +78,8 @@ class Education extends React.Component<IEducationProps> {
             from={{ rotation: 0 }}
             to={{ rotation:135 }}
             progress={progress*5}
-            playState={PlayState.stop} >
+            playState={PlayState.stop}
+            lazy>
               <OptimizedMedia className={`${styles["hobbies__box"]}`} src={"hobbies/box.png"} alt="Hobbies box" width={{default: "7%", sm: "25%", lg: "12%"}} srcWidth={318} srcHeight={343} />
           </Tween>
 
@@ -87,7 +88,8 @@ class Education extends React.Component<IEducationProps> {
             from={{ rotation: 80, y: 0, opacity: 0 }}
             to={{ rotation:0, top: "70vh", opacity: 1 }}
             progress={this.adjustProgress(1, progress)}
-            playState={PlayState.stop}>
+            playState={PlayState.stop}
+            lazy>
               <OptimizedMedia className={`${styles["hobbies__hobby"]}`} src={"hobbies/sport.png"} alt="Sport hobby" width={{default: "10%", sm: "30%", lg: "20%"}} srcWidth={1024} srcHeight={473}/>
           </Tween>
           <div className={`${styles["hobbies__hobby-description"]} ${(this.adjustProgress(1.1, progress)==0?"out":"")}`}>
@@ -95,7 +97,8 @@ class Education extends React.Component<IEducationProps> {
               from={{css: {className: "animate__animated animate__fadeOut out"}}}
               to={{css: {className: "animate__animated animate__fadeIn"}}}
               progress={this.adjustProgress(1.1, progress)}
-              playState={PlayState.stop}>
+              playState={PlayState.stop}
+              lazy>
                 <div>
                   <h1><FormattedMessage id="ABOUT_ME.HOBBIES.TITLE_SPORT" /></h1>
                   <FormattedMessage id="ABOUT_ME.HOBBIES.DESCRIPTION_SPORT" />
@@ -108,7 +111,8 @@ class Education extends React.Component<IEducationProps> {
             from={{ rotation: 0, y: 0, opacity: 0 }}
             to={{ rotation:-80, left:"-20%", top: "65vh", opacity: 1 }}
             progress={this.adjustProgress(2, progress)}
-            playState={PlayState.stop}>
+            playState={PlayState.stop}
+            lazy>
               <OptimizedMedia className={`${styles["hobbies__hobby"]} ${styles["hobbies__hobby-martial-arts"]}`} src={"hobbies/martial-arts.png"} alt="Martial Arts hobby" width={{default: "6%", sm: "20%", lg: "12%"}} srcWidth={512} srcHeight={714}/>
           </Tween>
           <div className={`${styles["hobbies__hobby-description"]} ${(this.adjustProgress(2.1, progress)==0?"out":"")}`}>
@@ -116,7 +120,8 @@ class Education extends React.Component<IEducationProps> {
               from={{css: {className: "animate__animated animate__fadeOut"}}}
               to={{css: {className: "animate__animated animate__fadeIn"}}}
               progress={this.adjustProgress(2.1, progress)}
-              playState={PlayState.stop}>
+              playState={PlayState.stop}
+              lazy>
                 <div>
                   <h1><FormattedMessage id="ABOUT_ME.HOBBIES.TITLE_MARTIAL_ARTS" /></h1>
                   <div>
@@ -136,7 +141,8 @@ class Education extends React.Component<IEducationProps> {
             from={{ rotation: 0, y: 0, opacity: 0 }}
             to={{ rotation:80, left:"20%", top: "68vh", opacity: 1 }}
             progress={this.adjustProgress(3, progress)}
-            playState={PlayState.stop}>
+            playState={PlayState.stop}
+            lazy>
               <OptimizedMedia className={`${styles["hobbies__hobby"]} ${styles["hobbies__hobby-martial-arts"]}`} src={"hobbies/music.png"} alt="Music hobby" width={{default: "6%", sm: "20%", lg: "12%"}} srcWidth={1410} srcHeight={1341} />
           </Tween>
           <div className={`${styles["hobbies__hobby-description"]} ${(this.adjustProgress(3.1, progress)==0?"out":"")}`}>
@@ -144,7 +150,8 @@ class Education extends React.Component<IEducationProps> {
               from={{css: {className: "animate__animated animate__fadeOut"}}}
               to={{css: {className: "animate__animated animate__fadeIn"}}}
               progress={this.adjustProgress(3.1, progress)}
-              playState={PlayState.stop}>
+              playState={PlayState.stop}
+              lazy>
                 <div>
                   <h1><FormattedMessage id="ABOUT_ME.HOBBIES.TITLE_MUSIC" /></h1>
                   <FormattedMessage id="ABOUT_ME.HOBBIES.DESCRIPTION_MUSIC" />
@@ -157,7 +164,8 @@ class Education extends React.Component<IEducationProps> {
             from={{ rotation: -90, y: 0, opacity: 0, top: "0vh" }}
             to={{ rotation:10, left:"10%", opacity: 1, top: this.getTopAnimation(TweenElement.Spearfishing) }}
             progress={this.adjustProgress(4, progress)}
-            playState={PlayState.stop}>
+            playState={PlayState.stop}
+            lazy>
               <OptimizedMedia className={`${styles["hobbies__hobby"]} ${styles["hobbies__hobby-spearfishing"]}`} src={"hobbies/spearfishing.png"} alt="Spearfishing hobby" width={{default: "8%", sm: "34%", lg: "18%"}} srcWidth={1819} srcHeight={815} />
           </Tween>
           <div className={`${styles["hobbies__hobby-description"]} ${(this.adjustProgress(4.1, progress)==0?"out":"")}`}>
@@ -165,7 +173,8 @@ class Education extends React.Component<IEducationProps> {
               from={{css: {className: "animate__animated animate__fadeOut"}}}
               to={{css: {className: "animate__animated animate__fadeIn d-block"}}}
               progress={this.adjustProgress(4.1, progress)}
-              playState={PlayState.stop}>
+              playState={PlayState.stop}
+              lazy>
                 <div>
                   <h1><FormattedMessage id="ABOUT_ME.HOBBIES.TITLE_SPEARFISHING" /></h1>
                   <FormattedMessage id="ABOUT_ME.HOBBIES.DESCRIPTION_SPEARFISHING" />
@@ -178,7 +187,8 @@ class Education extends React.Component<IEducationProps> {
             from={{ rotation: 90, y: 0, opacity: 0, top: "0vh" }}
             to={{ rotation:-10, left:"-10%", opacity: 1, top: this.getTopAnimation(TweenElement.Cinema) }}
             progress={this.adjustProgress(5, progress)}
-            playState={PlayState.stop}>
+            playState={PlayState.stop}
+            lazy>
               <OptimizedMedia className={`${styles["hobbies__hobby"]} ${styles["hobbies__hobby-cinema"]}`} src={"hobbies/cinema.png"} alt="Cinema hobby" width={{default: "8%", sm: "30%", lg: "18%"}} srcWidth={1177} srcHeight={734} />
           </Tween>
           <div className={`${styles["hobbies__hobby-description"]} ${(this.adjustProgress(5.1, progress)==0?"out":"")}`}>
@@ -186,7 +196,8 @@ class Education extends React.Component<IEducationProps> {
               from={{css: {className: "animate__animated animate__fadeOut"}}}
               to={{css: {className: "animate__animated animate__fadeIn"}}}
               progress={this.adjustProgress(5.1, progress)}
-              playState={PlayState.stop}>
+              playState={PlayState.stop}
+              lazy>
                 <div>
                   <h1><FormattedMessage id="ABOUT_ME.HOBBIES.TITLE_CINEMA" /></h1>
                   <FormattedMessage id="ABOUT_ME.HOBBIES.DESCRIPTION_CINEMA" />
@@ -200,4 +211,4 @@ class Education extends React.Component<IEducationProps> {
 
 }
 
-export default withHooksBreakpoint(Education)
+export default withHooksBreakpoint(Hobbies)

@@ -139,7 +139,8 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
               from={{css: {className: "animate__animated animate__fadeOut w-100"}}}
               to={{css: {className: "animate__animated animate__fadeIn w-100"}}}
               progress={progress}
-              playState={PlayState.stop}>
+              playState={PlayState.stop}
+              lazy>
                 <div>{this.getHeader()}</div>
             </Tween>
 
@@ -148,7 +149,8 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
               from={{css: {className: `animate__animated animate__fadeOut ${styles["experience__body"]}`}}}
               to={{css: {className: `animate__animated animate__fadeIn ${styles["experience__body"]}`}}}
               progress={progress}
-              playState={PlayState.stop}>            
+              playState={PlayState.stop}
+              lazy>            
               <div className={`${styles["experience__body"]}`} onMouseOver={()=>{this.stopSlideshow()}} onMouseOut={()=>{this.startSlideshow()}} onTouchStart={()=>{this.stopSlideshow()}} onTouchEnd={()=>{this.startSlideshow()}}>
               
               {/* TAB */}
@@ -189,7 +191,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                           <div className={`${styles["experience__card-content-container"]}`}>
                             {/* TASKS */}
                             <div className={"col-12 col-md-4 p-0 pl-md-2 pr-md-2 text-center order-1"}>
-                              <Tween from={{ opacity: 0, x: (i:number) => (i+1) * 50}} stagger={0.1} playState={this.getPlayState(this.props.progress)}>
+                              <Tween from={{ opacity: 0, x: (i:number) => (i+1) * 50}} stagger={0.1} playState={this.getPlayState(this.props.progress)} lazy>
                                 <div className={`${styles["experience__section-title"]} mb-md-3`}>{"<"}<FormattedMessage id={"ABOUT_ME.EXPERIENCE.MAIN_ACTIVITIES"} />{"/>"}</div>
                                 {
                                   this.props.experience.tasks.map((value, index) =>{
@@ -201,7 +203,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                             
                             {/* SECTORS */}
                             <div className={"col-12 col-md-4 p-0 pl-md-2 pr-md-2 text-center order-3"}>
-                              <Tween from={{ opacity: 0, x: (i:number) => (i+1) * 50}} stagger={0.1} playState={this.getPlayState(this.props.progress)}>
+                              <Tween from={{ opacity: 0, x: (i:number) => (i+1) * 50}} stagger={0.1} playState={this.getPlayState(this.props.progress)} lazy>
                                 <div className={`${styles["experience__section-title"]} mb-md-3`}>{"<"}<FormattedMessage id={"ABOUT_ME.EXPERIENCE.SECTORS"} />{"/>"}</div>
                                 {
                                   this.props.experience.sectors.map((value, index) =>{
@@ -213,7 +215,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
 
                             {/* COMPANIES */}
                             <div className={"col-12 col-md-4 p-0 pl-md-2 pr-md-2 text-center order-3 order-md-2"}>
-                              <Tween from={{ opacity: 0, x: (i:number) => (i+1) * 50}} stagger={0.1} playState={this.getPlayState(this.props.progress)}>
+                              <Tween from={{ opacity: 0, x: (i:number) => (i+1) * 50}} stagger={0.1} playState={this.getPlayState(this.props.progress)} lazy>
                                 <div className={`${styles["experience__section-title"]} mb-md-3 mb-2`}>{"<"}<FormattedMessage id={"ABOUT_ME.EXPERIENCE.COMPANIES"} />{"/>"}</div>
                                 {
                                   this.props.experience.companies.map((value, index) =>{
