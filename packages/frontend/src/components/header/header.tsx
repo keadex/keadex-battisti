@@ -7,7 +7,7 @@ import { MDBIcon } from 'mdbreact';
 import Link from 'next/link';
 import { withRouter } from 'next/router'
 import { WithRouterProps } from 'next/dist/client/with-router';
-import type { IStoreState } from '../../core/store/store.type';
+import type { StoreState } from '../../core/store/store.type';
 import dynamic from 'next/dynamic';
 
 const OptimizedMedia = dynamic(
@@ -86,7 +86,7 @@ class Header extends React.Component<HeaderProps> {
 
 }
 
-const mapStateToProps = (state:IStoreState) => {
+const mapStateToProps = (state:StoreState) => {
   return {
     menuOpen: state.app.menuOpen
   }
