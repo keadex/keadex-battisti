@@ -116,7 +116,6 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
 
   //------------ render
   let progress = props.progress;
-  console.log(breakpoints);
   return (
     <React.Fragment>
       <div className="row m-0">

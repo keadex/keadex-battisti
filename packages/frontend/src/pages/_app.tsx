@@ -112,11 +112,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   const onRouteChangeStart = ()=>{
     store.dispatch(activateSpinner());
     store.dispatch(setPreviousUrl(location.href));
-    // store.dispatch(setNavigationOccurred(true));
   }
 
   const onRouteChangeComplete = ()=>{
-    //console.log("routeChangeComplete " + location.href + " -- " + store.getState().app.previousUrl);
     store.dispatch(disableSpinner());
     if (location.href != store.getState().app.previousUrl){
       store.dispatch(setNavigationOccurred(true));
@@ -132,17 +130,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const onHashChangeStart = ()=>{
     store.dispatch(setPreviousUrl(location.href));
-    // store.dispatch(setNavigationOccurred(true));
   }
 
   const onHashChangeComplete = ()=>{
-    // console.log("hashChangeComplete " + location.href + " -- " + store.getState().app.previousUrl);
-    // document.body.scrollTop=0;
     if (location.href != store.getState().app.previousUrl){
-      //console.log("occurred");
       store.dispatch(setNavigationOccurred(true));
     }else{
-      //console.log("not occurred");
       store.dispatch(setNavigationOccurred(false));
     }
   }
