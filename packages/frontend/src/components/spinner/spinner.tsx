@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './spinner.module.scss';
-import { IStoreState } from '../../core/store/store.type';
+import type { StoreState } from '../../core/store/store.type';
 import { connect } from 'react-redux';
 
 
@@ -40,7 +40,7 @@ class Spinner extends React.Component<ISpinnerProps> {
   }
 }
 
-const mapStateToProps = (state:IStoreState) => {
+const mapStateToProps = (state:StoreState) => {
   return {
     spinnerCounter: state.app.spinnerCounter
   }

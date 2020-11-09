@@ -1,15 +1,14 @@
-import React, { RefObject, cloneElement } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { IStoreState } from '../../core/store/store.type';
+import type { StoreState } from '../../core/store/store.type';
 import SplashScreen from '../splashscreen/splash-screen';
 import { toggleMenu } from '../../core/store/reducers/app.reducer';
 import { NextComponentType, NextPageContext } from 'next';
 import { PAGE_ROOT_ID } from '../../core/route.constants';
-// import store from '../../core/store/store';
 
 
 //--------------- TYPES
-interface IBodyProps {
+interface BodyProps {
   menuOpen: boolean,
   navigationOccurred: boolean,
   toggleMenu:(menuOpen?: boolean)=>void,
@@ -19,10 +18,10 @@ interface IBodyProps {
 
 
 //--------------- COMPONENT
-class Body extends React.Component<IBodyProps> {
+class Body extends React.Component<BodyProps> {
 
   //------------ constructor
-  constructor(props:IBodyProps){
+  constructor(props:BodyProps){
     super(props);
   }
 
@@ -42,13 +41,11 @@ class Body extends React.Component<IBodyProps> {
 
   //------------ componentDidUpdate
   componentDidUpdate(){
-    //the following line is needed to be sure to scoll to the top the page root when you open the menu
+    //the following line is needed to be sure to scoll to top of the page root when you open the menu
     //(splashscreen case) and when you close the menu without changing the page (content case). The last
-    //case id needed because we scroll to the top the page root every time you change the page (see _app.tsx - useEffect())
+    //case is needed because we scroll to the top of the page root every time you change the page (see _app.tsx - useEffect())
     // console.log("SCROLL body didupdate scrolltop=0 section");
     if (this.props.menuOpen || !this.props.navigationOccurred) document.getElementById(PAGE_ROOT_ID)!.scrollTop = 0;
-    // console.log("SCROLL body didupdate scrolltop");
-    // document.body.scrollTop=0;
   }
 
   //------------ render
@@ -98,7 +95,7 @@ class Body extends React.Component<IBodyProps> {
 
 }
 
-const mapStateToProps = (state:IStoreState) => {
+const mapStateToProps = (state:StoreState) => {
   return {
     menuOpen: state.app.menuOpen,
     navigationOccurred: state.app.navigationOccurred

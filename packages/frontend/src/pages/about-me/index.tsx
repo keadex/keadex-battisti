@@ -3,7 +3,7 @@ import styles from './about-me.module.scss';
 import { Controller, Scene } from 'react-scrollmagic';
 import { connect } from 'react-redux';
 import { setCurrentScene, setProgress, setExperience, resetState } from '../../core/store/reducers/aboutme.reducer';
-import { getDefaultAboutMeState, IAboutMeState, IStoreState } from '../../core/store/store.type';
+import { getDefaultAboutMeState, AboutMeState, StoreState } from '../../core/store/store.type';
 import {Experience as IExperience, ForceGraph} from '../../model/models';
 import BasePageComponent from '../../components/base-page-component/base-page-component';
 import { PAGE_ROOT_ID } from '../../core/route.constants';
@@ -56,7 +56,7 @@ interface AboutMeProps {
 class AboutMe extends BasePageComponent<AboutMeProps, any> {
   
   //------ ATTRS
-  private defaultState:IAboutMeState;
+  private defaultState:AboutMeState;
   private lastProgress:number=0;
   private currentPayload:string|undefined;
   
@@ -235,9 +235,8 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
               <Scene pin duration={this.defaultState.progress[5].duration}>
                 {(progress: any, event: any) => {
                   progress = this.onSceneEvent(5, progress, event);
-                  // console.log("Resume: " + progress);
                   if (progress == 0)
-                    return (<div></div>)
+                    return (<div className={`${styles["about-me__panel"]}`}></div>)
                   else return (
                     <div className={`${styles["about-me__panel"]}`}>
                       <Resume />
@@ -253,7 +252,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
 
 }
 
-const mapStateToProps = (state:IStoreState) => {
+const mapStateToProps = (state:StoreState) => {
   return {
     experience: state.aboutMe.experience,
     menuOpen: state.app.menuOpen

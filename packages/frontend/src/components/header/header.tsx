@@ -1,14 +1,13 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { HOME_URL, ABOUT_ME_URL, KEA_LAB_URL, WHY_KEADEX_URL, WHATS_KEADEX_URL } from '../../core/route.constants';
-import logo from '../../../public/img/keadex-logo.png';
 import { connect } from 'react-redux';
 import { toggleMenu } from '../../core/store/reducers/app.reducer';
 import { MDBIcon } from 'mdbreact';
 import Link from 'next/link';
 import { withRouter } from 'next/router'
 import { WithRouterProps } from 'next/dist/client/with-router';
-import { IStoreState } from '../../core/store/store.type';
+import type { IStoreState } from '../../core/store/store.type';
 import dynamic from 'next/dynamic';
 
 const OptimizedMedia = dynamic(

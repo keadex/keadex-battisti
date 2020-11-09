@@ -1,5 +1,5 @@
 import { createActions, handleActions } from 'redux-actions';
-import { getDefaultAboutMeState, IAboutMeState } from '../store.type';
+import { getDefaultAboutMeState, AboutMeState } from '../store.type';
 import update from 'immutability-helper';
 import { Experience } from '../../../model/models';
 import {HYDRATE} from 'next-redux-wrapper';
@@ -19,7 +19,7 @@ export const { setCurrentScene, setProgress, setExperience, resetState } = creat
   RESET_STATE: () => ({})
 });
 
-export const aboutMeReducer = handleActions<IAboutMeState, AnyAction>(
+export const aboutMeReducer = handleActions<AboutMeState, AnyAction>(
   {
     [HYDRATE]: (state, action) => {
       console.debug("hydrate aboutme");

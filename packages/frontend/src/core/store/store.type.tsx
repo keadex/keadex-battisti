@@ -1,16 +1,16 @@
-import { IProgress } from "../../components/progressbar/progressbar"
-import { Experience, Quote } from "../../model/models";
+import type { IProgress } from "../../components/progressbar/progressbar"
+import type { Experience, Quote } from "../../model/models";
 import { SceneId } from "../app.constants";
 
-export interface IStoreState {
-    app: IAppState;
-    bot: IBotState;
-    aboutMe: IAboutMeState;
-    counter: ICounterState;
+export interface StoreState {
+    app: AppState;
+    bot: BotState;
+    aboutMe: AboutMeState;
+    counter: CounterState;
 }
 
 
-export interface IAppState {
+export interface AppState {
     isAppInitialized: boolean;
     isGAInitialized: boolean;
     menuOpen: boolean;
@@ -20,22 +20,22 @@ export interface IAppState {
     quotes: Quote[];
 }
 
-export interface IBotState {
+export interface BotState {
     messages: string[];
 }
 
-export interface IAboutMeState {
+export interface AboutMeState {
     currentScene: number;
     scenePayload: string|null;
     progress: IProgress[];
     experience: Experience[];
 }
 
-export interface ICounterState {
+export interface CounterState {
     counter: number;
 }
 
-export const getDefaultStoreState = () : IStoreState => {
+export const getDefaultStoreState = () : StoreState => {
     return {
         app: getDefaultAppState(),
         bot: getDefaultBotState(),
@@ -44,7 +44,7 @@ export const getDefaultStoreState = () : IStoreState => {
     }
 };
 
-export const getDefaultAppState =  () : IAppState => {
+export const getDefaultAppState =  () : AppState => {
     return {
         isAppInitialized: false,
         isGAInitialized: false,
@@ -56,13 +56,13 @@ export const getDefaultAppState =  () : IAppState => {
     }
 };
 
-export const getDefaultBotState =  () : IBotState => {
+export const getDefaultBotState =  () : BotState => {
     return {
         messages: []
     }
 };
 
-export const getDefaultAboutMeState =  () : IAboutMeState => {
+export const getDefaultAboutMeState =  () : AboutMeState => {
     return {
         currentScene: 0,
         scenePayload: null,
@@ -78,7 +78,7 @@ export const getDefaultAboutMeState =  () : IAboutMeState => {
     }
 };
 
-export const getDefaultCounterState =  () : ICounterState => {
+export const getDefaultCounterState =  () : CounterState => {
     return {
         counter: 0
     }
