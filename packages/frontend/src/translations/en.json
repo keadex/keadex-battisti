@@ -83,7 +83,8 @@
             "HIGH_SCHOOL": "I've started to study Computer Science at \"I.T.I.S. Guglielmo Marconi Bari\"... the best fu***ing high school of the planet! But my passion was (of course) born many years earlier...",
             "UNIVERSITY": "I graduated in 2013 in Computer Science at \"University of Bari\". In 2013 I attended the \"University of Liverpool\" thanks to the Erasmus program. Here I wrote my dissertation \"SoChild - A social network to control and to support the language acquisition by children\".",
             "JACK": "\"Hello, Friend\"",
-            "BRAIN_GRAPH_BANNER": ">interact with me on desktop devices_"
+            "BRAIN_GRAPH_BANNER_1": ">interact with the graph",
+            "BRAIN_GRAPH_BANNER_2": " on desktop devices_"
         },
         "HOBBIES":{
             "TITLE": "Hobbies",

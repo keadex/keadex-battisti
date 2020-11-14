@@ -13,9 +13,9 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <script src="../../custom_template/js/classie.min.js" async/>
+          {/* <script src="../../custom_template/js/classie.min.js"/> */}
           <script src="../../custom_template/js/main.min.js" async/>
-          <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" />
+          {/* <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" /> */}
         </body>
       </Html>
     )

@@ -24,8 +24,9 @@ const OptimizedMedia = dynamic(
 )
 const DosButton = dynamic(() => import('../components/dos-button/dos-button'));
 const Background = dynamic(() => import('../components/background/background'));
-const PageLayout = dynamic(() => import('../components/page-layout/page-layout'));
+// const PageLayout = dynamic(() => import('../components/page-layout/page-layout'));
 const KeadexPreview = dynamic(() => import('../components/keadex-preview/keadex-preview'));
+import PageLayout from '../components/page-layout/page-layout';
 
 
 //--------------- TYPES
@@ -224,7 +225,7 @@ class Home extends BasePageComponent<any, HomeState> {
           </div>
 
           {/* WHY KEADEX */}
-          <div id="why-keadex" ref={this.anchorRefs.get("why-keadex")} className={`${styles["home__section"]} ${styles["home__why-keadex"]}`}>
+          <div id="why-keadex" ref={this.anchorRefs.get(WHY_KEADEX_ID)} className={`${styles["home__section"]} ${styles["home__why-keadex"]}`}>
             <Background id={`bg`} img={"graph-bg.jpg"} overlayColor="#131313"/>
             <div className={`${styles["home__section-content"]}`}>
               <div className="row m-0">
@@ -250,7 +251,7 @@ class Home extends BasePageComponent<any, HomeState> {
           </div>
 
           {/* WHAT IS KEADEX */}
-          <div id="whats-keadex" ref={this.anchorRefs.get("whats-keadex")} className={`${styles["home__section"]} ${styles["home__whats-keadex"]} mt-3 mt-md-6`}>
+          <div id="whats-keadex" ref={this.anchorRefs.get(WHATS_KEADEX_ID)} className={`${styles["home__section"]} ${styles["home__whats-keadex"]} mt-3 mt-md-6`}>
             {/* <Background id="bg" img={bgWhat}/> */}
             {/* <Background id="bg" img={code} overlayColor="#131313"/> */}
             <div className="row m-0">

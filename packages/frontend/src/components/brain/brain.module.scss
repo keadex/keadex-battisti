@@ -1,0 +1,120 @@
+@import '../shared/shared-imports.module.scss';
+
+
+.brain__cosmo{
+  position: fixed;
+  pointer-events: none;
+  background-size: auto;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.3;
+}
+.brain__cosmo:global(.lazyloaded){
+  background: url("../../../public/img/cosmo.png") repeat;
+}
+:global(.webp) .brain__cosmo:global(.lazyloaded){
+  background: url("../../../public/img/cosmo.webp") repeat;
+}
+
+.brain__quote-container{
+  position: absolute;
+  left: $page-body-padding-desktop;
+  top: 25px;  
+  background-color: $primary-color-text;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: $primary-color;
+  opacity: 0.7;
+  
+  :global(#quote){
+    font-size: $h5-text-size;
+  }
+
+  :global(#author){
+    font-size: $h6-text-size;
+    float: right;
+  }
+
+}
+
+.brain__graph{
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+}
+
+.brain__container--picture{
+  height: 100vh;
+}
+
+.brain__container--interactive{
+  margin-left: -$page-body-padding-desktop;
+}
+
+.brain__chart-banner {
+  position: absolute;
+  bottom: $height-progressbar + 10px;
+  left: 0;
+  right: 0;
+  margin: 10px;
+  background: $primary-color;
+  cursor: pointer;
+
+  :global(#text) {
+    font-size: $body1-text-size;
+    color: $console-text-color;
+    border: 1px solid $console-text-color;
+    margin: 5px;
+    padding: 5px;
+  }
+}
+
+@include media-breakpoint-down(xl) {
+  .brain__graph{
+    width: 35%;
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .brain__graph{
+    width: 45%;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .brain__graph{
+    width: 75%;
+  }
+}
+
+@include media-breakpoint-down(sm) { 
+
+  .brain__graph{
+    width: 85%;
+  }
+  .brain__quote-container{
+    top: 15px;
+    left: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    :global(#quote){
+      font-size: $h6-text-size;
+    }
+  
+    :global(#author){
+      font-size: $body2-text-size;
+    }
+  }
+
+  .brain__chart-banner {
+    cursor: none;  
+    :global(#text) {
+      font-size: $caption-text-size;
+    }
+  }
+
+}

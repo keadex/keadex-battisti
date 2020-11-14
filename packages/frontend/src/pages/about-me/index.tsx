@@ -11,6 +11,8 @@ import { GetStaticProps } from 'next';
 import { wrapper } from '../../core/store/store';
 import { DEFAULT_REVALIDATE_SECONDS } from '../../core/app.constants';
 import dynamic from 'next/dynamic';
+import LazyLoad from 'react-lazyload';
+// import Brain from '../../components/brain/brain';
 
 const FormattedMessage:any = dynamic(() => import('react-intl').then((mod:any) => mod.FormattedMessage));
 const ProgressBar = dynamic(() => import('../../components/progressbar/progressbar'));
@@ -19,7 +21,7 @@ const Hobbies = dynamic(() => import('../../components/hobbies/hobbies'));
 const Experience = dynamic(() => import('../../components/experience/experience'));
 const Resume = dynamic(() => import('../../components/resume/resume'));
 const PageLayout = dynamic(() => import('../../components/page-layout/page-layout'));
-
+const Brain = dynamic(() => import('../../components/brain/brain'));
 
 //--------------- TYPES
 interface AboutMeProps {
@@ -33,8 +35,8 @@ interface AboutMeProps {
 }
 
 
-  //---------- getStaticProps
-  export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
+//---------- getStaticProps
+export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
   async ({store}) => {
   const NetworkService = (await import("../../core/network/network.service")).default;
   let expResp = await NetworkService.getInstance().__tmp_getExperiences();
@@ -145,7 +147,10 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
           <p className="bp-header__desc"><FormattedMessage id="ABOUT_ME.SUBTITLE" /></p>
         </header>
         <div className='page-body'>
-         
+          <div className={`${styles["about-me__panel"]} p-0 m-0`}>
+            <Brain experienceGraph={this.props.experienceGraph} />
+          </div>
+          <LazyLoad height={"100vh"} once scrollContainer={"#"+PAGE_ROOT_ID}>
             <Controller container={"#"+PAGE_ROOT_ID} globalSceneOptions={{ triggerHook: 0 }}>
               
               {/* PROGRESS BAR */}
@@ -176,9 +181,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
                 {(progress: any, event: any) => {
                   progress = this.onSceneEvent(1, progress, event);
                   // console.log("Hobbies: " + progress);
-                  if (progress == 0)
-                    return (<div></div>)
-                  else return (
+                  return (
                     <div className={`${styles["about-me__panel"]}`}>
                       <Hobbies progress={progress}/>
                     </div>
@@ -191,9 +194,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
                 {(progress: any, event: any) => {
                   progress = this.onSceneEvent(2, progress, event, (this.props.experience[0] != undefined)?this.props.experience[0].id:undefined);
                   // console.log("EXPERIENCE: MOBILE: " + progress);
-                  if (progress == 0)
-                    return (<div></div>)
-                  else return (
+                  return (
                     <div className={`${styles["about-me__panel"]}`}>
                       <Experience progress={progress} experience={this.props.experience[0]}/>
                     </div>
@@ -206,9 +207,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
                 {(progress: any, event: any) => {
                   progress = this.onSceneEvent(3, progress, event, (this.props.experience[1] != undefined)?this.props.experience[1].id:undefined);
                   // console.log("EXPERIENCE: FULL STACK: " + progress);
-                  if (progress == 0)
-                    return (<div></div>)
-                  else return (
+                  return (
                     <div className={`${styles["about-me__panel"]}`}>
                       <Experience progress={progress} experience={this.props.experience[1]}/>
                     </div>
@@ -221,9 +220,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
                 {(progress: any, event: any) => {
                   progress = this.onSceneEvent(4, progress, event, (this.props.experience[2] != undefined)?this.props.experience[2].id:undefined);
                   // console.log("EXPERIENCE: IT SOLUTION ARCHITECT: " + progress);
-                  if (progress == 0)
-                    return (<div></div>)
-                  else return (
+                  return (
                     <div className={`${styles["about-me__panel"]}`}>
                       <Experience progress={progress} experience={this.props.experience[2]}/>
                     </div>
@@ -235,9 +232,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
               <Scene pin duration={this.defaultState.progress[5].duration}>
                 {(progress: any, event: any) => {
                   progress = this.onSceneEvent(5, progress, event);
-                  if (progress == 0)
-                    return (<div className={`${styles["about-me__panel"]}`}></div>)
-                  else return (
+                  return (
                     <div className={`${styles["about-me__panel"]}`}>
                       <Resume />
                     </div>
@@ -245,6 +240,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
                 }}
               </Scene>
             </Controller>
+          </LazyLoad>
         </div>
       </PageLayout>
     );

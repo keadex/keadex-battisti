@@ -1,17 +1,13 @@
-import React, { useRef, useEffect, useCallback, MutableRefObject } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { PlayState, Tween } from 'react-gsap';import frontalLobe from "../../../public/img/education/frontal-lobe.png";
-import occipitalLobe from "../../../public/img/education/occipital-lobe.png";
-import parietalLobe from "../../../public/img/education/parietal-lobe.png";
-import temporalLobe from "../../../public/img/education/temporal-lobe.png";
-import cerebellum from "../../../public/img/education/cerebellum.png";
+import { PlayState, Tween } from 'react-gsap';
 import styles from './education.module.scss';
 import { ForceGraph } from '../../model/models';
 import { HooksBreakpointProps, useBreakpoint } from '../../core/react-breakpoint';
 import { isClient } from '../../helper/react-helper';
-import NoSSR from 'react-no-ssr';
 import dynamic from 'next/dynamic';
 import { MediaType } from '../optimized-media/optimized-media';
+const Brain:any = dynamic(() => import('../brain/brain'));
 
 const OptimizedMedia = dynamic(
   () => import('../optimized-media/optimized-media'),
@@ -34,70 +30,18 @@ export interface EducationProps extends HooksBreakpointProps {
 export const Education : React.FunctionComponent<EducationProps> = props => {
 
   //ATTRS
-  let forceGraphRef:any = useCallback((node:any) => {
-    if (node !== null) {
-      //Enlarge graph only if it is not in mobile mode
-    if (!breakpoints!.xs && !breakpoints!.sm){
-      node.d3Force('charge')
-        .strength(-200)
-        .distanceMax(1000);
-        node.d3Force('link').distance(80)
-    }else{
-      node.d3Force('charge')
-        .strength(-20);
-        node.d3Force('link').distance(50)
-    }
-    }
-  }, []);
-  
-  let brain:MutableRefObject<Map<string, HTMLImageElement>> = useRef(new Map());
-  let breakpoints = useBreakpoint();
-  
-  // let experienceGraph : ForceGraph.Graph|undefined = {nodes: [], links: []};
-
-  // const { data, error } = useSWR(GET_EXPERIENCE_GRAPH_API, (url)=>NetworkService.getInstance().getExperienceGraph());
-  // if (!error && data && data.data && data.data.result){
-  //   experienceGraph = data.data.result;
-  // }
 
 
   //FUNCS
-
-  //---------- useEffect
-  useEffect(() => {
-    initBrain();
-  }, []);
-
-
-  //------------ initBrain
-  function initBrain(){
-    let frontalLobeImg = new Image();
-    frontalLobeImg.src = frontalLobe;
-    let occipitalLobeImg = new Image();
-    occipitalLobeImg.src = occipitalLobe;
-    let parietalLobeImg = new Image();
-    parietalLobeImg.src = parietalLobe;
-    let temporalLobeImg = new Image();
-    temporalLobeImg.src = temporalLobe;
-    let cerebellumImg = new Image();
-    cerebellumImg.src = cerebellum;
-    brain.current.set("frontal-lobe", frontalLobeImg);
-    brain.current.set("occipital-lobe", occipitalLobeImg);
-    brain.current.set("parietal-lobe", parietalLobeImg);
-    brain.current.set("temporal-lobe", temporalLobeImg);
-    brain.current.set("cerebellum", cerebellumImg);
-  }
 
 
   //------------ adjustProgress
   function adjustProgress(idTween:number, inProgress: number):number{
     
     switch (idTween){
-      case 1: return (inProgress < 0 || inProgress > 0.1)?inProgress:0;
       case 2: 
-      case 3: var progress = inProgress-0.1;
-              // console.log(idTween + " -- " + inProgress + " --- " + ((progress < 0 || progress > 0.25)?0:progress));
-              return (progress < 0 || progress > 0.25)?0:progress;
+      case 3: // console.log(idTween + " -- " + inProgress + " --- " + ((progress < 0 || progress > 0.25)?0:progress));
+              return (inProgress < 0 || inProgress > 0.25)?0:inProgress;
       case 4: 
       case 5: var progress = inProgress-0.35;
               // console.log(idTween + " -- " + inProgress + " --- " + ((progress < 0 || progress > 0.25)?0:progress));
@@ -121,63 +65,18 @@ export const Education : React.FunctionComponent<EducationProps> = props => {
       <div className="row m-0">
 
         {/* EDUCATION */}
-        <div className="col-md-12 p-0">
-          <Tween            
+        {/* <div className="col-md-12 p-0"> */}
+          {/* <Tween            
             from={{css: {className: "position-relative animate__animated animate__fadeIn"}}}
             to={{css: {className: "position-relative animate__animated animate__fadeOut"}}}
             progress={adjustProgress(1, progress)}
             playState={PlayState.stop}
             lazy>
-              <div>
-                <div className={`${styles["education__cosmo"]} lazyload`} />
-                <div className={`${styles["education__quote-container"]}`}>
-                  <span id="quote">"No, I'm not interested in developing a powerful brain..."</span><br />
-                  <span id="author" className="text-right">Alan Turing</span>
-                </div>
-
-                {/* SHOW INTERACTIVE BRAIN GRAPH ONLY ON DESKTOP */}
-                {(breakpoints.xs || breakpoints.sm || breakpoints.md) && (<div className={`d-block d-lg-none text-center ${styles["education__brain-container--mobile"]} ${(adjustProgress(1, progress)!=0?"out":"")}`}>
-                  <OptimizedMedia className={`${styles["education__brain-graph"]}`} src={"education/brain-graph.png"} alt="Brain Graph" width={{default: "85%"}} srcWidth={852} srcHeight={751} />
-                  <div className={`${styles["education__brain-chart-banner"]}`}>
-                    <div id="text"><FormattedMessage id="ABOUT_ME.EDUCATION.BRAIN_GRAPH_BANNER" /></div>
-                  </div>
-                </div>)}
-                
-                {/* SHOW INTERACTIVE BRAIN GRAPH ONLY ON DESKTOP */}
-                {(breakpoints.lg || breakpoints.xl) && (<div className={`d-none d-lg-block ${styles["education__brain-container--desktop"]} ${(adjustProgress(1, progress)!=0?"out":"")} ${(progress==0?"pointer-events-none":"")}`}>
-                  <NoSSR>
-                    {ForceGraph2D && <ForceGraph2D ref={forceGraphRef} graphData={props.experienceGraph} linkColor={() => '#fff'} nodeAutoColorBy="group" enableNodeDrag={true} enableZoomPanInteraction={false}
-                      nodeCanvasObjectMode={()=>"replace"} nodeCanvasObject={(node:any, ctx:any, globalScale:any) => {
-                        
-                      if (node != undefined && node.id != undefined && node.x != undefined && node.y != undefined){
-                        if (node.id == "occipital-lobe" || node.id == "temporal-lobe" || node.id == "parietal-lobe" || node.id == "cerebellum" || node.id == "frontal-lobe"){
-                          let percentage = 85;
-                          // if (breakpoints!.xs && breakpoints!.sm) percentage = 75;
-                          const image = brain.current.get(node.id);
-                          if (image){
-                            const width = image.width - Math.ceil((image!.width * percentage)/100);
-                            const height = image.height * (width/image!.width);
-                            ctx.drawImage(image, node.x-width/2, node.y-height/2, width, height);
-                          }
-                        }else{
-                          const fontSize = 12/globalScale;
-                          ctx.font = `${fontSize}px \"Perfect DOS VGA 437\"`;
-                          ctx.textAlign = 'center';
-                          ctx.textBaseline = 'middle';
-                          ctx.fillStyle = node.color;
-                          var lines = node.name.split('\n');
-                          var lineheight = 8;
-                          for (var i = 0; i<lines.length; i++)
-                            ctx.fillText(lines[i], node.x, node.y + (i*lineheight));
-                        }
-                      }
-                    }} />}
-                  </NoSSR>
-                </div>)}
-
-              </div>                
-          </Tween>
-        </div>
+              <div> */}
+                {/* <Brain progress={progress} experienceGraph={props.experienceGraph} /> */}
+              {/* </div>
+          </Tween> */}
+        {/* </div> */}
 
         {/* HAPPY HOUR */}
         <div className={`col-sm-12 col-md-12 text-center ${styles["education__container-element"]} ${(adjustProgress(2, progress)==0?"out":"")}`}>
