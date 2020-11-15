@@ -1,7 +1,6 @@
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 
 @import "./custom-template.scss";
-// @import "./custom-template-demo.scss";
 @import '~bootstrap/scss/bootstrap.scss';
 @import '../components/shared/scss/mdb.scss';
 
@@ -13,14 +12,13 @@
   font-family: 'Perfect DOS VGA 437';
   font-style: sans-serif;
   font-weight: 400;
-  src: url('../../public/fonts/Perfect DOS VGA 437 Win.ttf');
+  src: url('../../public/fonts/perfect_dos_vga_437_win.woff2') format('woff2');
   font-display: swap;
 }
 
 
 body {
   background: $primary-color;
-	// font-family: 'Inconsolata', monospace;
 	font-family: 'Perfect DOS VGA 437', sans-serif;
 	font-weight: 400;
 	color: $primary-color-text;
