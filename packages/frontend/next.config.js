@@ -1,10 +1,9 @@
-// const withSass = require('@zeit/next-sass');
-// const withCSS = require('@zeit/next-css');
-const compose = require('next-compose')
+const compose = require('next-compose-plugins')
 const optimizedImages = require('next-optimized-images');
 const withTM = require('next-transpile-modules')(['react-scrollmagic', 'react-syntax-highlighter']);
 const withModernizr = require("next-plugin-modernizr");
 const withVideos = require('next-videos')
+const withPWA = require('next-pwa');
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -16,6 +15,12 @@ module.exports = compose([
   [optimizedImages],
   [withTM],
   [withBundleAnalyzer],
+  [withPWA, {
+    pwa: {
+      disable: process.env.NODE_ENV === 'development',
+      dest: 'public'
+    }
+  }]],
   {
     webpack: cfg => {
       const originalEntry = cfg.entry
@@ -35,4 +40,4 @@ module.exports = compose([
       return cfg
     }
   }
-])
+)
