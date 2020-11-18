@@ -58,7 +58,7 @@ class Body extends React.Component<BodyProps> {
             Object.keys(ROUTES).map(function (key) {
               // let ComponentName = ROUTES[key].component;
               return ( */}
-                <div className="page" id="page-root" data-menuopen={this.props.menuOpen}>
+                <div className="page" id="page-root" data-menuopen={this.props.menuOpen} style={{zIndex: 3, opacity: 1}}>
                   {/* <Switch> */}
                     {/* <Route exact path={ROUTES[key].url} render={() => (
                       <Suspense fallback={<div></div>}> */}
@@ -84,8 +84,8 @@ class Body extends React.Component<BodyProps> {
                     )}/> */}
                   {/* </Switch> */}
                 </div>
-                <div className="page" id="page-fake1" />
-                <div className="page" id="page-fake2" />
+                <div className="page page--inactive" id="page-fake1" style={{transform: "translate3d(0px, 100%, 0px)", zIndex: 2, opacity: 0.9}}/>
+                <div className="page page--inactive" id="page-fake2" style={{transform: "translate3d(0px, 100%, 0px)", zIndex: 1, opacity: 0.8}}/>
               {/* )
             })
         } */}
