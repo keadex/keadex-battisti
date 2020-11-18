@@ -136,7 +136,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
   //------------ render
   public render() {
     return (
-      <PageLayout title="Keadex - About me">
+      <PageLayout title="Keadex - About me" description="From Bari (Italy). Since 1991. Of July. 'About me' is not just a boring resume, it's a way to interact with it.">
         <header className="bp-header cf position-relative z-index-1">
           <h1 className="bp-header__title text-brand1-dark">
             <FormattedMessage id="ABOUT_ME.TITLE" values={{

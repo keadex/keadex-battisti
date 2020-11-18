@@ -106,7 +106,7 @@ class KeaLab extends BasePageComponent<KeaLabProps, KeaLabState> {
   public render() {
     this.reloadModules();
     return (
-      <PageLayout title="Keadex - KeaLab">
+      <PageLayout title="Keadex - KeaLab" description="Check the Keadex architecture and the modules which compose it. Here you will find the technical details of each module.">
         <header className="bp-header cf">
           <h1 className="bp-header__title text-brand1-dark"><FormattedMessage id="KEALAB.TITLE" /></h1>
           <p className="bp-header__desc"><FormattedMessage id="KEALAB.SUBTITLE" /></p>
