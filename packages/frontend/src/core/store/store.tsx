@@ -31,7 +31,7 @@ export class StoreService {
 
   public saveStore(store: Store<any, AnyAction>):boolean{
     if (!isClient()){
-      console.debug("You cannot use StoreService on server side");
+      // console.debug("You cannot use StoreService on server side");
       return false;
     }
     this.store = store;
@@ -41,7 +41,7 @@ export class StoreService {
 
   public getStore():Store<any, AnyAction>|null{
     if (!isClient()){
-      console.debug("You cannot use StoreService on server side");
+      // console.debug("You cannot use StoreService on server side");
       return null;
     }
     console.debug("Store found on client side!");
