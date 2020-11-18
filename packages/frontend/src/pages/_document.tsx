@@ -10,6 +10,7 @@ class MyDocument extends Document {
     return (
       <Html className="js" lang="en">
         <Head>
+          <meta charSet="UTF-8" />
           <link rel="shortcut icon" href="/favicon.ico" />
           <link rel='mask-icon' href='/favicon.svg' color='#2C2C2C' />
           <link rel='apple-touch-icon' sizes='192x192' href='/img/keadex-logo-192x192.png' />
