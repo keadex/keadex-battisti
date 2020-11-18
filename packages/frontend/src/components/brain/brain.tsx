@@ -102,7 +102,7 @@ const Brain : React.FunctionComponent<BrainProps> = props => {
       {/* (breakpoints.xs || breakpoints.sm || breakpoints.md) */}
       {!isGraphVisible && (<div className={`d-block text-center ${styles["brain__container--picture"]} ${(adjustProgress(0.1)!=0?"out":"")}`}>
         <OptimizedMedia className={`${styles["brain__graph"]}`} src={"education/brain-graph.png"} alt="Brain Graph" width={{sm:"85%", md: "75%", lg: "45%", xl: "35%"}} srcWidth={852} srcHeight={751} />
-        <div className={`${styles["brain__chart-banner"]}`} onClick={()=>{if (breakpoints.lg || breakpoints.xl) setIsGraphVisible(true)}}>
+        <div className={`${styles["brain__chart-banner"]}`} onClick={()=>{if (!breakpoints.xs && !breakpoints.sm && !breakpoints.md) setIsGraphVisible(true)}}>
           <div id="text">
             <span><FormattedMessage id="ABOUT_ME.EDUCATION.BRAIN_GRAPH_BANNER_1" /></span>
             <span className="d-lg-none d-xl-none"><FormattedMessage id="ABOUT_ME.EDUCATION.BRAIN_GRAPH_BANNER_2" /></span>
