@@ -1,4 +1,4 @@
-declare module 'flubber' {
+declare module 'flubber'  {
     // No default export
     export default undefined
 
