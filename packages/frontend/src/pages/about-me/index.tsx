@@ -12,7 +12,6 @@ import { wrapper } from '../../core/store/store';
 import { DEFAULT_REVALIDATE_SECONDS } from '../../core/app.constants';
 import dynamic from 'next/dynamic';
 import LazyLoad from 'react-lazyload';
-// import Brain from '../../components/brain/brain';
 
 const FormattedMessage:any = dynamic(() => import('react-intl').then((mod:any) => mod.FormattedMessage));
 const ProgressBar = dynamic(() => import('../../components/progressbar/progressbar'));
