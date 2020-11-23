@@ -13,7 +13,7 @@ interface CodeSnippetProps {
 
 
 //------------------ COMPONENT
-export const CodeSnippet : React.FC<CodeSnippetProps> = (props:CodeSnippetProps) => {
+const CodeSnippet : React.FC<CodeSnippetProps> = (props:CodeSnippetProps) => {
   
   //----- render
   return (
@@ -26,3 +26,5 @@ export const CodeSnippet : React.FC<CodeSnippetProps> = (props:CodeSnippetProps)
     </div>
   );
 }
+
+export default CodeSnippet;

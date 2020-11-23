@@ -3,8 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { PlayState, Tween } from 'react-gsap';
 import styles from './education.module.scss';
 import { ForceGraph } from '../../model/models';
-import { HooksBreakpointProps, useBreakpoint } from '../../core/react-breakpoint';
-import { isClient } from '../../helper/react-helper';
+import { HooksBreakpointProps } from '../../core/react-breakpoint';
 import dynamic from 'next/dynamic';
 import { MediaType } from '../optimized-media/optimized-media';
 const Brain:any = dynamic(() => import('../brain/brain'));
@@ -14,10 +13,6 @@ const OptimizedMedia = dynamic(
   { ssr: false }
 )
 
-let ForceGraph2D:any = undefined;
-if (isClient()){
-  ForceGraph2D = require('react-force-graph').ForceGraph2D;
-}
 
 //------------------ TYPES
 export interface EducationProps extends HooksBreakpointProps {
