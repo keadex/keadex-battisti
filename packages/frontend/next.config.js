@@ -6,7 +6,7 @@ const withFonts = require('next-fonts');
 const withTM = require('next-transpile-modules')(['react-scrollmagic', 'react-syntax-highlighter']);
 
 // module.exports = withSass(withImages());
-
+ 
 module.exports = compose([
   // [withSass],
   // [withCSS],
