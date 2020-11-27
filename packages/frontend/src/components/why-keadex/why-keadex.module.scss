@@ -1,0 +1,18 @@
+@import '../shared/shared-imports.module.scss';
+
+.why-keadex__section-content{
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50% );
+  position: relative;
+}
+
+@include media-breakpoint-down(sm) {
+  
+  .why-keadex__section-content{
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+
+}

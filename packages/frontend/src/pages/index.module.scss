@@ -9,7 +9,7 @@
   overflow: hidden;
 
   :global(#bg){
-    margin: -$page-body-padding-desktop;
+    margin-left: -$page-body-padding-desktop;
   }
 }
 
@@ -22,6 +22,7 @@
 
 .home__cover {
   height: 100vh !important;
+  margin-bottom: 10px;;
 }
 
 .home__cover img {
@@ -51,87 +52,17 @@
   min-height: 100vh;
   height: auto;
   padding-bottom: 0px;
-  svg {
-    width: 50%;
-    :global(#target1){
-      fill: $brand-color-2;
-    }
-    :global(#target2){
-      fill: $brand-color-3;
-    }
-    :global(#target3){
-      fill: $brand-color-1;
-    }
-  }
+}
 
-  ul {
-    li{
-      list-style: none;
-      cursor: pointer;
-      ::before {
-        content: '>';
-        position: absolute;
-        margin-left: -15px;
-      }
-      &.active {
-        color: $brand-color-1;
-      }
-    }
-  }
-
-  :global(.card){
-    background: #171717;
-  }
-  :global(.card-body img){
-    width: 150px;
-    display: initial;
+.home__why-keadex-container{
+  :global(.lazyload-wrapper){
+    height: 100%;
+    margin-top: -$page-body-padding-desktop;
+    margin-bottom: -$page-body-padding-desktop;
   }
 }
 
-.home__kealab{
-  background: #131313;
-  margin-left: -$page-body-padding-desktop !important;
-  margin-right: -$page-body-padding-desktop !important;
-  padding: 40px;
-}
-
-.home__kealab-title{
-  line-height: 1;
-  font-size: $overline-text-size;
-  color: $console-text-color;
-  padding: 15px;
-}
-
-.home__kealab-content{
-  border: double ;
-  margin: 40px 20% 40px 20%;
-  padding: 15px;
-}
-
-
-@include media-breakpoint-down(md) { 
-  .home__whats-keadex {
-    svg {
-      width: 80%;
-    }
-  }
-  .home__kealab-content{
-    margin-left: 5%;
-    margin-right: 5%;
-  }
-}
-
-@include media-breakpoint-down(lg) { 
- 
-}
-
-@include media-breakpoint-down(sm) { 
-  .home__whats-keadex {
-    svg {
-      width: 50%;
-    }
-  }
-  
+@include media-breakpoint-down(sm) {  
   .home__section{
     height: auto;
     min-height: 100vh;
@@ -151,19 +82,11 @@
   .home__cover img {
     width: 200px;
   }
-  .home__title {
-    margin-top: 50px;
-    font-size: $subtitle2-text-size;
-  }
-  
-  .home__kealab{
-    background: black;
-    margin-left: -$page-body-padding-mobile;
-    margin-right: -$page-body-padding-mobile;
-  }
 
-  .home__kealab-title{
-    font-size: 7px;
+  .home__why-keadex-container{
+    :global(.lazyload-wrapper){
+      margin-top: -$page-body-padding-mobile;
+      margin-bottom: -$page-body-padding-mobile;
+    }
   }
-
 }

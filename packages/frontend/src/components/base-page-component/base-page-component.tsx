@@ -1,7 +1,5 @@
 import React, { RefObject } from 'react';
-// import store from '../../core/store/store';
 import { PAGE_ROOT_ID } from '../../core/route.constants';
-import { StoreService } from '../../core/store/store';
 
 
 //--------------- COMPONENT
