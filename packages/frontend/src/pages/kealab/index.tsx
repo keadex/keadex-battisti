@@ -1,6 +1,5 @@
 import React from 'react';
 import BasePageComponent from '../../components/base-page-component/base-page-component';
-import { FormattedMessage } from 'react-intl';
 import PageLayout from '../../components/page-layout/page-layout';
 import { GetStaticProps } from 'next';
 import { wrapper } from '../../core/store/store';
@@ -8,6 +7,7 @@ import { ArchitectureModule, ArchitectureModuleType } from '../../model/autogene
 import { DEFAULT_REVALIDATE_SECONDS } from '../../core/app.constants';
 import dynamic from 'next/dynamic';
 
+const FormattedMessage:any = dynamic(() => import('react-intl').then((mod:any) => mod.FormattedMessage));
 const ApplicationArchitecture = dynamic(() => import('../../components/architecture/application-architecture'));
 const InfrastructureArchitecture = dynamic(() => import('../../components/architecture/infrastructure-architecture'));
 

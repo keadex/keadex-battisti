@@ -1,7 +1,10 @@
 import React from 'react';
 import { ArchitectureType } from '../../pages/kealab';
+import type { ArchitectureImplProps } from './architecture';
 import AppArchSvg from '../../../public/img/application-architecture.svg';
-import Architecture, { ArchitectureImplProps} from './architecture';
+import dynamic from 'next/dynamic';
+
+const Architecture = dynamic(() => import('../../components/architecture/architecture'));
 
 
 //------------------ COMPONENT
