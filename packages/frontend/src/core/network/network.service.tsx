@@ -12,6 +12,7 @@ import { ARCHITECTURE_MODULES } from './graphql-queries/strapi/architecture-modu
 
 
 //API ENDPOINTS
+export const CDN_ENDPOINT : string = process.env.NEXT_PUBLIC_CDN_ENDPOINT!;
 export const API_ENDPOINT : string = process.env.NEXT_PUBLIC_API_ENDPOINT!;
 export const STRAPI_ENDPOINT: string = process.env.NEXT_PUBLIC_STRAPI_API_URL!;
 export const STRAPI_GRAPHQL_ENDPOINT: string = process.env.NEXT_PUBLIC_STRAPI_GRAPHQL_API_URL!;

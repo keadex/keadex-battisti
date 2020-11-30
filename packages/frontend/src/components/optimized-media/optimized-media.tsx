@@ -150,7 +150,7 @@ const OptimizedMedia = React.forwardRef(({ src, className, alt, id, srcWidth:old
       return (
         <video width={getDimension(DimensionType.Width)} height={getDimension(DimensionType.Height)} autoPlay={autoPlay??false} loop={loop??false} preload={preload??"auto"} className={"lazyload " + (className??'')} >
           <source src={require(`../../../public/video/${src}.webm`)} type="video/webm" />
-          <source src={require(`../../../public/video/${src}.mp4`)} type="video/mp4" />
+          <source src={`https://keadex.io/cdn/video/${src}.mp4`} type="video/mp4" />
           Sorry, your browser doesn't support embedded videos.
         </video>
       )
