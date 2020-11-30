@@ -1,36 +1,31 @@
 import React, { useEffect } from 'react';
-
 import App, { AppContext } from "next/app";
 import type { AppProps } from 'next/app'
 import {useRouter} from 'next/router'
-import Head from 'next/head'
-import '../styles/global.scss'
 import { BreakpointProvider, Query } from '../core/react-breakpoint'
-import { wrapper, StoreService } from '../core/store/store';
-import { IntlProvider } from 'react-intl'
+import { isClient } from '../helper/react-helper';
 import flatten from 'flat'
-import { toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred, setIsAppInitialized, setIsGaInitialized, setQuotes } from '../core/store/reducers/app.reducer';
-
-// import 'react-app-polyfill/ie9';
-// import 'react-app-polyfill/stable';
-// import 'svg-classlist-polyfill'
-// import smoothscroll from 'smoothscroll-polyfill';
-import { watchForHover, isClient } from '../helper/generic-helper';
-import Spinner from '../components/spinner/spinner';
-import Header from '../components/header/header';
-import Body from '../components/body/body';
 import {useStore} from 'react-redux';
-import useSWR from 'swr';
-import NetworkService, { GET_QUOTES_API } from '../core/network/network.service';
-import { initGA, logPageView } from '../core/google-analytics';
+import dynamic from 'next/dynamic'
+import '../styles/global.scss'
+import { wrapper, StoreService } from '../core/store/store';
+import { toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred, setIsAppInitialized, setIsGaInitialized, setQuotes } from '../core/store/reducers/app.reducer';
 import Cookies from 'js-cookie';
+import { initGA, logPageView } from '../core/google-analytics';
 import { CookieConsent } from '../model/models';
-import sanitizeHtml from 'sanitize-html';
-import { DefaultSeo } from 'next-seo';
-import { getStrapiMedia } from '../helper/strapi-helper';
+import Modernizr from 'modernizr';
+if (isClient()){
+  window.Modernizr = Modernizr;
+  require("../custom-template/main.min.js");
+}
 
+const Head = dynamic(() => import('next/head'));
+const Spinner:any = dynamic(() => import('../components/spinner/spinner'));
+const Header:any = dynamic(() => import('../components/header/header'));
+const Body:any = dynamic(() => import('../components/body/body'));
+const IntlProvider:any = dynamic(() => import('react-intl').then((mod:any) => mod.IntlProvider));
+const DefaultSeo:any = dynamic(() => import('next-seo').then((mod:any) => mod.DefaultSeo));
 
-// smoothscroll.polyfill();
 
 //---------- Disable debug and log levels in production
 if (process.env.NODE_ENV === "production"){
@@ -44,14 +39,14 @@ export interface CustomTemplate{
   openPage: (id:string, skipMenu?:boolean)=>void;
 }
 declare global {
-  interface Window { CustomTemplate: CustomTemplate; }
+  interface Window { CustomTemplate: CustomTemplate; Modernizr: any }
 }
 
 
 //---------- react-intl configuration
 if (!Intl.PluralRules) {
-    require('@formatjs/intl-pluralrules/polyfill');
-    require('@formatjs/intl-pluralrules/locale-data/en'); // Add locale data for en
+  // require('@formatjs/intl-pluralrules/polyfill');
+  // require('@formatjs/intl-pluralrules/locale-data/en'); // Add locale data for en
 }
 
 var messages_en:any = flatten(require('../translations/en.json'));
@@ -76,9 +71,31 @@ const queries : Query = {
 }
 
 
-//---------- Sanitize Html global configuration
-sanitizeHtml.defaults.allowedAttributes["*"] = ["class"]; //allow class attr on all tags
+//---------- watchForHover
+function watchForHover() {
+  console.debug("watch for hover");
+  // lastTouchTime is used for ignoring emulated mousemove events
+  let lastTouchTime = 0
 
+  function enableHover() {
+    if ((new Date()).getMilliseconds() - lastTouchTime < 500) return;
+    document.body.classList.add('hasHover');
+  }
+
+  function disableHover() {
+    document.body.classList.remove('hasHover');
+  }
+
+  function updateLastTouchTime() {
+    lastTouchTime = (new Date()).getMilliseconds();
+  }
+
+  document.addEventListener('touchstart', updateLastTouchTime, {passive: true});
+  document.addEventListener('touchstart', disableHover, {passive: true});
+  document.addEventListener('mousemove', enableHover, {passive: true});
+
+  enableHover()
+}
 
 //---------- COMPONENT
 function MyApp({ Component, pageProps }: AppProps) {
@@ -96,11 +113,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   const onRouteChangeStart = ()=>{
     store.dispatch(activateSpinner());
     store.dispatch(setPreviousUrl(location.href));
-    // store.dispatch(setNavigationOccurred(true));
   }
 
   const onRouteChangeComplete = ()=>{
-    //console.log("routeChangeComplete " + location.href + " -- " + store.getState().app.previousUrl);
     store.dispatch(disableSpinner());
     if (location.href != store.getState().app.previousUrl){
       store.dispatch(setNavigationOccurred(true));
@@ -116,42 +131,35 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const onHashChangeStart = ()=>{
     store.dispatch(setPreviousUrl(location.href));
-    // store.dispatch(setNavigationOccurred(true));
   }
 
   const onHashChangeComplete = ()=>{
-    // console.log("hashChangeComplete " + location.href + " -- " + store.getState().app.previousUrl);
-    // document.body.scrollTop=0;
     if (location.href != store.getState().app.previousUrl){
-      //console.log("occurred");
       store.dispatch(setNavigationOccurred(true));
     }else{
-      //console.log("not occurred");
       store.dispatch(setNavigationOccurred(false));
     }
   }
   
   //useSWR caches already done requests and doesn't resubmit the same request.
   //So it's not a problem if the following line is called multiple time: only a request is submitted
-  const quotesResp = useSWR(getStrapiMedia(GET_QUOTES_API)!, (url)=>NetworkService.getInstance().__tmp_getQuotes());
+  // const quotesResp = useSWR(getStrapiMedia(GET_QUOTES_API)!, ()=>NetworkService.getInstance().__tmp_getQuotes());
 
   //---------- useEffect
   useEffect(() => {
     // console.debug("_app");
-
     if (!store.getState().app.isAppInitialized){
       watchForHover();
       store.dispatch(setIsAppInitialized(true));
     }
 
     //---- start to use Google Analytics only if the user has given the consensus
-    let cookieConsent = Cookies.get('CookieConsent');    
+    let cookieConsentValue = Cookies.get('CookieConsent');    
 
     //fix Cookiebot "CookieConsent" cookie json string (missing quotes)
-    // cookieConsent = cookieConsent?.replaceAll('{', '{"').replaceAll(':', '":').replaceAll(',', ',"').replaceAll("'", '"');
-    cookieConsent = cookieConsent?.replace(/{/gi, '{"').replace(/:/gi, '":').replace(/,/gi, ',"').replace(/'/gi, '"');
+    cookieConsentValue = cookieConsentValue?.replace(/{/gi, '{"').replace(/:/gi, '":').replace(/,/gi, ',"').replace(/'/gi, '"');
     
-    if (!store.getState().app.isGAInitialized && cookieConsent && (JSON.parse(cookieConsent) as CookieConsent).statistics){
+    if (!store.getState().app.isGAInitialized && cookieConsentValue && (JSON.parse(cookieConsentValue) as CookieConsent).statistics){
       initGA()
       store.dispatch(setIsGaInitialized(true));
     }
@@ -160,10 +168,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
     //---- 
 
-    if (!quotesResp.error && quotesResp && quotesResp.data && quotesResp.data.data
-      && quotesResp.data.data.data && quotesResp.data.data.data.quotes && store.getState().app.quotes.length == 0){
+    // console.log(pageProps.quotesResp);
+    if (pageProps.quotesResp && pageProps.quotesResp.data && pageProps.quotesResp.data.quotes && store.getState().app.quotes.length == 0){
       //save quotes only if not already saved
-      store.dispatch(setQuotes(quotesResp.data.data.data.quotes));
+      store.dispatch(setQuotes(pageProps.quotesResp.data.quotes));
     }
 
     //---------- Bind router events to show loader
@@ -195,16 +203,17 @@ function MyApp({ Component, pageProps }: AppProps) {
   //---------- rendering
   return (    
     <>
-      <Head>
-        {/* <link rel="stylesheet" type="text/css" href="../../custom_template/css/demo.css" /> */}
-        {/* <link rel="stylesheet" type="text/css" href="../../custom_template/css/component.css" /> */}
+      {/* <Head>
         <link rel="shortcut icon" href="/favicon.ico" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" /><script src="../../custom_template/js/modernizr-custom.min.js" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <link rel="manifest" href="/manifest.json" />
-        <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;display=swap" rel="stylesheet" />
-        {/* <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet" /> */}
-        <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="d12031df-a146-4c32-8276-e1d5c086b932" data-blockingmode="auto" type="text/javascript"></script>
+        <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="d12031df-a146-4c32-8276-e1d5c086b932" data-blockingmode="auto" type="text/javascript" async /> */}
         {/* <script id="CookieDeclaration" src="https://consent.cookiebot.com/d12031df-a146-4c32-8276-e1d5c086b932/cd.js" type="text/javascript" async></script> */}
+        {/* <title>Keadex</title>
+      </Head> */}
+
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <title>Keadex</title>
       </Head>
 
@@ -265,16 +274,19 @@ MyApp.getInitialProps = async (appCtx:AppContext) => {
   // Calls page's `getInitialProps` and fills `appProps.pageProps`
   const appProps = await App.getInitialProps(appCtx);
   
+  const NetworkService = (await import("../core/network/network.service")).default;
+  const quotesResp = await NetworkService.getInstance().__tmp_getQuotes();
+  // console.log(quotesResp);
   if(appCtx.ctx.pathname.indexOf("/strapi") != -1){
-    // Fetch global site settings from Strapi, only for pages retrieved by Strapi 
+    // Fetch global site settings from Strapi, only for pages retrieved by Strapi
     const global = await NetworkService.getInstance().getStrapiGlobalData();
     const globalData = global.data.data?.global;
     // console.debug("Global data");
     // console.debug(globalData);
     // Pass the data to our page via props
-    return { ...appProps, pageProps: { globalData, path: appCtx.ctx.pathname } };
+    return { ...appProps, pageProps: { globalData, path: appCtx.ctx.pathname, quotesResp: quotesResp.data } };
   }else{
-    return { ...appProps };
+    return { ...appProps, pageProps: { quotesResp: quotesResp.data } };
   }
 };
 

@@ -26,12 +26,6 @@
 .hobbies__hobby-cinema{
   width: 8%;
 }
-.hobbies__hobby-spearfishing-end{
-  top: 72vh;
-}
-.hobbies__hobby-cinema-end{
-  top: 71vh;
-}
 
 .hobbies__hobby-description {
   position: absolute;
@@ -58,12 +52,6 @@
   .hobbies__hobby-cinema{
     width: 18%;
   }
-  .hobbies__hobby-spearfishing-end{
-    top: 70vh;
-  }
-  .hobbies__hobby-cinema-end{
-    top: 69vh;
-  }
 }
 
 @include media-breakpoint-down(sm) { 
@@ -83,11 +71,5 @@
   }
   .hobbies__hobby-cinema{
     width: 30%;
-  }
-  .hobbies__hobby-spearfishing-end{
-    top: 69vh;
-  }
-  .hobbies__hobby-cinema-end{
-    top: 69vh;
   }
 }

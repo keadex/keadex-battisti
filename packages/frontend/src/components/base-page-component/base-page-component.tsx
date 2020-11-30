@@ -1,7 +1,5 @@
 import React, { RefObject } from 'react';
-// import store from '../../core/store/store';
 import { PAGE_ROOT_ID } from '../../core/route.constants';
-import { StoreService } from '../../core/store/store';
 
 
 //--------------- COMPONENT
@@ -14,8 +12,8 @@ class BasePageComponent<K,V> extends React.Component<K,V> {
   //FUNCS
 
   //------------ constructor
-  constructor(props:K, state:V){
-    super(props, state);
+  constructor(props:K){
+    super(props);
     this.anchorRefs = new Map<string, RefObject<any>>();
   }
 
@@ -30,6 +28,7 @@ class BasePageComponent<K,V> extends React.Component<K,V> {
       // console.log(this.anchorRefs.get(hash)!);
       // console.log(PAGE_ROOT_ID);
       // document.getElementById(PAGE_ROOT_ID)!.scrollTo({top: this.anchorRefs.get(hash)!.current.offsetTop, behavior: 'smooth'});
+      // console.log(this.anchorRefs);
       document.getElementById(PAGE_ROOT_ID)!.scrollTop = this.anchorRefs.get(hash)!.current.offsetTop;
       // console.log("scrolled");
     }

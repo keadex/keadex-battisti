@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './progressbar.module.scss';
 import { WrappedComponentProps, injectIntl } from 'react-intl';
-import { IStoreState } from '../../core/store/store.type';
+import { StoreState } from '../../core/store/store.type';
 import { connect } from 'react-redux';
 import { SceneId } from '../../core/app.constants';
 
@@ -65,7 +65,7 @@ class ProgressBar extends React.Component<IProgressBarProps, any> {
 }
 
 
-const mapStateToProps = (state:IStoreState) => {
+const mapStateToProps = (state:StoreState) => {
   return {
     currentScene: state.aboutMe.currentScene,
     scenePayload: state.aboutMe.scenePayload,

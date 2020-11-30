@@ -9,10 +9,18 @@
     @extend .header-sw-eng-root;
     background-image: url("../../../public/img/header-experience/bg-landscape.png");
   }
+  :global(.webp) &--landscape{
+    @extend .header-sw-eng-root;
+    background-image: url("../../../public/img/header-experience/bg-landscape.webp");
+  }
 
   &--ground {
     @extend .header-sw-eng-root;
     background-image: url("../../../public/img/header-experience/bg-landscape-ground.png");
+  }
+  :global(.webp) &--ground{
+    @extend .header-sw-eng-root;
+    background-image: url("../../../public/img/header-experience/bg-landscape-ground.webp");
   }
 }
 

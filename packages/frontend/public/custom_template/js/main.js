@@ -67,7 +67,7 @@
 				posIdx = stackPagesIdxs.indexOf(i);
 
 			if( current !== i ) {
-				classie.add(page, 'page--inactive');
+				page.classList.add('page--inactive');
 
 				if( posIdx !== -1 ) {
 					// visible pages in the stack
@@ -81,7 +81,7 @@
 				}
 			}
 			else {
-				classie.remove(page, 'page--inactive');
+				page.classList.remove('page--inactive');
 			}
 
 			page.style.zIndex = i < current ? parseInt(current - i) : parseInt(pagesTotal + current - i);
@@ -145,11 +145,11 @@
 	// opens the menu
 	function openMenu() {
 		// toggle the menu button
-		classie.add(menuCtrl, 'menu-button--open')
+		menuCtrl.classList.add('menu-button--open')
 		// stack gets the class "pages-stack--open" to add the transitions
-		classie.add(stack, 'pages-stack--open');
+		stack.classList.add('pages-stack--open');
 		// reveal the menu
-		classie.add(nav, 'pages-nav--open');
+		nav.classList.add('pages-nav--open');
 
 		// now set the page transforms
 		var stackPagesIdxs = getStackPagesIdxs();
@@ -198,10 +198,10 @@
 		
 		// close menu..
 		if (skipMenu === undefined || !skipMenu){
-			classie.remove(menuCtrl, 'menu-button--open');
-			classie.remove(nav, 'pages-nav--open');
+			menuCtrl.classList.remove('menu-button--open');
+			nav.classList.remove('pages-nav--open');
 			onEndTransition(futurePage, function() {
-				classie.remove(stack, 'pages-stack--open');
+				stack.classList.remove('pages-stack--open');
 				// reorganize stack
 				buildStack();
 				isMenuOpen = false;

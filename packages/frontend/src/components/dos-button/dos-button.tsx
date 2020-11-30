@@ -10,7 +10,7 @@ interface DosButtonProps {
 }
 
 //------------------ COMPONENT
-export const DosButton : React.FunctionComponent<DosButtonProps> = props => {
+const DosButton : React.FunctionComponent<DosButtonProps> = props => {
   const router = useRouter();
 
   //------ handleClick
@@ -29,3 +29,5 @@ export const DosButton : React.FunctionComponent<DosButtonProps> = props => {
     </div>
   );
 }
+
+export default DosButton;

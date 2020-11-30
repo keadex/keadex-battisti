@@ -1,15 +1,19 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { HOME_URL, ABOUT_ME_URL, KEA_LAB_URL, WHY_KEADEX_URL, WHATS_KEADEX_URL } from '../../core/route.constants';
-import logo from '../../../public/img/keadex-logo.png';
 import { connect } from 'react-redux';
 import { toggleMenu } from '../../core/store/reducers/app.reducer';
 import { MDBIcon } from 'mdbreact';
 import Link from 'next/link';
 import { withRouter } from 'next/router'
 import { WithRouterProps } from 'next/dist/client/with-router';
-import { IStoreState } from '../../core/store/store.type';
+import type { StoreState } from '../../core/store/store.type';
+import dynamic from 'next/dynamic';
 
+const OptimizedMedia = dynamic(
+  () => import('../optimized-media/optimized-media'),
+  { ssr: false }
+)
 
 //--------------- TYPES
 interface HeaderProps extends WithRouterProps {
@@ -54,7 +58,7 @@ class Header extends React.Component<HeaderProps> {
       <div>
         {/* navigation */}
         <nav className="pages-nav">
-        <img src={logo} className="nav-logo" alt="logo" />
+          <div className="w-100 text-center"><OptimizedMedia src={"keadex-logo.png"} className="nav-logo" alt="logo" width={{default: "15%", sm: "60%", md: "32%", lg: "28%", xl: "23%"}} srcWidth={529} srcHeight={96} /></div>
           <div className="pages-nav__item"><Link replace href={HOME_URL} scroll={false} ><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((this.currentUrl.endsWith(HOME_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.HOME" /></a></Link></div>
           <div className="pages-nav__item"><Link replace href={WHY_KEADEX_URL} scroll={false} ><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((this.currentUrl.endsWith(WHY_KEADEX_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.WHY_KEADEX" /></a></Link></div>
           <div className="pages-nav__item"><Link replace href={WHATS_KEADEX_URL} scroll={false} ><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((this.currentUrl.endsWith(WHATS_KEADEX_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.WHATS_KEADEX" /></a></Link></div>
@@ -68,10 +72,10 @@ class Header extends React.Component<HeaderProps> {
           <div className="pages-nav__item pages-nav__item--small"><a className="link link--page link--faded" href="#page-blog">Blog &amp; News</a></div>
           <div className="pages-nav__item pages-nav__item--small"><a className="link link--page link--faded" href="#page-contact">Contact</a></div> */}
           <div className="pages-nav__item pages-nav__item--social text-center"> 
-            <a className="link link--social link--faded" href="https://www.linkedin.com/in/giacomosimmi/" target="_blank"><MDBIcon fab icon='linkedin' /><span className="text-hidden">LinkedIn</span></a>
-            <a className="link link--social link--faded" href="https://github.com/keadex" target="_blank"><MDBIcon fab icon='github' /><span className="text-hidden">GitHub</span></a>
-            <a className="link link--social link--faded" href="http://open.spotify.com/user/jacksimmi" target="_blank"><MDBIcon fab icon='spotify' /><span className="text-hidden">Spotify</span></a>
-            {/* <a className="link link--social link--faded" href="https://www.instagram.com/jh4ck_/" target="_blank"><MDBIcon fab icon='instagram' /><span className="text-hidden">Instagram</span></a> */}
+            <a className="link link--social link--faded" href="https://www.linkedin.com/in/giacomosimmi/" target="_blank" rel="external nofollow noopener"><MDBIcon fab icon='linkedin' /><span className="text-hidden">LinkedIn</span></a>
+            <a className="link link--social link--faded" href="https://github.com/keadex" target="_blank" rel="external nofollow noopener"><MDBIcon fab icon='github' /><span className="text-hidden">GitHub</span></a>
+            <a className="link link--social link--faded" href="http://open.spotify.com/user/jacksimmi" target="_blank" rel="external nofollow noopener"><MDBIcon fab icon='spotify' /><span className="text-hidden">Spotify</span></a>
+            {/* <a className="link link--social link--faded" href="https://www.instagram.com/jh4ck_/" target="_blank" rel="external nofollow noopener"><MDBIcon fab icon='instagram' /><span className="text-hidden">Instagram</span></a> */}
           </div> 
         </nav>
         {/* /navigation*/}
@@ -82,7 +86,7 @@ class Header extends React.Component<HeaderProps> {
 
 }
 
-const mapStateToProps = (state:IStoreState) => {
+const mapStateToProps = (state:StoreState) => {
   return {
     menuOpen: state.app.menuOpen
   }

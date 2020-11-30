@@ -1,7 +1,7 @@
 import { createActions, handleActions } from 'redux-actions';
-import { getDefaultAppState, IAppState } from '../store.type';
+import { getDefaultAppState, AppState } from '../store.type';
 import {HYDRATE} from 'next-redux-wrapper';
-import {AnyAction} from 'redux';
+import type {AnyAction} from 'redux';
 import update from 'immutability-helper';
 
 // interface IAppAction {
@@ -21,7 +21,7 @@ export const { setIsAppInitialized, setIsGaInitialized, toggleMenu, activateSpin
   SET_QUOTES: (quotes) => ({quotes: quotes})
 });
 
-export const appReducer = handleActions<IAppState, AnyAction>(
+export const appReducer = handleActions<AppState, AnyAction>(
   {
     [HYDRATE]: (state) => {
       console.debug("hydrate app");

@@ -1,11 +1,11 @@
 import { createStore, combineReducers, applyMiddleware, AnyAction, Store } from 'redux';
-import { IStoreState } from "./store.type";
-import { composeWithDevTools } from 'redux-devtools-extension';
+import type { StoreState } from "./store.type";
+import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
 import thunk from 'redux-thunk';
 import { aboutMeReducer } from "./reducers/aboutme.reducer";
 import { appReducer } from "./reducers/app.reducer";
 import { MakeStore, Context, createWrapper } from "next-redux-wrapper";
-import { isClient } from '../../helper/generic-helper';
+import { isClient } from '../../helper/react-helper';
 
 
 /**
@@ -31,7 +31,7 @@ export class StoreService {
 
   public saveStore(store: Store<any, AnyAction>):boolean{
     if (!isClient()){
-      console.debug("You cannot use StoreService on server side");
+      // console.debug("You cannot use StoreService on server side");
       return false;
     }
     this.store = store;
@@ -41,7 +41,7 @@ export class StoreService {
 
   public getStore():Store<any, AnyAction>|null{
     if (!isClient()){
-      console.debug("You cannot use StoreService on server side");
+      // console.debug("You cannot use StoreService on server side");
       return null;
     }
     console.debug("Store found on client side!");
@@ -55,8 +55,8 @@ const composeEnhancers = composeWithDevTools({
   // Specify name here, actionsBlacklist, actionsCreators and other options if needed
 })
 
-const makeStore: MakeStore<IStoreState> = (context: Context) => createStore(combineReducers<IStoreState>({app: appReducer, aboutMe: aboutMeReducer} as any), composeEnhancers(applyMiddleware(thunk)));
+const makeStore: MakeStore<StoreState> = (context: Context) => createStore(combineReducers<StoreState>({app: appReducer, aboutMe: aboutMeReducer} as any), composeEnhancers(applyMiddleware(thunk)));
 
-export const wrapper = createWrapper<IStoreState>(makeStore, {debug: false});
+export const wrapper = createWrapper<StoreState>(makeStore, {debug: false});
 
 

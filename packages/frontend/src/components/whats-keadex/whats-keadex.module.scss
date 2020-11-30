@@ -1,0 +1,90 @@
+@import '../shared/shared-imports.module.scss';
+
+.whats-keadex {
+  svg {
+    width: 50%;
+    :global(#target1){
+      fill: $brand-color-2;
+    }
+    :global(#target2){
+      fill: $brand-color-3;
+    }
+    :global(#target3){
+      fill: $brand-color-1;
+    }
+  }
+
+  ul {
+    li{
+      list-style: none;
+      cursor: pointer;
+      ::before {
+        content: '>';
+        position: absolute;
+        margin-left: -15px;
+      }
+      &.active {
+        color: $brand-color-1;
+      }
+    }
+  }
+
+  :global(.card){
+    background: #171717;
+  }
+  :global(.card-body img){
+    width: 150px;
+    display: initial;
+  }
+}
+
+.whats-keadex__kealab{
+  background: #131313;
+  margin-left: -$page-body-padding-desktop !important;
+  margin-right: -$page-body-padding-desktop !important;
+  padding: 40px;
+}
+
+.whats-keadex__kealab-title{
+  line-height: 1;
+  font-size: $overline-text-size;
+  color: $console-text-color;
+  padding: 15px;
+}
+
+.whats-keadex__kealab-content{
+  border: double ;
+  margin: 40px 20% 40px 20%;
+  padding: 15px;
+}
+
+@include media-breakpoint-down(md) { 
+  .whats-keadex {
+    svg {
+      width: 80%;
+    }
+  }
+  .whats-keadex__kealab-content{
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+}
+
+@include media-breakpoint-down(sm) { 
+  .whats-keadex {
+    svg {
+      width: 50%;
+    }
+  }
+  
+  .whats-keadex__kealab{
+    background: black;
+    margin-left: -$page-body-padding-mobile;
+    margin-right: -$page-body-padding-mobile;
+  }
+
+  .whats-keadex__kealab-title{
+    font-size: 7px;
+  }
+
+}

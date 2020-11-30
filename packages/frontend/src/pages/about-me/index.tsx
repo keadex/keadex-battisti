@@ -1,24 +1,26 @@
 import React from 'react';
 import styles from './about-me.module.scss';
-import { FormattedMessage } from 'react-intl';
 import { Controller, Scene } from 'react-scrollmagic';
-import ProgressBar from '../../components/progressbar/progressbar';
 import { connect } from 'react-redux';
 import { setCurrentScene, setProgress, setExperience, resetState } from '../../core/store/reducers/aboutme.reducer';
-import { getDefaultAboutMeState, IAboutMeState, IStoreState } from '../../core/store/store.type';
-import Education from '../../components/education/education';
-import Hobbies from '../../components/hobbies/hobbies';
-import Experience from '../../components/experience/experience';
+import { getDefaultAboutMeState, AboutMeState, StoreState } from '../../core/store/store.type';
 import {Experience as IExperience, ForceGraph} from '../../model/models';
-import NetworkService from '../../core/network/network.service';
-import Resume from '../../components/resume/resume';
 import BasePageComponent from '../../components/base-page-component/base-page-component';
 import { PAGE_ROOT_ID } from '../../core/route.constants';
 import { GetStaticProps } from 'next';
 import { wrapper } from '../../core/store/store';
-import PageLayout from '../../components/page-layout/page-layout';
 import { DEFAULT_REVALIDATE_SECONDS } from '../../core/app.constants';
+import dynamic from 'next/dynamic';
+import LazyLoad from 'react-lazyload';
 
+const FormattedMessage:any = dynamic(() => import('react-intl').then((mod:any) => mod.FormattedMessage));
+const ProgressBar = dynamic(() => import('../../components/progressbar/progressbar'));
+const Education = dynamic(() => import('../../components/education/education'));
+const Hobbies = dynamic(() => import('../../components/hobbies/hobbies'));
+const Experience = dynamic(() => import('../../components/experience/experience'));
+const Resume = dynamic(() => import('../../components/resume/resume'));
+const PageLayout = dynamic(() => import('../../components/page-layout/page-layout'));
+const Brain = dynamic(() => import('../../components/brain/brain'));
 
 //--------------- TYPES
 interface AboutMeProps {
@@ -31,21 +33,12 @@ interface AboutMeProps {
   experienceGraph?: ForceGraph.Graph
 }
 
-// export const getServerSideProps = wrapper.getServerSideProps(
-//   ({store, req, res, ...etc}) => {
-//     console.log("getServerSideProps aboutme before " + store.getState().app.previousUrl);
-//     store.dispatch(setPreviousUrl("blaaa"));
-//     console.log("getServerSideProps aboutme after " + store.getState().app.previousUrl);
-//     return {
-//       props: {
-//         prova: store.getState().app.previousUrl
-//       },
-//     }
-//   }
-// );
+
+//---------- getStaticProps
 export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
   async ({store}) => {
-    let expResp = await NetworkService.getInstance().__tmp_getExperiences();
+  const NetworkService = (await import("../../core/network/network.service")).default;
+  let expResp = await NetworkService.getInstance().__tmp_getExperiences();
     if (expResp.data && expResp.data.data && expResp.data.data.experiences) {
       store.dispatch(setExperience(expResp.data.data.experiences));
     }
@@ -64,7 +57,7 @@ export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
 class AboutMe extends BasePageComponent<AboutMeProps, any> {
   
   //------ ATTRS
-  private defaultState:IAboutMeState;
+  private defaultState:AboutMeState;
   private lastProgress:number=0;
   private currentPayload:string|undefined;
   
@@ -72,8 +65,8 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
   //------ FUNCTIONS
 
   //---------- constructor
-  constructor(props: AboutMeProps, state: any) {
-    super(props, state);
+  constructor(props: AboutMeProps) {
+    super(props);
     this.defaultState = getDefaultAboutMeState();
     this.onSceneEvent = this.onSceneEvent.bind(this);
   }
@@ -142,8 +135,8 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
   //------------ render
   public render() {
     return (
-      <PageLayout title="Keadex - About me">
-        <header className="bp-header cf">
+      <PageLayout title="Keadex - About me" description="From Bari (Italy). Since 1991. Of July. 'About me' is not just a boring resume, it's a way to interact with it.">
+        <header className="bp-header cf position-relative z-index-1">
           <h1 className="bp-header__title text-brand1-dark">
             <FormattedMessage id="ABOUT_ME.TITLE" values={{
               span: (chunks:any) => (<span className='d-sm-none'>{chunks}</span>),
@@ -153,7 +146,10 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
           <p className="bp-header__desc"><FormattedMessage id="ABOUT_ME.SUBTITLE" /></p>
         </header>
         <div className='page-body'>
-         
+          <div className={`${styles["about-me__panel"]} p-0 m-0`}>
+            <Brain experienceGraph={this.props.experienceGraph} />
+          </div>
+          <LazyLoad height={"100vh"} once scrollContainer={"#"+PAGE_ROOT_ID}>
             <Controller container={"#"+PAGE_ROOT_ID} globalSceneOptions={{ triggerHook: 0 }}>
               
               {/* PROGRESS BAR */}
@@ -183,6 +179,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
               <Scene pin duration={this.defaultState.progress[1].duration} indicators={false}>
                 {(progress: any, event: any) => {
                   progress = this.onSceneEvent(1, progress, event);
+                  // console.log("Hobbies: " + progress);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>
                       <Hobbies progress={progress}/>
@@ -195,6 +192,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
               <Scene pin duration={this.defaultState.progress[2].duration} indicators={false}>
                 {(progress: any, event: any) => {
                   progress = this.onSceneEvent(2, progress, event, (this.props.experience[0] != undefined)?this.props.experience[0].id:undefined);
+                  // console.log("EXPERIENCE: MOBILE: " + progress);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>
                       <Experience progress={progress} experience={this.props.experience[0]}/>
@@ -207,6 +205,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
               <Scene pin duration={this.defaultState.progress[3].duration} indicators={false}>
                 {(progress: any, event: any) => {
                   progress = this.onSceneEvent(3, progress, event, (this.props.experience[1] != undefined)?this.props.experience[1].id:undefined);
+                  // console.log("EXPERIENCE: FULL STACK: " + progress);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>
                       <Experience progress={progress} experience={this.props.experience[1]}/>
@@ -219,6 +218,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
               <Scene pin duration={this.defaultState.progress[4].duration} indicators={false}>
                 {(progress: any, event: any) => {
                   progress = this.onSceneEvent(4, progress, event, (this.props.experience[2] != undefined)?this.props.experience[2].id:undefined);
+                  // console.log("EXPERIENCE: IT SOLUTION ARCHITECT: " + progress);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>
                       <Experience progress={progress} experience={this.props.experience[2]}/>
@@ -239,6 +239,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
                 }}
               </Scene>
             </Controller>
+          </LazyLoad>
         </div>
       </PageLayout>
     );
@@ -246,7 +247,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
 
 }
 
-const mapStateToProps = (state:IStoreState) => {
+const mapStateToProps = (state:StoreState) => {
   return {
     experience: state.aboutMe.experience,
     menuOpen: state.app.menuOpen

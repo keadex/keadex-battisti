@@ -1,15 +1,3 @@
-// import React from 'react';
-// import { CookieDeclaration } from '../../pages/cookie-declaration/CookieDeclaration';
-
-// import Home from '../../components/pages/home/Home';
-// import AboutMe from '../../components/pages/about_me/AboutMe';
-// import KeaLab from '../../components/pages/kea_lab/KeaLab';
-// import { PrivacyPolicy } from '../../pages/privacy-policy/PrivacyPolicy';
-// import { TermsConditions } from '../../pages/terms-conditions/TermsConditions';
-// const Home = React.lazy(() => import('../../pages/home/Home'));
-// const AboutMe = React.lazy(() => import('../../pages/about-me/AboutMe'));
-// const KeaLab = React.lazy(() => import('../../pages/kea-lab/KeaLab'));
-
 export interface IArrayRoute {
   [index: string]: IRoute
 }

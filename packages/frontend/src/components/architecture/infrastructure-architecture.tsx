@@ -1,11 +1,14 @@
 import React from 'react';
-import Architecture, {ArchitectureImplProps } from './architecture';
 import { ArchitectureType } from '../../pages/kealab';
+import type { ArchitectureImplProps } from './architecture';
 import InfrArchSvg from '../../../public/img/infrastructure-architecture.svg'; 
+import dynamic from 'next/dynamic';
+
+const Architecture = dynamic(() => import('../../components/architecture/architecture'));
 
 
 //------------------ COMPONENT
-export const InfrastructureArchitecture : React.FunctionComponent<ArchitectureImplProps> = (props:ArchitectureImplProps) => {
+const InfrastructureArchitecture : React.FunctionComponent<ArchitectureImplProps> = (props:ArchitectureImplProps) => {
   
   //----- render
   return (
@@ -18,3 +21,5 @@ export const InfrastructureArchitecture : React.FunctionComponent<ArchitectureIm
     </React.Fragment>
   );
 }
+
+export default InfrastructureArchitecture;

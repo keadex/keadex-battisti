@@ -1,7 +1,6 @@
 import React, { RefObject } from 'react';
 import { FormattedMessage, WrappedComponentProps, injectIntl } from 'react-intl';
-import { Tween } from 'react-gsap';
-import {Experience as ExperienceModel} from '../../model/models' 
+import { PlayState, Tween } from 'react-gsap';import {Experience as ExperienceModel} from '../../model/models' 
 import styles from './experience.module.scss';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer} from 'recharts';
 import HeaderSoftwareEngineer from '../header-software-engineer/header-software-engineer';
@@ -9,16 +8,8 @@ import HeaderArchitect from '../header-architect/header-architect';
 import HeaderMobileDeveloper from '../header-mobile-developer/header-mobile-developer';
 import { HooksBreakpointProps } from '../../core/react-breakpoint';
 import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBCard, MDBCardBody, MDBCardTitle, MDBNav, MDBNavItem, MDBNavLink, MDBIcon  } from "mdbreact";
-import { generateColors } from '../../helper/generic-helper';
-import jackMobile from "../../../public/img/jack/jack-mobile.png";
-import jackFullStack from "../../../public/img/jack/jack-fullstack.png";
-import jackArchitect from "../../../public/img/jack/jack-architect.png";
-import atosLogo from "../../../public/img/logo/atos-logo.png";
-import ibmLogo from "../../../public/img/logo/ibm-logo.png";
-import openReplyLogo from "../../../public/img/logo/open-reply-logo.png";
-import univLiverpoolLogo from "../../../public/img/logo/univ-liverpool-logo.png";
-import vodafoneLogo from "../../../public/img/logo/vodafone-logo.png";
-
+import { generateColors } from '../../helper/colors-helper';
+import OptimizedMedia from '../optimized-media/optimized-media';
 
 //------------------ TYPES
 export interface ExperienceProps extends HooksBreakpointProps, WrappedComponentProps {
@@ -35,30 +26,29 @@ export interface ExperienceState {
 class Experience extends React.Component<ExperienceProps, ExperienceState> {
   
   //ATTRS
-  private widthChart:number = 250;
   private refCarousel:RefObject<any>;
   private carouselInterval:number = -1;
   private carouselIntervalTime:number = 10600000;
   private colors : string[] = [];
   private jackImages : any = {
-    "jack-mobile.png": jackMobile,
-    "jack-fullstack.png": jackFullStack,
-    "jack-architect.png": jackArchitect
+    "jack-mobile.png": "jack/jack-mobile.png",
+    "jack-fullstack.png": "jack/jack-fullstack.png",
+    "jack-architect.png": "jack/jack-architect.png"
   }
   private logo : any = {
-    "atos-logo.png": atosLogo,
-    "ibm-logo.png": ibmLogo,
-    "open-reply-logo.png": openReplyLogo,
-    "univ-liverpool-logo.png": univLiverpoolLogo,
-    "vodafone-logo.png": vodafoneLogo
+    "atos-logo.png": ["logo/atos-logo.png", 1256, 410],
+    "ibm-logo.png": ["logo/ibm-logo.png", 4922, 1833],
+    "open-reply-logo.png": ["logo/open-reply-logo.png", 200, 56],
+    "univ-liverpool-logo.png": ["logo/univ-liverpool-logo.png", 592, 137],
+    "vodafone-logo.png": ["logo/vodafone-logo.png", 440, 110]
   }
 
 
   //FUNCS
 
   //----------- constructor
-  constructor(props:ExperienceProps, state: ExperienceState){
-    super(props, state);
+  constructor(props:ExperienceProps){
+    super(props);
     this.state = {
       chartKey: 1,
       activeItem: 1
@@ -85,35 +75,10 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
   }
 
 
-  //------------ adjustProgress
-  public adjustProgress(idTween:number, inProgress: number):number{
-    switch (idTween){
-      case 2: 
-      case 3: var progress = inProgress-0.1;
-              return (progress < 0 || progress > 0.3)?0:progress;
-      case 4: 
-      case 5: var progress = inProgress-0.4;
-              return (progress < 0 || progress > 0.3)?0:progress;
-      case 6: 
-      case 7: var progress = inProgress-0.8;
-              return (progress < 0 || progress > 0.3)?0:progress;
-    }
-    return inProgress;
-  }
-
-
   //------------ getPlayState
-  public getPlayState(inProgress: number):string{
-    if (inProgress > 0) return "play"; else return "reverse";
+  public getPlayState(inProgress: number):PlayState{
+    if (inProgress > 0) return PlayState.play; else return PlayState.reverse;
   }
-
-
-  // //------------ updateChart
-  // public updateChart(progress:number){
-  //   if (progress == 0.01){
-  //     this.setState({chartKey: this.state.chartKey + 1});
-  //   }
-  // }
 
 
   //------------ getHeader
@@ -156,15 +121,11 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
   //------------ render
   public render() {
     let progress = this.props.progress;
-    let i = -1;
-    let legend : Map<number, JSX.Element[]> = new Map();
     
     if (this.props.experience && this.colors.length == 0) {
       this.colors = generateColors(this.props.experience.skills.length);
     }
-    // if (this.props.experience === undefined) return (<React.Fragment><div></div></React.Fragment>);
-    // this.updateChart(progress);
-    let colSize = this.props.experience && this.props.experience.customers?"col-md-3":"col-md-4";
+    
     return (      
       <React.Fragment>
         { this.props.experience === undefined && (
@@ -178,7 +139,8 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
               from={{css: {className: "animate__animated animate__fadeOut w-100"}}}
               to={{css: {className: "animate__animated animate__fadeIn w-100"}}}
               progress={progress}
-              playState="stop">
+              playState={PlayState.stop}
+              lazy>
                 <div>{this.getHeader()}</div>
             </Tween>
 
@@ -187,18 +149,19 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
               from={{css: {className: `animate__animated animate__fadeOut ${styles["experience__body"]}`}}}
               to={{css: {className: `animate__animated animate__fadeIn ${styles["experience__body"]}`}}}
               progress={progress}
-              playState="stop">            
+              playState={PlayState.stop}
+              lazy>            
               <div className={`${styles["experience__body"]}`} onMouseOver={()=>{this.stopSlideshow()}} onMouseOut={()=>{this.startSlideshow()}} onTouchStart={()=>{this.stopSlideshow()}} onTouchEnd={()=>{this.startSlideshow()}}>
               
               {/* TAB */}
-              <MDBNav tabs className="nav-justified pointer-events-all" color='indigo'>
+              <MDBNav tabs className="nav-justified pointer-events-all" color='indigo' role="tablist" aria-owns={`summary-${this.props.experience.id} skills-${this.props.experience.id}`}>
                 <MDBNavItem>
-                  <a className={`nav-link ${this.state.activeItem == 1?"active":""}`} role="tab" onClick={(event)=>this.onTabBtnClick(event, 1)}>
+                  <a id={`summary-${this.props.experience.id}`} className={`nav-link ${this.state.activeItem == 1?"active":""}`} role="tab" onClick={(event)=>this.onTabBtnClick(event, 1)}>
                     <MDBIcon icon="address-card" /> <FormattedMessage id={"ABOUT_ME.EXPERIENCE.SUMMARY"} />
                   </a>
                 </MDBNavItem>
                 <MDBNavItem>
-                  <a className={`nav-link ${this.state.activeItem == 2?"active":""}`} role="tab" onClick={(event)=>this.onTabBtnClick(event, 2)}>
+                  <a id={`skills-${this.props.experience.id}`} className={`nav-link ${this.state.activeItem == 2?"active":""}`} role="tab" onClick={(event)=>this.onTabBtnClick(event, 2)}>
                     <MDBIcon icon="list-ul" /> <FormattedMessage id={"ABOUT_ME.EXPERIENCE.SKILLS"} />
                   </a>
                 </MDBNavItem>
@@ -217,8 +180,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                           {/* POSITION */}                          
                           <MDBCardTitle className="text-center">
                             <div className={`avatar d-inline-block ${styles["experience__avatar"]}`}>
-                              <img src={this.jackImages[this.props.experience.avatarFilename]} alt="avatar position"/>
-                              {/* <img src={`../../../public/img/jack/${this.props.experience.avatarFilename}`} alt="avatar position"/> */}
+                              <OptimizedMedia src={this.jackImages[this.props.experience.avatarFilename]} alt="avatar position" width={{default: "90px", sm: "40px"}} height={{default: "90px", sm: "40px"}} srcWidth={2240} srcHeight={2240}/>
                             </div>
                             <div className={`${styles["experience__title-position"]} text-left text-md-center`}>
                               <FormattedMessage id={"POSITIONS." + this.props.experience.id} /><br />
@@ -229,7 +191,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                           <div className={`${styles["experience__card-content-container"]}`}>
                             {/* TASKS */}
                             <div className={"col-12 col-md-4 p-0 pl-md-2 pr-md-2 text-center order-1"}>
-                              <Tween staggerFrom={{ opacity: 0, cycle: { x: (i:number) => (i+1) * 50 }}} stagger={0.1} playState={this.getPlayState(this.props.progress)}>
+                              <Tween from={{ opacity: 0, x: (i:number) => (i+1) * 50}} stagger={0.1} playState={this.getPlayState(this.props.progress)} lazy>
                                 <div className={`${styles["experience__section-title"]} mb-md-3`}>{"<"}<FormattedMessage id={"ABOUT_ME.EXPERIENCE.MAIN_ACTIVITIES"} />{"/>"}</div>
                                 {
                                   this.props.experience.tasks.map((value, index) =>{
@@ -241,7 +203,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                             
                             {/* SECTORS */}
                             <div className={"col-12 col-md-4 p-0 pl-md-2 pr-md-2 text-center order-3"}>
-                              <Tween staggerFrom={{ opacity: 0, cycle: { x: (i:number) => (i+1) * 50 }}} stagger={0.1} playState={this.getPlayState(this.props.progress)}>
+                              <Tween from={{ opacity: 0, x: (i:number) => (i+1) * 50}} stagger={0.1} playState={this.getPlayState(this.props.progress)} lazy>
                                 <div className={`${styles["experience__section-title"]} mb-md-3`}>{"<"}<FormattedMessage id={"ABOUT_ME.EXPERIENCE.SECTORS"} />{"/>"}</div>
                                 {
                                   this.props.experience.sectors.map((value, index) =>{
@@ -253,11 +215,13 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
 
                             {/* COMPANIES */}
                             <div className={"col-12 col-md-4 p-0 pl-md-2 pr-md-2 text-center order-3 order-md-2"}>
-                              <Tween staggerFrom={{ opacity: 0, cycle: { x: (i:number) => (i+1) * 50 }}} stagger={0.1} playState={this.getPlayState(this.props.progress)}>
+                              <Tween from={{ opacity: 0, x: (i:number) => (i+1) * 50}} stagger={0.1} playState={this.getPlayState(this.props.progress)} lazy>
                                 <div className={`${styles["experience__section-title"]} mb-md-3 mb-2`}>{"<"}<FormattedMessage id={"ABOUT_ME.EXPERIENCE.COMPANIES"} />{"/>"}</div>
                                 {
                                   this.props.experience.companies.map((value, index) =>{
-                                    return <div className="d-inline d-md-block mx-1 mx-md-0" key={index}><img src={this.logo[value.logoFilename]} className={`mb-3 mb-md-4 ${styles["experience__logo-brands"]} d-inline`} alt={`${value.name}`}/></div>
+                                    return <div className="d-inline d-md-block mx-1 mx-md-0" key={index}><OptimizedMedia src={this.logo[value.logoFilename][0]} className={`mb-3 mb-md-4 ${styles["experience__logo-brands"]} d-inline`} alt={`${value.name}`} height={{default: "25px", md: "15px"}}
+                                     srcWidth={this.logo[value.logoFilename][1]} srcHeight={this.logo[value.logoFilename][2]}/></div>
+                                    // return <div className="d-inline d-md-block mx-1 mx-md-0" key={index}><img src={this.logo[value.logoFilename][0]} className={`mb-3 mb-md-4 ${styles["experience__logo-brands"]} d-inline`} alt={`${value.name}`} /></div>
                                   })
                                 }
                               </Tween>
@@ -266,7 +230,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                             {/* CUSTOMERS */}
                             {/* {this.props.experience.customers != undefined &&
                               <div className={"p-0 pl-md-2 pr-md-2 mt-2 mt-md-0 text-center "}>
-                                <Tween staggerFrom={{ opacity: 0, cycle: { x: (i:number) => (i+1) * 50 }}} stagger={0.1} playState={this.getPlayState(this.props.progress)}>
+                                <Tween from={{ opacity: 0, cycle: { x: (i:number) => (i+1) * 50 }}} stagger={0.1} playState={this.getPlayState(this.props.progress)}>
                                   <div className="experience__section-title mb-md-3 mb-2">{"<"}<FormattedMessage id={"ABOUT_ME.EXPERIENCE.CUSTOMERS"} />{"/>"}</div>
                                   {
                                     this.props.experience.customers.map((value, index) =>{

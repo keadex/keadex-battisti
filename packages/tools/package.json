@@ -1,0 +1,20 @@
+{
+  "name": "tools",
+  "version": "1.0.0",
+  "description": "Front-end tools",
+  "scripts": {
+    "report-performance": "ts-node ./performance/report-performance.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Keadex",
+  "license": "MIT",
+  "dependencies": {
+    "@types/rimraf": "^3.0.0",
+    "rimraf": "^3.0.2",
+    "ts-node": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.6",
+    "typescript": "3.9.7"
+  }
+}

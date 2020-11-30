@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import styles from "./keadex-preview.module.scss";
-import { TimelineMax, Sine, Elastic, Linear } from 'gsap';
+import { Sine, Elastic, Linear } from 'gsap';
 import { generateMorphSVGTimelines, MorphSVGTimeline, MorphSVGSubject, MATERIAL_ENTRANCE_SPEED, MATERIAL_EXIT_SPEED } from '../../helper/animation-helper';
 import { shuffle } from '../../helper/array-helper';
-
+import gsap from 'gsap';
 
 //------------------ COMPONENT
-export const KeadexPreview : React.FunctionComponent = React.memo((props) => {
+const KeadexPreview : React.FunctionComponent = React.memo((props) => {
   // const windowDimensions = useWindowDimensions();
   
   let isAnimationInitialized = false;
-  let timeline:TimelineMax|undefined;
+  let timeline:GSAPTimeline|undefined;
   let morphTimelines:Map<string, MorphSVGTimeline>;
   
   let keaPath = [
@@ -70,7 +70,7 @@ export const KeadexPreview : React.FunctionComponent = React.memo((props) => {
   
   //----- initTimeline
   function initTimeline(){
-    timeline = new TimelineMax();
+    timeline = gsap.timeline();
     isAnimationInitialized = true;
     svgBoundingClientRect = svgRef.current!.getBoundingClientRect();
     svgPath1BoundingClientRect = svgPathRef[0].current!.getBoundingClientRect();
@@ -92,15 +92,15 @@ export const KeadexPreview : React.FunctionComponent = React.memo((props) => {
     }
 
     //reset scale svg paths and morph logo
-    timeline.to("#target1", 2, {scale: 1, transformOrigin:"50% 50%", ease: Linear.easeOut});
-    timeline.to("#target2", 2, {scale: 1, transformOrigin:"50% 50%", ease: Linear.easeOut}, "-=2");
-    timeline.to("#target3", 2, {scale: 1, transformOrigin:"50% 50%", ease: Linear.easeOut, onComplete: ()=>{
+    timeline.to("#target1", {duration: 2, scale: 1, transformOrigin:"50% 50%", ease: Linear.easeOut});
+    timeline.to("#target2", {duration: 2, scale: 1, transformOrigin:"50% 50%", ease: Linear.easeOut}, "-=2");
+    timeline.to("#target3", {duration: 2, scale: 1, transformOrigin:"50% 50%", ease: Linear.easeOut, onComplete: ()=>{
       animateLogo();
     }}, "-=2");
 
-    timeline.to("#DEX", logoAnimationDuration, {opacity: 1, ease: Linear.easeOut}, "+=1");
-    timeline.to("#slogan", 2, {opacity: 1, ease: Linear.easeOut}, "-=1");
-    timeline.to("#alpha-launch", 2, {opacity:1, scale: 1, transformOrigin:"50% 50%", ease: Elastic.easeOut});
+    timeline.to("#DEX", {duration: logoAnimationDuration, opacity: 1, ease: Linear.easeOut}, "+=1");
+    timeline.to("#slogan", {duration: 2, opacity: 1, ease: Linear.easeOut}, "-=1");
+    timeline.to("#alpha-launch", {duration: 2, opacity:1, scale: 1, transformOrigin:"50% 50%", ease: Elastic.easeOut});
     timeline.pause();
   }
 
@@ -144,9 +144,9 @@ export const KeadexPreview : React.FunctionComponent = React.memo((props) => {
         break;
     }
     
-    timeline!.to("#techlabel-"+techLabelId, MATERIAL_ENTRANCE_SPEED/1000, {opacity: 1, top: -100, fontSize: "2rem", ease: Sine.easeOut});
-    timeline!.to("#techlabel-"+techLabelId, MATERIAL_EXIT_SPEED/1000, {top: bubbleTop-svgBoundingClientRect.top+(bubbleHeight/2), left: bubbleLeft-svgBoundingClientRect.left+(bubbleWidth/2), transform: "translate(-50%, -50%) scale(0)", ease: Sine.easeIn}, "+=0.5");
-    timeline!.to(bubbleSelector, 1, {opacity: 1, scale: bubbleScaleFactor, transformOrigin:"50% 50%", ease: Elastic.easeOut});
+    timeline!.to("#techlabel-"+techLabelId, {duration: MATERIAL_ENTRANCE_SPEED/1000, opacity: 1, top: -100, fontSize: "2rem", ease: Sine.easeOut});
+    timeline!.to("#techlabel-"+techLabelId, {duration: MATERIAL_EXIT_SPEED/1000, top: bubbleTop-svgBoundingClientRect.top+(bubbleHeight/2), left: bubbleLeft-svgBoundingClientRect.left+(bubbleWidth/2), xPercent: -50, yPercent: -50, scale: 0, ease: Sine.easeIn}, "+=0.5");
+    timeline!.to(bubbleSelector, {duration: 1, opacity: 1, scale: bubbleScaleFactor, transformOrigin:"50% 50%", ease: Elastic.easeOut});
   }
 
 
@@ -187,7 +187,7 @@ export const KeadexPreview : React.FunctionComponent = React.memo((props) => {
     let divs:JSX.Element[] = [];
     for (let i=0; i<techLabels.length; i++){
       divs.push(
-        <div className={`text-center ${styles["keadex-preview__tech-label"]}`} id={"techlabel-"+i} key={"techlabel-"+i}>
+        <div className={`text-center ${styles["keadex-preview__tech-label"]}`} id={"techlabel-"+i} key={"techlabel-"+i} style={{opacity: 0}}>
           {
             techLabels[i].split('\n').map((item, i) => {
               return <p key={i}>{item}</p>;
@@ -220,13 +220,15 @@ export const KeadexPreview : React.FunctionComponent = React.memo((props) => {
             <path id="target3" d={circlePath[2]} ref={svgPathRef[2]} style={{opacity: "0"}}></path>
           </svg>
           </div>
-          <div className={`${styles["keadex-preview__slogan"]}`} id="slogan"><FormattedMessage id="HOME.SLOGAN"/></div>         
+          <div className={`${styles["keadex-preview__slogan"]}`} id="slogan" style={{opacity: 0}}><FormattedMessage id="HOME.SLOGAN"/></div>         
         </div>
       </div>
 
-      <div className={`${styles["keadex-preview__footer"]} text-uppercase`} id="alpha-launch">
+      <div className={`${styles["keadex-preview__footer"]} text-uppercase`} id="alpha-launch" style={{opacity: 0}}>
         Version {process.env.NEXT_PUBLIC_APP_VERSION}
       </div>
     </React.Fragment>
   );
 })
+
+export default KeadexPreview;

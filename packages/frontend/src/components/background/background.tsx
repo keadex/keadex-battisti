@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { isClient } from "../../helper/react-helper";
 
+if (isClient()){
+  require('lazysizes/plugins/unveilhooks/ls.unveilhooks');
+}
 
 const Overlay:any = styled.div<any>`
   width: 100%;
@@ -10,6 +14,7 @@ const Overlay:any = styled.div<any>`
   opacity: ${(props)=>props.overlayOpacity};
 `;
 
+
 const Img:any = styled.div<any>`
   width: 100%;
   height: 100%;
@@ -17,8 +22,7 @@ const Img:any = styled.div<any>`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  background-attachment: fixed;
-  background-image: url('${(props)=>props.img}');"
+  background-attachment: fixed;"
 `;
 
 
@@ -32,13 +36,15 @@ interface BackgroundProps {
 
 
 //------------------ COMPONENT
-export function Background(props: BackgroundProps) {
+const Background : React.FunctionComponent<BackgroundProps> = props => {
   let overlayColor:string = (props.overlayColor)?props.overlayColor:"#1d1d1d";
   let overlayOpacity:number = (props.overlayOpacity)?props.overlayOpacity:0.8;
   return (
     <div id={props.id}>
-      <Img img={props.img}/>
+      <Img img={props.img} data-bg={"../../img/"+props.img} className="lazyload"/>
       <Overlay overlayColor={overlayColor} overlayOpacity={overlayOpacity} />
     </div>   
   );
 }
+
+export default Background;

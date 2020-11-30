@@ -1,16 +1,23 @@
 import React, { RefObject } from 'react';
 
-import pdfIcon from "../../../public/img/pdf-icon-glitch.gif";
 import styles from './resume.module.scss';
-import { TimelineMax, Linear } from 'gsap';
+import { Linear } from 'gsap';
 import { FormattedMessage } from 'react-intl';
 import { MDBBtn } from 'mdbreact';
 import KMDCheckbox from '../kmdcheckbox/kmdcheckbox';
 import { MDBIcon } from 'mdbreact';
-import NetworkService from '../../core/network/network.service';
 import { FORMATTED_MESSAGE_STANDARD_HTML_VALUES } from '../../core/app.constants';
+import dynamic from 'next/dynamic';
+import gsap from "gsap";
+import NetworkService from '../../core/network/network.service';
 import { getStrapiMedia } from '../../helper/strapi-helper';
+import { MediaType } from '../optimized-media/optimized-media';
 
+
+const OptimizedMedia = dynamic(
+  () => import('../optimized-media/optimized-media'),
+  { ssr: false }
+)
 
 //--------------- TYPES
 interface ResumeState{
@@ -21,7 +28,7 @@ interface ResumeState{
 class Resume extends React.Component<any, ResumeState> {
 
   //ATTRS
-  private tlDownloadResume : TimelineMax|undefined;
+  private tlDownloadResume : GSAPTimeline|undefined;
   private resumeAgreeContRef : RefObject<HTMLDivElement>;
   private resumeBinaryContRef : RefObject<HTMLDivElement>;
   private isAnimationInitialized : boolean;
@@ -44,7 +51,7 @@ class Resume extends React.Component<any, ResumeState> {
 
   //----- componentDidMount
   componentDidMount(){
-    this.tlDownloadResume = new TimelineMax();
+    this.tlDownloadResume = gsap.timeline();
   }
   
 
@@ -58,15 +65,15 @@ class Resume extends React.Component<any, ResumeState> {
     let agreeContainerStyle = window.getComputedStyle(this.resumeAgreeContRef.current!);
     let agreeContainerHeight = parseFloat(agreeContainerStyle!.height!.replace("px", ""));
     
-    this.tlDownloadResume!.to("#resume-agree-bg", 1, {opacity: `1`});
-    this.tlDownloadResume!.to("#resume-agree-container", 1, {top: `${top + (-1*((agreeContainerHeight*scaleFactor/2)+(agreeContainerHeight*scaleFactor/4)))}px`, transform: `translate(-50%, 0) scale(${scaleFactor})`}, "-=1");
-    this.tlDownloadResume!.to("#resume-binary-container", 1, {top: `${top + (agreeContainerHeight*scaleFactor)}px`,  transform: "translate(-50%, 0)"}, "-=1");
-    this.tlDownloadResume!.to("#resume-agree-content", 2, {transform: `translate(0, 100%)`});
-    this.tlDownloadResume!.to("#resume-agree-bg", 2, {transform: `translate(0, 101%)`}, "-=2");
-    this.tlDownloadResume!.to("#resume-binary-content", 3, {transform: `translate(0, 100%)`, opacity: 1, ease:Linear.easeNone}, "-=2");
-    this.tlDownloadResume!.to("#resume-pdf", 2, {opacity: `1`}, "-=2.5");
+    this.tlDownloadResume!.to("#resume-agree-bg", {duration: 1, opacity: `1`});
+    this.tlDownloadResume!.to("#resume-agree-container", {duration: 1, top: `${top + (-1*((agreeContainerHeight*scaleFactor/2)+(agreeContainerHeight*scaleFactor/4)))}px`, scale: scaleFactor, xPercent: -50, yPercent: 0}, "-=1");
+    this.tlDownloadResume!.to("#resume-binary-container", {duration: 1, top: `${top + (agreeContainerHeight*scaleFactor)}px`,  xPercent: -50, yPercent: 0}, "-=1");
+    this.tlDownloadResume!.to("#resume-agree-content", {duration: 2, xPercent: 0, yPercent: 100});
+    this.tlDownloadResume!.to("#resume-agree-bg", {duration: 2, xPercent: 0, yPercent: 101}, "-=2");
+    this.tlDownloadResume!.to("#resume-binary-content", {duration: 3, xPercent: 0, yPercent: 100, opacity: 0, ease:Linear.easeNone}, "-=3");
+    this.tlDownloadResume!.to("#resume-pdf", {duration: 2, opacity: `1`}, "-=1.5");
     
-    this.tlDownloadResume!.addCallback(()=>{
+    this.tlDownloadResume!.add(()=>{
       NetworkService.getInstance().downloadFile(getStrapiMedia(process.env.NEXT_PUBLIC_RESUME_PDF_URL!)!, "resume-giacomosimmi.pdf");
     }, "-=2.5");
     
@@ -110,12 +117,14 @@ class Resume extends React.Component<any, ResumeState> {
 
         {/* RESUME DOWNLOAD */}
         <div id="resume-binary-container" className={`full-center ${styles["resume__binary-container"]} text-center`} ref={this.resumeBinaryContRef}>
-          <div id="resume-binary-content" className={`${styles["resume__binary-content"]}`} />
+          <div id="resume-binary-content" className={`${styles["resume__binary-content"]}`} >
+            <OptimizedMedia width="100%" height="100%" srcWidth={400} srcHeight={320} autoPlay loop preload="none" src={"binary-matrix"} type={MediaType.Video} />
+          </div>
         </div>
 
         {/* PDF ICON */}
         <div id="resume-pdf" className={`full-center ${styles["resume__pdf"]} text-center w-100`}>
-          <img src={pdfIcon} width="160px" />
+          <OptimizedMedia width="160px" srcWidth={300} srcHeight={204} autoPlay loop preload="none" src={"pdf-icon-glitch"} type={MediaType.Video} />
           {/* <div className="text-console">resume-giacomosimmi.pdf</div> */}
           <h4><MDBIcon icon="undo-alt" className="mt-3" style={{cursor: "pointer"}} onClick={()=>{this.restartAnimation()}}/></h4>
         </div>

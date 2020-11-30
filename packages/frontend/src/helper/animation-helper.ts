@@ -1,4 +1,4 @@
-import { TimelineMax, Sine, Ease } from 'gsap';
+import { Sine, gsap } from 'gsap';
 import { RefObject } from 'react';
 import { interpolateAll } from 'flubber';
 
@@ -10,7 +10,7 @@ export interface MorphSVGSubject {
 export interface MorphSVGTimeline {
   subject: MorphSVGSubject;
   interpolator: ((t:number)=>string)[];
-  timeline: TimelineMax;
+  timeline: GSAPTimeline;
 }
 
 export interface SVGPath {
@@ -21,7 +21,7 @@ export interface SVGPath {
 
 export interface MorphSVGOptions{
   duration?: number
-  ease?: Ease
+  ease?: gsap.EaseFunction
 }
 
 export const MATERIAL_ENTRANCE_SPEED:number = 300; //ms
@@ -41,8 +41,9 @@ export function generateMorphSVGTimelines(svgPathRef:RefObject<SVGPathElement>[]
     //svgPath2 -> svgPath1
     let interpolator:((t:number)=>string)[] = interpolateAll(subject.fromSvgPath.path, subject.toSvgPath.path, { maxSegmentLength: 25 });
     let obj = { t: 0 };
-    let timeline = new TimelineMax();
-    timeline.to(obj, duration, {
+    let timeline = gsap.timeline();
+    timeline.to(obj, {
+      duration: duration,
       t: 1,
       ease: ease,
       yoyo: true,

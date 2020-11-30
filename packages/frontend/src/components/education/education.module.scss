@@ -16,73 +16,6 @@
   opacity: 0.8;
 }
 
-.education__brain-graph{
-  width: 85%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  left: 50%;
-}
-
-.education__brain-container--desktop{
-  margin-left: -$page-body-padding-desktop;
-}
-
-.education__brain-container--mobile{
-  height: 100vh;
-}
-
-.education__quote-container{
-  position: absolute;
-  left: $page-body-padding-desktop;
-  top: 25px;  
-  background-color: $primary-color-text;
-  padding-left: 10px;
-  padding-right: 10px;
-  color: $primary-color;
-  opacity: 0.7;
-  
-  :global(#quote){
-    font-size: $h5-text-size;
-  }
-
-  :global(#author){
-    font-size: $h6-text-size;
-    float: right;
-  }
-
-}
-
-.education__cosmo{
-  position: fixed;
-  pointer-events: none;
-  background: url("../../../public/img/cosmo.png");
-  background-size: auto;
-  left: 0;
-  bottom: 0;
-  height: 100%;
-  width: 100%;
-  opacity: 0.3;
-}
-
-.education__brain-chart-banner {
-  position: absolute;
-  bottom: $height-progressbar + 10px;
-  left: 0;
-  right: 0;
-  margin: 10px;
-  background: $primary-color;
-
-  :global(#text) {
-    font-size: $caption-text-size;
-    color: $console-text-color;
-    border: 1px solid $console-text-color;
-    margin: 5px;
-    padding: 5px;
-  }
-}
-
-
 
 @include media-breakpoint-down(sm) { 
 
@@ -94,18 +27,4 @@
     width: 130px;
   }
 
-  .education__quote-container{
-    top: 15px;
-    left: 5px;
-    padding-left: 20px;
-    padding-right: 20px;
-
-    :global(#quote){
-      font-size: $h6-text-size;
-    }
-  
-    :global(#author){
-      font-size: $body2-text-size;
-    }
-  }
 }

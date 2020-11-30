@@ -1,12 +1,12 @@
 import React, { useRef, MutableRefObject, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import {Quote} from '../../model/models';
+import type {Quote} from '../../model/models';
 import styles from './splash-screen.module.scss';
-import { COOKIE_DECLARATION_URL, PRIVACY_POLICY_URL, TERMS_AND_CONDITIONS_URL, PAGE_ROOT_ID } from '../../core/route.constants';
+import { PRIVACY_POLICY_URL, TERMS_AND_CONDITIONS_URL, PAGE_ROOT_ID } from '../../core/route.constants';
 import { toggleMenu } from '../../core/store/reducers/app.reducer';
 import Link from 'next/link';
 import { connect } from 'react-redux';
-import { IStoreState } from '../../core/store/store.type';
+import type { StoreState } from '../../core/store/store.type';
 
 //------------------ TYPES
 interface SplashScreenProps {
@@ -107,7 +107,7 @@ export const SplashScreen : React.FunctionComponent<SplashScreenProps> = props =
   );
 }
 
-const mapStateToProps = (state:IStoreState) => {
+const mapStateToProps = (state:StoreState) => {
   return {
     menuOpen: state.app.menuOpen,
     quotes: state.app.quotes
