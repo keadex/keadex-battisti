@@ -46,8 +46,7 @@ export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
     return {
       props:{
         experienceGraph: (expGraphResp.data && expGraphResp.data.data && expGraphResp.data.data.experienceGraph)?expGraphResp.data.data.experienceGraph:undefined
-      },
-      revalidate: DEFAULT_REVALIDATE_SECONDS
+      }
     }
   }
 );

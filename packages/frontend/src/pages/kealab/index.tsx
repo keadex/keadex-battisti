@@ -35,8 +35,7 @@ export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
     return {
       props:{
         modules: modules.data.data?.architectureModules
-      },
-      revalidate: DEFAULT_REVALIDATE_SECONDS
+      }
     }
   }
 );
