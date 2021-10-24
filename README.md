@@ -22,3 +22,7 @@ To start the project:
 1.  run `yarn dev` under **cms** package.
 1.  import into Strapi demo contents from `cms/contents-snapshot` folder by using "Strapi plugin content-export-import"
 1.  run `yarn dev` under **frontend** package
+
+## Notes
+- Strapi does not support Yarn >2: check the [issue](https://github.com/strapi/strapi/issues/9109).</br>
+Once will be added the support for Yarn >2, this project will be migrated and will be removed Lerna. The monorepo will be then managed with the Yarn workspaces feature. 

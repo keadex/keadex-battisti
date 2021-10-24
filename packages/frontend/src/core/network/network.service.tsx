@@ -12,13 +12,13 @@ import { ARCHITECTURE_MODULES } from './graphql-queries/strapi/architecture-modu
 
 
 //API ENDPOINTS
-export const CDN_ENDPOINT : string = process.env.NEXT_PUBLIC_CDN_ENDPOINT!;
-export const API_ENDPOINT : string = process.env.NEXT_PUBLIC_API_ENDPOINT!;
-export const STRAPI_ENDPOINT: string = process.env.NEXT_PUBLIC_STRAPI_API_URL!;
-export const STRAPI_GRAPHQL_ENDPOINT: string = process.env.NEXT_PUBLIC_STRAPI_GRAPHQL_API_URL!;
-export const GET_QUOTES_API : string = process.env.NEXT_PUBLIC_GET_QUOTES_API!;
-export const GET_EXPERIENCE_API : string = process.env.NEXT_PUBLIC_GET_EXPERIENCE_API!;
-export const GET_EXPERIENCE_GRAPH_API : string = process.env.NEXT_PUBLIC_GET_EXPERIENCE_GRAPH_API!;
+export const CDN_ENDPOINT : string = process.env.NEXT_PUBLIC_CDN_ENDPOINT;
+export const API_ENDPOINT : string = process.env.NEXT_PUBLIC_API_ENDPOINT;
+export const STRAPI_ENDPOINT: string = process.env.NEXT_PUBLIC_STRAPI_API_URL;
+export const STRAPI_GRAPHQL_ENDPOINT: string = process.env.NEXT_PUBLIC_STRAPI_GRAPHQL_API_URL;
+export const GET_QUOTES_API : string = process.env.NEXT_PUBLIC_GET_QUOTES_API;
+export const GET_EXPERIENCE_API : string = process.env.NEXT_PUBLIC_GET_EXPERIENCE_API;
+export const GET_EXPERIENCE_GRAPH_API : string = process.env.NEXT_PUBLIC_GET_EXPERIENCE_GRAPH_API;
 
 
 
@@ -131,19 +131,12 @@ class NetworkService {
       method: 'GET',
       responseType: 'blob', // important
     }).then((response) => {
-      if(window.navigator.msSaveOrOpenBlob) {
-        //IE11 compatibility
-        let blobObject = new Blob([response.data]);
-        window.navigator.msSaveOrOpenBlob(blobObject, fileName);
-      } else {
-        //Other Browsers
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', fileName);
-        document.body.appendChild(link);
-        link.click();
-      }
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', fileName);
+      document.body.appendChild(link);
+      link.click();
     });
   }
 

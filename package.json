@@ -1,7 +1,7 @@
 {
-  "name": "root",
+  "name": "keadex-battisti",
   "private": true,
   "devDependencies": {
-    "lerna": "^3.20.2"
+    "lerna": "^4.0.0"
   }
 }

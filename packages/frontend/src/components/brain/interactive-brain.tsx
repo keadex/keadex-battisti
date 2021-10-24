@@ -33,7 +33,7 @@ const InteractiveBrain : React.FunctionComponent<BrainProps> = props => {
   let forceGraphRef:any = useCallback((node:any) => {
     if (node !== null) {
       //Enlarge graph only if it is not in mobile mode
-    if (!breakpoints!.xs && !breakpoints!.sm){
+    if (!breakpoints.xs && !breakpoints.sm){
       node.d3Force('charge')
         .strength(-200)
         .distanceMax(1000);
@@ -58,15 +58,15 @@ const InteractiveBrain : React.FunctionComponent<BrainProps> = props => {
   //------------ initBrain
   function initBrain(){
     let frontalLobeImg = new Image();
-    frontalLobeImg.src = frontalLobe;
+    frontalLobeImg.src = frontalLobe.src;
     let occipitalLobeImg = new Image();
-    occipitalLobeImg.src = occipitalLobe;
+    occipitalLobeImg.src = occipitalLobe.src;
     let parietalLobeImg = new Image();
-    parietalLobeImg.src = parietalLobe;
+    parietalLobeImg.src = parietalLobe.src;
     let temporalLobeImg = new Image();
-    temporalLobeImg.src = temporalLobe;
+    temporalLobeImg.src = temporalLobe.src;
     let cerebellumImg = new Image();
-    cerebellumImg.src = cerebellum;
+    cerebellumImg.src = cerebellum.src;
     brain.current.set("frontal-lobe", frontalLobeImg);
     brain.current.set("occipital-lobe", occipitalLobeImg);
     brain.current.set("parietal-lobe", parietalLobeImg);
@@ -90,8 +90,8 @@ const InteractiveBrain : React.FunctionComponent<BrainProps> = props => {
                 // if (breakpoints!.xs && breakpoints!.sm) percentage = 75;
                 const image = brain.current.get(node.id);
                 if (image){
-                  const width = image.width - Math.ceil((image!.width * percentage)/100);
-                  const height = image.height * (width/image!.width);
+                  const width = image.width - Math.ceil((image.width * percentage)/100);
+                  const height = image.height * (width/image.width);
                   ctx.drawImage(image, node.x-width/2, node.y-height/2, width, height);
                 }
               }else{

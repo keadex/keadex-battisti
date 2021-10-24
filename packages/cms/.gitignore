@@ -126,3 +126,4 @@ public/uploads/*
 # Custom
 
 .vscode/*
+.yarn

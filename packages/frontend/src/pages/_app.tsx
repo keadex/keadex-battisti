@@ -13,9 +13,9 @@ import { toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigat
 import Cookies from 'js-cookie';
 import { initGA, logPageView } from '../core/google-analytics';
 import { CookieConsent } from '../model/models';
-import Modernizr from 'modernizr';
+
 if (isClient()){
-  window.Modernizr = Modernizr;
+  window.Modernizr = require("modernizr");;
   require("../custom-template/main.min.js");
 }
 

@@ -1,5 +1,4 @@
 const compose = require('next-compose-plugins')
-const optimizedImages = require('next-optimized-images');
 const withTM = require('next-transpile-modules')(['react-scrollmagic', 'react-syntax-highlighter']);
 const withModernizr = require("next-plugin-modernizr");
 const withVideos = require('next-videos')
@@ -12,7 +11,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 module.exports = compose([
   [withModernizr],
   [withVideos],
-  [optimizedImages],
   [withTM],
   [withBundleAnalyzer],
   [withPWA, {
@@ -23,6 +21,8 @@ module.exports = compose([
   }]],
   {
     webpack: cfg => {
+      //console.log("ccccaaaaaaa");
+      //console.log(cfg);
       const originalEntry = cfg.entry
       cfg.entry = async () => {
         const entries = await originalEntry()
