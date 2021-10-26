@@ -226,7 +226,7 @@ const WhatsKeadex : React.FunctionComponent<WhatsKeadexProps> = props => {
                 <MDBCard className="h-100 w-100">
                   <MDBCardBody>
                     <h4 className="text-brand1"><FormattedMessage id="HOME.TITLE_KNOW" /></h4>
-                    <OptimizedMedia className="mt-4 mb-4" src={"knwoledge.png"} width="150px" srcWidth={925} srcHeight={710} />
+                    <OptimizedMedia className="mt-4 mb-4" src={"knowledge.png"} width="150px" srcWidth={925} srcHeight={710} />
                     <div><FormattedMessage id="HOME.TEXT_KNOW" values={FORMATTED_MESSAGE_STANDARD_HTML_VALUES}/></div>
                   </MDBCardBody>
                 </MDBCard>
