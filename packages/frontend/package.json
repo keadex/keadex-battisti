@@ -43,6 +43,7 @@
     "mdbreact": "^4.26.0",
     "next": "latest",
     "next-fonts": "^1.4.0",
+    "next-optimized-images": "^2.6.2",
     "next-redux-wrapper": "^6.0.2",
     "next-seo": "^4.28.1",
     "next-videos": "1.4.0",
