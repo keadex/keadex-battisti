@@ -40,7 +40,7 @@ const Brain : React.FunctionComponent<BrainProps> = props => {
     <>
       {isCosmoVisible && (<div className={`${styles["brain__cosmo"]} lazyload`} />)}
       <div className={`${styles["brain__quote-container"]}`}>
-        <span id="quote">"No, I'm not interested in developing a powerful brain..."</span><br />
+        <span id="quote">&quot;No, I&apos;m not interested in developing a powerful brain...&quot;</span><br />
         <span id="author" className="text-right">Alan Turing</span>
       </div>
 

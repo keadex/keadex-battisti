@@ -106,9 +106,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   // Prevent Next bug when it tries to render the /strapi/[[...slug]] route
-  if (router.asPath === "/strapi/[[...slug]]") {
-    return null;
-  }
+  // if (router.asPath === "/strapi/[[...slug]]") {
+  //   return null;
+  // }
 
   const onRouteChangeStart = ()=>{
     store.dispatch(activateSpinner());

@@ -50,6 +50,7 @@ const ArchitectureChalkboardToolbar : React.FunctionComponent<ArchitectureChalkb
     //menu button
     buttons.push(
       <MainButton
+        key="main-button"
         iconResting={<MDBIcon fab icon="buffer" />}
         iconActive={<MDBIcon fab icon="buffer" />}
         onClick={() => setIsOpen(!isOpen)}
@@ -85,8 +86,9 @@ const ArchitectureChalkboardToolbar : React.FunctionComponent<ArchitectureChalkb
                   slideSpeed={500}
                   direction="down"
                   spacing={8}
-                  isOpen={isOpen}
-                  children={getModuleButtons()} />
+                  isOpen={isOpen} >
+                  {getModuleButtons()}
+              </FloatingMenu>
             </div>
           </div>
         </div>

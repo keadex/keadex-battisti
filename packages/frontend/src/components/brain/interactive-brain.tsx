@@ -26,7 +26,6 @@ export interface BrainProps {
 
 //--------------- COMPONENT
 const InteractiveBrain : React.FunctionComponent<BrainProps> = props => {
-  console.log("ciaa");
   //ATTRS
   let breakpoints = useBreakpoint();
   let brain:MutableRefObject<Map<string, HTMLImageElement>> = useRef(new Map());
@@ -51,22 +50,21 @@ const InteractiveBrain : React.FunctionComponent<BrainProps> = props => {
 
   //---------- useEffect
   useEffect(() => {
-    console.log("ciaa2");
     initBrain();
   }, []);
 
   //------------ initBrain
   function initBrain(){
     let frontalLobeImg = new Image();
-    frontalLobeImg.src = frontalLobe.src;
+    frontalLobeImg.src = frontalLobe;
     let occipitalLobeImg = new Image();
-    occipitalLobeImg.src = occipitalLobe.src;
+    occipitalLobeImg.src = occipitalLobe;
     let parietalLobeImg = new Image();
-    parietalLobeImg.src = parietalLobe.src;
+    parietalLobeImg.src = parietalLobe;
     let temporalLobeImg = new Image();
-    temporalLobeImg.src = temporalLobe.src;
+    temporalLobeImg.src = temporalLobe;
     let cerebellumImg = new Image();
-    cerebellumImg.src = cerebellum.src;
+    cerebellumImg.src = cerebellum;
     brain.current.set("frontal-lobe", frontalLobeImg);
     brain.current.set("occipital-lobe", occipitalLobeImg);
     brain.current.set("parietal-lobe", parietalLobeImg);

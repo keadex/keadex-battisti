@@ -128,7 +128,7 @@ class Hobbies extends React.Component<HobbiesProps> {
                     <FormattedMessage
                       id="ABOUT_ME.HOBBIES.DESCRIPTION_MARTIAL_ARTS"
                       values={{
-                        a: (chunks:any) => (<a href='http://www.kyohansimmi.it' target='_blank' rel="noopener">{chunks}</a>)
+                        a: (chunks:any) => (<a href='http://www.kyohansimmi.it' target='_blank' rel="noreferrer">{chunks}</a>)
                       }
                     }/>
                   </div>

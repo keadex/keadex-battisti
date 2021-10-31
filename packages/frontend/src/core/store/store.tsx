@@ -55,8 +55,8 @@ const composeEnhancers = composeWithDevTools({
   // Specify name here, actionsBlacklist, actionsCreators and other options if needed
 })
 
-const makeStore: MakeStore<StoreState> = (context: Context) => createStore(combineReducers<StoreState>({app: appReducer, aboutMe: aboutMeReducer} as any), composeEnhancers(applyMiddleware(thunk)));
+const makeStore = (context: Context) => createStore(combineReducers<StoreState>({app: appReducer, aboutMe: aboutMeReducer} as any), composeEnhancers(applyMiddleware(thunk)));
 
-export const wrapper = createWrapper<StoreState>(makeStore, {debug: false});
+export const wrapper = createWrapper<Store<StoreState>>(makeStore, {debug: false});
 
 

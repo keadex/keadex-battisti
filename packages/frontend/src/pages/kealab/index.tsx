@@ -29,7 +29,7 @@ interface KeaLabState {
 
 //---------- getStaticProps
 export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
-  async ({store}) => {
+  (store) => async (ctx) => {
     const NetworkService = (await import("../../core/network/network.service")).default;
     let modules = await NetworkService.getInstance().getArchitectureModules([ArchitectureModuleType.ApplicationArchitecture, ArchitectureModuleType.InfrastructureArchitecture])
     return {

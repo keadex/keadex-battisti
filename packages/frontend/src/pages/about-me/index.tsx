@@ -36,19 +36,19 @@ interface AboutMeProps {
 
 //---------- getStaticProps
 export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
-  async ({store}) => {
-  const NetworkService = (await import("../../core/network/network.service")).default;
-  let expResp = await NetworkService.getInstance().__tmp_getExperiences();
-    if (expResp.data && expResp.data.data && expResp.data.data.experiences) {
-      store.dispatch(setExperience(expResp.data.data.experiences));
-    }
-    let expGraphResp = await NetworkService.getInstance().__tmp_getExperienceGraph();
-    return {
-      props:{
-        experienceGraph: (expGraphResp.data && expGraphResp.data.data && expGraphResp.data.data.experienceGraph)?expGraphResp.data.data.experienceGraph:undefined
+  (store) => async (ctx) => {
+    const NetworkService = (await import("../../core/network/network.service")).default;
+    let expResp = await NetworkService.getInstance().__tmp_getExperiences();
+      if (expResp.data && expResp.data.data && expResp.data.data.experiences) {
+        store.dispatch(setExperience(expResp.data.data.experiences));
+      }
+      let expGraphResp = await NetworkService.getInstance().__tmp_getExperienceGraph();
+      return {
+        props:{
+          experienceGraph: (expGraphResp.data && expGraphResp.data.data && expGraphResp.data.data.experienceGraph)?expGraphResp.data.data.experienceGraph:undefined
+        }
       }
     }
-  }
 );
 
 
