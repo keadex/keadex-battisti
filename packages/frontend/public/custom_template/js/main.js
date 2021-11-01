@@ -38,9 +38,9 @@
 		// the navigation wrapper
 		nav = document.querySelector('.pages-nav'),
 		// the menu nav items
-		navItems = [].slice.call(nav.querySelectorAll('.link--page')),
+		navItems = [].slice.call(nav.querySelectorAll('.link--page'));
 		// check if menu is open
-		isMenuOpen = false;
+		//isMenuOpen = false;
 
 	function getDefaultCurrent(){
 		var current = 0;
@@ -114,7 +114,7 @@
 		pages.forEach(function(page) {
 			var pageid = page.getAttribute('id');
 			page.addEventListener('click', function(ev) {
-				if( isMenuOpen ) {
+				if( isMenuOpen() ) {
 					// ev.preventDefault();
 					// openPage(pageid);
 				}
@@ -123,7 +123,7 @@
 
 		// keyboard navigation events
 		document.addEventListener( 'keydown', function( ev ) {
-			if( !isMenuOpen ) return; 
+			if( !isMenuOpen() ) return; 
 			var keyCode = ev.keyCode || ev.which;
 			if( keyCode === 27 ) {
 				closeMenu();
@@ -133,12 +133,12 @@
 
 	// toggle menu fn
 	function toggleMenu() {
-		if( isMenuOpen ) {
+		if( isMenuOpen() ) {
 			closeMenu();
 		}
 		else {
 			openMenu();
-			isMenuOpen = true;
+			//isMenuOpen = true;
 		}
 	}
 
@@ -160,6 +160,10 @@
 			page.style.transform = 'translate3d(0, 75%, ' + parseInt(-1 * 100 - zPercentage*i) + 'px)';
 		}
 	}
+
+  function isMenuOpen(){
+    return menuCtrl.classList.contains("menu-button--open");
+  }
 
 	// closes the menu
 	function closeMenu() {
@@ -198,13 +202,14 @@
 		
 		// close menu..
 		if (skipMenu === undefined || !skipMenu){
-			menuCtrl.classList.remove('menu-button--open');
+			//menuCtrl.classList.remove('menu-button--open');
 			nav.classList.remove('pages-nav--open');
 			onEndTransition(futurePage, function() {
 				stack.classList.remove('pages-stack--open');
 				// reorganize stack
 				buildStack();
-				isMenuOpen = false;
+				//isMenuOpen = false;
+		  	menuCtrl.classList.remove('menu-button--open');
 			});
 		}else{
 			buildStack();
