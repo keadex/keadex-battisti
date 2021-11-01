@@ -37,6 +37,7 @@ if (process.env.NODE_ENV === "production"){
 export interface CustomTemplate{
   closeMenu: ()=>void;
   openPage: (id:string, skipMenu?:boolean)=>void;
+  toggleMenu: ()=>void;
 }
 declare global {
   interface Window { CustomTemplate: CustomTemplate; Modernizr: any }
@@ -257,7 +258,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                   </Body> */}
                 </div>
                 
-                <button className="menu-button" onClick={()=>store.dispatch(toggleMenu())}><span>Menu</span></button>
+                <button className="menu-button" onClick={()=>{window.CustomTemplate.toggleMenu(); store.dispatch(toggleMenu())}}><span>Menu</span></button>
               </div>
             </div>
           </IntlProvider>
