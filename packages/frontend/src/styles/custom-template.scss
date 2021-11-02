@@ -181,6 +181,14 @@ html.js,
 	transition-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
 }
 
+.js .pages-stack--close .page {
+	/* cursor: pointer; */
+	-webkit-transition: -webkit-transform 0.45s, opacity 0.45s;
+	transition: transform 0.45s, opacity 0.45s;
+	-webkit-transition-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
+	transition-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
+}
+
 .js .page--inactive {
 	position: absolute;
 	z-index: 0;
