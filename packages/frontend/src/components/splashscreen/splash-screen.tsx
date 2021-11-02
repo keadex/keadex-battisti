@@ -17,7 +17,7 @@ interface SplashScreenProps {
 
 
 //------------------ COMPONENT
-export const SplashScreen : React.FunctionComponent<SplashScreenProps> = props => {
+const SplashScreen : React.FunctionComponent<SplashScreenProps> = props => {
 
   //ATTRS
   const intl = useIntl();

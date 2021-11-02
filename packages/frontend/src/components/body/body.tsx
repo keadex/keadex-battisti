@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { RefObject, useEffect, useImperativeHandle, useRef } from 'react';
+import { connect, useStore } from 'react-redux';
 import type { StoreState } from '../../core/store/store.type';
 import SplashScreen from '../splashscreen/splash-screen';
 import { toggleMenu } from '../../core/store/reducers/app.reducer';
@@ -8,6 +8,12 @@ import { PAGE_ROOT_ID } from '../../core/route.constants';
 
 
 //--------------- TYPES
+export interface BodyHandle {
+  pageRoot: HTMLDivElement|null;
+  pageFake1: HTMLDivElement|null;
+  pageFake2: HTMLDivElement|null;
+}
+
 interface BodyProps {
   menuOpen: boolean,
   navigationOccurred: boolean,
@@ -18,82 +24,53 @@ interface BodyProps {
 
 
 //--------------- COMPONENT
-class Body extends React.Component<BodyProps> {
+const Body = React.forwardRef<BodyHandle, BodyProps>((props, forwardedRef) => {
 
-  //------------ constructor
-  constructor(props:BodyProps){
-    super(props);
-  }
+  const pageRootRef = useRef<HTMLDivElement>(null);
+  const pageFake1Ref = useRef<HTMLDivElement>(null);
+  const pageFake2Ref = useRef<HTMLDivElement>(null);
 
-
-  //------------ toggleMenu
-  // private toggleMenu(){
-  //   if (store.getState().app.menuOpen)
-  //     this.props.toggleMenu(false)
-  // }
-
-  //------------ componentDidMount
-  componentDidMount(){
-    // console.log("SCROLL body didmount scrolltop");
-    // document.body.scrollTop=0;
-  }
-
+  useImperativeHandle(forwardedRef, () => ({
+    get pageRoot() {
+      return pageRootRef.current;
+    },
+    get pageFake1() {
+      return pageFake1Ref.current;
+    },
+    get pageFake2() {
+      return pageFake2Ref.current;
+    }
+  }));
 
   //------------ componentDidUpdate
-  componentDidUpdate(){
+  useEffect(() => {
     //the following line is needed to be sure to scoll to top of the page root when you open the menu
     //(splashscreen case) and when you close the menu without changing the page (content case). The last
     //case is needed because we scroll to the top of the page root every time you change the page (see _app.tsx - useEffect())
     // console.log("SCROLL body didupdate scrolltop=0 section");
-    if (this.props.menuOpen || !this.props.navigationOccurred) document.getElementById(PAGE_ROOT_ID)!.scrollTop = 0;
-  }
+    if (props.menuOpen || !props.navigationOccurred) document.getElementById(PAGE_ROOT_ID)!.scrollTop = 0;
+  });
 
   //------------ render
-  public render() {
-    // let _self = this;
-    //TODO if (this.props.location.pathname === "/") return <Redirect to={HOME_URL} />
-    return (
-        <React.Fragment>
-          {/* {
-            Object.keys(ROUTES).map(function (key) {
-              // let ComponentName = ROUTES[key].component;
-              return ( */}
-                <div className="page" id="page-root" data-menuopen={this.props.menuOpen} style={{zIndex: 3, opacity: 1}}>
-                  {/* <Switch> */}
-                    {/* <Route exact path={ROUTES[key].url} render={() => (
-                      <Suspense fallback={<div></div>}> */}
-                        <div style={{display:this.props.menuOpen?'inherit':'none'}}>
-                          <SplashScreen/>
-                        </div>
-                        <div style={{opacity:this.props.menuOpen?0:1}} className={this.props.menuOpen?"":"animate__animated animate__fast animate__fadeIn"}>
-                          {/* {cloneElement(this.props.children)} */}
-                          {/* {this.props.children} */}
-                          <this.props.PageComponent {...this.props.pageProps} />
-                        </div>
-                      {/* </Suspense> */}
-                    {/* )}/> */}
-                    {/* <Route render={() => (
-                      <div className="h-100">
-                        <div style={{display:_self.props.menuOpen?'inherit':'none'}}>
-                          <SplashScreen/>
-                        </div>
-                        <div style={{display:_self.props.menuOpen?'none':'inherit'}} className="h-100">
-                          <PageNotFound />
-                        </div>
-                      </div>
-                    )}/> */}
-                  {/* </Switch> */}
-                </div>
-                <div className="page page--inactive" id="page-fake1" style={{transform: "translate3d(0px, 100%, 0px)", zIndex: 2, opacity: 0.9}}/>
-                <div className="page page--inactive" id="page-fake2" style={{transform: "translate3d(0px, 100%, 0px)", zIndex: 1, opacity: 0.8}}/>
-              {/* )
-            })
-        } */}
-        </React.Fragment>
-    );
-  }
+  // let _self = this;
+  //TODO if (this.props.location.pathname === "/") return <Redirect to={HOME_URL} />
+  return (
+    <React.Fragment>
+      <div className="page" id={PAGE_ROOT_ID} style={{zIndex: 3, opacity: 1}} ref={pageRootRef}>
+        <div style={{display:props.menuOpen?'inherit':'none'}}>
+          <SplashScreen/>
+        </div>
+        <div style={{opacity:props.menuOpen?0:1}} className={props.menuOpen?"":"animate__animated animate__fast animate__fadeIn"}>
+          <props.PageComponent {...props.pageProps} />
+        </div>
+      </div>
+      <div className="page page--inactive" id="page-fake1" style={{transform: "translate3d(0px, 100%, 0px)", zIndex: 2, opacity: 0.9}} ref={pageFake1Ref}/>
+      <div className="page page--inactive" id="page-fake2" style={{transform: "translate3d(0px, 100%, 0px)", zIndex: 1, opacity: 0.8}} ref={pageFake2Ref}/>
+    </React.Fragment>
+  );
+});
 
-}
+Body.displayName = "Body";
 
 const mapStateToProps = (state:StoreState) => {
   return {
@@ -104,5 +81,7 @@ const mapStateToProps = (state:StoreState) => {
 
 export default connect(
   mapStateToProps,
-  {toggleMenu}
+  {toggleMenu},
+  null,
+  {forwardRef: true}
 )(Body)
