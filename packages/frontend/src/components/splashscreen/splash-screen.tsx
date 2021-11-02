@@ -17,7 +17,7 @@ interface SplashScreenProps {
 
 
 //------------------ COMPONENT
-export const SplashScreen : React.FunctionComponent<SplashScreenProps> = props => {
+const SplashScreen : React.FunctionComponent<SplashScreenProps> = props => {
 
   //ATTRS
   const intl = useIntl();
@@ -66,13 +66,11 @@ export const SplashScreen : React.FunctionComponent<SplashScreenProps> = props =
   //------------ close
   function close(){
     props.toggleMenu();
-    window.CustomTemplate.closeMenu();
   }
 
   //------------ close
   function openLink(pageId: string){
     props.toggleMenu();
-    window.CustomTemplate.openPage(pageId, false);
   }
 
 

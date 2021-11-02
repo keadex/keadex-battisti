@@ -17,7 +17,8 @@ const OptimizedMedia = dynamic(
 
 //--------------- TYPES
 interface HeaderProps extends WithRouterProps {
-  toggleMenu:(menuOpen?: boolean)=>void
+  toggleMenu:(menuOpen?: boolean)=>void;
+  menuOpen: boolean;
 }
 
 
@@ -57,7 +58,7 @@ class Header extends React.Component<HeaderProps> {
     return (
       <div>
         {/* navigation */}
-        <nav className="pages-nav">
+        <nav className={`pages-nav ${this.props.menuOpen?"pages-nav--open":""}`}>
           <div className="w-100 text-center"><OptimizedMedia src={"keadex-logo.png"} className="nav-logo" alt="logo" width={{default: "15%", sm: "60%", md: "32%", lg: "28%", xl: "23%"}} srcWidth={529} srcHeight={96} /></div>
           <div className="pages-nav__item"><Link replace href={HOME_URL} scroll={false} ><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((this.currentUrl.endsWith(HOME_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.HOME" /></a></Link></div>
           <div className="pages-nav__item"><Link replace href={WHY_KEADEX_URL} scroll={false} ><a onClick={()=>this.props.toggleMenu(false)} className={"link link--page " + ((this.currentUrl.endsWith(WHY_KEADEX_URL))?"is-active":"")}><FormattedMessage id="NAVIGATION.WHY_KEADEX" /></a></Link></div>

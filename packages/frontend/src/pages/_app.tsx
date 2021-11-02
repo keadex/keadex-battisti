@@ -14,17 +14,10 @@ import Cookies from 'js-cookie';
 import { initGA, logPageView } from '../core/google-analytics';
 import { CookieConsent } from '../model/models';
 
-if (isClient()){
-  window.Modernizr = require("modernizr");;
-  require("../custom-template/main.min.js");
-}
-
 const Head = dynamic(() => import('next/head'));
-const Spinner:any = dynamic(() => import('../components/spinner/spinner'));
-const Header:any = dynamic(() => import('../components/header/header'));
-const Body:any = dynamic(() => import('../components/body/body'));
 const IntlProvider:any = dynamic(() => import('react-intl').then((mod:any) => mod.IntlProvider));
 const DefaultSeo:any = dynamic(() => import('next-seo').then((mod:any) => mod.DefaultSeo));
+const KeadexTemplate:any = dynamic(() => import('../components/keadex-template/keadex-template'));
 
 
 //---------- Disable debug and log levels in production
@@ -32,17 +25,6 @@ if (process.env.NODE_ENV === "production"){
   console.log = ()=>{}
   console.debug = ()=>{}
 }
-
-//---------- Window object extension
-export interface CustomTemplate{
-  closeMenu: ()=>void;
-  openPage: (id:string, skipMenu?:boolean)=>void;
-  toggleMenu: ()=>void;
-}
-declare global {
-  interface Window { CustomTemplate: CustomTemplate; Modernizr: any }
-}
-
 
 //---------- react-intl configuration
 if (!Intl.PluralRules) {
@@ -243,24 +225,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       <BreakpointProvider queries={queries}>
           <IntlProvider locale={language} messages={messages[language]}>
-            <div>
-              <Spinner />
-              <div>
-                <Header />
-
-                {/* pages stack */}
-                {/* I need to leave page-stack div outside the body because the javascript of
-                the template cannot wait the rendering of body component since it calculates
-                the number of the pages of the stack*/}
-                <div className="pages-stack">
-                  <Body PageComponent={Component} pageProps={pageProps} />
-                    {/* <Component {...pageProps} />
-                  </Body> */}
-                </div>
-                
-                <button className="menu-button" onClick={()=>{window.CustomTemplate.toggleMenu(); store.dispatch(toggleMenu())}}><span>Menu</span></button>
-              </div>
-            </div>
+            <KeadexTemplate Component={Component} pageProps={pageProps} />              
           </IntlProvider>
       </BreakpointProvider>
     </>
