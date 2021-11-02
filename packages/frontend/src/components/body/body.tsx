@@ -1,5 +1,5 @@
-import React, { RefObject, useEffect, useImperativeHandle, useRef } from 'react';
-import { connect, useStore } from 'react-redux';
+import React, { useEffect, useImperativeHandle, useRef } from 'react';
+import { connect } from 'react-redux';
 import type { StoreState } from '../../core/store/store.type';
 import SplashScreen from '../splashscreen/splash-screen';
 import { toggleMenu } from '../../core/store/reducers/app.reducer';
@@ -52,8 +52,6 @@ const Body = React.forwardRef<BodyHandle, BodyProps>((props, forwardedRef) => {
   });
 
   //------------ render
-  // let _self = this;
-  //TODO if (this.props.location.pathname === "/") return <Redirect to={HOME_URL} />
   return (
     <React.Fragment>
       <div className="page" id={PAGE_ROOT_ID} style={{zIndex: 3, opacity: 1}} ref={pageRootRef}>

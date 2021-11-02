@@ -114,7 +114,6 @@
     "imagemin-optipng": "^8.0.0",
     "imagemin-svgo": "^8.0.0",
     "next-compose-plugins": "^2.2.1",
-    "next-plugin-modernizr": "^0.0.3",
     "next-pwa": "^5.4.0",
     "next-transpile-modules": "^9.0.0",
     "redux-devtools-extension": "^2.13.8",

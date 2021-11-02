@@ -14,11 +14,6 @@ import Cookies from 'js-cookie';
 import { initGA, logPageView } from '../core/google-analytics';
 import { CookieConsent } from '../model/models';
 
-if (isClient()){
-  window.Modernizr = require("modernizr");;
-  //require("../custom-template/main.min.js");
-}
-
 const Head = dynamic(() => import('next/head'));
 const IntlProvider:any = dynamic(() => import('react-intl').then((mod:any) => mod.IntlProvider));
 const DefaultSeo:any = dynamic(() => import('next-seo').then((mod:any) => mod.DefaultSeo));
@@ -30,17 +25,6 @@ if (process.env.NODE_ENV === "production"){
   console.log = ()=>{}
   console.debug = ()=>{}
 }
-
-//---------- Window object extension
-export interface ICustomTemplate{
-  closeMenu: ()=>void;
-  openPage: (id:string, skipMenu?:boolean)=>void;
-  toggleMenu: ()=>void;
-}
-declare global {
-  interface Window { CustomTemplate: ICustomTemplate; Modernizr: any }
-}
-
 
 //---------- react-intl configuration
 if (!Intl.PluralRules) {

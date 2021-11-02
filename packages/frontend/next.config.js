@@ -2,7 +2,6 @@
 const compose = require('next-compose-plugins');
 const optimizedImages = require('next-optimized-images');
 const withTM = require('next-transpile-modules')(['react-scrollmagic', 'react-syntax-highlighter']);
-const withModernizr = require("next-plugin-modernizr");
 const withVideos = require('next-videos')
 const withPWA = require('next-pwa');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
@@ -16,7 +15,6 @@ module.exports = compose([
       disableStaticImages: true,
     }
   },
-  [withModernizr],
   [withVideos],
   [optimizedImages],
   [withTM],

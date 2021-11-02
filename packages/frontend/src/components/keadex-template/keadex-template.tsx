@@ -13,7 +13,7 @@ const Header:any = dynamic(() => import('../header/header'));
 
 
 //--------------- TYPES
-interface CustomTemplateProps {
+interface KeadexTemplateProps {
   Component: NextComponentType<NextPageContext<any>, any, {}>;
   pageProps: any;
   menuOpen: boolean;
@@ -22,12 +22,11 @@ interface CustomTemplateProps {
 
 
 //--------------- COMPONENT
-const KeadexTemplate : React.FunctionComponent<CustomTemplateProps> = props => {
+const KeadexTemplate : React.FunctionComponent<KeadexTemplateProps> = props => {
 
   //ATTRS
   const store = useStore();
   const bodyRef = React.useRef<BodyHandle>(null);
-  const stackPages = ["pageRoot", ];
   
   //FUNCS
 
@@ -42,7 +41,7 @@ const KeadexTemplate : React.FunctionComponent<CustomTemplateProps> = props => {
     if( props.menuOpen ) {
       openMenu(pages, zPercentage);
 		}	else {
-			closeMenu(pages, zPercentage);
+			closeMenu(pages);
 		}
   })
 
@@ -55,17 +54,16 @@ const KeadexTemplate : React.FunctionComponent<CustomTemplateProps> = props => {
 
 
   //---------- closeMenu
-  function closeMenu(pages: (HTMLDivElement | null | undefined)[], zPercentage: number) {
+  function closeMenu(pages: (HTMLDivElement | null | undefined)[]) {
     pages.forEach((page, i)=>{
       if (page){
-        page.style.transform = (i == 0)?"translate3d(0, 0%, 0)":`translate3d(0, 100%, 0)`;
+        page.style.transform = (i == 0)?``:`translate3d(0, 100%, 0)`;
       } 
     })
   }
 
 
   //------------ render
-  //TODO if (this.props.location.pathname === "/") return <Redirect to={HOME_URL} />
   return (
     <div>
       <Spinner />
