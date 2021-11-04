@@ -1,7 +1,6 @@
 import React from 'react';
 import { ArchitectureType } from '../../pages/kealab';
 import type { ArchitectureImplProps } from './architecture';
-import InfrArchSvg from '../../../public/img/infrastructure-architecture.svg'; 
 import dynamic from 'next/dynamic';
 
 const Architecture = dynamic(() => import('../../components/architecture/architecture'));
@@ -17,7 +16,7 @@ const InfrastructureArchitecture : React.FunctionComponent<ArchitectureImplProps
         architectureType={ArchitectureType.infrastructure} 
         onArchitectureTypeSelection={props.onArchitectureTypeSelection}
         modules={props.modules}
-        chalkboard={InfrArchSvg} />
+        chalkboard={"infrastructure-architecture.png"} />
     </React.Fragment>
   );
 }

@@ -66,7 +66,6 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "react-scrollmagic": "file:./patch/react-scrollmagic",
-    "react-svg": "^11.0.27",
     "react-syntax-highlighter": "^13.5.3",
     "react-use": "^15.3.4",
     "react-zoom-pan-pinch": "^1.6.1",
