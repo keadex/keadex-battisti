@@ -12,6 +12,7 @@ import { wrapper } from '../../core/store/store';
 import { DEFAULT_REVALIDATE_SECONDS } from '../../core/app.constants';
 import dynamic from 'next/dynamic';
 import LazyLoad from 'react-lazyload';
+import networkService from '../../core/network/network.service';
 
 const FormattedMessage:any = dynamic(() => import('react-intl').then((mod:any) => mod.FormattedMessage));
 const ProgressBar = dynamic(() => import('../../components/progressbar/progressbar'));
@@ -37,18 +38,18 @@ interface AboutMeProps {
 //---------- getStaticProps
 export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
   (store) => async (ctx) => {
-    const NetworkService = (await import("../../core/network/network.service")).default;
-    let expResp = await NetworkService.getInstance().__tmp_getExperiences();
-      if (expResp.data && expResp.data.data && expResp.data.data.experiences) {
-        store.dispatch(setExperience(expResp.data.data.experiences));
-      }
-      let expGraphResp = await NetworkService.getInstance().__tmp_getExperienceGraph();
-      return {
-        props:{
-          experienceGraph: (expGraphResp.data && expGraphResp.data.data && expGraphResp.data.data.experienceGraph)?expGraphResp.data.data.experienceGraph:undefined
-        }
+    const networkService = (await import("../../core/network/network.service")).default;
+    let expResp = await networkService.__tmp_getExperiences();
+    if (expResp.data && expResp.data.data && expResp.data.data.experiences) {
+      store.dispatch(setExperience(expResp.data.data.experiences));
+    }
+    let expGraphResp = await networkService.__tmp_getExperienceGraph();
+    return {
+      props:{
+        experienceGraph: (expGraphResp.data && expGraphResp.data.data && expGraphResp.data.data.experienceGraph)?expGraphResp.data.data.experienceGraph:undefined
       }
     }
+  }
 );
 
 
@@ -75,14 +76,6 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
   componentDidMount() {
     super.componentDidMount();
     this.resetProgress();
-    // let _self = this;
-    // NetworkService.getInstance().getExperience()
-    //   .then(function (response) {
-    //     if (response.data.results != undefined) {
-    //       _self.props.setExperience(response.data.results);
-    //     }
-    //   }
-    // );
   }
 
   //------------ componentDidUpdate

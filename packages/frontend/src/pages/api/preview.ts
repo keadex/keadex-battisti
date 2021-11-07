@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import NetworkService from "../../core/network/network.service";
+import networkService from "../../core/network/network.service";
 
 const preview = async (req: NextApiRequest, res: NextApiResponse) => {
   // Check the secret and next parameters
@@ -10,7 +10,7 @@ const preview = async (req: NextApiRequest, res: NextApiResponse) => {
 
   // Fetch the headless CMS to check if the provided `slug` exists
   if (typeof req.query.slug === "string"){
-    const pageData = await NetworkService.getInstance().getStrapiPageData(req.query.slug, true);
+    const pageData = await networkService.getStrapiPageData(req.query.slug, true);
 
     // If the slug doesn't exist prevent preview mode from being enabled
     if (!pageData) {

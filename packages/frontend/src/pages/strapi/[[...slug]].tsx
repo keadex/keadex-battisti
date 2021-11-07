@@ -42,8 +42,8 @@ const DynamicPage:React.FC<DynamicPageProps> = ({ sections, metadata, preview }:
 
 export async function getStaticPaths() {
   // Get all pages from Strapi
-  const NetworkService = (await import("../../core/network/network.service")).default;
-  const pages = await NetworkService.getInstance().getStrapiPages();
+  const networkService = (await import("../../core/network/network.service")).default;
+  const pages = await networkService.getStrapiPages();
   let paths:any[] = [];
   if (pages.data && pages.data.data && pages.data.data.pages){
     paths = pages.data.data.pages.map((page) => {
@@ -75,8 +75,8 @@ export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
     }
 
     // Fetch pages. Include drafts if preview mode is on
-    const NetworkService = (await import("../../core/network/network.service")).default;
-    const pageData = await NetworkService.getInstance().getStrapiPageData(chainedSlugs, ctx.preview!);
+    const networkService = (await import("../../core/network/network.service")).default;
+    const pageData = await networkService.getStrapiPageData(chainedSlugs, ctx.preview!);
     if (pageData == null) {
       // Giving the page no props will trigger a 404 page
       return { props: {} };

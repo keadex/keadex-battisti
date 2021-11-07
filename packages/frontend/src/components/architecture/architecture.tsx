@@ -82,7 +82,6 @@ const Architecture : React.FunctionComponent<ArchitectureProps> = (props) => {
   }
 
   //----- render
-  // console.log("render " + currentUrl);
   return (
     <div>
       <div className="w-100 text-center">

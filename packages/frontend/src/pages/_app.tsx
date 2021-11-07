@@ -8,7 +8,7 @@ import flatten from 'flat'
 import {useStore} from 'react-redux';
 import dynamic from 'next/dynamic'
 import '../styles/global.scss'
-import { wrapper, StoreService } from '../core/store/store';
+import { wrapper, storeService } from '../core/store/store';
 import { toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred, setIsAppInitialized, setIsGaInitialized, setQuotes } from '../core/store/reducers/app.reducer';
 import Cookies from 'js-cookie';
 import { initGA, logPageView } from '../core/google-analytics';
@@ -84,7 +84,7 @@ function watchForHover() {
 function MyApp({ Component, pageProps }: AppProps) {
   
   const store = useStore();
-  StoreService.getInstance().saveStore(store);
+  storeService.saveStore(store);
   
   const router = useRouter();
 
@@ -240,12 +240,12 @@ MyApp.getInitialProps = async (appCtx:AppContext) => {
   // Calls page's `getInitialProps` and fills `appProps.pageProps`
   const appProps = await App.getInitialProps(appCtx);
   
-  const NetworkService = (await import("../core/network/network.service")).default;
-  const quotesResp = await NetworkService.getInstance().__tmp_getQuotes();
+  const networkService = (await import("../core/network/network.service")).default;
+  const quotesResp = await networkService.__tmp_getQuotes();
   // console.log(quotesResp);
   if(appCtx.ctx.pathname.indexOf("/strapi") != -1){
     // Fetch global site settings from Strapi, only for pages retrieved by Strapi
-    const global = await NetworkService.getInstance().getStrapiGlobalData();
+    const global = await networkService.getStrapiGlobalData();
     const globalData = global.data.data?.global;
     // console.debug("Global data");
     // console.debug(globalData);

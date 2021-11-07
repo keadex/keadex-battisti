@@ -19,15 +19,9 @@ import { isClient } from '../../helper/react-helper';
  * 
  * The store is saved by the _app.
  */
-export class StoreService {
+class StoreService {
 
-  private static _INSTANCE:StoreService|null = null;
   private store: Store<any, AnyAction>|null = null;
-  
-  public static getInstance():StoreService{
-    if (!this._INSTANCE) this._INSTANCE = new StoreService();
-    return this._INSTANCE;
-  }
 
   public saveStore(store: Store<any, AnyAction>):boolean{
     if (!isClient()){
@@ -48,6 +42,8 @@ export class StoreService {
     return this.store;
   }
 }
+
+export const storeService = new StoreService(); 
 
 
 //STORE CREATION
