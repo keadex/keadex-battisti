@@ -241,7 +241,7 @@ MyApp.getInitialProps = async (appCtx:AppContext) => {
   const appProps = await App.getInitialProps(appCtx);
   
   const networkService = (await import("../core/network/network.service")).default;
-  const quotesResp = await networkService.__tmp_getQuotes();
+  const quotesResp = await networkService.__tmp_getQuotes(appCtx.ctx);
   // console.log(quotesResp);
   if(appCtx.ctx.pathname.indexOf("/strapi") != -1){
     // Fetch global site settings from Strapi, only for pages retrieved by Strapi

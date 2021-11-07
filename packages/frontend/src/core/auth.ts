@@ -41,7 +41,7 @@ export const withBattistiJwt = (networkServiceFunc:any) => {
     // const token = getBattistiJwt(ctx) // Add logic to extract token from `req.headers.cookie`
     // console.log("requireAuthentication " + token);
     if (!isClient() && !ctx) {
-      //throw new Error("It's not possible to set cookies on server side without a context");
+      throw new Error("It's not possible to set cookies on server side without a context");
     }
     let jwt = getBattistiJwt(ctx);
     if (!jwt){
