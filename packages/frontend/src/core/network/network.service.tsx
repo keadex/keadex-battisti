@@ -1,4 +1,4 @@
-import {BaseResponse, StrapiResponse} from '../../model/models';
+import { BaseResponse, StrapiResponse, BattistiLogin } from '../../model/models';
 import axios, { AxiosPromise, AxiosResponse } from 'axios';
 import { Quote, Experience, ForceGraph } from '../../model/models';
 import { print } from 'graphql/language';
@@ -10,6 +10,7 @@ import { PAGES } from './graphql-queries/strapi/page';
 import { GLOBAL } from './graphql-queries/strapi/global';
 import { ARCHITECTURE_MODULES } from './graphql-queries/strapi/architecture-module';
 import { withBattistiJwt } from '../auth';
+import { BATTISTI_LOGIN_MUTATION } from './graphql-queries/auth';
 
 //API ENDPOINTS
 export const CDN_ENDPOINT : string = process.env.NEXT_PUBLIC_CDN_ENDPOINT;
@@ -61,15 +62,13 @@ class NetworkService {
     // });
   }
 
-  /**
-   * @deprecated Temporary getQuotes function based on a REST API.
-   * This will be replaced by getQuotes which will be based on 
-   * GraphQL and it will be available when Keadex Einaudi (the backend)
-   * will be delivered.
-   */
-  __tmp_getQuotes = withBattistiJwt(() : AxiosPromise<BaseResponse<Quote[]>> => {
-    return axios.get<BaseResponse<Quote[]>>(getStrapiMedia(GET_QUOTES_API)!);
-  });
+
+  //--------- loginToBattisti
+  loginToBattisti = () : AxiosPromise<BaseResponse<BattistiLogin>> => {
+    return axios.post<BaseResponse<BattistiLogin>>(API_ENDPOINT, {
+      query: print(BATTISTI_LOGIN_MUTATION)
+    })
+  }
     
   //--------- getQuotes
   getQuotes = withBattistiJwt(() : AxiosPromise<BaseResponse<Quote[]>> => {

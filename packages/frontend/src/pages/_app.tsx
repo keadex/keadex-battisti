@@ -152,9 +152,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     //---- 
 
     // console.log(pageProps.quotesResp);
-    if (pageProps.quotesResp && pageProps.quotesResp.data && pageProps.quotesResp.data.quotes && store.getState().app.quotes.length == 0){
+    if (pageProps.quotesResp && pageProps.quotesResp.data && pageProps.quotesResp.data.randomQuotes && store.getState().app.quotes.length == 0){
       //save quotes only if not already saved
-      store.dispatch(setQuotes(pageProps.quotesResp.data.quotes));
+      store.dispatch(setQuotes(pageProps.quotesResp.data.randomQuotes));
     }
 
     //---------- Bind router events to show loader
@@ -241,8 +241,7 @@ MyApp.getInitialProps = async (appCtx:AppContext) => {
   const appProps = await App.getInitialProps(appCtx);
   
   const networkService = (await import("../core/network/network.service")).default;
-  const quotesResp = await networkService.__tmp_getQuotes(appCtx.ctx);
-  // console.log(quotesResp);
+  const quotesResp = await networkService.getQuotes(appCtx.ctx);
   if(appCtx.ctx.pathname.indexOf("/strapi") != -1){
     // Fetch global site settings from Strapi, only for pages retrieved by Strapi
     const global = await networkService.getStrapiGlobalData();
