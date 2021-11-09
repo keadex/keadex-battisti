@@ -78,22 +78,12 @@ class NetworkService {
   })
 
 
-  /**
-   * @deprecated Temporary getExperiences function based on a REST API.
-   * This will be replaced by getExperiences which will be based on 
-   * GraphQL and it will be available when Keadex Einaudi (the backend)
-   * will be delivered.
-   */
-  __tmp_getExperiences = () : AxiosPromise<BaseResponse<Experience[]>> => {
-    return axios.get<BaseResponse<Experience[]>>(getStrapiMedia(GET_EXPERIENCE_API)!);
-  }
-
   //--------- getExperiences
-  getExperiences = () : AxiosPromise<BaseResponse<Experience[]>> => {
+  getExperiences = withBattistiJwt(() : AxiosPromise<BaseResponse<Experience[]>> => {
     return axios.post<BaseResponse<Experience[]>>(API_ENDPOINT, {
       query: print(EXPERIENCES_QUERY)
     })
-  }
+  });
 
 
   /**

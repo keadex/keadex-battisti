@@ -3,32 +3,45 @@ import gql from 'graphql-tag';
 export const EXPERIENCES_QUERY = gql`
   query Experiences {
     experiences {
-      id
+      _id
+      avatarFileName
       from
       to
-      avatarFilename
+      role
       tasks {
-        id
+        _id
+        key
       }
-      companies {
-        name
+      employers {
+        _id
+        company {
+          _id
+          city
+          country
+          logoFilename
+          name
+        }
         from
         to
+      }
+      customers {
+        _id
         city
         country
         logoFilename
-      }
-      customers {
-        id
         name
-        logoFilename
       }
       sectors {
-        id
+        _id
+        key
       }
       skills {
-        name
+        _id
         usagePercentage
+        skill {
+          _id
+          name
+        }
       }
     }
   }

@@ -39,7 +39,8 @@ interface AboutMeProps {
 export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
   (store) => async (ctx) => {
     const networkService = (await import("../../core/network/network.service")).default;
-    let expResp = await networkService.__tmp_getExperiences();
+    let expResp = await networkService.getExperiences();
+    console.log(expResp.data);
     if (expResp.data && expResp.data.data && expResp.data.data.experiences) {
       store.dispatch(setExperience(expResp.data.data.experiences));
     }
@@ -183,7 +184,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
               {/* EXPERIENCE: MOBILE */}
               <Scene pin duration={this.defaultState.progress[2].duration} indicators={false}>
                 {(progress: any, event: any) => {
-                  progress = this.onSceneEvent(2, progress, event, (this.props.experience[0] != undefined)?this.props.experience[0].id:undefined);
+                  progress = this.onSceneEvent(2, progress, event, (this.props.experience[0] != undefined)?this.props.experience[0].role:undefined);
                   // console.log("EXPERIENCE: MOBILE: " + progress);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>
@@ -196,7 +197,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
               {/* EXPERIENCE: FULL STACK */}
               <Scene pin duration={this.defaultState.progress[3].duration} indicators={false}>
                 {(progress: any, event: any) => {
-                  progress = this.onSceneEvent(3, progress, event, (this.props.experience[1] != undefined)?this.props.experience[1].id:undefined);
+                  progress = this.onSceneEvent(3, progress, event, (this.props.experience[1] != undefined)?this.props.experience[1].role:undefined);
                   // console.log("EXPERIENCE: FULL STACK: " + progress);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>
@@ -209,7 +210,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
               {/* EXPERIENCE: IT SOLUTION ARCHITECT */}
               <Scene pin duration={this.defaultState.progress[4].duration} indicators={false}>
                 {(progress: any, event: any) => {
-                  progress = this.onSceneEvent(4, progress, event, (this.props.experience[2] != undefined)?this.props.experience[2].id:undefined);
+                  progress = this.onSceneEvent(4, progress, event, (this.props.experience[2] != undefined)?this.props.experience[2].role:undefined);
                   // console.log("EXPERIENCE: IT SOLUTION ARCHITECT: " + progress);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>

@@ -54,53 +54,55 @@ export interface Quote {
 
 // --------  TASK
 export interface Task {
-  id: string
+  key: string
 }
 
 
 // --------  COMPANY
 export interface Company {
   name: string,
-  from: string,
-  to?: string,
   city: string,
   country: string,
   logoFilename: string
 }
 
 
-// --------  CUSTOMER
-export interface Customer {
-  id: string,
-  name: string,
-  logoFilename: string
+// --------  EMPLOYER
+export interface Employer {
+  from: string,
+  to?: string,
+  company: Company
 }
 
 
 // --------  SECTOR
 export interface Sector {
-  id: string
+  key: string
 }
 
 
 // --------  SKILL
 export interface Skill {
   name: string,
+}
+
+export interface SkillUsage {
+  skill: Skill,
   usagePercentage: number
 }
 
 
 // --------  EXPERIENCE
 export interface Experience {
-  id: string,
+  role: string,
   from: string,
   to?: string,
-  avatarFilename: string,
+  avatarFileName: string,
   tasks: Task[],
-  companies: Company[],
-  customers: Customer[],
+  employers: Employer[],
+  customers: Company[],
   sectors: Sector[],
-  skills: Skill[]
+  skills: SkillUsage[]
 }
 
 

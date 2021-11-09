@@ -56,9 +56,9 @@ export const withBattistiJwt = <T>(networkServiceFunc:(...props: any[]) => Axios
   return async (ctx?:NextPageContext, ...props: any[]) => {
     // const token = getBattistiJwt(ctx) // Add logic to extract token from `req.headers.cookie`
     // console.log("requireAuthentication " + token);
-    if (!isClient() && !ctx) {
-      throw new Error("It's not possible to set cookies on server side without a context");
-    }
+    // if (!isClient() && !ctx) {
+    //   throw new Error("It's not possible to set cookies on server side without a context");
+    // }
 
     let result: AxiosResponse<BaseResponse<T>>;
     let retry = 1;
