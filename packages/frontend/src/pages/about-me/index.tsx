@@ -4,15 +4,13 @@ import { Controller, Scene } from 'react-scrollmagic';
 import { connect } from 'react-redux';
 import { setCurrentScene, setProgress, setExperience, resetState } from '../../core/store/reducers/aboutme.reducer';
 import { getDefaultAboutMeState, AboutMeState, StoreState } from '../../core/store/store.type';
-import {Experience as IExperience, ForceGraph} from '../../model/models';
+import {Experience as IExperience} from '../../model/models';
 import BasePageComponent from '../../components/base-page-component/base-page-component';
 import { PAGE_ROOT_ID } from '../../core/route.constants';
 import { GetStaticProps } from 'next';
 import { wrapper } from '../../core/store/store';
-import { DEFAULT_REVALIDATE_SECONDS } from '../../core/app.constants';
 import dynamic from 'next/dynamic';
 import LazyLoad from 'react-lazyload';
-import networkService from '../../core/network/network.service';
 
 const FormattedMessage:any = dynamic(() => import('react-intl').then((mod:any) => mod.FormattedMessage));
 const ProgressBar = dynamic(() => import('../../components/progressbar/progressbar'));
@@ -30,8 +28,7 @@ interface AboutMeProps {
   setExperience: (experience: IExperience[])=>void,
   resetState:()=>void,
   experience: IExperience[],
-  menuOpen: boolean,
-  experienceGraph?: ForceGraph.Graph
+  menuOpen: boolean
 }
 
 
@@ -40,15 +37,11 @@ export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
   (store) => async (ctx) => {
     const networkService = (await import("../../core/network/network.service")).default;
     let expResp = await networkService.getExperiences();
-    console.log(expResp.data);
     if (expResp.data && expResp.data.data && expResp.data.data.experiences) {
       store.dispatch(setExperience(expResp.data.data.experiences));
     }
-    let expGraphResp = await networkService.__tmp_getExperienceGraph();
     return {
-      props:{
-        experienceGraph: (expGraphResp.data && expGraphResp.data.data && expGraphResp.data.data.experienceGraph)?expGraphResp.data.data.experienceGraph:undefined
-      }
+      props:{}
     }
   }
 );
@@ -140,7 +133,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
         </header>
         <div className='page-body'>
           <div className={`${styles["about-me__panel"]} p-0 m-0`}>
-            <Brain experienceGraph={this.props.experienceGraph} />
+            <Brain />
           </div>
           <LazyLoad height={"100vh"} once scrollContainer={"#"+PAGE_ROOT_ID}>
             <Controller container={"#"+PAGE_ROOT_ID} globalSceneOptions={{ triggerHook: 0 }}>
@@ -162,7 +155,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
                   // console.log(event);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>
-                      <Education progress={progress} experienceGraph={this.props.experienceGraph}/>
+                      <Education progress={progress} />
                     </div>
                   )
                 }}

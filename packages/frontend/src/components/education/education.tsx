@@ -16,8 +16,7 @@ const OptimizedMedia = dynamic(
 
 //------------------ TYPES
 export interface EducationProps extends HooksBreakpointProps {
-  progress: number,
-  experienceGraph?: ForceGraph.Graph
+  progress: number
 }
 
     

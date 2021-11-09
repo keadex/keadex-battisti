@@ -46,20 +46,3 @@ export const EXPERIENCES_QUERY = gql`
     }
   }
 `
-
-export const EXPERIENCE_GRAPH_QUERY = gql`
-  query ExperienceGraph {
-    experienceGraph {
-      nodes {
-        id
-        name
-        val
-        group
-      }
-      links {
-        source
-        target
-      }
-    }
-  }
-`

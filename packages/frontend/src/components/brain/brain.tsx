@@ -16,8 +16,7 @@ const OptimizedMedia = dynamic(
 //------------------ TYPES
 export interface BrainProps {
   progress?: number,
-  currentScene?: number,
-  experienceGraph?: ForceGraph.Graph
+  currentScene?: number
 }
 
 
@@ -33,7 +32,7 @@ const Brain : React.FunctionComponent<BrainProps> = props => {
   let interactiveBrain = (<></>);
   if ((breakpoints.lg || breakpoints.xl) && isGraphVisible){
     const InteractiveBrain = dynamic(() => import('./interactive-brain'));
-    interactiveBrain = (<InteractiveBrain progress={props.progress} experienceGraph={props.experienceGraph} />)
+    interactiveBrain = (<InteractiveBrain progress={props.progress} />)
   }
 
   return (

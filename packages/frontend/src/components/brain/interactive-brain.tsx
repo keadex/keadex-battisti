@@ -10,6 +10,7 @@ import temporalLobe from "../../../public/img/education/temporal-lobe.png";
 import cerebellum from "../../../public/img/education/cerebellum.png";
 import frontalLobe from "../../../public/img/education/frontal-lobe.png";
 import { isClient } from "../../helper/react-helper";
+import brainGraph from "./brain-graph";
 
 
 let ForceGraph2D:any = undefined;
@@ -19,8 +20,7 @@ if (isClient()){
 
 //------------------ TYPES
 export interface BrainProps {
-  progress?: number,
-  experienceGraph?: ForceGraph.Graph
+  progress?: number
 }
 
 
@@ -79,7 +79,7 @@ const InteractiveBrain : React.FunctionComponent<BrainProps> = props => {
       {/* SHOW INTERACTIVE BRAIN GRAPH ONLY ON DESKTOP */}
       <div className={`d-none d-lg-block ${styles["brain__container--interactive"]} ${(props.progress!=0?"out":"")}`}>
         <NoSSR>
-          {ForceGraph2D && <ForceGraph2D ref={forceGraphRef} graphData={props.experienceGraph} linkColor={() => '#fff'} nodeAutoColorBy="group" enableNodeDrag={true} enableZoomPanInteraction={false}
+          {ForceGraph2D && <ForceGraph2D ref={forceGraphRef} graphData={brainGraph} linkColor={() => '#fff'} nodeAutoColorBy="group" enableNodeDrag={true} enableZoomPanInteraction={false}
             nodeCanvasObjectMode={()=>"replace"} nodeCanvasObject={(node:any, ctx:any, globalScale:any) => {
               
             if (node != undefined && node.id != undefined && node.x != undefined && node.y != undefined){

@@ -35,7 +35,6 @@ export interface StrapiResponse {
 export interface Query<T> {
   experiences?: T;
   randomQuotes?: T;
-  experienceGraph?: T;
   login: T;
 }
 
