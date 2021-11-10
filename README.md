@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://keadex.io/kealab#keadex-battisti" target="blank"><img src="https://keadex.io:2053/uploads/keadex_battisti_dark_9ef872e108.png" width="350" alt="Nest Logo" /></a>
+  <a href="https://keadex.io/kealab#keadex-battisti" target="blank"><img src="https://keadex.io:2053/uploads/keadex_battisti_dark_9ef872e108.png" width="350" alt="Keadex Battisti Logo" /></a>
 </p>
 <p align="center">The frontend module built with <a href="https://nextjs.org/" target="_blank">Next.js</a> and <a href="https://strapi.io/" target="_blank">Strapi</a>.</p>
 </br>
@@ -18,8 +18,10 @@ The **monorepo** (managed with Lerna) is made up of three packages:
 * **mock**: contains the code of the GraphQL mock server to test and to develop the frontend without waiting for the backend integration
 
 Keadex Battisti is used as a showcase of the Keadex platform but it can easily adapted to satisfy any need. The development of a CLI is planned in order to minimize the effort needed to initialize a web client with the Keadex Battisti features (check the roadmap to track the planned capabilities)  
+</br>
+</br>
 
-To start the project:  
+# Getting started
 
 1. clone the monorepo: `git clone https://github.com/keadex/keadex-battisti.git`
 2. run `lerna bootstrap` under the root folder
