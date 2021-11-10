@@ -33,6 +33,7 @@ To start the project:
 8. run `yarn dev` under the **frontend** package
 </br>
 </br>
+
 # Notes
 - Strapi does not support Yarn >2: check this [issue](https://github.com/strapi/strapi/issues/9109).</br>
 Once will be added the support for Yarn >2, this project will be migrated and will be removed Lerna. The monorepo will be then managed with the Yarn workspaces feature. 
