@@ -1,5 +1,6 @@
 {
-  "name": "front-end",
+  "name": "keadex-einaudi",
+  "description": "Front-end module of Keadex",
   "version": "2.0.0",
   "license": "MIT",
   "author": "Keadex",
