@@ -19,7 +19,6 @@ The **monorepo** (managed with Lerna) is made up of three packages:
 
 Keadex Battisti is used as a showcase of the Keadex platform but it can easily adapted to satisfy any need. The development of a CLI is planned in order to minimize the effort needed to initialize a web client with the Keadex Battisti features (check the roadmap to track the planned capabilities)  
 </br>
-</br>
 
 # Getting started
 
@@ -31,7 +30,6 @@ Keadex Battisti is used as a showcase of the Keadex platform but it can easily a
 6. run `yarn develop` under the **cms** package.
 7. import into Strapi demo contents from `cms/contents-snapshot` folder by using the Strapi plugin [content-export-import](https://github.com/lazurey/strapi-plugin-content-export-import)
 8. run `yarn dev` under the **frontend** package
-</br>
 </br>
 
 # Notes
