@@ -1,7 +1,7 @@
 <p align="center">
-  <a href="https://nextjs.org">
+  <a href="https://keadex.io/kealab#keadex-battisti">
     <img src="https://keadex.io:2053/uploads/keadex_battisti_dark_9ef872e108.png" width="350">
-    <h2 style="border-bottom: none" align="center">Keadex Battisti</h21>
+    <h2 align="center">Keadex Battisti</h21>
   </a>
 </p>
 </br>
