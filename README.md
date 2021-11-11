@@ -4,6 +4,11 @@
 <p align="center">The frontend module built with <a href="https://nextjs.org/" target="_blank">Next.js</a> and <a href="https://strapi.io/" target="_blank">Strapi</a>.</p>
 </br>
 
+<div align="center">
+
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
+</div>
+
 # Description
 
 **Keadex Battisti** represents the shell of Keadex, the way to describe it.  
