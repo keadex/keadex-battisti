@@ -3,13 +3,12 @@ import App, { AppContext } from "next/app";
 import type { AppProps } from 'next/app'
 import {useRouter} from 'next/router'
 import { BreakpointProvider, Query } from '../core/react-breakpoint'
-import { isClient } from '../helper/react-helper';
 import flatten from 'flat'
 import {useStore} from 'react-redux';
 import dynamic from 'next/dynamic'
 import '../styles/global.scss'
 import { wrapper, storeService } from '../core/store/store';
-import { toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred, setIsAppInitialized, setIsGaInitialized, setQuotes } from '../core/store/reducers/app.reducer';
+import { activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred, setIsAppInitialized, setIsGaInitialized, setQuotes } from '../core/store/reducers/app.reducer';
 import Cookies from 'js-cookie';
 import { initGA, logPageView } from '../core/google-analytics';
 import { CookieConsent } from '../model/models';
@@ -138,7 +137,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     //---- start to use Google Analytics only if the user has given the consensus
     let cookieConsentValue = Cookies.get('CookieConsent');    
-
+    
     //fix Cookiebot "CookieConsent" cookie json string (missing quotes)
     cookieConsentValue = cookieConsentValue?.replace(/{/gi, '{"').replace(/:/gi, '":').replace(/,/gi, ',"').replace(/'/gi, '"');
     

@@ -57,7 +57,7 @@
     "react-dom": "^17.0.2",
     "react-floating-button-menu": "^2.0.8",
     "react-force-graph": "^1.37.1",
-    "react-ga": "^3.1.2",
+    "react-ga4": "^1.4.1",
     "react-gsap": "^2.2.1",
     "react-intl": "^5.3.2",
     "react-lazyload": "^3.1.0",
