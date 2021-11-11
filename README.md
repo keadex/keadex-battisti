@@ -7,8 +7,10 @@
 <div align="center">
 
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
-[![GitHub license](https://badgen.net/github/license/Naereen/Strapdown.js)](https://github.com/keadex/keadex-battisti/blob/master/LICENSE)
-[![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://github.com/keadex/keadex-battisti/releases/)
+![GitHub](https://img.shields.io/github/license/keadex/keadex-battisti)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/keadex/keadex-battisti)
+![GitHub deployments](https://img.shields.io/github/deployments/keadex/keadex-battisti/production?label=vercel&logo=vercel&logoColor=white)
+![GitHub deployments](https://img.shields.io/github/deployments/keadex/keadex-battisti/preview?label=vercel%20preview&logo=vercel&logoColor=white)
 
 
 </div>
