@@ -150,7 +150,7 @@ const Architecture : React.FunctionComponent<ArchitectureProps> = (props) => {
                           <h1><FormattedMessage id="KEALAB.MODULE_DETAILS.MENU.FEATURES" /></h1>
                           {/* <div dangerouslySetInnerHTML={{__html: sanitizeHtml(module.features)}} /> */}
                           {module.features.map((feature, index)=>{
-                            return <ArchitectureModuleFeature feature={feature!} key={feature!.id} firstItem={index==0} onAccordionClick={toggleCollapse} isOpen={collapseID==feature!.id || (collapseID == "null" && index == 0)}/>
+                            return <ArchitectureModuleFeature moduleId={module.moduleId} feature={feature!} key={feature!.id} firstItem={index==0} onAccordionClick={toggleCollapse} isOpen={collapseID==feature!.id || (collapseID == "null" && index == 0)}/>
                           })}
                         </div>
                       </>

@@ -15,6 +15,7 @@ interface ArchitectureModuleFeatureProps {
   firstItem: boolean;
   onAccordionClick: (id:string)=>void;
   isOpen: boolean;
+  moduleId: string;
 }
 
 
@@ -30,7 +31,7 @@ const ArchitectureModuleFeature : React.FC<ArchitectureModuleFeatureProps> = (pr
         {props.feature.codeSnippet && props.feature.codeSnippet.length > 0 && (
           <>
             {props.feature.codeSnippet.map((codeSnippet)=>{
-              return <CodeSnippet codeSnippet={codeSnippet!} key={codeSnippet!.id} />
+              return <CodeSnippet moduleId={props.moduleId} codeSnippet={codeSnippet!} key={codeSnippet!.id} />
             })}
           </>        
       )}
