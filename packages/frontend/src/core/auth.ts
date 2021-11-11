@@ -1,6 +1,6 @@
 import { isClient } from '../helper/react-helper';
 import nookies, { destroyCookie, parseCookies, setCookie } from 'nookies'
-import { NextApiRequest, NextApiResponse, NextPageContext } from 'next';
+import { NextPageContext } from 'next';
 import axios, { AxiosPromise } from 'axios';
 import { AxiosResponse } from 'axios';
 import { BaseResponse } from '../model/models';
