@@ -9,7 +9,7 @@ import { MDBIcon } from 'mdbreact';
 import { FORMATTED_MESSAGE_STANDARD_HTML_VALUES } from '../../core/app.constants';
 import dynamic from 'next/dynamic';
 import gsap from "gsap";
-import NetworkService from '../../core/network/network.service';
+import networkService from '../../core/network/network.service';
 import { getStrapiMedia } from '../../helper/strapi-helper';
 import { MediaType } from '../optimized-media/optimized-media';
 
@@ -74,7 +74,7 @@ class Resume extends React.Component<any, ResumeState> {
     this.tlDownloadResume!.to("#resume-pdf", {duration: 2, opacity: `1`}, "-=1.5");
     
     this.tlDownloadResume!.add(()=>{
-      NetworkService.getInstance().downloadFile(getStrapiMedia(process.env.NEXT_PUBLIC_RESUME_PDF_URL!)!, "resume-giacomosimmi.pdf");
+      networkService.downloadFile(getStrapiMedia(process.env.NEXT_PUBLIC_RESUME_PDF_URL!)!, "resume-giacomosimmi.pdf");
     }, "-=2.5");
     
     this.tlDownloadResume!.pause();

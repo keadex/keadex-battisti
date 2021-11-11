@@ -37,7 +37,6 @@ const ArchitectureChalkboardToolbar : React.FunctionComponent<ArchitectureChalkb
       position you need to wait this component to be rendered.
     */
    if (isModuleSelected){
-      // console.log("SCROLL chalkboard toolbar menu");
       setTimeout(()=>scrollToSection(props.moduleDetailsRef, PAGE_ROOT_ID), 0);
       setIsModuleSelected(false);
     }
@@ -50,6 +49,7 @@ const ArchitectureChalkboardToolbar : React.FunctionComponent<ArchitectureChalkb
     //menu button
     buttons.push(
       <MainButton
+        key="main-button"
         iconResting={<MDBIcon fab icon="buffer" />}
         iconActive={<MDBIcon fab icon="buffer" />}
         onClick={() => setIsOpen(!isOpen)}
@@ -85,8 +85,9 @@ const ArchitectureChalkboardToolbar : React.FunctionComponent<ArchitectureChalkb
                   slideSpeed={500}
                   direction="down"
                   spacing={8}
-                  isOpen={isOpen}
-                  children={getModuleButtons()} />
+                  isOpen={isOpen} >
+                  {getModuleButtons()}
+              </FloatingMenu>
             </div>
           </div>
         </div>

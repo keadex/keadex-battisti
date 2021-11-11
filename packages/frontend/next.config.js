@@ -1,16 +1,20 @@
-const compose = require('next-compose-plugins')
+/** @type {import('next').NextConfig} */
+const compose = require('next-compose-plugins');
 const optimizedImages = require('next-optimized-images');
 const withTM = require('next-transpile-modules')(['react-scrollmagic', 'react-syntax-highlighter']);
-const withModernizr = require("next-plugin-modernizr");
 const withVideos = require('next-videos')
 const withPWA = require('next-pwa');
-
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
 module.exports = compose([
-  [withModernizr],
+  {
+    reactStrictMode: true,
+    images: {
+      disableStaticImages: true,
+    }
+  },
   [withVideos],
   [optimizedImages],
   [withTM],
@@ -35,8 +39,7 @@ module.exports = compose([
         }
 
         return entries
-      }
-
+      };
       return cfg
     }
   }

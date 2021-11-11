@@ -1,5 +1,4 @@
 import React, { useState, useRef, RefObject, useEffect } from 'react';
-import { ReactSVG } from 'react-svg'
 import styles from "./architecture.module.scss";
 import { ArchitectureType } from '../../pages/kealab';
 import { PAGE_ROOT_ID } from '../../core/route.constants';
@@ -64,25 +63,6 @@ const Architecture : React.FunctionComponent<ArchitectureProps> = (props) => {
   });
 
 
-  //----- afterInjection
-  function afterInjection(error:Error|null, svg:SVGElement|undefined):void{
-    if (svg && props.modules){
-      disableScrollIntoView(props.modules.map((module)=>{return module.moduleId}), null);
-      props.modules.forEach((module)=>{
-        let svgElem = svg.querySelector("#"+module.moduleId);
-        if (svgElem){
-          svgElem.classList.add(styles["architecture__module"]);
-          svgElem.addEventListener("click", ()=>{
-            navigateToModule(module.moduleId);
-            setCurrentUrl(router.asPath+"#"+module.moduleId);
-            scrollToSection(moduleDetailsRef, PAGE_ROOT_ID);
-          });
-        }
-      })
-    }
-  }
-
-
   //----- scrollToSection
   function scrollToSection(ref:RefObject<HTMLDivElement>, parentId:string):void{
     scrollToSectionHelper(ref, parentId);
@@ -102,7 +82,6 @@ const Architecture : React.FunctionComponent<ArchitectureProps> = (props) => {
   }
 
   //----- render
-  // console.log("render " + currentUrl);
   return (
     <div>
       <div className="w-100 text-center">
@@ -112,7 +91,7 @@ const Architecture : React.FunctionComponent<ArchitectureProps> = (props) => {
               <React.Fragment>
                 <ArchitectureChalkboardToolbar modules={props.modules} moduleDetailsRef={moduleDetailsRef} onArchitectureTypeSelection={props.onArchitectureTypeSelection} navigateToModule={navigateToModule} architectureType={props.architectureType} zoomPanPinchProps={zoomPanPinchProps} />
                 <TransformComponent>
-                  <ReactSVG src={props.chalkboard} renumerateIRIElements={false} afterInjection={afterInjection} className={styles["architecture__chalkboard"]}/>
+                  <OptimizedMedia src={props.chalkboard} className={styles["architecture__chalkboard"]} srcWidth={1909} srcHeight={1366} width={{default: "100%"}}/>
                 </TransformComponent>
               </React.Fragment>
             )}
@@ -171,7 +150,7 @@ const Architecture : React.FunctionComponent<ArchitectureProps> = (props) => {
                           <h1><FormattedMessage id="KEALAB.MODULE_DETAILS.MENU.FEATURES" /></h1>
                           {/* <div dangerouslySetInnerHTML={{__html: sanitizeHtml(module.features)}} /> */}
                           {module.features.map((feature, index)=>{
-                            return <ArchitectureModuleFeature feature={feature!} key={feature!.id} firstItem={index==0} onAccordionClick={toggleCollapse} isOpen={collapseID==feature!.id || (collapseID == "null" && index == 0)}/>
+                            return <ArchitectureModuleFeature moduleId={module.moduleId} feature={feature!} key={feature!.id} firstItem={index==0} onAccordionClick={toggleCollapse} isOpen={collapseID==feature!.id || (collapseID == "null" && index == 0)}/>
                           })}
                         </div>
                       </>

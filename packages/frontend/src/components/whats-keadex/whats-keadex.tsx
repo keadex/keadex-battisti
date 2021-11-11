@@ -226,7 +226,7 @@ const WhatsKeadex : React.FunctionComponent<WhatsKeadexProps> = props => {
                 <MDBCard className="h-100 w-100">
                   <MDBCardBody>
                     <h4 className="text-brand1"><FormattedMessage id="HOME.TITLE_KNOW" /></h4>
-                    <OptimizedMedia className="mt-4 mb-4" src={"knwoledge.png"} width="150px" srcWidth={925} srcHeight={710} />
+                    <OptimizedMedia className="mt-4 mb-4" src={"knowledge.png"} width="150px" srcWidth={925} srcHeight={710} />
                     <div><FormattedMessage id="HOME.TEXT_KNOW" values={FORMATTED_MESSAGE_STANDARD_HTML_VALUES}/></div>
                   </MDBCardBody>
                 </MDBCard>
@@ -252,7 +252,7 @@ const WhatsKeadex : React.FunctionComponent<WhatsKeadexProps> = props => {
           <div className={`${styles["whats-keadex__kealab-title"]}`}>
             $$\&nbsp;&nbsp;&nbsp;$$\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>$$&nbsp;|&nbsp;$$&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>$$&nbsp;|$$&nbsp;&nbsp;/&nbsp;$$$$$$\&nbsp;&nbsp;&nbsp;$$$$$$\&nbsp;&nbsp;$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$$$$$\&nbsp;&nbsp;$$$$$$$\&nbsp;&nbsp;<br/>$$$$$&nbsp;&nbsp;/&nbsp;$$&nbsp;&nbsp;__$$\&nbsp;&nbsp;\____$$\&nbsp;$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\____$$\&nbsp;$$&nbsp;&nbsp;__$$\&nbsp;<br/>$$&nbsp;&nbsp;$$&lt;&nbsp;&nbsp;$$$$$$$$&nbsp;|&nbsp;$$$$$$$&nbsp;|$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$$$$$$&nbsp;|$$&nbsp;|&nbsp;&nbsp;$$&nbsp;|<br/>$$&nbsp;|\$$\&nbsp;$$&nbsp;&nbsp;&nbsp;____|$$&nbsp;&nbsp;__$$&nbsp;|$$&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$&nbsp;&nbsp;__$$&nbsp;|$$&nbsp;|&nbsp;&nbsp;$$&nbsp;|<br/>$$&nbsp;|&nbsp;\$$\\$$$$$$$\&nbsp;\$$$$$$$&nbsp;|$$$$$$$$\\$$$$$$$&nbsp;|$$$$$$$&nbsp;&nbsp;|<br/>\__|&nbsp;&nbsp;\__|\_______|&nbsp;\_______|\________|\_______|\_______/&nbsp;                </div>
           <div className={`${styles["whats-keadex__kealab-content"]}`}><FormattedMessage id="HOME.TEXT_KEALAB" values={props.formatMessageValues}/></div>
-          <DosButton onClick={()=>{window.CustomTemplate.openPage(PAGE_ROOT_ID, true)}} href={KEA_LAB_URL}><FormattedMessage id="HOME.SHOW_KEALAB" /></DosButton>
+          <DosButton href={KEA_LAB_URL}><FormattedMessage id="HOME.SHOW_KEALAB" /></DosButton>
         </div>
       </ScrollAnimation>
     </div>

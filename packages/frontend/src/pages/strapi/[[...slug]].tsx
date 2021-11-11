@@ -42,8 +42,8 @@ const DynamicPage:React.FC<DynamicPageProps> = ({ sections, metadata, preview }:
 
 export async function getStaticPaths() {
   // Get all pages from Strapi
-  const NetworkService = (await import("../../core/network/network.service")).default;
-  const pages = await NetworkService.getInstance().getStrapiPages();
+  const networkService = (await import("../../core/network/network.service")).default;
+  const pages = await networkService.getStrapiPages();
   let paths:any[] = [];
   if (pages.data && pages.data.data && pages.data.data.pages){
     paths = pages.data.data.pages.map((page) => {
@@ -58,26 +58,25 @@ export async function getStaticPaths() {
   return { paths, fallback: true };
 }
 
-
 export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
-  async ({params, preview = null}) => {
+  (store => async (ctx) => {
     // Find the page data for the current slug
     let chainedSlugs:string = "";
-    if (params == {} || !params!.slug) {
+    if (ctx.params == {} || !ctx.params!.slug) {
       // To get the homepage, find the only page where slug is an empty string
       chainedSlugs = ``;
     } else {
       // Otherwise find a page with a matching slug
       // Recompose the slug that was saved in Strapi
-      if (Array.isArray(params!.slug))
-        chainedSlugs = params!.slug.join("__");
+      if (Array.isArray(ctx.params!.slug))
+        chainedSlugs = ctx.params!.slug.join("__");
       else
-        chainedSlugs = params!.slug;
+        chainedSlugs = ctx.params!.slug;
     }
 
     // Fetch pages. Include drafts if preview mode is on
-    const NetworkService = (await import("../../core/network/network.service")).default;
-    const pageData = await NetworkService.getInstance().getStrapiPageData(chainedSlugs, preview!);
+    const networkService = (await import("../../core/network/network.service")).default;
+    const pageData = await networkService.getStrapiPageData(chainedSlugs, ctx.preview!);
     if (pageData == null) {
       // Giving the page no props will trigger a 404 page
       return { props: {} };
@@ -87,12 +86,12 @@ export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
     const { contentSections, metadata } = pageData;
     return {
       props: {
-        preview,
-        sections: contentSections,
-        metadata,
-      },
-    };
-  }
+        preview: (ctx.preview??null) as any,
+        sections: contentSections as any,
+        metadata: metadata as any,
+      }
+    }
+  })
 );
 
 export default DynamicPage;

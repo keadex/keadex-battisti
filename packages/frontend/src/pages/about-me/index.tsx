@@ -4,12 +4,11 @@ import { Controller, Scene } from 'react-scrollmagic';
 import { connect } from 'react-redux';
 import { setCurrentScene, setProgress, setExperience, resetState } from '../../core/store/reducers/aboutme.reducer';
 import { getDefaultAboutMeState, AboutMeState, StoreState } from '../../core/store/store.type';
-import {Experience as IExperience, ForceGraph} from '../../model/models';
+import {Experience as IExperience} from '../../model/models';
 import BasePageComponent from '../../components/base-page-component/base-page-component';
 import { PAGE_ROOT_ID } from '../../core/route.constants';
 import { GetStaticProps } from 'next';
 import { wrapper } from '../../core/store/store';
-import { DEFAULT_REVALIDATE_SECONDS } from '../../core/app.constants';
 import dynamic from 'next/dynamic';
 import LazyLoad from 'react-lazyload';
 
@@ -29,24 +28,20 @@ interface AboutMeProps {
   setExperience: (experience: IExperience[])=>void,
   resetState:()=>void,
   experience: IExperience[],
-  menuOpen: boolean,
-  experienceGraph?: ForceGraph.Graph
+  menuOpen: boolean
 }
 
 
 //---------- getStaticProps
 export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
-  async ({store}) => {
-  const NetworkService = (await import("../../core/network/network.service")).default;
-  let expResp = await NetworkService.getInstance().__tmp_getExperiences();
+  (store) => async (ctx) => {
+    const networkService = (await import("../../core/network/network.service")).default;
+    let expResp = await networkService.getExperiences();
     if (expResp.data && expResp.data.data && expResp.data.data.experiences) {
       store.dispatch(setExperience(expResp.data.data.experiences));
     }
-    let expGraphResp = await NetworkService.getInstance().__tmp_getExperienceGraph();
     return {
-      props:{
-        experienceGraph: (expGraphResp.data && expGraphResp.data.data && expGraphResp.data.data.experienceGraph)?expGraphResp.data.data.experienceGraph:undefined
-      }
+      props:{}
     }
   }
 );
@@ -75,14 +70,6 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
   componentDidMount() {
     super.componentDidMount();
     this.resetProgress();
-    // let _self = this;
-    // NetworkService.getInstance().getExperience()
-    //   .then(function (response) {
-    //     if (response.data.results != undefined) {
-    //       _self.props.setExperience(response.data.results);
-    //     }
-    //   }
-    // );
   }
 
   //------------ componentDidUpdate
@@ -146,7 +133,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
         </header>
         <div className='page-body'>
           <div className={`${styles["about-me__panel"]} p-0 m-0`}>
-            <Brain experienceGraph={this.props.experienceGraph} />
+            <Brain />
           </div>
           <LazyLoad height={"100vh"} once scrollContainer={"#"+PAGE_ROOT_ID}>
             <Controller container={"#"+PAGE_ROOT_ID} globalSceneOptions={{ triggerHook: 0 }}>
@@ -168,7 +155,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
                   // console.log(event);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>
-                      <Education progress={progress} experienceGraph={this.props.experienceGraph}/>
+                      <Education progress={progress} />
                     </div>
                   )
                 }}
@@ -190,7 +177,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
               {/* EXPERIENCE: MOBILE */}
               <Scene pin duration={this.defaultState.progress[2].duration} indicators={false}>
                 {(progress: any, event: any) => {
-                  progress = this.onSceneEvent(2, progress, event, (this.props.experience[0] != undefined)?this.props.experience[0].id:undefined);
+                  progress = this.onSceneEvent(2, progress, event, (this.props.experience[0] != undefined)?this.props.experience[0].role:undefined);
                   // console.log("EXPERIENCE: MOBILE: " + progress);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>
@@ -203,7 +190,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
               {/* EXPERIENCE: FULL STACK */}
               <Scene pin duration={this.defaultState.progress[3].duration} indicators={false}>
                 {(progress: any, event: any) => {
-                  progress = this.onSceneEvent(3, progress, event, (this.props.experience[1] != undefined)?this.props.experience[1].id:undefined);
+                  progress = this.onSceneEvent(3, progress, event, (this.props.experience[1] != undefined)?this.props.experience[1].role:undefined);
                   // console.log("EXPERIENCE: FULL STACK: " + progress);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>
@@ -216,7 +203,7 @@ class AboutMe extends BasePageComponent<AboutMeProps, any> {
               {/* EXPERIENCE: IT SOLUTION ARCHITECT */}
               <Scene pin duration={this.defaultState.progress[4].duration} indicators={false}>
                 {(progress: any, event: any) => {
-                  progress = this.onSceneEvent(4, progress, event, (this.props.experience[2] != undefined)?this.props.experience[2].id:undefined);
+                  progress = this.onSceneEvent(4, progress, event, (this.props.experience[2] != undefined)?this.props.experience[2].role:undefined);
                   // console.log("EXPERIENCE: IT SOLUTION ARCHITECT: " + progress);
                   return (
                     <div className={`${styles["about-me__panel"]}`}>

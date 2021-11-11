@@ -17,7 +17,7 @@ interface SplashScreenProps {
 
 
 //------------------ COMPONENT
-export const SplashScreen : React.FunctionComponent<SplashScreenProps> = props => {
+const SplashScreen : React.FunctionComponent<SplashScreenProps> = props => {
 
   //ATTRS
   const intl = useIntl();
@@ -40,13 +40,13 @@ export const SplashScreen : React.FunctionComponent<SplashScreenProps> = props =
     let indexQuote = 0;
     let quote: Quote = {
       author: intl.formatMessage({ id: "QUOTES.NO_QUOTES_AUTHOR" }),
-      quote: intl.formatMessage({ id: "QUOTES.NO_QUOTES" }),
+      content: intl.formatMessage({ id: "QUOTES.NO_QUOTES" }),
     };
     if ((new Date().getTime() - lastTimeQuote.current < 3000) && (countQuote.current == 2)) {
       countQuote.current = 0;
       return {
         author: intl.formatMessage({ id: "QUOTES.TIP_QUOTE_AUTHOR" }),
-        quote: intl.formatMessage({ id: "QUOTES.TIP_QUOTE" }),
+        content: intl.formatMessage({ id: "QUOTES.TIP_QUOTE" }),
       }
     } else if (countQuote.current > 2) {
       countQuote.current= 0;
@@ -55,7 +55,7 @@ export const SplashScreen : React.FunctionComponent<SplashScreenProps> = props =
       indexQuote = Math.floor(Math.random() * props.quotes.length);
       quote = props.quotes[indexQuote];
       quote.author = quote.author.replace(/ /g, "-");
-      quote.quote = quote.quote.replace(/(\n).*/g, "");
+      quote.content = quote.content.replace(/(\n).*/g, "");
       countQuote.current++;
       lastTimeQuote.current = new Date().getTime();
     }
@@ -66,13 +66,11 @@ export const SplashScreen : React.FunctionComponent<SplashScreenProps> = props =
   //------------ close
   function close(){
     props.toggleMenu();
-    window.CustomTemplate.closeMenu();
   }
 
   //------------ close
   function openLink(pageId: string){
     props.toggleMenu();
-    window.CustomTemplate.openPage(pageId, false);
   }
 
 
@@ -99,7 +97,7 @@ export const SplashScreen : React.FunctionComponent<SplashScreenProps> = props =
           </div>
           <div className="d-none d-md-block mt-5">
             {quote.current.author}@keadex&gt;print-quote.sh<br />
-            {quote.current.quote}
+            {quote.current.content}
           </div>
         </div>
       </div>

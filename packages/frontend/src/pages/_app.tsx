@@ -3,28 +3,20 @@ import App, { AppContext } from "next/app";
 import type { AppProps } from 'next/app'
 import {useRouter} from 'next/router'
 import { BreakpointProvider, Query } from '../core/react-breakpoint'
-import { isClient } from '../helper/react-helper';
 import flatten from 'flat'
 import {useStore} from 'react-redux';
 import dynamic from 'next/dynamic'
 import '../styles/global.scss'
-import { wrapper, StoreService } from '../core/store/store';
-import { toggleMenu, activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred, setIsAppInitialized, setIsGaInitialized, setQuotes } from '../core/store/reducers/app.reducer';
+import { wrapper, storeService } from '../core/store/store';
+import { activateSpinner, disableSpinner, setPreviousUrl, setNavigationOccurred, setIsAppInitialized, setIsGaInitialized, setQuotes } from '../core/store/reducers/app.reducer';
 import Cookies from 'js-cookie';
 import { initGA, logPageView } from '../core/google-analytics';
 import { CookieConsent } from '../model/models';
-import Modernizr from 'modernizr';
-if (isClient()){
-  window.Modernizr = Modernizr;
-  require("../custom-template/main.min.js");
-}
 
 const Head = dynamic(() => import('next/head'));
-const Spinner:any = dynamic(() => import('../components/spinner/spinner'));
-const Header:any = dynamic(() => import('../components/header/header'));
-const Body:any = dynamic(() => import('../components/body/body'));
 const IntlProvider:any = dynamic(() => import('react-intl').then((mod:any) => mod.IntlProvider));
 const DefaultSeo:any = dynamic(() => import('next-seo').then((mod:any) => mod.DefaultSeo));
+const KeadexTemplate:any = dynamic(() => import('../components/keadex-template/keadex-template'));
 
 
 //---------- Disable debug and log levels in production
@@ -32,16 +24,6 @@ if (process.env.NODE_ENV === "production"){
   console.log = ()=>{}
   console.debug = ()=>{}
 }
-
-//---------- Window object extension
-export interface CustomTemplate{
-  closeMenu: ()=>void;
-  openPage: (id:string, skipMenu?:boolean)=>void;
-}
-declare global {
-  interface Window { CustomTemplate: CustomTemplate; Modernizr: any }
-}
-
 
 //---------- react-intl configuration
 if (!Intl.PluralRules) {
@@ -101,14 +83,14 @@ function watchForHover() {
 function MyApp({ Component, pageProps }: AppProps) {
   
   const store = useStore();
-  StoreService.getInstance().saveStore(store);
+  storeService.saveStore(store);
   
   const router = useRouter();
 
   // Prevent Next bug when it tries to render the /strapi/[[...slug]] route
-  if (router.asPath === "/strapi/[[...slug]]") {
-    return null;
-  }
+  // if (router.asPath === "/strapi/[[...slug]]") {
+  //   return null;
+  // }
 
   const onRouteChangeStart = ()=>{
     store.dispatch(activateSpinner());
@@ -155,7 +137,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     //---- start to use Google Analytics only if the user has given the consensus
     let cookieConsentValue = Cookies.get('CookieConsent');    
-
+    
     //fix Cookiebot "CookieConsent" cookie json string (missing quotes)
     cookieConsentValue = cookieConsentValue?.replace(/{/gi, '{"').replace(/:/gi, '":').replace(/,/gi, ',"').replace(/'/gi, '"');
     
@@ -169,9 +151,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     //---- 
 
     // console.log(pageProps.quotesResp);
-    if (pageProps.quotesResp && pageProps.quotesResp.data && pageProps.quotesResp.data.quotes && store.getState().app.quotes.length == 0){
+    if (pageProps.quotesResp && pageProps.quotesResp.data && pageProps.quotesResp.data.randomQuotes && store.getState().app.quotes.length == 0){
       //save quotes only if not already saved
-      store.dispatch(setQuotes(pageProps.quotesResp.data.quotes));
+      store.dispatch(setQuotes(pageProps.quotesResp.data.randomQuotes));
     }
 
     //---------- Bind router events to show loader
@@ -242,24 +224,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       <BreakpointProvider queries={queries}>
           <IntlProvider locale={language} messages={messages[language]}>
-            <div>
-              <Spinner />
-              <div>
-                <Header />
-
-                {/* pages stack */}
-                {/* I need to leave page-stack div outside the body because the javascript of
-                the template cannot wait the rendering of body component since it calculates
-                the number of the pages of the stack*/}
-                <div className="pages-stack">
-                  <Body PageComponent={Component} pageProps={pageProps} />
-                    {/* <Component {...pageProps} />
-                  </Body> */}
-                </div>
-                
-                <button className="menu-button" onClick={()=>store.dispatch(toggleMenu())}><span>Menu</span></button>
-              </div>
-            </div>
+            <KeadexTemplate Component={Component} pageProps={pageProps} />              
           </IntlProvider>
       </BreakpointProvider>
     </>
@@ -274,12 +239,11 @@ MyApp.getInitialProps = async (appCtx:AppContext) => {
   // Calls page's `getInitialProps` and fills `appProps.pageProps`
   const appProps = await App.getInitialProps(appCtx);
   
-  const NetworkService = (await import("../core/network/network.service")).default;
-  const quotesResp = await NetworkService.getInstance().__tmp_getQuotes();
-  // console.log(quotesResp);
+  const networkService = (await import("../core/network/network.service")).default;
+  const quotesResp = await networkService.getQuotes(appCtx.ctx);
   if(appCtx.ctx.pathname.indexOf("/strapi") != -1){
     // Fetch global site settings from Strapi, only for pages retrieved by Strapi
-    const global = await NetworkService.getInstance().getStrapiGlobalData();
+    const global = await networkService.getStrapiGlobalData();
     const globalData = global.data.data?.global;
     // console.debug("Global data");
     // console.debug(globalData);

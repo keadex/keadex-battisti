@@ -1,5 +1,6 @@
 import type { RefObject } from "react";
 import type sanitize from 'sanitize-html';
+import { ModuleId, GITHUB_BATTISTI_MASTER_BASEURL, GITHUB_EINAUDI_MASTER_BASEURL } from '../core/app.constants';
 
 
 //----- scrollToSection
@@ -43,4 +44,16 @@ export function mySanitizeHtml(sanitizeHtml:(dirty: string, options?: sanitize.I
   let allowedAttributes = defaults.allowedAttributes;
   allowedAttributes["*"] = ["class"];
   return sanitizeHtml(dirty, {allowedAttributes: allowedAttributes});
+}
+
+
+//----- githubModuleBaseURL
+export function githubModuleBaseURL(moduleId: string):string{
+  switch (moduleId) {
+    case ModuleId.Battisti:
+      return GITHUB_BATTISTI_MASTER_BASEURL;
+    case ModuleId.Einaudi:
+      return GITHUB_EINAUDI_MASTER_BASEURL;
+  }
+  return "";
 }

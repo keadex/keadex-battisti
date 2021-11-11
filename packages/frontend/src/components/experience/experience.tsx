@@ -84,11 +84,11 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
   //------------ getHeader
   public getHeader(){
     if (this.props.experience){
-      if (this.props.experience.id == "MOBILE_DEVELOPER"){
+      if (this.props.experience.role == "MOBILE_DEVELOPER"){
         return <HeaderMobileDeveloper progress={this.props.progress} experience={this.props.experience}></HeaderMobileDeveloper>
-      } else if (this.props.experience.id == "SOFTWARE_ENGINEER"){
+      } else if (this.props.experience.role == "SOFTWARE_ENGINEER"){
         return <HeaderSoftwareEngineer progress={this.props.progress} experience={this.props.experience}></HeaderSoftwareEngineer>
-      } else if (this.props.experience.id == "IT_SOLUTION_ARCHITECT"){
+      } else if (this.props.experience.role == "IT_SOLUTION_ARCHITECT"){
         return <HeaderArchitect progress={this.props.progress} experience={this.props.experience}></HeaderArchitect>
       }
     }else{
@@ -154,14 +154,14 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
               <div className={`${styles["experience__body"]}`} onMouseOver={()=>{this.stopSlideshow()}} onMouseOut={()=>{this.startSlideshow()}} onTouchStart={()=>{this.stopSlideshow()}} onTouchEnd={()=>{this.startSlideshow()}}>
               
               {/* TAB */}
-              <MDBNav tabs className="nav-justified pointer-events-all" color='indigo' role="tablist" aria-owns={`summary-${this.props.experience.id} skills-${this.props.experience.id}`}>
+              <MDBNav tabs className="nav-justified pointer-events-all" color='indigo' role="tablist" aria-owns={`summary-${this.props.experience.role} skills-${this.props.experience.role}`}>
                 <MDBNavItem>
-                  <a id={`summary-${this.props.experience.id}`} className={`nav-link ${this.state.activeItem == 1?"active":""}`} role="tab" onClick={(event)=>this.onTabBtnClick(event, 1)}>
+                  <a id={`summary-${this.props.experience.role}`} className={`nav-link ${this.state.activeItem == 1?"active":""}`} role="tab" onClick={(event)=>this.onTabBtnClick(event, 1)}>
                     <MDBIcon icon="address-card" /> <FormattedMessage id={"ABOUT_ME.EXPERIENCE.SUMMARY"} />
                   </a>
                 </MDBNavItem>
                 <MDBNavItem>
-                  <a id={`skills-${this.props.experience.id}`} className={`nav-link ${this.state.activeItem == 2?"active":""}`} role="tab" onClick={(event)=>this.onTabBtnClick(event, 2)}>
+                  <a id={`skills-${this.props.experience.role}`} className={`nav-link ${this.state.activeItem == 2?"active":""}`} role="tab" onClick={(event)=>this.onTabBtnClick(event, 2)}>
                     <MDBIcon icon="list-ul" /> <FormattedMessage id={"ABOUT_ME.EXPERIENCE.SKILLS"} />
                   </a>
                 </MDBNavItem>
@@ -180,10 +180,10 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                           {/* POSITION */}                          
                           <MDBCardTitle className="text-center">
                             <div className={`avatar d-inline-block ${styles["experience__avatar"]}`}>
-                              <OptimizedMedia src={this.jackImages[this.props.experience.avatarFilename]} alt="avatar position" width={{default: "90px", sm: "40px"}} height={{default: "90px", sm: "40px"}} srcWidth={2240} srcHeight={2240}/>
+                              <OptimizedMedia src={this.jackImages[this.props.experience.avatarFileName]} alt="avatar position" width={{default: "90px", sm: "40px"}} height={{default: "90px", sm: "40px"}} srcWidth={2240} srcHeight={2240}/>
                             </div>
                             <div className={`${styles["experience__title-position"]} text-left text-md-center`}>
-                              <FormattedMessage id={"POSITIONS." + this.props.experience.id} /><br />
+                              <FormattedMessage id={"POSITIONS." + this.props.experience.role} /><br />
                               <span className="font-small">{this.props.experience.from + " - " + ((this.props.experience.to)?this.props.experience.to:this.props.intl.formatMessage({id:"GENERIC.TODAY"}))}</span>
                             </div>
                           </MDBCardTitle>
@@ -195,7 +195,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                                 <div className={`${styles["experience__section-title"]} mb-md-3`}>{"<"}<FormattedMessage id={"ABOUT_ME.EXPERIENCE.MAIN_ACTIVITIES"} />{"/>"}</div>
                                 {
                                   this.props.experience.tasks.map((value, index) =>{
-                                    return <div key={index} className={`${(index%2==0)?styles["experience__list-item--even"]:styles["experience__list-item--odd"]}`}>{">"} <FormattedMessage id={"TASKS."+value.id} /> </div>
+                                    return <div key={index} className={`${(index%2==0)?styles["experience__list-item--even"]:styles["experience__list-item--odd"]}`}>{">"} <FormattedMessage id={"TASKS."+value.key} /> </div>
                                   })
                                 }
                               </Tween>
@@ -207,20 +207,20 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                                 <div className={`${styles["experience__section-title"]} mb-md-3`}>{"<"}<FormattedMessage id={"ABOUT_ME.EXPERIENCE.SECTORS"} />{"/>"}</div>
                                 {
                                   this.props.experience.sectors.map((value, index) =>{
-                                    return <div key={index} className={`${(index%2==0)?styles["experience__list-item--even"]:styles["experience__list-item--odd"]}`}>{">"} <FormattedMessage id={"SECTORS."+value.id} /> </div>
+                                    return <div key={index} className={`${(index%2==0)?styles["experience__list-item--even"]:styles["experience__list-item--odd"]}`}>{">"} <FormattedMessage id={"SECTORS."+value.key} /> </div>
                                   })
                                 }
                               </Tween>
                             </div>
 
-                            {/* COMPANIES */}
+                            {/* EMPLOYERS */}
                             <div className={"col-12 col-md-4 p-0 pl-md-2 pr-md-2 text-center order-3 order-md-2"}>
                               <Tween from={{ opacity: 0, x: (i:number) => (i+1) * 50}} stagger={0.1} playState={this.getPlayState(this.props.progress)} lazy>
                                 <div className={`${styles["experience__section-title"]} mb-md-3 mb-2`}>{"<"}<FormattedMessage id={"ABOUT_ME.EXPERIENCE.COMPANIES"} />{"/>"}</div>
                                 {
-                                  this.props.experience.companies.map((value, index) =>{
-                                    return <div className="d-inline d-md-block mx-1 mx-md-0" key={index}><OptimizedMedia src={this.logo[value.logoFilename][0]} className={`mb-3 mb-md-4 ${styles["experience__logo-brands"]} d-inline`} alt={`${value.name}`} height={{default: "25px", md: "15px"}}
-                                     srcWidth={this.logo[value.logoFilename][1]} srcHeight={this.logo[value.logoFilename][2]}/></div>
+                                  this.props.experience.employers.map((value, index) =>{
+                                    return <div className="d-inline d-md-block mx-1 mx-md-0" key={index}><OptimizedMedia src={this.logo[value.company.logoFilename][0]} className={`mb-3 mb-md-4 ${styles["experience__logo-brands"]} d-inline`} alt={`${value.company.name}`} height={{default: "25px", md: "15px"}}
+                                     srcWidth={this.logo[value.company.logoFilename][1]} srcHeight={this.logo[value.company.logoFilename][2]}/></div>
                                     // return <div className="d-inline d-md-block mx-1 mx-md-0" key={index}><img src={this.logo[value.logoFilename][0]} className={`mb-3 mb-md-4 ${styles["experience__logo-brands"]} d-inline`} alt={`${value.name}`} /></div>
                                   })
                                 }
@@ -254,7 +254,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                           <div className={`${styles["experience__skills-chart-container"]} pointer-events-all`}>
                             <ResponsiveContainer>
                               <PieChart>
-                                <Pie dataKey="usagePercentage" data={this.props.experience.skills.sort((a,b)=>{return a.name.localeCompare(b.name)})} cx={'50%'} cy={'50%'} innerRadius={"20%"} outerRadius={"100%"} paddingAngle={0} stroke="#2C2C2C" strokeWidth="0.2px">
+                                <Pie dataKey="usagePercentage" data={this.props.experience.skills.sort((a,b)=>{return a.skill.name.localeCompare(b.skill.name)})} cx={'50%'} cy={'50%'} innerRadius={"20%"} outerRadius={"100%"} paddingAngle={0} stroke="#2C2C2C" strokeWidth="0.2px">
                                   {
                                     this.props.experience.skills.map((entry, index) => <Cell fill={this.colors[index]} key={index}/>)
                                   }
@@ -269,7 +269,7 @@ class Experience extends React.Component<ExperienceProps, ExperienceState> {
                                   this.props.experience.skills.map((entry, index) => {
                                     return (
                                     <div className={`col-auto ${styles["experience__legend"]}`} key={index}>
-                                      <MDBIcon icon="square-full" style={{color: this.colors[index]}}/> {entry.name} ({entry.usagePercentage}%)
+                                      <MDBIcon icon="square-full" style={{color: this.colors[index]}}/> {entry.skill.name} ({entry.usagePercentage}%)
                                     </div>
                                     )
                                   })                                  

@@ -16,8 +16,7 @@ const OptimizedMedia = dynamic(
 //------------------ TYPES
 export interface BrainProps {
   progress?: number,
-  currentScene?: number,
-  experienceGraph?: ForceGraph.Graph
+  currentScene?: number
 }
 
 
@@ -33,14 +32,14 @@ const Brain : React.FunctionComponent<BrainProps> = props => {
   let interactiveBrain = (<></>);
   if ((breakpoints.lg || breakpoints.xl) && isGraphVisible){
     const InteractiveBrain = dynamic(() => import('./interactive-brain'));
-    interactiveBrain = (<InteractiveBrain progress={props.progress} experienceGraph={props.experienceGraph} />)
+    interactiveBrain = (<InteractiveBrain progress={props.progress} />)
   }
 
   return (
     <>
       {isCosmoVisible && (<div className={`${styles["brain__cosmo"]} lazyload`} />)}
       <div className={`${styles["brain__quote-container"]}`}>
-        <span id="quote">"No, I'm not interested in developing a powerful brain..."</span><br />
+        <span id="quote">&quot;No, I&apos;m not interested in developing a powerful brain...&quot;</span><br />
         <span id="author" className="text-right">Alan Turing</span>
       </div>
 

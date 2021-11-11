@@ -1,7 +1,14 @@
 {
-  "name": "root",
+  "name": "keadex-battisti-monorepo",
   "private": true,
+  "scripts": {
+    "commit": "git-cz"
+  },
   "devDependencies": {
-    "lerna": "^3.20.2"
-  }
+    "git-cz": "^4.8.0",
+    "lerna": "^4.0.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

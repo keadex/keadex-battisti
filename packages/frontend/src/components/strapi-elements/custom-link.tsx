@@ -27,7 +27,7 @@ const CustomLink = ({ link, children } : CustomLinkProps) => {
       href={link.url!}
       // Change target and rel attributes is newTab is turned on
       target={link.newTab ? "_blank" : "_self"}
-      rel={link.newTab ? "noopener noreferrer" : ""}
+      rel={`noreferrer ${link.newTab ? "noopener" : ""}`}
     >
       {children}
     </a>

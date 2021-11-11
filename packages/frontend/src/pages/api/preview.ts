@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import NetworkService from "../../core/network/network.service";
+import networkService from "../../core/network/network.service";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const preview = async (req: NextApiRequest, res: NextApiResponse) => {
   // Check the secret and next parameters
   // This secret should only be known to this API route and the CMS
   if (req.query.secret !== (process.env.PREVIEW_SECRET)) {
@@ -10,7 +10,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   // Fetch the headless CMS to check if the provided `slug` exists
   if (typeof req.query.slug === "string"){
-    const pageData = await NetworkService.getInstance().getStrapiPageData(req.query.slug, true);
+    const pageData = await networkService.getStrapiPageData(req.query.slug, true);
 
     // If the slug doesn't exist prevent preview mode from being enabled
     if (!pageData) {
@@ -33,3 +33,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 // http://localhost:3000/api/preview?secret=<preview-secret>&slug=<slug>
 // where <preview-secret> is the secret token defined in your .env config
 // and where <slug> is the slug you entered in Strapi for your page
+
+export default preview;

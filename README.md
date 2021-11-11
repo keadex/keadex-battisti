@@ -1,4 +1,21 @@
-# Keadex Battisti
+<p align="center">
+  <a href="https://keadex.io/kealab#keadex-battisti" target="blank"><img src="https://keadex.io:2053/uploads/keadex_battisti_dark_9ef872e108.png" width="350" alt="Keadex Battisti Logo" /></a>
+</p>
+<p align="center">The frontend module built with <a href="https://nextjs.org/" target="_blank">Next.js</a> and <a href="https://strapi.io/" target="_blank">Strapi</a>.</p>
+</br>
+
+<div align="center">
+
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
+![GitHub](https://img.shields.io/github/license/keadex/keadex-battisti)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/keadex/keadex-battisti)
+![GitHub deployments](https://img.shields.io/github/deployments/keadex/keadex-battisti/production?label=vercel&logo=vercel&logoColor=white)
+![GitHub deployments](https://img.shields.io/github/deployments/keadex/keadex-battisti/preview?label=vercel%20preview&logo=vercel&logoColor=white)
+
+
+</div>
+
+# Description
 
 **Keadex Battisti** represents the shell of Keadex, the way to describe it.  
 
@@ -12,13 +29,20 @@ The **monorepo** (managed with Lerna) is made up of three packages:
 * **mock**: contains the code of the GraphQL mock server to test and to develop the frontend without waiting for the backend integration
 
 Keadex Battisti is used as a showcase of the Keadex platform but it can easily adapted to satisfy any need. The development of a CLI is planned in order to minimize the effort needed to initialize a web client with the Keadex Battisti features (check the roadmap to track the planned capabilities)  
+</br>
 
-To start the project:  
+# Getting started
 
-1.  clone the monorepo: `git clone https://github.com/keadex/keadex-battisti.git`
-1.  run `yarn install` under each package
-1.  run `yarn install` under `cms/plugins/content-export-import` folder
-1.  run `yarn build` under **cms** package.
-1.  run `yarn dev` under **cms** package.
-1.  import into Strapi demo contents from `cms/contents-snapshot` folder by using "Strapi plugin content-export-import"
-1.  run `yarn dev` under **frontend** package
+1. clone the monorepo: `git clone https://github.com/keadex/keadex-battisti.git`
+2. run `lerna bootstrap` under the root folder
+3. run `yarn install` under the `cms/plugins/content-export-import` folder
+4. check your environment variables for both the **cms** and **frontend** packages
+5. run `yarn build --clean` under the **cms** package.
+6. run `yarn develop` under the **cms** package.
+7. import into Strapi demo contents from `cms/contents-snapshot` folder by using the Strapi plugin [content-export-import](https://github.com/lazurey/strapi-plugin-content-export-import)
+8. run `yarn dev` under the **frontend** package
+</br>
+
+# Notes
+- Strapi does not support Yarn >2: check this [issue](https://github.com/strapi/strapi/issues/9109).</br>
+Once will be added the support for Yarn >2, this project will be migrated and will be removed Lerna. The monorepo will be then managed with the Yarn workspaces feature. 

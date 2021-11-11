@@ -7,11 +7,11 @@ import { wrapper } from '../../core/store/store';
 
 //---------- getStaticProps
 export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
-  async ({store}) => {
+  (store => async (ctx) => {
     return {
       props: {}
     }
-  }
+  })
 );
 
 //------------------ COMPONENT

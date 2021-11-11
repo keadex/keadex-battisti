@@ -10,6 +10,7 @@ import temporalLobe from "../../../public/img/education/temporal-lobe.png";
 import cerebellum from "../../../public/img/education/cerebellum.png";
 import frontalLobe from "../../../public/img/education/frontal-lobe.png";
 import { isClient } from "../../helper/react-helper";
+import brainGraph from "./brain-graph";
 
 
 let ForceGraph2D:any = undefined;
@@ -19,21 +20,19 @@ if (isClient()){
 
 //------------------ TYPES
 export interface BrainProps {
-  progress?: number,
-  experienceGraph?: ForceGraph.Graph
+  progress?: number
 }
 
 
 //--------------- COMPONENT
 const InteractiveBrain : React.FunctionComponent<BrainProps> = props => {
-  console.log("ciaa");
   //ATTRS
   let breakpoints = useBreakpoint();
   let brain:MutableRefObject<Map<string, HTMLImageElement>> = useRef(new Map());
   let forceGraphRef:any = useCallback((node:any) => {
     if (node !== null) {
       //Enlarge graph only if it is not in mobile mode
-    if (!breakpoints!.xs && !breakpoints!.sm){
+    if (!breakpoints.xs && !breakpoints.sm){
       node.d3Force('charge')
         .strength(-200)
         .distanceMax(1000);
@@ -51,7 +50,6 @@ const InteractiveBrain : React.FunctionComponent<BrainProps> = props => {
 
   //---------- useEffect
   useEffect(() => {
-    console.log("ciaa2");
     initBrain();
   }, []);
 
@@ -81,7 +79,7 @@ const InteractiveBrain : React.FunctionComponent<BrainProps> = props => {
       {/* SHOW INTERACTIVE BRAIN GRAPH ONLY ON DESKTOP */}
       <div className={`d-none d-lg-block ${styles["brain__container--interactive"]} ${(props.progress!=0?"out":"")}`}>
         <NoSSR>
-          {ForceGraph2D && <ForceGraph2D ref={forceGraphRef} graphData={props.experienceGraph} linkColor={() => '#fff'} nodeAutoColorBy="group" enableNodeDrag={true} enableZoomPanInteraction={false}
+          {ForceGraph2D && <ForceGraph2D ref={forceGraphRef} graphData={brainGraph} linkColor={() => '#fff'} nodeAutoColorBy="group" enableNodeDrag={true} enableZoomPanInteraction={false}
             nodeCanvasObjectMode={()=>"replace"} nodeCanvasObject={(node:any, ctx:any, globalScale:any) => {
               
             if (node != undefined && node.id != undefined && node.x != undefined && node.y != undefined){
@@ -90,8 +88,8 @@ const InteractiveBrain : React.FunctionComponent<BrainProps> = props => {
                 // if (breakpoints!.xs && breakpoints!.sm) percentage = 75;
                 const image = brain.current.get(node.id);
                 if (image){
-                  const width = image.width - Math.ceil((image!.width * percentage)/100);
-                  const height = image.height * (width/image!.width);
+                  const width = image.width - Math.ceil((image.width * percentage)/100);
+                  const height = image.height * (width/image.width);
                   ctx.drawImage(image, node.x-width/2, node.y-height/2, width, height);
                 }
               }else{
