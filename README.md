@@ -7,6 +7,10 @@
 <div align="center">
 
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
+[![GitHub license](https://badgen.net/github/license/Naereen/Strapdown.js)](https://github.com/keadex/keadex-battisti/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://github.com/keadex/keadex-battisti/releases/)
+
+
 </div>
 
 # Description
