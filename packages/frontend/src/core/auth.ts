@@ -45,36 +45,24 @@ export const destroyBattistiJwt = (ctx: NextPageContext|undefined) => {
   if (isClient()){
     (destroyCookie as any)(null, ...opts);
   }else{
-    //(nookies.destroy as any)(ctx, ...opts);
-    console.debug("desssssss");
     nookies.destroy(ctx , BATTISTI_JWT_COOKIE_NAME, {path: "/"});
   }
 }
 
 export const withBattistiJwt = <T>(networkServiceFunc:(...props: any[]) => AxiosPromise<BaseResponse<T>>) => {
-  console.debug("withBattistiJwt")
   return async (ctx?:NextPageContext, ...props: any[]) => {
-    // const token = getBattistiJwt(ctx) // Add logic to extract token from `req.headers.cookie`
-    // console.log("requireAuthentication " + token);
-    // if (!isClient() && !ctx) {
-    //   throw new Error("It's not possible to set cookies on server side without a context");
-    // }
-
     let result: AxiosResponse<BaseResponse<T>>;
     let retry = 1;
     let isNotAuthorized = false;
     do {
       let jwt = getBattistiJwt(ctx);
-      console.debug("jwwwwww " + jwt);
       if (!jwt){
-        console.debug("login");
         jwt = (await networkService.loginToBattisti()).data.data?.login.accessToken;
         if (!jwt) {
           throw new Error("Cannot login to Keadex Battisti.")
         }
         setBattistiJwt(ctx, jwt);
       }
-      console.debug(`jwt: ${jwt}`);
       axios.defaults.headers.common["Authorization"] = `Bearer ${jwt}`;
 
       // Continue on to call network service function
@@ -87,7 +75,6 @@ export const withBattistiJwt = <T>(networkServiceFunc:(...props: any[]) => Axios
       if (isNotAuthorized){
         console.debug("is not authorized");
         destroyBattistiJwt(ctx);
-        console.debug(getBattistiJwt(ctx));
       }
 
       retry++;
