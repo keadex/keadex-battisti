@@ -28,14 +28,6 @@ export const GLOBAL = gql`
           previewUrl
           provider
           provider_metadata
-          created_by {
-            id
-            username
-          }
-          updated_by {
-            id
-            username
-          }
         }
         twitterCardType
         twitterUsername
@@ -58,14 +50,6 @@ export const GLOBAL = gql`
         url
         provider
         provider_metadata
-        created_by {
-          id
-          username
-        }
-        updated_by {
-          id
-          username
-        }
         related {
           __typename
         }
@@ -94,14 +78,6 @@ export const GLOBAL = gql`
           url
           provider
           provider_metadata
-          created_by {
-            id
-            username
-          }
-          updated_by {
-            id
-            username
-          }
         }
         links {
           id
@@ -136,14 +112,6 @@ export const GLOBAL = gql`
           url
           provider
           provider_metadata
-          created_by {
-            id
-            username
-          }
-          updated_by {
-            id
-            username
-          }
         }
         columns {
           id
@@ -156,14 +124,6 @@ export const GLOBAL = gql`
           }
         }
         smallText
-      }
-      created_by {
-        id
-        username
-      }
-      updated_by {
-        id
-        username
       }
     }
   }

@@ -39,14 +39,6 @@ export const PAGES = (slug:string|null, preview:boolean)=> {
             previewUrl
             provider
             provider_metadata
-            created_by {
-              id
-              username
-            }
-            updated_by {
-              id
-              username
-            }
           }
           twitterCardType,
           twitterUsername
@@ -76,14 +68,6 @@ export const PAGES = (slug:string|null, preview:boolean)=> {
               previewUrl
               provider
               provider_metadata
-              created_by {
-                id
-                username
-              }
-              updated_by {
-                id
-                username
-              }
             }
             smallTextWithLink
             buttons {
@@ -129,14 +113,6 @@ export const PAGES = (slug:string|null, preview:boolean)=> {
                 previewUrl
                 provider
                 provider_metadata
-                created_by {
-                  id
-                  username
-                }
-                updated_by {
-                  id
-                  username
-                }
               }
             }
           }
@@ -164,14 +140,6 @@ export const PAGES = (slug:string|null, preview:boolean)=> {
                 previewUrl
                 provider
                 provider_metadata
-                created_by {
-                  id
-                  username
-                }
-                updated_by {
-                  id
-                  username
-                }
               }
               link {
                 id
@@ -212,14 +180,6 @@ export const PAGES = (slug:string|null, preview:boolean)=> {
                 previewUrl
                 provider
                 provider_metadata
-                created_by {
-                  id
-                  username
-                }
-                updated_by {
-                  id
-                  username
-                }
               }
             }
             testimonials {
@@ -242,14 +202,6 @@ export const PAGES = (slug:string|null, preview:boolean)=> {
                 previewUrl
                 provider
                 provider_metadata
-                created_by {
-                  id
-                  username
-                }
-                updated_by {
-                  id
-                  username
-                }
               } 
               picture {
                 id
@@ -269,14 +221,6 @@ export const PAGES = (slug:string|null, preview:boolean)=> {
                 previewUrl
                 provider
                 provider_metadata
-                created_by {
-                  id
-                  username
-                }
-                updated_by {
-                  id
-                  username
-                }
               }
               text
               authorName
@@ -306,14 +250,6 @@ export const PAGES = (slug:string|null, preview:boolean)=> {
               previewUrl
               provider
               provider_metadata
-              created_by {
-                id
-                username
-              }
-              updated_by {
-                id
-                username
-              }
             }
             poster {
               id
@@ -333,14 +269,6 @@ export const PAGES = (slug:string|null, preview:boolean)=> {
               previewUrl
               provider
               provider_metadata
-              created_by {
-                id
-                username
-              }
-              updated_by {
-                id
-                username
-              }
             }
           }
           ... on ComponentSectionsRichText {
@@ -365,14 +293,6 @@ export const PAGES = (slug:string|null, preview:boolean)=> {
           }
         }
         status
-        created_by {
-          id
-          username
-        }
-        updated_by {
-          id
-          username
-        }
       }
     }
   `
