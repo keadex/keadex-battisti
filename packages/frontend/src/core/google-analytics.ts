@@ -2,7 +2,7 @@ import ReactGA from 'react-ga4'
 
 //-------- initGA
 export const initGA = () => {
-  console.debug(`GA init ${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID!}`);
+  //console.debug(`GA init ${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID!}`);
   ReactGA.gtag('config', process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID!, { 'anonymize_ip': true, send_page_view: false });
 }
 
