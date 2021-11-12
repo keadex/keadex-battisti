@@ -4,6 +4,7 @@ const optimizedImages = require('next-optimized-images');
 const withTM = require('next-transpile-modules')(['react-scrollmagic', 'react-syntax-highlighter']);
 const withVideos = require('next-videos')
 const withPWA = require('next-pwa');
+const runtimeCaching = require("next-pwa/cache");
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
@@ -21,8 +22,10 @@ module.exports = compose([
   [withBundleAnalyzer],
   [withPWA, {
     pwa: {
+      runtimeCaching,
       disable: process.env.NODE_ENV === 'development',
-      dest: 'public'
+      dest: 'public',
+      buildExcludes: [/middleware-manifest.json$/]
     }
   }]],
   {
