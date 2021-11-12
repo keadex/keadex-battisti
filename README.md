@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://keadex.io/kealab#keadex-battisti" target="blank"><img src="https://keadex.io:2053/uploads/keadex_battisti_dark_9ef872e108.png" width="350" alt="Keadex Battisti Logo" /></a>
+  <a href="https://keadex.io/kealab#keadex-battisti" target="blank"><img src="https://keadex.io:2053/uploads/keadex_battisti_dark_ff71c03a21.png" width="350" alt="Keadex Battisti Logo" /></a>
 </p>
 <p align="center">The frontend module built with <a href="https://nextjs.org/" target="_blank">Next.js</a> and <a href="https://strapi.io/" target="_blank">Strapi</a>.</p>
 </br>
