@@ -1,0 +1,17 @@
+@import '../../components/shared/shared-imports.module.scss';
+
+.docs__parent {
+  border: 0;
+}
+
+.docs__parent {
+  :global(.docs-version-current) {
+    overflow: hidden !important;
+    color: red !important;
+  }
+  
+}
+.docs__parent :global(.table-of-contents__link){
+  color: yellow !important;
+
+}

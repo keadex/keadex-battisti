@@ -142,5 +142,9 @@
     },
     "KEADEX_MODULES":{
         "KEADEX_BATTISTI": "Keadex Battisti"
+    },
+    "DOCS": {
+        "TITLE": "Keadex Docs",
+        "SUBTITLE": "Documentation of each Keadex module."
     }
 }
