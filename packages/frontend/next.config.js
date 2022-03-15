@@ -8,7 +8,6 @@ const runtimeCaching = require("next-pwa/cache");
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
-const deps = require('./package.json').dependencies
 
 module.exports = compose([
   {
@@ -47,9 +46,6 @@ module.exports = compose([
       const { ModuleFederationPlugin } = opts.webpack.container;
       cfg.plugins.push(
         new ModuleFederationPlugin({
-          // remotes: {
-          //   keadexdocs: "keadexdocs@http://localhost:3001/remoteEntry.js",
-          // },
           name: "keadexdocs",
           shared: [
             {

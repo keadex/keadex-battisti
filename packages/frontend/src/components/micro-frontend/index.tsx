@@ -22,7 +22,8 @@ interface MicroFrontendProps {
   // Id of the microfrontend container
   id: string,
   // Callback to execute when the microfrontend is loaded
-  isReadyCallback?: (isReady:boolean)=>void
+  isReadyCallback?: (isReady:boolean)=>void,
+  className?: string
 }
 
 async function loadComponent(scope: string, module: string) {
@@ -39,9 +40,11 @@ async function loadComponent(scope: string, module: string) {
 }
 
 //--------------- COMPONENT
-const MicroFrontend: React.FunctionComponent<MicroFrontendProps> = ({ remoteAppInfo, innerHTMLContent, skeletonThreshold, skeleton, id, isReadyCallback }) => {
+const MicroFrontend: React.FunctionComponent<MicroFrontendProps> = (props) => {
   
   console.log("Remote-App injecter (in host app) rendered");
+  
+  const { remoteAppInfo, skeletonThreshold, skeleton, id, isReadyCallback, className } = props;
   
   const skeletonTimeoutRef = useRef(-1);
   const { module, scope, url } = remoteAppInfo;
@@ -85,7 +88,7 @@ const MicroFrontend: React.FunctionComponent<MicroFrontendProps> = ({ remoteAppI
 
   
   return (
-    <div id={id}>
+    <div id={id} className={className}>
       {showSkeleton && skeleton}
       {/* <div
         dangerouslySetInnerHTML={{ __html: innerHTMLContent ?? "<div></div>" }}
@@ -96,4 +99,5 @@ const MicroFrontend: React.FunctionComponent<MicroFrontendProps> = ({ remoteAppI
 }
 
 // Never re-render when parent/prop changes
+// export default React.memo(MicroFrontend, () => true);;
 export default React.memo(MicroFrontend, () => true);

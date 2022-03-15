@@ -49,7 +49,8 @@
         "ABOUT_ME": "a80ut_m3",
         "WHY_KEADEX": "why_K34d3x",
         "WHATS_KEADEX": "wh4t5_K34d3x",
-        "KEA_LAB": "k34_l4b"
+        "KEA_LAB": "k34_l4b",
+        "DOCS": "d0cs"
     },
     "KEADEX_PREVIEW":{
         "LOAD": "Click here to load."
@@ -145,6 +146,6 @@
     },
     "DOCS": {
         "TITLE": "Keadex Docs",
-        "SUBTITLE": "Documentation of each Keadex module."
+        "SUBTITLE": "Documentation of Keadex's modules."
     }
 }

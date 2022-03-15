@@ -18,8 +18,6 @@ export const useDynamicScript = (url:string) => {
     setErrorLoading(false);
     const element = document.createElement('script');
     element.src = url;
-    // element.text = 'console.log("aweee"); console.log(document.getElementById("__docusaurus"))'
-    // element.type = 'text/javascript';
     element.async = true;
     element.onload = () => {
       urlCache.add(url);
