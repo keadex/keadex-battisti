@@ -29,7 +29,7 @@ module.exports = compose([
     }
   }]],
   {
-    webpack: cfg => {
+    webpack: (cfg, opts) => {
       const originalEntry = cfg.entry
       cfg.entry = async () => {
         const entries = await originalEntry()
@@ -43,6 +43,31 @@ module.exports = compose([
 
         return entries
       };
+      const { ModuleFederationPlugin } = opts.webpack.container;
+      cfg.plugins.push(
+        new ModuleFederationPlugin({
+          name: "keadexdocs",
+          shared: [
+            {
+              react: {
+                eager: true,
+                singleton: true,
+                requiredVersion: false,
+              },
+              "react-dom": {
+                eager: true,
+                singleton: true,
+                requiredVersion: false,
+              },
+              "react-router": {
+                eager: true,
+                singleton: true,
+                requiredVersion: false,
+              },
+            },
+          ],
+        })
+      );
       return cfg
     }
   }

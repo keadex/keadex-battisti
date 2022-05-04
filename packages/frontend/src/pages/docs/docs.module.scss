@@ -1,0 +1,31 @@
+@import '../../components/shared/shared-imports.module.scss';
+
+
+.docs__header {
+  h1 {
+    font-family: 'Perfect DOS VGA 437' !important
+  }
+}
+
+.docs__docusaurus-container {
+  font-family: "Roboto", sans-serif;
+  a {
+    color: $accent-color !important;
+    &:hover{
+      color: $accent-color !important;
+      opacity: 0.5 !important;
+      text-decoration: none;
+    }
+  }
+  :global(.pagination-nav__link){
+    border: 1px solid $accent-color;
+    &:hover{
+      border-color: $accent-color !important;
+      opacity: 0.5 !important;
+    }
+  }
+  :global(.table-of-contents__link--active){
+    color: $accent-color !important;
+    opacity: 0.5 !important;
+  }
+}
